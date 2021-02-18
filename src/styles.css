@@ -1,1 +1,16 @@
 /* You can add global styles to this file, and also import other style files */
+@font-face{
+    font-family: 'Segoe UI';
+    src: local('Segoe UI'), url(/assets/fonts/Segoe\ UI.ttf) format("truetype");
+}
+
+@font-face{
+    font-family: 'Segoe UI';
+    src: local('Segoe UI'), url(/assets/fonts/Segoe\ UI\ Bold.ttf) format("truetype");
+    font-weight: 900;
+}
+
+@font-face{
+    font-family: "Futura";
+    src: local("Futura"), url(/assets/fonts/Futura\ Bold\ font.ttf) format("truetype");
+}
