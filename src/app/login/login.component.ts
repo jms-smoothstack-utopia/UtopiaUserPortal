@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {NgForm} from "@angular/forms";
-import {AuthService} from "../services/auth.service";
+import {AuthService} from "../services/auth/auth.service";
 
 @Component({
   selector: 'app-login',
@@ -16,7 +16,6 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit(authForm: NgForm) {
-
     // const email = authForm.value.email;
     // const password = authForm.value.password;
     const email = "test@test.com";
@@ -25,6 +24,12 @@ export class LoginComponent implements OnInit {
     this.authService.authenticate(email, password)
     .subscribe(res => {
       console.log("ON SUBMIT")
+      console.log(res);
+    })
+  }
+
+  onTestAuth() {
+    this.authService.testAuth().subscribe(res => {
       console.log(res);
     })
   }
