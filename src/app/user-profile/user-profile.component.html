@@ -1,0 +1,32 @@
+<div *ngIf="user">
+    <h2>{{user.firstName}} {{user.lastName}}</h2>
+    <!-- TODO: consider if we want to show IDs here or not -->
+    <div><span>ID: </span>{{user.id}}</div>
+    <div>
+        <label>First name:
+            <!-- two-way data binding that updates the user name in the header above when the input is enabled and changed -->
+            <input [(ngModel)]="user.firstName" placeholder="firstname" disabled="true"/>
+        </label>
+        <label>Last name:
+            <input [(ngModel)]="user.lastName" placeholder="lastname" disabled="true"/>
+        </label>
+        <label>Email address:
+            <input [(ngModel)]="user.email" placeholder="email" disabled="true"/>
+        </label>
+        <label>Address line 1:
+            <input [(ngModel)]="user.addresses[0].line1" placeholder="address line 1" disabled="true"/>
+        </label>
+        <label>Address line 2:
+            <input [(ngModel)]="user.addresses[0].line2" placeholder="address line 2" disabled="true"/>
+        </label>
+        <label>City:
+            <input [(ngModel)]="user.addresses[0].city" placeholder="city" disabled="true"/>
+        </label>
+        <label>State:
+            <input [(ngModel)]="user.addresses[0].state" placeholder="state" disabled="true"/>
+        </label>
+        <label>ZIP code:
+            <input [(ngModel)]="user.addresses[0].zipcode" placeholder="zip code" disabled="true"/>
+        </label>
+    </div>
+</div>
