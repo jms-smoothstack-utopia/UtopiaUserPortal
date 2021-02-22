@@ -32,11 +32,11 @@
     font-weight: bolder;
 }
 
-a:focus{
+.navbar a:focus{
     outline: 5px dashed white;
 }
 
-a:hover:not(:focus){
+.navbar a:hover:not(:focus){
     animation: shake 10s;
     animation-iteration-count: infinite;
 }
@@ -54,4 +54,26 @@ a:hover:not(:focus){
     90% { transform: translate(1px, 2px) rotate(0deg); }
     95% { transform: translate(1px, -2px) rotate(-1deg); }
     100% { transform: translate(0px, 0px) rotate(0deg); }
-  }
+}
+
+.nav button{
+    font-family: 'Lato', sans-serif;
+    font-weight: 600;
+    color: black;
+    background-color: white;
+    font-size: large;
+    padding: 4px 16px;
+    margin: 8px 8px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    width: 100%;
+}
+
+.nav button:hover{
+    background-color: rgb(228, 222, 222);
+}
+
+.nav button:focus{
+    outline: 5px dashed white;
+}
