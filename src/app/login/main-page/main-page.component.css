@@ -1,10 +1,18 @@
 .componentContainer{
+    background:  url("../pictures/Blue-WaterColor-Background.gif") no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
     position: relative; 
-    margin-top: 30px;
+}
+
+.firstRow{
+    padding-top: 30px;
 }
 
 .movingGradient{
-    background: linear-gradient(52deg, #1508AF, #0bc1da, #8E2AE3);
+    background: linear-gradient(52deg, #1508AF, #0bc1da, #AFC3F2, #3E4C6E);
     background-size: 800% 800%;
     -webkit-animation: animatedGradient 40s ease infinite;
     -moz-animation: animatedGradient 40s ease infinite;
@@ -35,7 +43,7 @@
     min-width: 100px;
     text-align: center;
     border-radius: 4px;
-    background: linear-gradient(52deg, #1508AF, #0bc1da, #8E2AE3);
+    background: linear-gradient(52deg, #1508AF, #0bc1da, #AFC3F2, #3E4C6E);
     background-size: 800% 800%;
     -webkit-animation: animatedGradient 40s ease infinite;
     -moz-animation: animatedGradient 40s ease infinite;
@@ -266,7 +274,12 @@ input[type=text]:focus, input[type=password]:focus, .submitButton:focus, .create
       .componentContainer{
           display: block;
           margin-top: 0px;
+          background-image: none;
       }
+
+      .firstRow{
+        padding-top: 30px;
+    }
 
       .loginBoxBorder{
           visibility: hidden;
