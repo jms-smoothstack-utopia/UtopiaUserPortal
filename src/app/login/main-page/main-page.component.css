@@ -246,7 +246,7 @@ hr{
 }
 
 input[type=text]:focus, input[type=password]:focus, .submitButton:focus, .createAccountButton:focus, .dot:focus{
-    outline: 1px solid black;
+    outline: 2px dashed #1508AF;
 }
 
   label{    

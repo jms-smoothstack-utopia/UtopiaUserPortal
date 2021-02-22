@@ -144,7 +144,7 @@ span{
 }
 
 .submitButton:focus{
-    border: 5px dashed black;
+    border: 5px dashed #1508AF;
     outline: none;
 }
 
