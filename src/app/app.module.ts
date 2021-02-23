@@ -6,7 +6,7 @@ import { AppComponent } from './app.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { LoginComponent } from './login/login.component';
 import { HeaderComponent } from './login/header/header.component';
-import { ReactiveFormsModule } from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { MainPageComponent } from './login/main-page/main-page.component';
 import { PasswordResetComponent } from './login/password-reset/password-reset.component';
 import { PasswordConfirmationComponent } from './login/password-reset/password-confirmation/password-confirmation.component';
@@ -17,6 +17,12 @@ import { MainheaderComponent } from './layout/mainheader/mainheader.component';
 import { RouterModule } from '@angular/router';
 import { SidebarComponent } from './layout/sidebar/sidebar.component';
 import { UserprofileComponent } from './layout/userprofile/userprofile.component';
+import {AuthInterceptor} from "./services/auth/auth.interceptor";
+import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
+import { AlertComponent } from './shared/alert/alert.component';
+import { LoadingSpinnerComponent } from './shared/loading-spinner/loading-spinner.component';
+import {environment} from "../environments/environment";
+import {LoggerModule} from "ngx-logger";
 
 @NgModule({
   declarations: [
@@ -32,6 +38,8 @@ import { UserprofileComponent } from './layout/userprofile/userprofile.component
     MainheaderComponent,
     SidebarComponent,
     UserprofileComponent,
+    AlertComponent,
+    LoadingSpinnerComponent,
   ],
   imports: [
     BrowserModule,
@@ -39,8 +47,11 @@ import { UserprofileComponent } from './layout/userprofile/userprofile.component
     AppRoutingModule,
     NgbModule,
     ReactiveFormsModule,
+    FormsModule,
+    HttpClientModule,
+    LoggerModule.forRoot({level: environment.logLevel})
   ],
-  providers: [],
+  providers: [{ provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
