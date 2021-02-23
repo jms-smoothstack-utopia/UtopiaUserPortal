@@ -7,7 +7,7 @@
        aria-label="Return back to Utopia home page">UTOPIA</a>
     <ul class="nav navbar-nav navbar-right">
       <li>
-        <button
+        <button *ngIf="!hideSignInButton"
           (keyup.enter)="onClickButton()"
           (click)="onClickButton()">
           {{buttonMsg}}

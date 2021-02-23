@@ -9,10 +9,10 @@ import PathConstants from '../../../environments/paths';
 
 @Component({
   selector: 'app-main-page',
-  templateUrl: './main-page.component.html',
-  styleUrls: ['./main-page.component.css'],
+  templateUrl: './login-form.component.html',
+  styleUrls: ['./login-form.component.css'],
 })
-export class MainPageComponent implements OnInit {
+export class LoginFormComponent implements OnInit {
   errorMsg?: string = undefined;
   isLoading = false;
 
