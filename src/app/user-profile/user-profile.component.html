@@ -30,3 +30,9 @@
         </label>
     </div>
 </div>
+<div *ngIf="error">
+    <h2>{{error.status}} Error</h2>
+    <div *ngIf="error.status === 404">
+        <p>User not found.</p>
+    </div>
+</div>
