@@ -1,6 +1,7 @@
-<app-mainheader></app-mainheader>
+<app-mainheader [hideSignInButton]="true"></app-mainheader>
 <div class="container-fluid">
-  <form>
+  <form [formGroup]="accountForm"
+        (ngSubmit)="onSubmit()">
     <div class="row movingGradient no-gutters">
       <div class="col-md-6"><span>UTOPIA</span></div>
       <div class="col-md-6 secondcell"><span>Your ticket to the skies</span></div>
@@ -9,109 +10,160 @@
       <div class="col-md-4">
         <label for="email">
           <b>Email</b>
-          <div class="tooltipInside">
-            <input type="text" placeholder="Enter your email" name="email" required>
-          </div>
+          <input id="email"
+                 class="tooltipInside"
+                 type="email"
+                 formControlName="email"
+                 placeholder="Enter your email"
+                 name="email"
+                 required
+          />
         </label>
       </div>
       <div class="col-md-4">
-        <label for="firstname">
+        <label for="firstName">
           <b>First Name</b>
-          <div class="tooltipInside">
-            <input type="text" placeholder="Enter your first name" name="firstname" required>
-          </div>
+          <input id="firstName"
+                 class="tooltipInside"
+                 type="text"
+                 formControlName="firstName"
+                 placeholder="Enter your first name"
+                 name="firstName"
+                 required
+          />
         </label>
       </div>
       <div class="col-md-4">
-        <label for="lastname">
+        <label for="lastName">
           <b>Last Name</b>
-          <div class="tooltipInside">
-            <input type="text" placeholder="Enter your last name" name="lastname" required>
-          </div>
+          <input id="lastName"
+                 class="tooltipInside"
+                 type="text"
+                 formControlName="lastName"
+                 placeholder="Enter your last name"
+                 name="lastName"
+                 required
+          />
         </label>
       </div>
     </div>
     <div class="row no-gutters">
       <div class="col-md-4">
-        <label for="address">
+        <label for="addrLine1">
           <b>Address</b>
-          <div class="tooltipInside">
-            <input type="text" placeholder="Address Line" name="mainaddress" required>
-          </div>
+          <input id="addrLine1"
+                 class="tooltipInside"
+                 type="text"
+                 formControlName="addrLine1"
+                 placeholder="Enter your street address"
+                 name="addrLine1"
+                 required
+          />
         </label>
       </div>
+      <div class="col-md-4">
+        <label for="addrLine2">
+          <b>Apt/Suite</b>
+          <input id="addrLine2"
+                 class="tooltipInside"
+                 type="text"
+                 formControlName="addrLine2"
+                 placeholder="(If applicable)"
+                 name="addrLine2"
+          />
+        </label>
+      </div>
+      <div class="col-md-4">
+        <label for="phoneNumber">
+          <b>Phone Number</b>
+          <input id="phoneNumber"
+                 class="tooltipInside"
+                 type="tel"
+                 formControlName="phoneNumber"
+                 placeholder="Enter your phone number"
+                 required
+          />
+        </label>
+      </div>
+    </div>
+    <div class="row no-gutters">
       <div class="col-md-4">
         <label for="city">
           <b>City</b>
-          <div class="tooltipInside">
-            <input type="text" placeholder="City" name="City" required>
-          </div>
+          <input id="city"
+                 class="tooltipInside"
+                 type="text"
+                 formControlName="city"
+                 placeholder="Enter your city"
+                 name="city"
+                 required
+          />
         </label>
       </div>
       <div class="col-md-4">
-        <label for="State/Province">
+        <label for="state">
           <b>State/Province</b>
-          <div class="tooltipInside">
-            <input type="text" placeholder="State/Province" name="state" required>
-          </div>
+          <!--FIXME Replace with dropdown-->
+          <input id="state"
+                 class="tooltipInside"
+                 type="text"
+                 formControlName="state"
+                 placeholder="Enter your State/Province"
+                 name="state"
+                 required
+          />
         </label>
       </div>
-    </div>
-    <div class="row no-gutters">
       <div class="col-md-4">
-        <label for="address">
+        <label for="postalCode">
           <b>Postal Code</b>
-          <div class="tooltipInside">
-            <input type="text" placeholder="Postal code" name="postalcode" required>
-          </div>
+          <input id="postalCode"
+                 class="tooltipInside"
+                 type="text"
+                 formControlName="postalCode"
+                 placeholder="Enter your postal code"
+                 name="postalCode"
+                 required
+          />
         </label>
       </div>
-      <div class="col-md-4">
-        <label for="birthday">
-          <b>Birthdate</b>
-          <div class="tooltipInside">
-            <input class="month" type="number" min="1" max="12" placeholder="MM"
-                   name="monthbirthdate" required>
-            <input class="day" type="number" min="1" max="31" placeholder="DD" name="daybirthdate"
-                   required>
-            <input class="year" type="number" min="1900" max="2100" placeholder="YYYY"
-                   name="yearbirthdate" required>
-          </div>
-        </label>
-      </div>
-      <div class="col-md-4">
-        <label for="phonenumber">
-          <b>Phone Number</b>
-          <div class="tooltipInside">
-            <input class="month" type="number" min="0" max="999" placeholder="XXX" name="areacode"
-                   required>
-            <input class="day" type="number" min="0" max="999" placeholder="XXX" name="prefix"
-                   required>
-            <input class="year" type="number" min="0" max="9999" placeholder="XXXX"
-                   name="line number" required>
-          </div>
-        </label>
-      </div>
+
     </div>
     <div class="row no-gutters">
       <div class="col-md-4">
         <label for="password">
           <b>Password</b>
-          <div class="tooltipInside">
-            <input type="password" placeholder="Password" name="password" required>
-          </div>
+          <input id="password"
+                 class="tooltipInside"
+                 type="password"
+                 formControlName="password"
+                 placeholder="Enter a password"
+                 name="password"
+                 required
+          />
         </label>
       </div>
       <div class="col-md-4">
-        <label for="birthday">
+        <label for="confirmPassword">
           <b>Retype password</b>
-          <div class="tooltipInside">
-            <input type="password" placeholder="Retype Password" name="passwordvalidation" required>
-          </div>
+          <input id="confirmPassword"
+                 class="tooltipInside"
+                 type="password"
+                 formControlName="confirmPassword"
+                 placeholder="Retype your password"
+                 name="confirmPassword"
+                 required
+          />
         </label>
       </div>
       <div class="col-md-4 submitColumn">
-        <button class="submitButton" type="submit">Submit</button>
+        <button
+          class="submitButton"
+          type="submit"
+          [disabled]="!accountForm.valid"
+        >
+          Submit
+        </button>
       </div>
     </div>
     <div class="row movingGradient no-gutters">

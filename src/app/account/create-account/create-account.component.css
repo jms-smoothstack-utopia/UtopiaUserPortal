@@ -1,179 +1,180 @@
-.container-fluid{
-    background:  none;
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-    background-size: cover;
-    position: relative; 
-    height: calc(100vh - 75px);
-    padding-top: 30px;
+.container-fluid {
+  background: none;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  position: relative;
+  height: calc(100vh - 75px);
+  padding-top: 30px;
 }
 
-form{
-    display: block;
-    margin-left: 30px;
-    margin-right: 30px;
-    overflow: hidden;
-    background: #FFF;
-    border: 1px solid #E4E4E4;
-    border-radius: 20px;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-}
-.col-md-4{
-    height: 68px;
-    background-color: white;        
-    padding-left: 15px;
-    padding-right: 25px;
+form {
+  display: block;
+  margin-left: 30px;
+  margin-right: 30px;
+  overflow: hidden;
+  background: #FFF;
+  border: 1px solid #E4E4E4;
+  border-radius: 20px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
-.tooltipInside{
-    position: relative;
-    width: 100%;
+.col-md-4 {
+  height: 68px;
+  background-color: white;
+  padding-left: 15px;
+  padding-right: 25px;
 }
 
-b{
-    font-family: "VT323";
-    color: black;
-    font-size: 24px;
+.tooltipInside {
+  position: relative;
+  width: 100%;
 }
 
-label{
-    margin-bottom: 0px;
-    width: 100%;
+b {
+  font-family: "VT323";
+  color: black;
+  font-size: 24px;
 }
 
-input[type="text"], input[type="password"] {
-    width: 100%;
-    margin: 0px 0px 5px 0px;
-    display: inline-block;
-    border-width: 0px 0px 1px 0px;
-    border-style: none;
-    box-sizing: border-box;
-    font-family: "VT323";
-    font-size: 18px;
-    color:grey;
+label {
+  margin-bottom: 0px;
+  width: 100%;
 }
 
-.month, .day{
-    width: 20%;
-    margin-right: 2px;
+input {
+  width: 100%;
+  margin: 0px 0px 5px 0px;
+  display: inline-block;
+  border-width: 0px 0px 1px 0px;
+  border-style: none;
+  box-sizing: border-box;
+  font-family: "VT323";
+  font-size: 18px;
+  color: grey;
 }
 
-.year{
-    width: 56%;
+.month, .day {
+  width: 20%;
+  margin-right: 2px;
 }
 
-input[type="number"]{
-    display: inline-block;
-    border-style: none; 
-    box-sizing: border-box;
-    font-family: "VT323";
-    font-size: 18px;
-    color:grey;
+.year {
+  width: 56%;
 }
 
-input[type="number"]:focus{         
-    outline: 2px dashed #1508AF;
+input[type="number"] {
+  display: inline-block;
+  border-style: none;
+  box-sizing: border-box;
+  font-family: "VT323";
+  font-size: 18px;
+  color: grey;
 }
 
-input[type="text"]:focus, input[type="password"]:focus{
-    outline: 2px dashed #1508AF;
+input[type="number"]:focus {
+  outline: 2px dashed #1508AF;
 }
 
-.col-md-12{
-    height: 70px;
-    padding-left: 20px;
-    padding-top: 18px;
+input[type="text"]:focus, input[type="password"]:focus {
+  outline: 2px dashed #1508AF;
 }
 
-.col-md-6{
-    height: 70px;
-    padding-left: 20px;
-    padding-top: 18px;
+.col-md-12 {
+  height: 70px;
+  padding-left: 20px;
+  padding-top: 18px;
 }
 
-.secondcell{
-    padding-left: 0px;
-    padding-right: 20px;
-    display: flex;
-    justify-content: flex-end;
+.col-md-6 {
+  height: 70px;
+  padding-left: 20px;
+  padding-top: 18px;
 }
 
-.movingGradient{
-    background: linear-gradient(52deg, #1508AF, #0bc1da, #AFC3F2, #3E4C6E);
-    background-size: 800% 800%;
-    -webkit-animation: animatedGradient 40s ease infinite;
-    -moz-animation: animatedGradient 40s ease infinite;
-    animation: animatedGradient 40s ease infinite;
+.secondcell {
+  padding-left: 0px;
+  padding-right: 20px;
+  display: flex;
+  justify-content: flex-end;
 }
 
-span{
-    color: white;
-    font-family: "Futura";
-    font-size: 25px;
-    font-weight: bold;
+.movingGradient {
+  background: linear-gradient(52deg, #1508AF, #0bc1da, #AFC3F2, #3E4C6E);
+  background-size: 800% 800%;
+  -webkit-animation: animatedGradient 40s ease infinite;
+  -moz-animation: animatedGradient 40s ease infinite;
+  animation: animatedGradient 40s ease infinite;
 }
 
-.textGradient{
-    font-size: larger;
-    font-family: 'Futura';
-    font-weight: bold;
-    background: linear-gradient(52deg, #1508AF,  #8E2AE3);
-    background-clip: text;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+span {
+  color: white;
+  font-family: "Futura";
+  font-size: 25px;
+  font-weight: bold;
 }
 
-.dot{
-    float: right;
-    z-index: 10;
-    position: absolute;
-    display: inline-flex;
-    justify-content: center;
-    align-items: center;
-    top: 0px;
-    right: 0px;
-    height: 30px;
-    width: 30px;
-    border-radius: 50%;
-    font-family: "American TypeWriter";
-    font-weight: bold;
-    color: white;
-    font-size: 20px;
-    cursor: pointer;
+.textGradient {
+  font-size: larger;
+  font-family: 'Futura';
+  font-weight: bold;
+  background: linear-gradient(52deg, #1508AF, #8E2AE3);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
-.submitButton{
-    font-family: 'Lato', sans-serif;
-    font-weight: 600;
-    color: white;
-    font-size: large;
-    background-color: #4CAF50;
-    border: none;
-    cursor: pointer;
-    width: 100%;
-    height: 100%;
+.dot {
+  float: right;
+  z-index: 10;
+  position: absolute;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  top: 0px;
+  right: 0px;
+  height: 30px;
+  width: 30px;
+  border-radius: 50%;
+  font-family: "American TypeWriter";
+  font-weight: bold;
+  color: white;
+  font-size: 20px;
+  cursor: pointer;
 }
 
-.submitButton:focus{
-    border: 5px dashed #1508AF;
-    outline: none;
+.submitButton {
+  font-family: 'Lato', sans-serif;
+  font-weight: 600;
+  color: white;
+  font-size: large;
+  background-color: #4CAF50;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  height: 100%;
 }
 
-.submitButton:hover{
-    background-color: #16891F;
+.submitButton:focus {
+  border: 5px dashed #1508AF;
+  outline: none;
 }
 
-.submitColumn{
-padding: 0px;
+.submitButton:hover {
+  background-color: #16891F;
 }
 
-@media screen and (max-width: 800px){
-    .secondcell{
-        display: none;
-    }
+.submitColumn {
+  padding: 0px;
+}
 
-    .container-fluid{
-        background: none;
-    }
+@media screen and (max-width: 800px) {
+  .secondcell {
+    display: none;
+  }
+
+  .container-fluid {
+    background: none;
+  }
 }
