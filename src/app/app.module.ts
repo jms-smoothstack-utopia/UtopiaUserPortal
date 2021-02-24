@@ -9,8 +9,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { LoginFormComponent } from './login/login-form/login-form.component';
 import { PasswordResetComponent } from './login/password-reset/password-reset.component';
 import { PasswordConfirmationComponent } from './login/password-reset/password-confirmation/password-confirmation.component';
-import { AccountComponent } from './login/account/account.component';
-import { ValidateemailComponent } from './login/account/validateemail/validateemail.component';
+import { CreateAccountComponent } from './account/create-account/create-account.component';
+import { ValidateemailComponent } from './account/validateemail/validateemail.component';
 import { LayoutComponent } from './layout/layout.component';
 import { HeaderComponent } from './layout/header/header.component';
 import { RouterModule } from '@angular/router';
@@ -31,7 +31,7 @@ import { LoggerModule } from 'ngx-logger';
     LoginFormComponent,
     PasswordResetComponent,
     PasswordConfirmationComponent,
-    AccountComponent,
+    CreateAccountComponent,
     ValidateemailComponent,
     LayoutComponent,
     HeaderComponent,
