@@ -43,16 +43,6 @@ describe('AppComponent', () => {
     expect(component).toBeTruthy();
   });
 
-<<<<<<< HEAD
-  it(`should have as title 'Utopia User Portal'`, () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.componentInstance;
-    expect(app.title).toEqual('Utopia User Portal');
-  });
-
-  //the base-level app component contains no useful content
-  //so not testing for that
-=======
   it('should set the title as "Utopia Airlines"', () => {
     spyOn(component, 'setTitle');
     component.ngOnInit();
@@ -65,5 +55,4 @@ describe('AppComponent', () => {
     component.ngOnInit();
     expect(authService.autoLogin).toHaveBeenCalled();
   });
->>>>>>> dec89a5bb7c5aaf7135d4aec99a760eb7b3112ee
 });

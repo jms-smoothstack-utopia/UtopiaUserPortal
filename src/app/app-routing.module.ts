@@ -1,13 +1,5 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-<<<<<<< HEAD
-import { UserProfileComponent } from './user-profile/user-profile.component';
-import { HomeComponent } from './home/home.component';
-
-const routes: Routes = [
-  { path: '', component: HomeComponent, pathMatch: 'full'},
-  { path: 'users/profile/:id', component: UserProfileComponent },
-=======
 import { LayoutComponent } from './layout/layout.component';
 import { UserprofileComponent } from './layout/userprofile/userprofile.component';
 import { AccountComponent } from './login/account/account.component';
@@ -56,7 +48,6 @@ const routes: Routes = [
       },
     ],
   },
->>>>>>> dec89a5bb7c5aaf7135d4aec99a760eb7b3112ee
 ];
 
 @NgModule({
