@@ -21,4 +21,20 @@ describe('AlertComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('should be empty if no error message given', () => {
+    component.message = undefined;
+    fixture.detectChanges();
+
+    expect(fixture.nativeElement.querySelector('div')).toBeFalsy();
+  });
+
+  it('should have the error message given by input as the inner text', () => {
+    component.message = 'some error';
+    fixture.detectChanges();
+
+    expect(fixture.nativeElement.querySelector('p').innerText).toEqual(
+      'some error'
+    );
+  });
 });
