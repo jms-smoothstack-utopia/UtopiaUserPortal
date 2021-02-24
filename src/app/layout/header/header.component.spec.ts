@@ -15,10 +15,12 @@ import {
   NGXMapperServiceMock,
 } from 'ngx-logger/testing';
 import { DatePipe } from '@angular/common';
+import { AuthService } from '../../services/auth/auth.service';
 
-describe('MainheaderComponent', () => {
+describe('HeaderComponent', () => {
   let component: HeaderComponent;
   let fixture: ComponentFixture<HeaderComponent>;
+  let authServiceSpy: AuthService;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -37,10 +39,34 @@ describe('MainheaderComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(HeaderComponent);
     component = fixture.componentInstance;
+    authServiceSpy = fixture.debugElement.injector.get(AuthService);
     fixture.detectChanges();
   });
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('should have "Sign out" as button text if logged in', () => {
+    spyOn(authServiceSpy, 'isLoggedIn').and.returnValue(true);
+    component.ngOnInit();
+    fixture.detectChanges();
+    expect(authServiceSpy.isLoggedIn).toHaveBeenCalled();
+    expect(component.buttonMsg).toEqual('Sign out');
+
+    expect(fixture.nativeElement.querySelector('button').innerText).toEqual(
+      'Sign out'
+    );
+  });
+
+  it('should have "Sign in" as button text if not logged in', () => {
+    spyOn(authServiceSpy, 'isLoggedIn').and.returnValue(false);
+    component.ngOnInit();
+    fixture.detectChanges();
+    expect(authServiceSpy.isLoggedIn).toHaveBeenCalled();
+    expect(component.buttonMsg).toEqual('Sign in');
+    expect(fixture.nativeElement.querySelector('button').innerText).toEqual(
+      'Sign in'
+    );
   });
 });

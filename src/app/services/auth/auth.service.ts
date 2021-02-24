@@ -13,7 +13,7 @@ interface AuthData {
   token: string;
   expiresAt: Date;
   userEmail: string;
-  tokenExpirationTimer: number;
+  tokenExpirationTimer: any;
 }
 
 @Injectable({
@@ -23,9 +23,9 @@ export class AuthService {
   public token?: string;
   public expiresAt?: Date;
   public userEmail?: string;
-  private tokenExpirationTimer?: number;
+  private tokenExpirationTimer?: any;
 
-  private readonly STORAGE_KEY = 'AUTH_DATA';
+  readonly STORAGE_KEY = 'AUTH_DATA';
 
   constructor(private http: HttpClient, private log: NGXLogger) {}
 
@@ -74,7 +74,7 @@ export class AuthService {
     }
 
     this.token = authData.token;
-    this.expiresAt = authData.expiresAt;
+    this.expiresAt = new Date(authData.expiresAt);
     this.userEmail = authData.userEmail;
 
     this.tokenExpirationTimer = this.setAutoLogout(
