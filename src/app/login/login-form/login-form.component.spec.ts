@@ -1,7 +1,7 @@
-import { TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
+
+import { LoginFormComponent } from './login-form.component';
 import { RouterTestingModule } from '@angular/router/testing';
-import { AppComponent } from './app.component';
-import { HttpClientTestingModule } from '@angular/common/http/testing';
 import {
   LoggerConfig,
   NGXLogger,
@@ -14,12 +14,16 @@ import {
   NGXMapperServiceMock,
 } from 'ngx-logger/testing';
 import { DatePipe } from '@angular/common';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { FormsModule } from '@angular/forms';
 
-describe('AppComponent', () => {
+describe('MainPageComponent', () => {
+  let component: LoginFormComponent;
+  let fixture: ComponentFixture<LoginFormComponent>;
+
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [RouterTestingModule, HttpClientTestingModule],
-      declarations: [AppComponent],
+      declarations: [LoginFormComponent],
       providers: [
         NGXLogger,
         { provide: NGXLoggerHttpService, useClass: NGXLoggerHttpServiceMock },
@@ -27,12 +31,17 @@ describe('AppComponent', () => {
         { provide: LoggerConfig, useValue: { level: NgxLoggerLevel.ERROR } },
         DatePipe,
       ],
+      imports: [RouterTestingModule, HttpClientTestingModule, FormsModule],
     }).compileComponents();
   });
 
-  it('should create the app', () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.componentInstance;
-    expect(app).toBeTruthy();
+  beforeEach(() => {
+    fixture = TestBed.createComponent(LoginFormComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
+  });
+
+  it('should create', () => {
+    expect(component).toBeTruthy();
   });
 });

@@ -1,6 +1,7 @@
-import { TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
+
+import { HeaderComponent } from './header.component';
 import { RouterTestingModule } from '@angular/router/testing';
-import { AppComponent } from './app.component';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import {
   LoggerConfig,
@@ -15,11 +16,14 @@ import {
 } from 'ngx-logger/testing';
 import { DatePipe } from '@angular/common';
 
-describe('AppComponent', () => {
+describe('MainheaderComponent', () => {
+  let component: HeaderComponent;
+  let fixture: ComponentFixture<HeaderComponent>;
+
   beforeEach(async () => {
     await TestBed.configureTestingModule({
+      declarations: [HeaderComponent],
       imports: [RouterTestingModule, HttpClientTestingModule],
-      declarations: [AppComponent],
       providers: [
         NGXLogger,
         { provide: NGXLoggerHttpService, useClass: NGXLoggerHttpServiceMock },
@@ -30,9 +34,13 @@ describe('AppComponent', () => {
     }).compileComponents();
   });
 
-  it('should create the app', () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.componentInstance;
-    expect(app).toBeTruthy();
+  beforeEach(() => {
+    fixture = TestBed.createComponent(HeaderComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
+  });
+
+  it('should create', () => {
+    expect(component).toBeTruthy();
   });
 });

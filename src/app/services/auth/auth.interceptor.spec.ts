@@ -1,6 +1,7 @@
 import { TestBed } from '@angular/core/testing';
-import { RouterTestingModule } from '@angular/router/testing';
-import { AppComponent } from './app.component';
+
+import { AuthInterceptor } from './auth.interceptor';
+import { AuthService } from './auth.service';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import {
   LoggerConfig,
@@ -15,24 +16,28 @@ import {
 } from 'ngx-logger/testing';
 import { DatePipe } from '@angular/common';
 
-describe('AppComponent', () => {
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      imports: [RouterTestingModule, HttpClientTestingModule],
-      declarations: [AppComponent],
+describe('AuthInterceptor', () => {
+  let interceptor: AuthInterceptor;
+
+  beforeEach(() => {
+    TestBed.configureTestingModule({
       providers: [
+        AuthInterceptor,
+        AuthService,
         NGXLogger,
         { provide: NGXLoggerHttpService, useClass: NGXLoggerHttpServiceMock },
         { provide: NGXMapperService, useClass: NGXMapperServiceMock },
         { provide: LoggerConfig, useValue: { level: NgxLoggerLevel.ERROR } },
         DatePipe,
       ],
-    }).compileComponents();
+      imports: [HttpClientTestingModule],
+    });
+
+    interceptor = TestBed.inject(AuthInterceptor);
   });
 
-  it('should create the app', () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.componentInstance;
-    expect(app).toBeTruthy();
+  it('should be created', () => {
+    const interceptor: AuthInterceptor = TestBed.inject(AuthInterceptor);
+    expect(interceptor).toBeTruthy();
   });
 });
