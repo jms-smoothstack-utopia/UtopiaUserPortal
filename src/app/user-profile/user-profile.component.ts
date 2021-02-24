@@ -3,7 +3,6 @@ import { ActivatedRoute } from '@angular/router';
 import { HttpErrorResponse } from '@angular/common/http';
 
 import { User } from '../user';
-import { Address } from '../address';
 import { UserService } from "../user.service";
 
 @Component({
@@ -31,23 +30,21 @@ export class UserProfileComponent implements OnInit {
     }
   }
 
-  checkIsValidUser(returnedValue: User | HttpErrorResponse): returnedValue is User {
-    console.log('checkIsValidUser got this:');
-    console.log(returnedValue);
-    //try to cast it to a User and check its firstName to see if it's actually a user
-    return (returnedValue as User).firstName !== undefined;
-  }
-
-  checkIsError(returnedValue: any): returnedValue is HttpErrorResponse {
-    return (returnedValue as HttpErrorResponse).status !== undefined;
-  }
-
   setUser(response: User | HttpErrorResponse): void {
     if (this.checkIsValidUser(response)) {
       this.user = response;
     } else if (this.checkIsError(response)) {
       this.error = response;
     }
+  }
+
+  checkIsValidUser(returnedValue: User | HttpErrorResponse): returnedValue is User {
+    //try to cast it to a User and check its firstName to see if it's actually a user
+    return (returnedValue as User).firstName !== undefined;
+  }
+
+  checkIsError(returnedValue: any): returnedValue is HttpErrorResponse {
+    return (returnedValue as HttpErrorResponse).status !== undefined;
   }
 
   ngOnInit(): void {

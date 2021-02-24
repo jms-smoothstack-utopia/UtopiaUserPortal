@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
-import { ObjectUnsubscribedError, Observable, of } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
 
 import { User } from './user';
@@ -31,18 +31,11 @@ export class UserService {
       );
     }
 
-
-    //error handler that returns an Observable with a default value passed in
-    //TODO: consider adding any Utopia-specific functionality to this (now it's mostly as in the tutorial)
+    //error handler passes back an HttpErrorResponse, handled in the component/view
      private handleError<T>(operation = 'operation', result?: T) {
       return (err: any): Observable<T> => {
-        console.error(`error in ${operation}, this object was returned:`);
-        console.error(err);
-        if (err.status == 404) {
-          //do 404 handling
-          return of(err as T);
-        }
-        return of(result as T);
+        console.error(`error in ${operation}`);
+        return of(err as T);
       };
     }
 }
