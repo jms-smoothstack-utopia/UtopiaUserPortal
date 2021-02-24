@@ -111,7 +111,7 @@
   float: right;
   z-index: 10;
   position: absolute;
-  top: 8px;
+  top: 0px;
   right: 0;
   height: 30px;
   width: 30px;
@@ -172,7 +172,7 @@
   font-size: large;
   background-color: #4caf50;
   padding: 7px 20px;
-  margin: 40px 0px 0px 0px;
+  margin: 55px 0px 0px 0px;
   border: none;
   cursor: pointer;
   width: 80%;
