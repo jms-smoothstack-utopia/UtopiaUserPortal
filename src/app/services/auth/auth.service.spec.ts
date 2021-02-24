@@ -40,6 +40,10 @@ describe('AuthService', () => {
     httpTestingController = TestBed.inject(HttpTestingController);
   });
 
+  beforeEach(() => {
+    localStorage.removeItem(service.STORAGE_KEY);
+  });
+
   afterEach(() => {
     httpTestingController.verify();
   });
