@@ -1,25 +1,49 @@
-import { TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { AppComponent } from './app.component';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import {
+  LoggerConfig,
+  NGXLogger,
+  NGXLoggerHttpService,
+  NgxLoggerLevel,
+  NGXMapperService,
+} from 'ngx-logger';
+import {
+  NGXLoggerHttpServiceMock,
+  NGXMapperServiceMock,
+} from 'ngx-logger/testing';
+import { DatePipe } from '@angular/common';
+import { AuthService } from './services/auth/auth.service';
 
 describe('AppComponent', () => {
+  let component: AppComponent;
+  let fixture: ComponentFixture<AppComponent>;
+
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [
-        RouterTestingModule
-      ],
-      declarations: [
-        AppComponent
+      imports: [RouterTestingModule, HttpClientTestingModule],
+      declarations: [AppComponent],
+      providers: [
+        NGXLogger,
+        { provide: NGXLoggerHttpService, useClass: NGXLoggerHttpServiceMock },
+        { provide: NGXMapperService, useClass: NGXMapperServiceMock },
+        { provide: LoggerConfig, useValue: { level: NgxLoggerLevel.ERROR } },
+        DatePipe,
       ],
     }).compileComponents();
   });
 
-  it('should create the app', () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.componentInstance;
-    expect(app).toBeTruthy();
+  beforeEach(() => {
+    fixture = TestBed.createComponent(AppComponent);
+    component = fixture.componentInstance;
   });
 
+  it('should create the app', () => {
+    expect(component).toBeTruthy();
+  });
+
+<<<<<<< HEAD
   it(`should have as title 'Utopia User Portal'`, () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
@@ -28,4 +52,18 @@ describe('AppComponent', () => {
 
   //the base-level app component contains no useful content
   //so not testing for that
+=======
+  it('should set the title as "Utopia Airlines"', () => {
+    spyOn(component, 'setTitle');
+    component.ngOnInit();
+    expect(component.setTitle).toHaveBeenCalledWith('Utopia Airlines');
+  });
+
+  it('should automatically login the user', () => {
+    let authService = fixture.debugElement.injector.get(AuthService);
+    spyOn(authService, 'autoLogin');
+    component.ngOnInit();
+    expect(authService.autoLogin).toHaveBeenCalled();
+  });
+>>>>>>> dec89a5bb7c5aaf7135d4aec99a760eb7b3112ee
 });
