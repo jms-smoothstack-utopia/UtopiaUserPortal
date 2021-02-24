@@ -1,0 +1,125 @@
+.container-fluid{
+    padding-top: 30px;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.firstcell{
+    padding-left: 20px;
+    padding-right: 0px;
+    display: flex;
+    justify-content: flex-start;
+}
+
+.secondcell{
+    padding-left: 0px;
+    padding-right: 20px;
+    display: flex;
+    justify-content: flex-end;
+}
+
+form{
+    width: 75%;
+    display: block;
+    overflow: hidden;
+    background: #FFF;
+    border: 1px solid #E4E4E4;
+    border-radius: 20px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+label{
+    margin-bottom: 0px;
+    width: 100%;
+}
+
+.firstRow .col-md-6{
+    height: 70px;
+    padding-left: 20px;
+    padding-top: 18px;
+}
+
+.col-md-12{
+    height: 60px;
+    padding-left: none;
+    padding-top: none;
+}
+
+.secondRow .col-md-6{
+    height: 68px;
+    padding-left: 20px;
+    padding-top: 9px;
+    padding-right: 2px;
+    margin-bottom: 12px;
+}
+
+input[type="password"] {
+    width: 100%;
+    margin: 0px 0px 5px 0px;
+    display: inline-block;
+    border-width: 0px 0px 1px 0px;
+    border-style: none;
+    box-sizing: border-box;
+    font-family: "VT323";
+    font-size: 18px;
+    color:grey;
+}
+
+b{
+    font-family: "VT323";
+    color: black;
+    font-size: 24px;
+}
+
+.movingGradient{
+    background: linear-gradient(52deg, #1508AF, #0bc1da, #AFC3F2, #3E4C6E);
+    background-size: 800% 800%;
+    -webkit-animation: animatedGradient 40s ease infinite;
+    -moz-animation: animatedGradient 40s ease infinite;
+    animation: animatedGradient 40s ease infinite;
+}
+
+span{
+    color: white;
+    font-family: "Futura";
+    font-size: 25px;
+    font-weight: bold;
+}
+
+input[type="password"]:focus{
+    outline: 2px dashed #1508AF;
+}
+
+@media screen and (max-width: 800px){
+    .secondcell{
+        display: none;
+    }
+
+    .container-fluid{
+        background: none;
+        margin-top: 0px;
+    }
+
+    form{
+        width: initial;
+    }
+}
+
+.submitButton{
+    font-family: 'Lato', sans-serif;
+    font-weight: 600;
+    color: white;
+    font-size: large;
+    background-color: #4CAF50;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    height: 100%;
+}
+
+.submitButton:hover{
+    background-color: #16891F;
+}

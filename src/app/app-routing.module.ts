@@ -8,6 +8,7 @@ import { LoginComponent } from './login/login.component';
 import { MainPageComponent } from './login/main-page/main-page.component';
 import { PasswordConfirmationComponent } from './login/password-reset/password-confirmation/password-confirmation.component';
 import { PasswordResetComponent } from './login/password-reset/password-reset.component';
+import { ResetformComponent } from './login/resetform/resetform.component';
 
 const routes: Routes = [
   {
@@ -35,6 +36,10 @@ const routes: Routes = [
       {
         path:"accountmaker/confirmemail",
         component: ValidateemailComponent,
+      },      
+      {
+        path:"password/resetform/:token",
+        component: ResetformComponent,
       }
     ]
   },

@@ -17,6 +17,7 @@ import { MainheaderComponent } from './layout/mainheader/mainheader.component';
 import { RouterModule } from '@angular/router';
 import { SidebarComponent } from './layout/sidebar/sidebar.component';
 import { UserprofileComponent } from './layout/userprofile/userprofile.component';
+import { ResetformComponent } from './login/resetform/resetform.component';
 
 @NgModule({
   declarations: [
@@ -32,6 +33,7 @@ import { UserprofileComponent } from './layout/userprofile/userprofile.component
     MainheaderComponent,
     SidebarComponent,
     UserprofileComponent,
+    ResetformComponent,
   ],
   imports: [
     BrowserModule,
