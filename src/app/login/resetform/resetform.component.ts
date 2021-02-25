@@ -1,5 +1,10 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { NgForm } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
+import { NGXLogger } from 'ngx-logger';
+import { HttpService } from 'src/app/shared/methods/http.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-resetform',
@@ -7,15 +12,102 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./resetform.component.css']
 })
 export class ResetformComponent implements OnInit {
+  errorMsg?: string = undefined;
+  passwordRegex: string = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[!@#$%^&*-_=+,.?])[A-Za-z\\d!@#$%^&*-_=+,.?]{10,128}$";
+  isLoading = false;
   userToken: any
 
-  constructor(private route:ActivatedRoute) {
+  constructor(
+    private httpService: HttpService,
+    private route:ActivatedRoute,
+    private log:NGXLogger,
+    private router: Router
+    ) {
     this.route.params.subscribe(params => {
       this.userToken = params["token"];
     });
    }
 
   ngOnInit(): void {
+  }
+
+  onCloseAlert() {
+    this.errorMsg = undefined;
+  }
+
+  onSubmitPasswordResetWithToken(onSubmitPasswordResetWithToken: NgForm){
+
+    if (!onSubmitPasswordResetWithToken.valid){
+      this.log.debug("Invalid form")
+      this.errorMsg = "Please enter your new password.";
+      return;
+    }
+
+    const newPassword = onSubmitPasswordResetWithToken.value.password;
+    const newPasswordValidation = onSubmitPasswordResetWithToken.value.passwordvalidation;
+
+    var res = newPassword.match(this.passwordRegex);
+    
+    if (newPassword != newPasswordValidation){
+      this.log.debug("Invalid form");
+      this.errorMsg = "Please enter the same password in both input boxes";
+      return;
+    } 
+
+    if (res == null){
+      this.log.debug("Invalid form");
+      this.errorMsg = "Password must be between 10 and 128 characters,"
+      + " contain at least one lowercase letter,"
+      + " at least one uppercase letter,"
+      + " at least one number,"
+      + " and at least one special character from the following: !@#$%^&*-_=+,.?";
+      return;
+    }
+
+    let JSONObject = 
+    {
+      "password": newPassword,
+      "token": this.userToken
+    };
+
+    let url = environment.accountsEndpoint + "/new-password";
+
+    this.httpService.post(url, JSONObject).subscribe(
+      () => {
+        this.passwordIsReset().then(() => onSubmitPasswordResetWithToken.reset())
+      },
+      (err: HttpErrorResponse) => {
+        this.passwordIsNotReset(err).then(() => onSubmitPasswordResetWithToken.reset())
+      },
+    );
+  }
+
+  async passwordIsReset(){
+    this.errorMsg = undefined;
+    this.isLoading = false;
+    //Need to add this component
+    //this.router.navigateByUrl("login/")
+  }
+
+  async passwordIsNotReset(err: HttpErrorResponse){
+    this.log.debug("Failure", err);
+    this.isLoading = false;
+    if (err.status == 404)
+    {
+      this.errorMsg = "The token you provided is expired or invalid. Please resetting your password again."
+    }
+    else if(err.status == 400)
+    {
+      this.errorMsg = "Password must be between 10 and 128 characters,"
+      + " contain at least one lowercase letter,"
+      + " at least one uppercase letter,"
+      + " at least one number,"
+      + " and at least one special character from the following: !@#$%^&*-_=+,.?";
+    }
+    else
+    {
+      this.errorMsg = "An error occured while trying to process your request. Please try again."
+    }
   }
 
 }

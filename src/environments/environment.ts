@@ -7,7 +7,7 @@ import {NgxLoggerLevel} from "ngx-logger";
 export const environment = {
   production: false,
   authEndpoint: "http://localhost:8080/authenticate",
-  passwordResetEndpoint: "http://localhost:8089/api/v0.1/password-reset",
+  accountsEndpoint: "http://localhost:8080/accounts",
   logLevel: NgxLoggerLevel.DEBUG
 };
 

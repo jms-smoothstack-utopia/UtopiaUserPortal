@@ -6,7 +6,6 @@
     align-items: center;
 
 }
-
 .firstcell{
     padding-left: 20px;
     padding-right: 0px;
@@ -122,4 +121,10 @@ input[type="password"]:focus{
 
 .submitButton:hover{
     background-color: #16891F;
+}
+
+.submitButton:focus{
+    border: 2px dashed #1508AF;
+    border-radius: 0px 0px 20px 20px;
+    outline: none;
 }

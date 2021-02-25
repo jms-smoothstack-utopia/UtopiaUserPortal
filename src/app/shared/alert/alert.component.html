@@ -1,6 +1,7 @@
 <div class="backdrop" (click)="onClose()"></div>
 <div class="alert-box">
   <p>{{ message }}</p>
+  <div [innerHTML] = "moreInfo"></div>
   <div class="alert-box-actions">
     <button class="close-button" (click)="onClose()">OK</button>
   </div>

@@ -1,6 +1,16 @@
 <app-mainheader [hideSignInButton]="true"></app-mainheader>
 <div class="container-fluid">
-    <form>
+    <app-alert
+    *ngIf="errorMsg"
+    [message]="errorMsg"
+    (closeEvent)="onCloseAlert()"
+    >
+    </app-alert>
+    <form
+    *ngIf="!isLoading"
+    #passwordResetFormWithToken="ngForm"
+    (ngSubmit)="onSubmitPasswordResetWithToken(passwordResetFormWithToken)"
+    >
         <div class="row movingGradient no-gutters firstRow">
             <div class="col-md-6 firstcell"><span>UTOPIA</span></div>
             <div class="col-md-6 secondcell"><span>Password Reset</span></div>
@@ -10,7 +20,15 @@
                 <label for="Password">
                     <b>New Password</b>
                     <div class="tooltipInside">
-                    <input type="password" placeholder="Enter your new password" name="password" required>
+                    <input 
+                    type="password" 
+                    placeholder="Enter your new password"
+                    id="password"
+                    ngModel 
+                    name="password"
+                    autocomplete="current-password"
+                    required
+                    password>
                     </div>
                 </label>
             </div>
@@ -18,7 +36,15 @@
                 <label for="retyped password">
                     <b>Retype Password</b>
                     <div class="tooltipInside">
-                    <input type="password" placeholder="Retype password" name="passwordvalidation" required>
+                    <input type="password" 
+                    placeholder="Retype password" 
+                    id="passwordValidation"
+                    ngModel
+                    name="passwordvalidation"
+                    autocomplete="current-password"
+                    required
+                    password
+                    >
                     </div>
                 </label>
             </div>
