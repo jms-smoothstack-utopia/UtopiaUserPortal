@@ -1,40 +1,98 @@
 <div *ngIf="user">
     <h2>{{user.firstName}} {{user.lastName}}</h2>
     <!-- User ID used to be displayed here, but removed since UUIDs can't be interacted with and are a bit ugly -->
-    <ul id="userData">
-        <li>
-            <label for='firstName'>First name:</label>
-            <input [(ngModel)]="user.firstName" placeholder="firstname" />
-        </li>
-        <li>
-            <label for='lastName'>Last name:</label>
-            <input [(ngModel)]="user.lastName" placeholder="lastname" />
-        </li>
-        <li>
-            <label for='email'>Email:</label>
-            <input [(ngModel)]="user.email" placeholder="email" type="email" />
-        </li>
-        <li>
-            <label for='addrLine1'>Address line 1:</label>
-            <input [(ngModel)]="user.addrLine1" placeholder="address line 1" />
-        </li>
-        <li>
-            <label for='addrLine2'>Address line 2:</label>
-            <input [(ngModel)]="user.addrLine2" placeholder="address line 2" />
-        </li>
-        <li>
-            <label for='city'>City:</label>
-            <input [(ngModel)]="user.city" placeholder="city" />
-        </li>
-        <li>
-            <label for='state'>State:</label>
-            <input [(ngModel)]="user.state" placeholder="state" />
-        </li>
-        <li>
-            <label for='zipcode'>ZIP code:</label>
-            <input [(ngModel)]="user.zipcode" placeholder="zip code" />
-        </li>
-    </ul>
+    <div class="col-3">
+        <ul id="userData" >
+            <li>
+                <label for='firstName'>First name:</label>
+                <input [(ngModel)]="user.firstName" placeholder="firstname" type="text"
+                    id="firstName" name="firstName" class="form-control"
+                    required #firstName="ngModel"/>
+                <div *ngIf="firstName.invalid && (firstName.dirty || firstName.touched)" class="alert alert-danger">
+                    <div *ngIf="firstName.errors && firstName.errors.required">
+                        First name is required.
+                    </div>
+                </div>
+            </li>
+            <li>
+                <label for='lastName'>Last name:</label>
+                <input [(ngModel)]="user.lastName" placeholder="lastname" type="text"
+                    id="lastName" name="lastName" class="form-control"
+                    required #lastName="ngModel"/>
+                <div *ngIf="lastName.invalid && (lastName.dirty || lastName.touched)" class="alert alert-danger">
+                    <div *ngIf="lastName.errors && lastName.errors.required">
+                        Last name is required.
+                    </div>
+                </div>
+            </li>
+            <li>
+                <label for='email'>Email:</label>
+                <input [(ngModel)]="user.email" placeholder="email" type="email"
+                    id="email" name="email" class="form-control"
+                    required email #email="ngModel"/>
+                <div *ngIf="email.invalid && (email.dirty || email.touched)" class="alert alert-danger">
+                    <div *ngIf="email.errors && email.errors.required">
+                        Email address is required.
+                    </div>
+                    <div *ngIf="email.errors && email.errors.email">
+                        Not a valid email address.
+                    </div>
+                </div>
+            </li>
+            <br>
+            <li>
+                <label for='addrLine1'>Address line 1:</label>
+                <input [(ngModel)]="user.addrLine1" placeholder="address line 1" type="text"
+                    id="addrLine1" name="addrLine1" class="form-control"
+                    required #addrLine1="ngModel"/>
+                <div *ngIf="addrLine1.invalid && (addrLine1.dirty || addrLine1.touched)" class="alert alert-danger">
+                    <div *ngIf="addrLine1.errors && addrLine1.errors.required">
+                        Address line 1 is required.
+                    </div>
+                </div>
+            </li>
+            <li>
+                <label for='addrLine2'>Address line 2:</label>
+                <input [(ngModel)]="user.addrLine2" placeholder="address line 2" type="text"
+                id="addrLine2" name="addrLine2" class="form-control" #addrLine2="ngModel"/>
+                <!-- Address line 2 NOT required, so no error box here. -->
+            </li>
+            <li>
+                <label for='city'>City:</label>
+                <input [(ngModel)]="user.city" placeholder="city" type="text"
+                    id="city" name="city" class="form-control"
+                    required #city="ngModel"/>
+                <div *ngIf="city.invalid && (city.dirty || city.touched)" class="alert alert-danger">
+                    <div *ngIf="city.errors && city.errors.required">
+                        City is required.
+                    </div>
+                </div>
+            </li>
+            <li>
+                <label for='state'>State:</label>
+                <input [(ngModel)]="user.state" placeholder="state" type="text"
+                    id="state" name="state" class="form-control"
+                    required #state="ngModel"/>
+                <div *ngIf="state.invalid && (state.dirty || state.touched)" class="alert alert-danger">
+                    <div *ngIf="state.errors && state.errors.required">
+                        State is required.
+                    </div>
+                </div>
+            </li>
+            <li>
+                <label for='zipcode'>ZIP code:</label>
+                <input [(ngModel)]="user.zipcode" placeholder="zip code" type="text"
+                    id="zipcode" name="zipcode" class="form-control"
+                    required #zipcode="ngModel"/>
+                <div *ngIf="zipcode.invalid && (zipcode.dirty || zipcode.touched)" class="alert alert-danger">
+                    <div *ngIf="zipcode.errors && zipcode.errors.required">
+                        ZIP code is required.
+                    </div>
+                    <!-- TODO regex for valid ZIP/ZIP+4 format. -->
+                </div>
+            </li>
+        </ul>
+    </div>
     <button (click)="updateUser()">Update Profile Information</button>
 </div>
 <div *ngIf="error">
