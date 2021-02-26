@@ -93,6 +93,8 @@
             </li>
         </ul>
     </div>
+    <!-- TODO: Disable the button when any of the fields above have errors. -->
+    <!-- https://angular.io/guide/form-validation -->
     <button (click)="updateUser()">Update Profile Information</button>
 </div>
 <div *ngIf="error">
