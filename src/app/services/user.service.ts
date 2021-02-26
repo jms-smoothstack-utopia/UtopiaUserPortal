@@ -31,6 +31,15 @@ export class UserService {
       );
     }
 
+    //PUT update a user
+    updateUser(updatedUser: User): Observable<any> {
+      const url=`${this.usersUrl}/${updatedUser.id}`;
+      return this.http.put<User>(url, updatedUser, this.httpOptions).pipe(
+        tap(_ => console.log("successfully updated user " + _.id)),
+        catchError(this.handleError<HttpErrorResponse>('getUser', ))
+      );
+    }
+
     //error handler passes back an HttpErrorResponse, handled in the component/view
      private handleError<T>(operation = 'operation', result?: T) {
       return (err: any): Observable<T> => {

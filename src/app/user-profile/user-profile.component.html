@@ -1,24 +1,41 @@
 <div *ngIf="user">
     <h2>{{user.firstName}} {{user.lastName}}</h2>
     <!-- User ID used to be displayed here, but removed since UUIDs can't be interacted with and are a bit ugly -->
-    <div id="userData">
-        <label for='firstName'>First name:</label>
-        <input [(ngModel)]="user.firstName" placeholder="firstname" disabled="false"/>
-        <label for='lastName'>Last name:</label>
-        <input [(ngModel)]="user.lastName" placeholder="lastname" disabled="true"/>
-        <label for='email'>Email:</label>
-        <input [(ngModel)]="user.email" placeholder="email" type="email" disabled="true"/>
-        <label for='addresses[0].line1'>Address line 1:</label>
-        <input [(ngModel)]="user.addresses[0].line1" placeholder="address line 1" disabled="true"/>
-        <label for='addresses[0].line2'>Address line 2:</label>
-        <input [(ngModel)]="user.addresses[0].line2" placeholder="address line 2" disabled="true"/>
-        <label for='addresses[0].city'>City:</label>
-        <input [(ngModel)]="user.addresses[0].city" placeholder="city" disabled="true"/>
-        <label for='addresses[0].state'>State:</label>
-        <input [(ngModel)]="user.addresses[0].state" placeholder="state" disabled="true"/>
-        <label for='addresses[0].zipcode'>ZIP code:</label>
-        <input [(ngModel)]="user.addresses[0].zipcode" placeholder="zip code" disabled="true"/>
-    </div>
+    <ul id="userData">
+        <li>
+            <label for='firstName'>First name:</label>
+            <input [(ngModel)]="user.firstName" placeholder="firstname" />
+        </li>
+        <li>
+            <label for='lastName'>Last name:</label>
+            <input [(ngModel)]="user.lastName" placeholder="lastname" />
+        </li>
+        <li>
+            <label for='email'>Email:</label>
+            <input [(ngModel)]="user.email" placeholder="email" type="email" />
+        </li>
+        <li>
+            <label for='addrLine1'>Address line 1:</label>
+            <input [(ngModel)]="user.addrLine1" placeholder="address line 1" />
+        </li>
+        <li>
+            <label for='addrLine2'>Address line 2:</label>
+            <input [(ngModel)]="user.addrLine2" placeholder="address line 2" />
+        </li>
+        <li>
+            <label for='city'>City:</label>
+            <input [(ngModel)]="user.city" placeholder="city" />
+        </li>
+        <li>
+            <label for='state'>State:</label>
+            <input [(ngModel)]="user.state" placeholder="state" />
+        </li>
+        <li>
+            <label for='zipcode'>ZIP code:</label>
+            <input [(ngModel)]="user.zipcode" placeholder="zip code" />
+        </li>
+    </ul>
+    <button (click)="updateUser()">Update Profile Information</button>
 </div>
 <div *ngIf="error">
     <h2>{{error.status}} Error</h2>
