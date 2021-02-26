@@ -3,7 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { HttpErrorResponse } from '@angular/common/http';
 
 import { User } from '../user';
-import { UserService } from "../user.service";
+import { UserService } from "../services/user.service";
 
 @Component({
   selector: 'app-user-profile',
@@ -25,7 +25,7 @@ export class UserProfileComponent implements OnInit {
     if (rawId === null) {
       //TODO: do some kind of error thing
     } else {
-      const id = +rawId;  //cast rawId as a number
+      const id = rawId;
       this.userService.getUser(id).subscribe(myUser => this.setUser(myUser));
     }
   }

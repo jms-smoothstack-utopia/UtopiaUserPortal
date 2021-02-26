@@ -17,7 +17,6 @@ import { LayoutComponent } from './layout/layout.component';
 import { HeaderComponent } from './layout/header/header.component';
 import { RouterModule } from '@angular/router';
 import { SidebarComponent } from './layout/sidebar/sidebar.component';
-import { UserprofileComponent } from './layout/userprofile/userprofile.component';
 import { AuthInterceptor } from './services/auth/auth.interceptor';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { AlertComponent } from './shared/alert/alert.component';
@@ -28,21 +27,8 @@ import { LoggerModule } from 'ngx-logger';
 @NgModule({
   declarations: [
     AppComponent,
-    UserProfileComponent,
-    HomeComponent,
-  ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    RouterModule,
-    HttpClientModule,
-    FormsModule,
-    ReactiveFormsModule,
-    FormsModule,
-    HttpClientModule,
-    LoggerModule.forRoot({ level: environment.logLevel }),
     LoginComponent,
-    NgbModule,
+
     LoginFormComponent,
     PasswordResetComponent,
     PasswordConfirmationComponent,
@@ -51,9 +37,21 @@ import { LoggerModule } from 'ngx-logger';
     LayoutComponent,
     HeaderComponent,
     SidebarComponent,
-    UserprofileComponent,
     AlertComponent,
     LoadingSpinnerComponent,
+    UserProfileComponent,
+    //HomeComponent,
+  ],
+  imports: [
+    BrowserModule,
+    RouterModule,
+    AppRoutingModule,
+    RouterModule,
+    HttpClientModule,
+    FormsModule,
+    ReactiveFormsModule,
+    LoggerModule.forRoot({ level: environment.logLevel }),
+    NgbModule,
   ],
   
   providers: [

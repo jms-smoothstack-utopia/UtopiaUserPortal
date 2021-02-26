@@ -1,10 +1,8 @@
 <div *ngIf="user">
     <h2>{{user.firstName}} {{user.lastName}}</h2>
-    <!-- TODO: consider if we want to show IDs here or not -->
-    <div><span>ID: </span>{{user.id}}</div>
+    <!-- User ID used to be displayed here, but removed since UUIDs can't be interacted with and are a bit ugly -->
     <div>
         <label>First name:
-            <!-- two-way data binding that updates the user name in the header above when the input is enabled and changed -->
             <input [(ngModel)]="user.firstName" placeholder="firstname" disabled="true"/>
         </label>
         <label>Last name:
