@@ -21,7 +21,7 @@ form {
 }
 
 .col-md-4 {
-  height: 68px;
+  /*height: 68px;*/
   background-color: white;
   padding-left: 15px;
   padding-right: 25px;
@@ -108,7 +108,7 @@ input[type="text"]:focus, input[type="password"]:focus {
   animation: animatedGradient 40s ease infinite;
 }
 
-span {
+.span-header {
   color: white;
   font-family: "Futura";
   font-size: 25px;
@@ -153,7 +153,11 @@ span {
   border: none;
   cursor: pointer;
   width: 100%;
-  height: 100%;
+  height: 50%;
+}
+
+.submitButton:hover {
+  background-color: #16891F;
 }
 
 .submitButton:focus {
@@ -161,12 +165,24 @@ span {
   outline: none;
 }
 
-.submitButton:hover {
-  background-color: #16891F;
+.submitButtonEnabled {
+  opacity: 100%;
+}
+
+.submitButtonEnabled:hover {
+  opacity: 100%;
+}
+
+.submitButtonDisabled {
+  opacity: 25%;
+}
+
+.submitButtonDisabled:hover {
+  opacity: 25%;
 }
 
 .submitColumn {
-  padding: 0px;
+  padding: 0;
 }
 
 @media screen and (max-width: 800px) {
@@ -177,4 +193,16 @@ span {
   .container-fluid {
     background: none;
   }
+}
+
+.error {
+  border: red solid !important;
+}
+
+.hiddenErrorText {
+  visibility: hidden;
+}
+
+.shownErrorText {
+  visibility: visible;
 }

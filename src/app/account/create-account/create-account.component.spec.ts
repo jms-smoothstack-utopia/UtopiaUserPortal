@@ -20,7 +20,7 @@ import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth/auth.service';
 import PathConstants from '../../../environments/paths';
 
-describe('AccountComponent', () => {
+describe('CreateAccountComponent', () => {
   let component: CreateAccountComponent;
   let fixture: ComponentFixture<CreateAccountComponent>;
   let accountServiceSpy: AccountService;
