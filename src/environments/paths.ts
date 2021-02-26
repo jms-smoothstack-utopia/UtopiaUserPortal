@@ -2,6 +2,7 @@
 const PathConstants = {
   LOGIN: 'login',
   USER_PROFILE: 'myprofile',
+  CREATE_ACCOUNT: 'account/create',
 };
 
 export default PathConstants;

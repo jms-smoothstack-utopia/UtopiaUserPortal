@@ -25,6 +25,8 @@ export class AuthService {
   public userEmail?: string;
   private tokenExpirationTimer?: any;
 
+  readonly URL = environment.hostUrl + '/authenticate';
+
   readonly STORAGE_KEY = 'AUTH_DATA';
 
   constructor(private http: HttpClient, private log: NGXLogger) {}
@@ -32,7 +34,10 @@ export class AuthService {
   login(email: string, password: string) {
     this.log.debug('Attempt authentication', email);
     return this.http
-      .post<AuthResponse>(environment.authEndpoint, { email, password })
+      .post<AuthResponse>(this.URL, {
+        email,
+        password,
+      })
       .pipe(
         tap((res) => {
           this.handleAuthenticationSuccess(res, email);

@@ -71,7 +71,7 @@ export class LoginFormComponent implements OnInit {
   }
 
   makeAnAccount() {
-    this.router.navigateByUrl('/login/accountmaker');
+    this.router.navigate([PathConstants.CREATE_ACCOUNT]);
   }
 
   onCloseAlert() {

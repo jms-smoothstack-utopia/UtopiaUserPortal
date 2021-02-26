@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 
+/**
+ * Wrapper for routing.
+ */
 @Component({
   selector: 'app-login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css'],
+  template: '<router-outlet></router-outlet>',
 })
 export class LoginComponent implements OnInit {
   constructor() {}
