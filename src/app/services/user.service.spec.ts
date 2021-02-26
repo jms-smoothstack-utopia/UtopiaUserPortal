@@ -10,7 +10,7 @@ describe('UserService', () => {
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule],
       declarations: [],
-      providers: [UserService]
+      providers: [UserService],
     });
     service = TestBed.inject(UserService);
   });
@@ -20,9 +20,9 @@ describe('UserService', () => {
   });
 
   it('getUser 2 should return user 2', (done: DoneFn) => {
-    service.getUser(2).subscribe(returned => {
+    service.getUser('2').subscribe((returned) => {
       expect(returned).toBeTruthy();
       done();
     });
-  })
+  });
 });
