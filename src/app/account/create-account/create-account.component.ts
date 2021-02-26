@@ -49,6 +49,7 @@ export class CreateAccountComponent implements OnInit {
     phoneNumber: new FormControl('', [
       Validators.required,
       USPhoneNumberValidator,
+      Validators.pattern(/^\(\d{3}\)\s\d{3}-\d{4}$/),
     ]),
     city: new FormControl('', [Validators.required, trimStringLength(1)]),
     state: new FormControl('', [Validators.required]),
@@ -72,11 +73,15 @@ export class CreateAccountComponent implements OnInit {
 
   onPhoneNumberFocusOut() {
     const phoneControl = this.accountForm.get('phoneNumber');
-    if (phoneControl && phoneControl.valid) {
+    if (phoneControl) {
       const number = this.phoneUtil.parse(phoneControl.value, 'US');
-      phoneControl.patchValue(
-        this.phoneUtil.format(number, PhoneNumberFormat.NATIONAL)
+      const formatted = this.phoneUtil.format(
+        number,
+        PhoneNumberFormat.NATIONAL
       );
+      if (phoneControl.value !== formatted) {
+        phoneControl.patchValue(formatted);
+      }
     }
   }
 
@@ -84,7 +89,7 @@ export class CreateAccountComponent implements OnInit {
   // or empty string if form not initialized
   get formattedPhoneNumber() {
     const control = this.accountForm.get('phoneNumber');
-    if (control) {
+    if (control && control.valid) {
       const val = control.value.replaceAll(/\D/g, '');
       return val.slice(0, 3) + '-' + val.slice(3, 6) + '-' + val.slice(6, 11);
     }
@@ -182,7 +187,7 @@ export class CreateAccountComponent implements OnInit {
       case 'lastName':
         return 'Please enter your last name.';
       case 'phoneNumber':
-        return 'Please enter your phone number.';
+        return 'Please enter a valid phone number.';
       case 'addrLine1':
         return 'Please enter your street address.';
       case 'addrLine2':

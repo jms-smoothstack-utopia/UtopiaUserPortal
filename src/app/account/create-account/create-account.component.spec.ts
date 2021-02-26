@@ -26,6 +26,19 @@ describe('CreateAccountComponent', () => {
   let accountServiceSpy: AccountService;
   let authServiceSpy: AuthService;
   let mockRouter: Router;
+  const expectedFormFields = [
+    'email',
+    'firstName',
+    'lastName',
+    'addrLine1',
+    'addrLine2',
+    'phoneNumber',
+    'city',
+    'state',
+    'zipcode',
+    'password',
+    'confirmPassword',
+  ];
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -50,8 +63,146 @@ describe('CreateAccountComponent', () => {
     mockRouter = fixture.debugElement.injector.get(Router);
   });
 
+  afterEach(() => {
+    component.accountForm.reset();
+  });
+
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('should contain an initialized form for entry containing all expected fields', () => {
+    const form = component.accountForm;
+    expect(form).toBeTruthy();
+
+    expectedFormFields.forEach((field) => {
+      expect(form.contains(field)).toBeTrue();
+    });
+
+    const totalFields = expectedFormFields.map((field) => {
+      form.get(field);
+    }).length;
+
+    expect(totalFields).toEqual(expectedFormFields.length);
+  });
+
+  it('should automatically format a valid phone number in a readable format for US numbers', () => {
+    const control = component.accountForm.get('phoneNumber');
+
+    expect(control).toBeTruthy();
+
+    control!.setValue('4178926530');
+    component.onPhoneNumberFocusOut();
+
+    expect(control!.value).toEqual('(417) 892-6530');
+  });
+
+  it('#formattedPhoneNuber should return a properly formatted string when input is valid for API calls', () => {
+    const control = component.accountForm.get('phoneNumber');
+    expect(control).toBeTruthy();
+
+    control!.setValue('4178926530');
+    component.onPhoneNumberFocusOut();
+    expect(component.formattedPhoneNumber).toEqual('417-892-6530');
+  });
+
+  it('#formattedPhoneNuber should return an empty string when input is not valid', () => {
+    const control = component.accountForm.get('phoneNumber');
+    expect(control).toBeTruthy();
+
+    control!.setValue('0123400000056789');
+    expect(control!.value).toEqual('0123400000056789');
+    expect(control!.valid).toBeFalse();
+    expect(component.formattedPhoneNumber).toEqual('');
+
+    control!.setValue('000');
+    expect(control!.value).toEqual('000');
+    expect(control!.valid).toBeFalse();
+    expect(component.formattedPhoneNumber).toEqual('');
+
+    control!.setValue('a123456789');
+    expect(control!.value).toEqual('a123456789');
+    expect(control!.valid).toBeFalse();
+    expect(component.formattedPhoneNumber).toEqual('');
+
+    control!.setValue('770a445987');
+    expect(control!.value).toEqual('770a445987');
+    expect(control!.valid).toBeFalse();
+    expect(component.formattedPhoneNumber).toEqual('');
+  });
+
+  it('#showErrorForField should return true if field invalid and touched', () => {
+    expectedFormFields.forEach((field) => {
+      component.accountForm.get(field)!.markAsTouched();
+      if (field !== 'addrLine2' && field !== 'confirmPassword') {
+        expect(component.accountForm.get(field)!.valid).toBeFalsy(
+          field + ' failed test.'
+        );
+        expect(component.showErrorForField(field)).toBeTrue();
+      }
+    });
+
+    component.accountForm.reset();
+
+    component.accountForm.get('password')!.setValue('abCD1234!@');
+    component.accountForm.get('confirmPassword')!.setValue('');
+    component.accountForm.get('confirmPassword')!.markAsTouched();
+
+    expect(component.showErrorForField('confirmPassword')).toBeTrue();
+
+    // if confirm matches password, should not show error even if password invalid
+    component.accountForm.get('password')!.setValue('a');
+    component.accountForm.get('confirmPassword')!.setValue('a');
+    expect(component.showErrorForField('confirmPassword')).toBeFalse();
+  });
+
+  it('#getFieldValue should return a trimmed string for values', () => {
+    expectedFormFields.forEach((field) => {
+      const control = component.accountForm.get(field)!;
+
+      control.setValue(' leading space');
+      expect(component.getFieldValue(field)).toEqual(
+        'leading space',
+        field + ' failed leading space.'
+      );
+
+      control.setValue('trailing space ');
+      expect(component.getFieldValue(field)).toEqual(
+        'trailing space',
+        field + ' failed trailing space.'
+      );
+
+      control.setValue('         ');
+      expect(component.getFieldValue(field)).toEqual(
+        '',
+        field + ' failed all space.'
+      );
+    });
+  });
+
+  it('TODO: #onSubmit happy path', () => {
+    //TODO
+    fail();
+  });
+
+  it('TODO submit button should be disabled when form is invalid', () => {
+    //TODO
+    fail();
+  });
+
+  it('TODO: #selectedStateAbbreviation', () => {
+    //TODO
+    fail();
+  });
+
+  it('TODO: #getErrorText', () => {
+    //TODO
+    fail();
+  });
+
+  it('TODO: #onCloseAlert', () => {
+    //TODO
+    fail();
   });
 
   it('should redirect to profile if already logged in', () => {
