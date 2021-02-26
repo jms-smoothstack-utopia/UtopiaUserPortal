@@ -92,17 +92,23 @@
 [data-tooltip-position="right"]:after {
   left: 100%;
   border-width: 6px 6px 6px 0;
-  border-right-color: #000;
+  border-right-color: #1508af;
 }
 
 [data-tooltip-position="left"]:after {
   right: 100%;
   border-width: 6px 0 6px 6px;
-  border-left-color: #000;
+  border-left-color: #1508af;
 }
 
 [data-tooltip]:hover:before,
 [data-tooltip]:hover:after {
+  display: block;
+  z-index: 50;
+}
+
+[data-tooltip]:focus:before,
+[data-tooltip]:focus:after {
   display: block;
   z-index: 50;
 }
@@ -272,7 +278,6 @@ hr {
 }
 
 input[type="text"]:focus,
-input[type="password"]:focus,
 .submitButton:focus,
 .createAccountButton:focus,
 .dot:focus {

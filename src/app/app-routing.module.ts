@@ -10,6 +10,8 @@ import { PasswordConfirmationComponent } from './login/password-reset/password-c
 import { PasswordResetComponent } from './login/password-reset/password-reset.component';
 import { ResetformComponent } from './login/resetform/resetform.component';
 import PathConstants from '../environments/paths';
+import { ConfirmationComponent } from './login/resetform/confirmation/confirmation.component';
+import { NotfoundComponent } from './notfound/notfound.component';
 
 const routes: Routes = [
   {
@@ -40,6 +42,10 @@ const routes: Routes = [
       {
         path:"password/resetform/:token",
         component: ResetformComponent,
+      },
+      {
+        path:"password/confirmationchange",
+        component: ConfirmationComponent
       }
     ]
   },
@@ -53,6 +59,8 @@ const routes: Routes = [
       },
     ],
   },
+  {path: "404/notfound", component: NotfoundComponent},
+  {path: "**", redirectTo: "/404/notfound"}
 ];
 
 @NgModule({

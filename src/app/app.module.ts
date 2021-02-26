@@ -23,6 +23,8 @@ import { AlertComponent } from './shared/alert/alert.component';
 import { LoadingSpinnerComponent } from './shared/loading-spinner/loading-spinner.component';
 import { environment } from '../environments/environment';
 import { LoggerModule } from 'ngx-logger';
+import { ConfirmationComponent } from './login/resetform/confirmation/confirmation.component';
+import { NotfoundComponent } from './notfound/notfound.component';
 
 @NgModule({
   declarations: [
@@ -41,6 +43,8 @@ import { LoggerModule } from 'ngx-logger';
     ResetformComponent,
     AlertComponent,
     LoadingSpinnerComponent,
+    ConfirmationComponent,
+    NotfoundComponent,
   ],
   imports: [
     BrowserModule,

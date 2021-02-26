@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { HttpService } from 'src/app/shared/methods/http.service';
 
 @Component({
   selector: 'app-userprofile',
@@ -6,8 +7,10 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./userprofile.component.css']
 })
 export class UserprofileComponent implements OnInit {
+  loyaltyPoints?:any;
 
-  constructor() { }
+  constructor(private httpService: HttpService) {
+   }
 
   ngOnInit(): void {
   }

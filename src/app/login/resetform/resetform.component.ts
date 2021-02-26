@@ -26,10 +26,24 @@ export class ResetformComponent implements OnInit {
     this.route.params.subscribe(params => {
       this.userToken = params["token"];
     });
-   }
 
-  ngOnInit(): void {
+    //We need to verify the token. If it is a valid token, then let user see page.
+    //Otherwise, send to 404 page
+
+    let url = environment.accountsEndpoint + "/new-password/" + this.userToken;
+
+    this.httpService.get(url).subscribe(
+      () => 
+      {},
+      (err: HttpErrorResponse) => 
+      { 
+        console.log(err);
+        this.router.navigate(["404/notfound"], {replaceUrl: true});
+      },
+    )
   }
+
+  ngOnInit(): void {}
 
   onCloseAlert() {
     this.errorMsg = undefined;
@@ -85,8 +99,7 @@ export class ResetformComponent implements OnInit {
   async passwordIsReset(){
     this.errorMsg = undefined;
     this.isLoading = false;
-    //Need to add this component
-    //this.router.navigateByUrl("login/")
+    this.router.navigateByUrl("login/password/confirmationchange")
   }
 
   async passwordIsNotReset(err: HttpErrorResponse){
@@ -95,6 +108,7 @@ export class ResetformComponent implements OnInit {
     if (err.status == 404)
     {
       this.errorMsg = "The token you provided is expired or invalid. Please resetting your password again."
+      this.router.navigateByUrl("login")
     }
     else if(err.status == 400)
     {

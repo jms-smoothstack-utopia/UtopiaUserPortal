@@ -42,6 +42,7 @@ export class PasswordResetComponent implements OnInit {
         this.successPasswordReset().then(() => passwordResetForm.reset());
       },
       (err: HttpErrorResponse) => {
+        console.log(err);
         this.errorPasswordReset(err).then(() => passwordResetForm.reset());
       }
     );
@@ -50,7 +51,7 @@ export class PasswordResetComponent implements OnInit {
   async successPasswordReset(){
     this.errorMsg = undefined;
     this.isLoading = false;
-    await this.router.navigateByUrl('login/forgotpassword/checkemail')
+    await this.router.navigateByUrl('login/forgotpassword/checkemail');
   }
 
   async errorPasswordReset(err: HttpErrorResponse){
