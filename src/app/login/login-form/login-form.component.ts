@@ -24,10 +24,14 @@ export class LoginFormComponent implements OnInit {
 
   ngOnInit(): void {
     if (this.authService.isLoggedIn()) {
-      this.router.navigate([PathConstants.USER_PROFILE]);
+      //todo Navigate back to previous location if present
+      this.router.navigate(['/']);
     }
   }
 
+  //TODO:
+  // Disable button if no entry
+  // Display feedback if no entry
   onSubmitLogin(authForm: NgForm) {
     if (!authForm.valid) {
       this.log.debug('Invalid form');
@@ -53,7 +57,7 @@ export class LoginFormComponent implements OnInit {
   async handleLoginSuccess() {
     this.errorMsg = undefined;
     this.isLoading = false;
-    await this.router.navigate([PathConstants.USER_PROFILE]);
+    await this.router.navigate(['/']);
   }
 
   async handleLoginFailure(err: HttpErrorResponse) {
