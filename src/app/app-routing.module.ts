@@ -9,6 +9,7 @@ import { PasswordConfirmationComponent } from './login/password-reset/password-c
 import { PasswordResetComponent } from './login/password-reset/password-reset.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import PathConstants from '../environments/paths';
+import { ConfirmRegistrationComponent } from './account/confirm-registration/confirm-registration.component';
 
 const routes: Routes = [
   {
@@ -37,6 +38,10 @@ const routes: Routes = [
   {
     path: PathConstants.CREATE_ACCOUNT,
     component: CreateAccountComponent,
+  },
+  {
+    path: PathConstants.CONFIRM_REGISTRATION + '/:confirmationTokenId',
+    component: ConfirmRegistrationComponent,
   },
   {
     path: '',

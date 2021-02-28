@@ -1,0 +1,11 @@
+<app-mainheader [hideSignInButton]="true"></app-mainheader>
+<div class="container-fluid">
+  <div *ngIf="isLoading">
+    <app-loading-spinner></app-loading-spinner>
+  </div>
+  <app-alert *ngIf="alertMsg"
+             [message]="alertMsg"
+             (closeEvent)="onCloseAlert()">
+  </app-alert>
+</div>
+
