@@ -105,4 +105,14 @@ export class AuthService {
   isLoggedIn() {
     return !!this.token;
   }
+
+  readonly CONFIRM_REGISTRATION_URL = environment.hostUrl + '/accounts/confirm';
+
+  confirmRegistration(confirmationTokenId: string) {
+    this.log.debug(
+      'Confirm account registration, tokenId=' + confirmationTokenId
+    );
+    const url = this.CONFIRM_REGISTRATION_URL + '/' + confirmationTokenId;
+    return this.http.put(url, null);
+  }
 }

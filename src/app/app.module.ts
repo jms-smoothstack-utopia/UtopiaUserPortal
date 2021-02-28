@@ -22,6 +22,7 @@ import { LoadingSpinnerComponent } from './shared/loading-spinner/loading-spinne
 import { environment } from '../environments/environment';
 import { LoggerModule } from 'ngx-logger';
 import { DpDatePickerModule } from 'ng2-date-picker';
+import { ConfirmRegistrationComponent } from './account/confirm-registration/confirm-registration.component';
 
 @NgModule({
   declarations: [
@@ -38,6 +39,7 @@ import { DpDatePickerModule } from 'ng2-date-picker';
     AlertComponent,
     LoadingSpinnerComponent,
     UserProfileComponent,
+    ConfirmRegistrationComponent,
   ],
   imports: [
     BrowserModule,
