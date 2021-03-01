@@ -7,8 +7,11 @@ import { LoginComponent } from './login/login.component';
 import { LoginFormComponent } from './login/login-form/login-form.component';
 import { PasswordConfirmationComponent } from './login/password-reset/password-confirmation/password-confirmation.component';
 import { PasswordResetComponent } from './login/password-reset/password-reset.component';
-import { UserProfileComponent } from './user-profile/user-profile.component';
+import { ResetformComponent } from './login/resetform/resetform.component';
 import PathConstants from '../environments/paths';
+import { ConfirmationComponent } from './login/resetform/confirmation/confirmation.component';
+import { NotfoundComponent } from './notfound/notfound.component';
+import { UserProfileComponent } from './user-profile/user-profile.component';
 import { ConfirmRegistrationComponent } from './account/confirm-registration/confirm-registration.component';
 
 const routes: Routes = [
@@ -33,7 +36,15 @@ const routes: Routes = [
         path: 'accountmaker/confirmemail',
         component: ValidateemailComponent,
       },
-    ],
+      {
+        path:"password/resetform/:token",
+        component: ResetformComponent,
+      },
+      {
+        path:"password/confirmationchange",
+        component: ConfirmationComponent
+      }
+    ]
   },
   {
     path: PathConstants.CREATE_ACCOUNT,
@@ -55,6 +66,8 @@ const routes: Routes = [
       },
     ],
   },
+  {path: "404/notfound", component: NotfoundComponent},
+  {path: "**", redirectTo: "404/notfound"}
 ];
 
 @NgModule({

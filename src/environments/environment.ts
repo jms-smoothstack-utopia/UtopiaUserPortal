@@ -6,6 +6,9 @@ import { NgxLoggerLevel } from 'ngx-logger';
 
 export const environment = {
   production: false,
+  authEndpoint: "http://localhost:8080/authenticate",
+  accountsEndpoint: "http://localhost:8080/accounts",
+  logLevel: NgxLoggerLevel.DEBUG
   hostUrl: 'http://localhost:8080',
   logLevel: NgxLoggerLevel.DEBUG,
 };

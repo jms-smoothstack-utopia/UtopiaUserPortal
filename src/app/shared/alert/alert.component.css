@@ -1,3 +1,15 @@
+p{
+  font-family: "Lato", sans-serif;
+}
+
+a{
+  font-family: "Lato", sans-serif;
+}
+
+a:focus{
+  outline: 2px dashed #1508AF;
+}
+
 .backdrop {
   position: fixed;
   top: 0;

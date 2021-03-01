@@ -1,6 +1,6 @@
 .componentContainer{
     position: relative; 
-    margin-top: 200px;
+    margin-top: 180px;
 }
 
 .movingGradient{
@@ -31,8 +31,8 @@
 }
 
 .loginBoxBorder{
-    width: 40%;
-    height: 180px;
+    width: 60%;
+    height: 240px;
     padding: 4px;
 }
 
@@ -74,7 +74,7 @@ h5{
 @media screen and (max-width: 1058px){
  
     .loginBoxBorder{
-        width: 65%;
+        width: 80%;
     }
 }
 
@@ -103,8 +103,22 @@ h5{
         padding: 7px 0px;
         margin: 24px;
     }
-    form{
-        padding-left: 30px;
-        padding-right: 30px;
-    }
 }
+
+.submitButton:hover {
+    background-color: #16891f;
+}
+
+.submitButton {
+    font-family: "Lato", sans-serif;
+    font-weight: 600;
+    color: white;
+    font-size: large;
+    background-color: #4caf50;
+    padding: 7px 20px;
+    margin: 15px 0px 0px 0px;
+    border: none;
+    cursor: pointer;
+    width: 60%;
+  }
+  
