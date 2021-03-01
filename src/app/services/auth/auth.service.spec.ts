@@ -20,6 +20,7 @@ import { DatePipe } from '@angular/common';
 import { environment } from '../../../environments/environment';
 
 describe('AuthService', () => {
+  const fullUrl = `${environment.hostUrl}/authenticate`;
   let service: AuthService;
   let httpTestingController: HttpTestingController;
 
@@ -37,6 +38,10 @@ describe('AuthService', () => {
 
     service = TestBed.inject(AuthService);
     httpTestingController = TestBed.inject(HttpTestingController);
+  });
+
+  beforeEach(() => {
+    localStorage.removeItem(service.STORAGE_KEY);
   });
 
   afterEach(() => {
@@ -62,7 +67,7 @@ describe('AuthService', () => {
       expect(res.expiresAt).toEqual(mockAuth.expiresAt);
     });
 
-    const req = httpTestingController.expectOne(environment.authEndpoint);
+    const req = httpTestingController.expectOne(fullUrl);
     expect(req.request.method).toBe('POST');
     expect(req.cancelled).toBeFalsy();
     expect(req.request.responseType).toEqual('json');
