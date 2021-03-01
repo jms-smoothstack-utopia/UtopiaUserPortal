@@ -26,6 +26,9 @@
         <label>ZIP code:
             <input [(ngModel)]="user.addresses[0].zipcode" placeholder="zip code" disabled="true"/>
         </label>
+        <label>Loyalty Points:
+            <input type="number" [(ngModel)]="user.loyaltyPoints" placeholder="Loyalty Points" disabled="true"/>
+        </label>
     </div>
 </div>
 <div *ngIf="error">
