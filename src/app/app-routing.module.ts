@@ -60,7 +60,7 @@ const routes: Routes = [
     ],
   },
   {path: "404/notfound", component: NotfoundComponent},
-  {path: "**", redirectTo: "/404/notfound"}
+  {path: "**", redirectTo: "404/notfound"}
 ];
 
 @NgModule({

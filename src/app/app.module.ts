@@ -25,6 +25,7 @@ import { environment } from '../environments/environment';
 import { LoggerModule } from 'ngx-logger';
 import { ConfirmationComponent } from './login/resetform/confirmation/confirmation.component';
 import { NotfoundComponent } from './notfound/notfound.component';
+import { BlankComponent } from './blank/blank.component';
 
 @NgModule({
   declarations: [
@@ -45,6 +46,7 @@ import { NotfoundComponent } from './notfound/notfound.component';
     LoadingSpinnerComponent,
     ConfirmationComponent,
     NotfoundComponent,
+    BlankComponent,
   ],
   imports: [
     BrowserModule,

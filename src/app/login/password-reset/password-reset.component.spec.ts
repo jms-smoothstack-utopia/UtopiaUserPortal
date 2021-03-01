@@ -16,25 +16,21 @@ import { DatePipe } from '@angular/common';
 
 import { PasswordResetComponent } from './password-reset.component';
 import { environment } from 'src/environments/environment';
-import { Router } from '@angular/router';
-
-class MockRouter {
-  navigateByUrl(url:string){return url;}
-}
+import { BlankComponent } from 'src/app/blank/blank.component';
 
 describe('PasswordResetComponent', () => {
   let component: PasswordResetComponent;
   let fixture: ComponentFixture<PasswordResetComponent>;
   let httpMock: HttpTestingController;
-  let location: Location;
-  let router: Router;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports:[ RouterTestingModule, HttpClientTestingModule, FormsModule ],
+      imports:[ RouterTestingModule.withRoutes([
+        {path:'login/forgotpassword/checkemail', component: BlankComponent}
+      ]),
+      HttpClientTestingModule, FormsModule ],
       declarations: [ PasswordResetComponent ],
       providers: [
-        {provide: Router, useClass:MockRouter},
         NGXLogger,
         { provide: NGXLoggerHttpService, useClass: NGXLoggerHttpServiceMock },
         { provide: NGXMapperService, useClass: NGXMapperServiceMock },
@@ -105,7 +101,7 @@ describe('PasswordResetComponent', () => {
 
   //Need to fix this test case for routing
 
-  it('should navigate to success page if process is initiated', inject([Router], (router:Router) => {
+  it('should navigate to success page if process is initiated', () => {
     const testForm = <NgForm>{
       value: 
       {
@@ -121,6 +117,6 @@ describe('PasswordResetComponent', () => {
     expect(req.request.method).toBe("POST");
     expect(component.errorMsg).toBe(undefined);
     expect(component.isLoading).toBe(false);
-  }));
+  });
 
 });

@@ -15,6 +15,7 @@ export class PasswordResetComponent implements OnInit {
   errorMsg?: string = undefined;
   moreInfoMsg?: string = undefined;
   isLoading = false;
+  form: NgForm | undefined;
   constructor(
     private log:NGXLogger,
     private httpService: HttpService,
@@ -25,6 +26,7 @@ export class PasswordResetComponent implements OnInit {
   }
 
   onSubmitPasswordReset(passwordResetForm: NgForm){
+    this.form = passwordResetForm;
     if (!passwordResetForm.valid){
       this.log.debug("Invalid form");
       this.errorMsg = "Please enter a valid email to reset your password";
@@ -39,13 +41,19 @@ export class PasswordResetComponent implements OnInit {
 
     this.httpService.post(url, email).subscribe(
       () => {
-        this.successPasswordReset().then(() => passwordResetForm.reset());
+        this.successPasswordReset();
       },
       (err: HttpErrorResponse) => {
         console.log(err);
-        this.errorPasswordReset(err).then(() => passwordResetForm.reset());
+        this.errorPasswordReset(err);
       }
     );
+  }
+
+  resetPageForm(){
+    if(this.form != undefined){
+      this.form.reset();
+    }
   }
 
   async successPasswordReset(){
@@ -54,7 +62,7 @@ export class PasswordResetComponent implements OnInit {
     await this.router.navigateByUrl('login/forgotpassword/checkemail');
   }
 
-  async errorPasswordReset(err: HttpErrorResponse){
+  errorPasswordReset(err: HttpErrorResponse){
     this.log.debug("Failure", err);
     this.isLoading = false;
     if (err.status == 404){
@@ -63,6 +71,7 @@ export class PasswordResetComponent implements OnInit {
     } else{
       this.errorMsg = "An error occurred while processing your request. Please try again."
     }
+    this.resetPageForm();
   }
 
   onCloseAlert() {

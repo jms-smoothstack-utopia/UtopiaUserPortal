@@ -15,7 +15,8 @@ export class ResetformComponent implements OnInit {
   errorMsg?: string = undefined;
   passwordRegex: string = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[!@#$%^&*-_=+,.?])[A-Za-z\\d!@#$%^&*-_=+,.?]{10,128}$";
   isLoading = false;
-  userToken: any
+  userToken: any;
+  form: NgForm | undefined;
 
   constructor(
     private httpService: HttpService,
@@ -50,6 +51,8 @@ export class ResetformComponent implements OnInit {
   }
 
   onSubmitPasswordResetWithToken(onSubmitPasswordResetWithToken: NgForm){
+
+    this.form = onSubmitPasswordResetWithToken;
 
     if (!onSubmitPasswordResetWithToken.valid){
       this.log.debug("Invalid form")
@@ -88,12 +91,18 @@ export class ResetformComponent implements OnInit {
 
     this.httpService.post(url, JSONObject).subscribe(
       () => {
-        this.passwordIsReset().then(() => onSubmitPasswordResetWithToken.reset())
+        this.passwordIsReset();
       },
       (err: HttpErrorResponse) => {
-        this.passwordIsNotReset(err).then(() => onSubmitPasswordResetWithToken.reset())
+        this.passwordIsNotReset(err);
       },
     );
+  }
+
+  resetPageForm(){
+    if(this.form != undefined){
+      this.form.reset();
+    }
   }
 
   async passwordIsReset(){
@@ -122,6 +131,6 @@ export class ResetformComponent implements OnInit {
     {
       this.errorMsg = "An error occured while trying to process your request. Please try again."
     }
+    this.resetPageForm();
   }
-
 }
