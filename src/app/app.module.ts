@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { UserProfileComponent } from './user-profile/user-profile.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { LoginComponent } from './login/login.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -15,7 +14,6 @@ import { LayoutComponent } from './layout/layout.component';
 import { HeaderComponent } from './layout/header/header.component';
 import { RouterModule } from '@angular/router';
 import { SidebarComponent } from './layout/sidebar/sidebar.component';
-import { UserprofileComponent } from './layout/userprofile/userprofile.component';
 import { ResetformComponent } from './login/resetform/resetform.component';
 import { AuthInterceptor } from './services/auth/auth.interceptor';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
@@ -28,6 +26,7 @@ import { NotfoundComponent } from './notfound/notfound.component';
 import { BlankComponent } from './blank/blank.component';
 import { DpDatePickerModule } from 'ng2-date-picker';
 import { ConfirmRegistrationComponent } from './account/confirm-registration/confirm-registration.component';
+import { UserProfileComponent } from './user-profile/user-profile.component';
 
 @NgModule({
   declarations: [
@@ -41,7 +40,6 @@ import { ConfirmRegistrationComponent } from './account/confirm-registration/con
     LayoutComponent,
     HeaderComponent,
     SidebarComponent,
-    UserprofileComponent,
     ResetformComponent,
     AlertComponent,
     LoadingSpinnerComponent,
