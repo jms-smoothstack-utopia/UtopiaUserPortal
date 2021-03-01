@@ -131,6 +131,5 @@ export class ResetformComponent implements OnInit {
     {
       this.errorMsg = "An error occured while trying to process your request. Please try again."
     }
-    this.resetPageForm();
   }
 }

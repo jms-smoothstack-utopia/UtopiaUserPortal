@@ -19,6 +19,7 @@ import { ResetformComponent } from './resetform.component';
 import { ActivatedRoute, Router } from '@angular/router';
 import { of } from 'rxjs';
 import { environment } from 'src/environments/environment';
+import { BlankComponent } from 'src/app/blank/blank.component';
 
 
 describe('ResetformComponent', () => {
@@ -30,7 +31,12 @@ describe('ResetformComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [ 
-        RouterTestingModule.withRoutes([]),
+        RouterTestingModule.withRoutes([
+          {
+          path:"login",
+          component:BlankComponent,
+          },
+        ]),
         HttpClientTestingModule,
         FormsModule
        ],
