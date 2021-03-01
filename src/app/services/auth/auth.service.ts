@@ -13,7 +13,7 @@ interface AuthData {
   token: string;
   expiresAt: Date;
   userEmail: string;
-  tokenExpirationTimer: number;
+  tokenExpirationTimer: any;
 }
 
 @Injectable({
@@ -23,16 +23,21 @@ export class AuthService {
   public token?: string;
   public expiresAt?: Date;
   public userEmail?: string;
-  private tokenExpirationTimer?: number;
+  private tokenExpirationTimer?: any;
 
-  private readonly STORAGE_KEY = 'AUTH_DATA';
+  readonly URL = environment.hostUrl + '/authenticate';
+
+  readonly STORAGE_KEY = 'AUTH_DATA';
 
   constructor(private http: HttpClient, private log: NGXLogger) {}
 
   login(email: string, password: string) {
     this.log.debug('Attempt authentication', email);
     return this.http
-      .post<AuthResponse>(environment.authEndpoint, { email, password })
+      .post<AuthResponse>(this.URL, {
+        email,
+        password,
+      })
       .pipe(
         tap((res) => {
           this.handleAuthenticationSuccess(res, email);
@@ -74,7 +79,7 @@ export class AuthService {
     }
 
     this.token = authData.token;
-    this.expiresAt = authData.expiresAt;
+    this.expiresAt = new Date(authData.expiresAt);
     this.userEmail = authData.userEmail;
 
     this.tokenExpirationTimer = this.setAutoLogout(
@@ -99,5 +104,15 @@ export class AuthService {
 
   isLoggedIn() {
     return !!this.token;
+  }
+
+  readonly CONFIRM_REGISTRATION_URL = environment.hostUrl + '/accounts/confirm';
+
+  confirmRegistration(confirmationTokenId: string) {
+    this.log.debug(
+      'Confirm account registration, tokenId=' + confirmationTokenId
+    );
+    const url = this.CONFIRM_REGISTRATION_URL + '/' + confirmationTokenId;
+    return this.http.put(url, null);
   }
 }

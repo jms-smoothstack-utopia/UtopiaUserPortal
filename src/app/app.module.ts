@@ -1,16 +1,16 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { UserProfileComponent } from './user-profile/user-profile.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { LoginComponent } from './login/login.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { LoginFormComponent } from './login/login-form/login-form.component';
 import { PasswordResetComponent } from './login/password-reset/password-reset.component';
 import { PasswordConfirmationComponent } from './login/password-reset/password-confirmation/password-confirmation.component';
-import { AccountComponent } from './login/account/account.component';
-import { ValidateemailComponent } from './login/account/validateemail/validateemail.component';
+import { CreateAccountComponent } from './account/create-account/create-account.component';
+import { ValidateemailComponent } from './account/validateemail/validateemail.component';
 import { LayoutComponent } from './layout/layout.component';
 import { HeaderComponent } from './layout/header/header.component';
 import { RouterModule } from '@angular/router';
@@ -26,16 +26,17 @@ import { LoggerModule } from 'ngx-logger';
 import { ConfirmationComponent } from './login/resetform/confirmation/confirmation.component';
 import { NotfoundComponent } from './notfound/notfound.component';
 import { BlankComponent } from './blank/blank.component';
+import { DpDatePickerModule } from 'ng2-date-picker';
+import { ConfirmRegistrationComponent } from './account/confirm-registration/confirm-registration.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-
     LoginFormComponent,
     PasswordResetComponent,
     PasswordConfirmationComponent,
-    AccountComponent,
+    CreateAccountComponent,
     ValidateemailComponent,
     LayoutComponent,
     HeaderComponent,
@@ -47,17 +48,24 @@ import { BlankComponent } from './blank/blank.component';
     ConfirmationComponent,
     NotfoundComponent,
     BlankComponent,
+    AlertComponent,
+    LoadingSpinnerComponent,
+    UserProfileComponent,
+    ConfirmRegistrationComponent,
   ],
   imports: [
     BrowserModule,
     RouterModule,
     AppRoutingModule,
-    NgbModule,
-    ReactiveFormsModule,
-    FormsModule,
+    RouterModule,
     HttpClientModule,
+    FormsModule,
+    ReactiveFormsModule,
     LoggerModule.forRoot({ level: environment.logLevel }),
+    DpDatePickerModule,
+    NgbModule,
   ],
+
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
   ],

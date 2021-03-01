@@ -1,0 +1,34 @@
+<div *ngIf="user">
+    <h2>{{user.firstName}} {{user.lastName}}</h2>
+    <!-- User ID used to be displayed here, but removed since UUIDs can't be interacted with and are a bit ugly -->
+    <div>
+        <label>First name:
+            <input [(ngModel)]="user.firstName" placeholder="firstname" disabled="true"/>
+        </label>
+        <label>Last name:
+            <input [(ngModel)]="user.lastName" placeholder="lastname" disabled="true"/>
+        </label>
+        <label>Email address:
+            <input [(ngModel)]="user.email" placeholder="email" disabled="true"/>
+        </label>
+        <label>Address line 1:
+            <input [(ngModel)]="user.addresses[0].line1" placeholder="address line 1" disabled="true"/>
+        </label>
+        <label>Address line 2:
+            <input [(ngModel)]="user.addresses[0].line2" placeholder="address line 2" disabled="true"/>
+        </label>
+        <label>City:
+            <input [(ngModel)]="user.addresses[0].city" placeholder="city" disabled="true"/>
+        </label>
+        <label>State:
+            <input [(ngModel)]="user.addresses[0].state" placeholder="state" disabled="true"/>
+        </label>
+        <label>ZIP code:
+            <input [(ngModel)]="user.addresses[0].zipcode" placeholder="zip code" disabled="true"/>
+        </label>
+    </div>
+</div>
+<div *ngIf="error">
+    <h2>{{error.status}} Error</h2>
+    <p>{{error.message}}</p>
+</div>
