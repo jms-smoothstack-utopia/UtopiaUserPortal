@@ -10,5 +10,7 @@ export interface User {
     addrLine2: string,
     city: string,
     state: string,
-    zipcode: string
+    zipcode: string,
+    ticketEmails: boolean,
+    flightEmails: boolean
 }

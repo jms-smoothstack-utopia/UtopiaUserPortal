@@ -88,8 +88,21 @@
                     <div *ngIf="zipcode.errors && zipcode.errors.required">
                         ZIP code is required.
                     </div>
-                    <!-- TODO regex for valid ZIP/ZIP+4 format. -->
+                    <!-- TODO "^\\d{5}(?:[-\\s]\\d{4})?$" -->
                 </div>
+            </li>
+            <br>
+            <li>
+                <label for='ticketEmails'>Receive emails for ticket/booking notifications?</label>
+                <input [(ngModel)]="user.ticketEmails" type="checkbox"
+                    id="ticketEmails" name="ticketEmails" class="form-control"
+                    #ticketEmails="ngModel" />
+            </li>
+            <li>
+                <label for='flightEmails'>Receive emails for flight notifications?</label>
+                <input [(ngModel)]="user.flightEmails" type="checkbox"
+                    id="flightEmails" name="flightEmails" class="form-control"
+                    #flightEmails="ngModel" />
             </li>
         </ul>
     </div>
