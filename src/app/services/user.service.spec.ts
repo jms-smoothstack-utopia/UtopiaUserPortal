@@ -36,4 +36,15 @@ describe('UserService', () => {
     );
     req.flush('something');
   });
+
+  it('getUsers should return a list of users', () => {
+    service.getUsers().subscribe((res) => {
+      expect(res).toBeTruthy();
+    });
+
+    const req = httpTestingController.expectOne(
+      'http://localhost:8080/customers'
+    );
+    req.flush('something');
+  });
 });
