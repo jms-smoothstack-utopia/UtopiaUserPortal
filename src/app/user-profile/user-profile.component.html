@@ -1,114 +1,120 @@
 <div *ngIf="user">
     <h2>{{user.firstName}} {{user.lastName}}</h2>
     <!-- User ID used to be displayed here, but removed since UUIDs can't be interacted with and are a bit ugly -->
-    <div class="col-3">
-        <ul id="userData" >
-            <li>
-                <label for='firstName'>First name:</label>
-                <input [(ngModel)]="user.firstName" placeholder="firstname" type="text"
-                    id="firstName" name="firstName" class="form-control"
-                    required #firstName="ngModel"/>
-                <div *ngIf="firstName.invalid && (firstName.dirty || firstName.touched)" class="alert alert-danger">
-                    <div *ngIf="firstName.errors && firstName.errors.required">
-                        First name is required.
+    <form [formGroup]="userProfileForm">
+        <div class="col-3">
+            <ul id="userData" >
+                <li>
+                    <label for="firstName">First name:</label>
+                    <input placeholder="firstname" type="text"
+                         name="firstName" id="firstName" class="form-control"
+                         formControlName="firstName" required />
+                    <div id="firstNameErrorText" class="alert alert-danger"
+                        [ngClass]="showErrorForField('firstNameControl') ? 'shownErrorText' : 'hiddenErrorText' ">
+                        Error text first name.
                     </div>
-                </div>
-            </li>
-            <li>
-                <label for='lastName'>Last name:</label>
-                <input [(ngModel)]="user.lastName" placeholder="lastname" type="text"
-                    id="lastName" name="lastName" class="form-control"
-                    required #lastName="ngModel"/>
-                <div *ngIf="lastName.invalid && (lastName.dirty || lastName.touched)" class="alert alert-danger">
-                    <div *ngIf="lastName.errors && lastName.errors.required">
-                        Last name is required.
+                </li>
+                <li>
+                    <label for='lastName'>Last name:</label>
+                    <input placeholder="lastname" type="text"
+                        name="lastName" id="lastName" class="form-control"
+                        formControlName="lastName" required />
+                    <div id="lastNameErrorText" class="alert alert-danger"
+                        [ngClass]="showErrorForField('lastNameControl') ? 'shownErrorText' : 'hiddenErrorText' ">
+                        Error text last name.
                     </div>
-                </div>
-            </li>
-            <li>
-                <label for='email'>Email:</label>
-                <input [(ngModel)]="user.email" placeholder="email" type="email"
-                    id="email" name="email" class="form-control"
-                    required email #email="ngModel"/>
-                <div *ngIf="email.invalid && (email.dirty || email.touched)" class="alert alert-danger">
-                    <div *ngIf="email.errors && email.errors.required">
-                        Email address is required.
-                    </div>
-                    <div *ngIf="email.errors && email.errors.email">
+                </li>
+                <li>
+                    <label for='email'>Email:</label>
+                    <input placeholder="email" type="email"
+                        name="email" id="email" class="form-control"
+                        formControlName="email" required />
+                    <div id="emailErrorText" class="alert alert-danger"
+                        [ngClass]="showErrorForField('emailControl') ? 'shownErrorText' : 'hiddenErrorText' ">
                         Not a valid email address.
                     </div>
-                </div>
-            </li>
-            <br>
-            <li>
-                <label for='addrLine1'>Address line 1:</label>
-                <input [(ngModel)]="user.addrLine1" placeholder="address line 1" type="text"
-                    id="addrLine1" name="addrLine1" class="form-control"
-                    required #addrLine1="ngModel"/>
-                <div *ngIf="addrLine1.invalid && (addrLine1.dirty || addrLine1.touched)" class="alert alert-danger">
-                    <div *ngIf="addrLine1.errors && addrLine1.errors.required">
-                        Address line 1 is required.
+                </li>
+                <br>
+                <li>
+                    <label for='addrLine1'>Address line 1:</label>
+                    <input placeholder="address line 1" type="text"
+                        name="addrLine1" id="addrLine1" class="form-control"
+                        formControlName="addrLine1" required />
+                    <div id="addrLine1ErrorText" class="alert alert-danger"
+                        [ngClass]="showErrorForField('addrLine1Control') ? 'shownErrorText' : 'hiddenErrorText' ">
+                        Not a valid address line.
                     </div>
-                </div>
-            </li>
-            <li>
-                <label for='addrLine2'>Address line 2:</label>
-                <input [(ngModel)]="user.addrLine2" placeholder="address line 2" type="text"
-                id="addrLine2" name="addrLine2" class="form-control" #addrLine2="ngModel"/>
-                <!-- Address line 2 NOT required, so no error box here. -->
-            </li>
-            <li>
-                <label for='city'>City:</label>
-                <input [(ngModel)]="user.city" placeholder="city" type="text"
-                    id="city" name="city" class="form-control"
-                    required #city="ngModel"/>
-                <div *ngIf="city.invalid && (city.dirty || city.touched)" class="alert alert-danger">
-                    <div *ngIf="city.errors && city.errors.required">
-                        City is required.
+                </li>
+                <li>
+                    <label for='addrLine2'>Address line 2:</label>
+                    <input placeholder="address line 2" type="text"
+                        id="addrLine2" name="addrLine2" class="form-control" 
+                        formControlName="addrLine2" />
+                    <!-- Address line 2 is not required. However, we should have a spot in the template and
+                        let the component class do the error checking logic now that this is reactive. -->
+                    <div id="addrLine2ErrorText" class="alert alert-danger"
+                        [ngClass]="showErrorForField('addrLine2Control') ? 'shownErrorText' : 'hiddenErrorText' ">
+                        Not a valid address line.
                     </div>
-                </div>
-            </li>
-            <li>
-                <label for='state'>State:</label>
-                <input [(ngModel)]="user.state" placeholder="state" type="text"
-                    id="state" name="state" class="form-control"
-                    required #state="ngModel"/>
-                <div *ngIf="state.invalid && (state.dirty || state.touched)" class="alert alert-danger">
-                    <div *ngIf="state.errors && state.errors.required">
-                        State is required.
+                </li>
+                <li>
+                    <label for='city'>City:</label>
+                    <input placeholder="city" type="text"
+                        name="city" id="city" class="form-control"
+                        formControlName="city" required />
+                    <div id="cityErrorText" class="alert alert-danger"
+                        [ngClass]="showErrorForField('cityControl') ? 'shownErrorText' : 'hiddenErrorText' ">
+                        Not a valid city name.
                     </div>
-                </div>
-            </li>
-            <li>
-                <label for='zipcode'>ZIP code:</label>
-                <input [(ngModel)]="user.zipcode" placeholder="zip code" type="text"
-                    id="zipcode" name="zipcode" class="form-control"
-                    required #zipcode="ngModel"/>
-                <div *ngIf="zipcode.invalid && (zipcode.dirty || zipcode.touched)" class="alert alert-danger">
-                    <div *ngIf="zipcode.errors && zipcode.errors.required">
-                        ZIP code is required.
+                </li>
+                <li>
+                    <label for='state'>State:</label>
+                    <select name="state" id="state" class="form-control"
+                        formControlName="state" required>
+                        <option *ngFor="let state of states" [ngValue]="state">{{state}}</option>
+                    </select>
+                    <div id="stateErrorText" class="alert alert-danger"
+                        [ngClass]="showErrorForField('stateControl') ? 'shownErrorText' : 'hiddenErrorText' ">
+                        Please select a state.
                     </div>
-                    <!-- TODO "^\\d{5}(?:[-\\s]\\d{4})?$" -->
-                </div>
-            </li>
-            <br>
-            <li>
-                <label for='ticketEmails'>Receive emails for ticket/booking notifications?</label>
-                <input [(ngModel)]="user.ticketEmails" type="checkbox"
-                    id="ticketEmails" name="ticketEmails" class="form-control"
-                    #ticketEmails="ngModel" />
-            </li>
-            <li>
-                <label for='flightEmails'>Receive emails for flight notifications?</label>
-                <input [(ngModel)]="user.flightEmails" type="checkbox"
-                    id="flightEmails" name="flightEmails" class="form-control"
-                    #flightEmails="ngModel" />
-            </li>
-        </ul>
-    </div>
-    <!-- TODO: Disable the button when any of the fields above have errors. -->
-    <!-- https://angular.io/guide/form-validation -->
-    <button (click)="updateUser()">Update Profile Information</button>
+                </li>
+                <li>
+                    <label for='zipcode'>ZIP code:</label>
+                    <input placeholder="zip code" type="text"
+                        name="zipcode" id="zipcode" class="form-control"
+                        formControlName="zipcode" required />
+                    <div id="zipcodeErrorText" class="alert alert-danger"
+                        [ngClass]="showErrorForField('zipcodeControl') ? 'shownErrorText' : 'hiddenErrorText' ">
+                        Invalid ZIP code (must be in the format of 12345, or 12345-6789).
+                    </div>
+                </li>
+                <li>
+                    <label for='loyaltyPoints'>Loyalty Points:</label>
+                    <input type="number"
+                        name="loyaltyPoints" id="loyaltyPoints" class="form-control"
+                        formControlName="loyaltyPoints" />
+                </li>
+                <br>
+                <li>
+                    <label for='ticketEmails'>Receive emails for ticket/booking notifications?</label>
+                    <input type="checkbox"
+                        id="ticketEmails" name="ticketEmails" class="form-control"
+                        formControlName="ticketEmails" />
+                </li>
+                <li>
+                    <label for='flightEmails'>Receive emails for flight notifications?</label>
+                    <input type="checkbox"
+                        id="flightEmails" name="flightEmails" class="form-control"
+                        formControlName="flightEmails" />
+                </li>
+            </ul>
+        </div>
+    </form>
+    <button id="updateButton" class="updateButton"
+        [ngClass]="userProfileForm.valid ? 'updateButtonEnabled' : 'updateButtonDisabled'"
+        type="submit" [disabled]="!userProfileForm.valid">
+        Update Profile Information
+    </button>
 </div>
 <div *ngIf="error">
     <h2>{{error.status}} Error</h2>

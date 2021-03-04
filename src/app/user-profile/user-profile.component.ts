@@ -4,6 +4,9 @@ import { HttpErrorResponse } from '@angular/common/http';
 
 import { User } from '../user';
 import { UserService } from "../services/user.service";
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { trimStringLength } from '../utils/validators';
+import US_STATE_LIST from '../services/us-state/us-states';
 
 @Component({
   selector: 'app-user-profile',
@@ -14,10 +17,33 @@ export class UserProfileComponent implements OnInit {
   @Input() user: User | undefined;
   @Input() error: HttpErrorResponse | undefined;
 
+  states = US_STATE_LIST.map((s) => s.name);
+
   constructor(
     private route: ActivatedRoute,
     private userService: UserService,
   ) { }
+
+  userProfileForm: FormGroup = new FormGroup({
+    firstNameControl: new FormControl('', [Validators.required, trimStringLength(1)]),
+    lastNameControl: new FormControl('', [Validators.required, trimStringLength(1)]),
+    emailControl: new FormControl('', [Validators.email, Validators.required]),
+    addrLine1Control: new FormControl('', [Validators.required, trimStringLength(1)]),
+    addrLine2Control: new FormControl('', [trimStringLength(1)]), //NOT required
+    cityControl: new FormControl('', [Validators.required, trimStringLength(1)]),
+    stateControl: new FormControl('', [Validators.required]),
+    zipCodeControl: new FormControl('', [Validators.required, Validators.pattern(/^\d{5}(?:[-\s]\d{4})?$/)]),
+    loyaltyPointsControl: new FormControl({ disabled: true }),
+    ticketEmailsControl: new FormControl(''),
+    flightEmailsControl: new FormControl('')
+  });
+
+  //should we show an error for the specified field?
+  showErrorForField(field: string) {
+    const control = this.userProfileForm.get(field);  //get the specified form field, such as firstNameControl
+    //yes, if the specified field exists, has been used by the user, and isn't valid
+    return control && control.touched && control.invalid;
+  }
 
   getUser(): void {
     const rawId = this.route.snapshot.paramMap.get('id');

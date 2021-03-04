@@ -1,0 +1,27 @@
+.error {
+    border: red solid !important;
+  }
+  
+  .hiddenErrorText {
+    visibility: hidden;
+  }
+  
+  .shownErrorText {
+    visibility: visible;
+  }
+
+  .updateButtonEnabled {
+    opacity: 100%;
+  }
+  
+  .updateButtonEnabled:hover {
+    opacity: 100%;
+  }
+  
+  .updateButtonDisabled {
+    opacity: 25%;
+  }
+  
+  .updateButtonDisabled:hover {
+    opacity: 25%;
+  }

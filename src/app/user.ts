@@ -5,7 +5,8 @@ export interface User {
     firstName: string,
     lastName: string,
     email: string, 
-    addresses: Address[]
+    addresses: Address[],
+    loyaltyPoints: number,
     addrLine1: string,
     addrLine2: string,
     city: string,
