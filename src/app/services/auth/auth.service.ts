@@ -25,7 +25,7 @@ export class AuthService {
   public userEmail?: string;
   private tokenExpirationTimer?: any;
 
-  readonly URL = environment.hostUrl + '/authenticate';
+  readonly URL = environment.hostUrl + '/login';
 
   readonly STORAGE_KEY = 'AUTH_DATA';
 
