@@ -61,7 +61,7 @@ describe('AuthInterceptor', () => {
     });
 
     const req = httpTestingController.expectOne(
-      environment.hostUrl + '/authenticate'
+      environment.hostUrl + '/login'
     );
     expect(req.request.headers.get('Authorization')).toBeFalsy();
 
