@@ -78,12 +78,14 @@ export class AuthService {
       return;
     }
 
+    this.log.debug('Refreshing authentication data.');
+
     this.token = authData.token;
     this.expiresAt = new Date(authData.expiresAt);
     this.userEmail = authData.userEmail;
 
     this.tokenExpirationTimer = this.setAutoLogout(
-      authData.tokenExpirationTimer - new Date().getTime()
+      this.expiresAt.getTime() - new Date().getTime()
     );
   }
 
