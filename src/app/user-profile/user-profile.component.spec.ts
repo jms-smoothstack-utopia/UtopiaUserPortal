@@ -13,10 +13,10 @@ describe('UserProfileComponent', () => {
   let fixture: ComponentFixture<UserProfileComponent>;
   let userServiceSpy: UserService;
   const expectedFormFields = [
-    'firstNameControl', 'lastNameControl', 'emailControl',
-    'addrLine1Control', 'addrLine2Control', 'cityControl',
-    'stateControl', 'zipCodeControl', 'loyaltyPointsControl',
-    'ticketEmailsControl', 'flightEmailsControl'
+    'firstName', 'lastName', 'email',
+    'addrLine1', 'addrLine2', 'city',
+    'state', 'zipcode', 'phoneNumber',
+    'loyaltyPoints', 'ticketEmails', 'flightEmails'
   ];
 
   const mockAddrs: Address[] = [ {
@@ -34,6 +34,7 @@ describe('UserProfileComponent', () => {
     email: 'foo@example.com',
     addresses: mockAddrs,
     loyaltyPoints: 1,
+    phoneNumber: "555-555-1234",
     addrLine1: '',
     addrLine2: '',
     city: '',
@@ -99,16 +100,22 @@ describe('UserProfileComponent', () => {
   });
 
   it('form zip code field should be invalid if bad zip code entered', () => {
-    component.userProfileForm.get('zipCodeControl')!.setValue('0');
-    component.userProfileForm.get('zipCodeControl')!.markAsTouched();
+    component.userProfileForm.get('zipcode')!.setValue('0');
+    component.userProfileForm.get('zipcode')!.markAsTouched();
 
-    expect(component.userProfileForm.get('zipCodeControl')!.invalid).toBeTrue();
+    expect(component.userProfileForm.get('zipcode')!.invalid).toBeTrue();
   });
 
   it('form email field should be invalid if bad email entered', () => {
-    component.userProfileForm.get('emailControl')!.setValue('Not an email!');
-    component.userProfileForm.get('emailControl')!.markAsTouched();
+    component.userProfileForm.get('email')!.setValue('Not an email!');
+    component.userProfileForm.get('email')!.markAsTouched();
 
-    expect(component.userProfileForm.get('emailControl')!.invalid).toBeTrue();
+    expect(component.userProfileForm.get('email')!.invalid).toBeTrue();
   });
+
+  it('form should be valid when set with a user', () => {
+    component.setUser(mockUser);
+
+    expect(component.userProfileForm.invalid).toBeFalse();
+  })
 });

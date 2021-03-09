@@ -13,6 +13,7 @@ export interface User {
     email: string, 
     addresses: Address[],
     loyaltyPoints: number,
+    phoneNumber: string,
     addrLine1: string,
     addrLine2: string,
     city: string,

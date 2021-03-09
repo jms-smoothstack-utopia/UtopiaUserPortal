@@ -5,7 +5,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { User } from '../user';
 import { UserService } from "../services/user.service";
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { trimStringLength } from '../utils/validators';
+import { trimStringLength, USPhoneNumberValidator } from '../utils/validators';
 import US_STATE_LIST from '../services/us-state/us-states';
 
 @Component({
@@ -17,7 +17,7 @@ export class UserProfileComponent implements OnInit {
   @Input() user: User | undefined;
   @Input() error: HttpErrorResponse | undefined;
 
-  states = US_STATE_LIST.map((s) => s.name);
+  states = US_STATE_LIST.map((s) => s.abbr);
 
   constructor(
     private route: ActivatedRoute,
@@ -25,17 +25,19 @@ export class UserProfileComponent implements OnInit {
   ) { }
 
   userProfileForm: FormGroup = new FormGroup({
-    firstNameControl: new FormControl('', [Validators.required, trimStringLength(1)]),
-    lastNameControl: new FormControl('', [Validators.required, trimStringLength(1)]),
-    emailControl: new FormControl('', [Validators.email, Validators.required]),
-    addrLine1Control: new FormControl('', [Validators.required, trimStringLength(1)]),
-    addrLine2Control: new FormControl('', [trimStringLength(1)]), //NOT required
-    cityControl: new FormControl('', [Validators.required, trimStringLength(1)]),
-    stateControl: new FormControl('', [Validators.required]),
-    zipCodeControl: new FormControl('', [Validators.required, Validators.pattern(/^\d{5}(?:[-\s]\d{4})?$/)]),
-    loyaltyPointsControl: new FormControl({ disabled: true }),
-    ticketEmailsControl: new FormControl(''),
-    flightEmailsControl: new FormControl('')
+    firstName: new FormControl('', [Validators.required, trimStringLength(1)]),
+    lastName: new FormControl('', [Validators.required, trimStringLength(1)]),
+    email: new FormControl('', [Validators.email, Validators.required]),
+    addrLine1: new FormControl('', [Validators.required, trimStringLength(1)]),
+    addrLine2: new FormControl('', [trimStringLength(1)]), //NOT required
+    city: new FormControl('', [Validators.required, trimStringLength(1)]),
+    state: new FormControl('', [Validators.required]),
+    zipcode: new FormControl('', [Validators.required, Validators.pattern(/^\d{5}(?:[-\s]\d{4})?$/)]),
+    //slightly different regex for phoneNumber (vs. account creation) to match how it comes in from the backend
+    phoneNumber: new FormControl('', [Validators.required, USPhoneNumberValidator, Validators.pattern(/^\d{3}-\d{3}-\d{4}$/)]),  
+    loyaltyPoints: new FormControl({ disabled: true }),
+    ticketEmails: new FormControl(''),
+    flightEmails: new FormControl('')
   });
 
   //should we show an error for the specified field?
@@ -60,6 +62,8 @@ export class UserProfileComponent implements OnInit {
     if (this.checkIsValidUser(response)) {
       this.user = response;
       this.fillThisUserAddr();
+      //must set values after fillThisUserAddr, when address is flattened onto the user
+      this.userProfileForm.patchValue(this.user);
     } else if (this.checkIsError(response)) {
       this.error = response;
     }

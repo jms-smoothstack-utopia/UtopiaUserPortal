@@ -10,7 +10,7 @@
                          name="firstName" id="firstName" class="form-control"
                          formControlName="firstName" required />
                     <div id="firstNameErrorText" class="alert alert-danger"
-                        [ngClass]="showErrorForField('firstNameControl') ? 'shownErrorText' : 'hiddenErrorText' ">
+                        [ngClass]="showErrorForField('firstName') ? 'shownErrorText' : 'hiddenErrorText' ">
                         Not a valid first name.
                     </div>
                 </li>
@@ -20,7 +20,7 @@
                         name="lastName" id="lastName" class="form-control"
                         formControlName="lastName" required />
                     <div id="lastNameErrorText" class="alert alert-danger"
-                        [ngClass]="showErrorForField('lastNameControl') ? 'shownErrorText' : 'hiddenErrorText' ">
+                        [ngClass]="showErrorForField('lastName') ? 'shownErrorText' : 'hiddenErrorText' ">
                         Not a valid last name.
                     </div>
                 </li>
@@ -30,7 +30,7 @@
                         name="email" id="email" class="form-control"
                         formControlName="email" required />
                     <div id="emailErrorText" class="alert alert-danger"
-                        [ngClass]="showErrorForField('emailControl') ? 'shownErrorText' : 'hiddenErrorText' ">
+                        [ngClass]="showErrorForField('email') ? 'shownErrorText' : 'hiddenErrorText' ">
                         Not a valid email address.
                     </div>
                 </li>
@@ -41,7 +41,7 @@
                         name="addrLine1" id="addrLine1" class="form-control"
                         formControlName="addrLine1" required />
                     <div id="addrLine1ErrorText" class="alert alert-danger"
-                        [ngClass]="showErrorForField('addrLine1Control') ? 'shownErrorText' : 'hiddenErrorText' ">
+                        [ngClass]="showErrorForField('addrLine1') ? 'shownErrorText' : 'hiddenErrorText' ">
                         Not a valid address line.
                     </div>
                 </li>
@@ -53,7 +53,7 @@
                     <!-- Address line 2 is not required. However, we should have a spot in the template and
                         let the component class do the error checking logic now that this is reactive. -->
                     <div id="addrLine2ErrorText" class="alert alert-danger"
-                        [ngClass]="showErrorForField('addrLine2Control') ? 'shownErrorText' : 'hiddenErrorText' ">
+                        [ngClass]="showErrorForField('addrLine2') ? 'shownErrorText' : 'hiddenErrorText' ">
                         Not a valid address line.
                     </div>
                 </li>
@@ -63,7 +63,7 @@
                         name="city" id="city" class="form-control"
                         formControlName="city" required />
                     <div id="cityErrorText" class="alert alert-danger"
-                        [ngClass]="showErrorForField('cityControl') ? 'shownErrorText' : 'hiddenErrorText' ">
+                        [ngClass]="showErrorForField('city') ? 'shownErrorText' : 'hiddenErrorText' ">
                         Not a valid city name.
                     </div>
                 </li>
@@ -74,7 +74,7 @@
                         <option *ngFor="let state of states" [ngValue]="state">{{state}}</option>
                     </select>
                     <div id="stateErrorText" class="alert alert-danger"
-                        [ngClass]="showErrorForField('stateControl') ? 'shownErrorText' : 'hiddenErrorText' ">
+                        [ngClass]="showErrorForField('state') ? 'shownErrorText' : 'hiddenErrorText' ">
                         Please select a state.
                     </div>
                 </li>
@@ -84,8 +84,18 @@
                         name="zipcode" id="zipcode" class="form-control"
                         formControlName="zipcode" required />
                     <div id="zipcodeErrorText" class="alert alert-danger"
-                        [ngClass]="showErrorForField('zipcodeControl') ? 'shownErrorText' : 'hiddenErrorText' ">
+                        [ngClass]="showErrorForField('zipcode') ? 'shownErrorText' : 'hiddenErrorText' ">
                         Invalid ZIP code (must be in the format of 12345, or 12345-6789).
+                    </div>
+                </li>
+                <li>
+                    <label for='phoneNumber'>Phone number:</label>
+                    <input placeholder="###-###-####" type="text"
+                        name="phoneNumber" id="phoneNumber" class="form-control"
+                        formControlName="phoneNumber" required />
+                    <div id="phoneNumberErrorText" class="alert alert-danger"
+                        [ngClass]="showErrorForField('phoneNumber') ? 'shownErrorText' : 'hiddenErrorText' ">
+                        Invalid phone number.
                     </div>
                 </li>
                 <li>
