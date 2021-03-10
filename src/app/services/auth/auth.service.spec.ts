@@ -20,7 +20,7 @@ import { DatePipe } from '@angular/common';
 import { environment } from '../../../environments/environment';
 
 describe('AuthService', () => {
-  const fullUrl = `${environment.hostUrl}/authenticate`;
+  const fullUrl = `${environment.hostUrl}/login`;
   let service: AuthService;
   let httpTestingController: HttpTestingController;
 

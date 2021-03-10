@@ -149,8 +149,9 @@ export class CreateAccountComponent implements OnInit {
       (res) => {
         this.log.debug(res);
         this.isLoading = false;
-        this.authService.login(email, password);
-        this.router.navigate([PathConstants.USER_PROFILE, res.id]);
+        this.authService.login(email, password).subscribe(() => {
+          this.router.navigate([PathConstants.USER_PROFILE, res.id]);
+        });
       },
       (err) => {
         this.log.error(err);

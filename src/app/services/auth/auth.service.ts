@@ -62,7 +62,6 @@ export class AuthService {
         token: this.token,
         expiresAt: this.expiresAt,
         userEmail: this.userEmail,
-        tokenExpirationTimer: this.tokenExpirationTimer,
       })
     );
   }
