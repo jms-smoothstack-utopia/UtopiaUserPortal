@@ -27,6 +27,7 @@ import { BlankComponent } from './blank/blank.component';
 import { DpDatePickerModule } from 'ng2-date-picker';
 import { ConfirmRegistrationComponent } from './account/confirm-registration/confirm-registration.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
+import { UserFlightHistoryComponent } from './user-flight-history/user-flight-history.component';
 
 @NgModule({
   declarations: [
@@ -50,6 +51,7 @@ import { UserProfileComponent } from './user-profile/user-profile.component';
     LoadingSpinnerComponent,
     UserProfileComponent,
     ConfirmRegistrationComponent,
+    UserFlightHistoryComponent,
   ],
   imports: [
     BrowserModule,

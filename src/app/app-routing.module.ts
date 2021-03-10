@@ -13,6 +13,7 @@ import { ConfirmationComponent } from './login/resetform/confirmation/confirmati
 import { NotfoundComponent } from './notfound/notfound.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import { ConfirmRegistrationComponent } from './account/confirm-registration/confirm-registration.component';
+import { UserFlightHistoryComponent } from './user-flight-history/user-flight-history.component';
 
 const routes: Routes = [
   {
@@ -59,10 +60,13 @@ const routes: Routes = [
     component: LayoutComponent,
     children: [
       {
-        //path: PathConstants.USER_PROFILE,
-        //todo get this in paths.ts
-        path: 'myprofile/:id',
+
+        path: PathConstants.USER_PROFILE + '/:id',
         component: UserProfileComponent,
+      },
+      {
+        path: PathConstants.FLIGHT_HISTORY + '/:id',
+        component: UserFlightHistoryComponent,
       },
     ],
   },
