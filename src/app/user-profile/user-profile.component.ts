@@ -6,6 +6,7 @@ import { User } from '../user';
 import { UserService } from "../services/user.service";
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { trimStringLength, USPhoneNumberValidator } from '../utils/validators';
+import { PhoneNumberFormat, PhoneNumberUtil } from 'google-libphonenumber';
 import US_STATE_LIST from '../services/us-state/us-states';
 
 @Component({
@@ -17,7 +18,10 @@ export class UserProfileComponent implements OnInit {
   @Input() user: User | undefined;
   @Input() error: HttpErrorResponse | undefined;
 
+  phoneUtil: PhoneNumberUtil = PhoneNumberUtil.getInstance();
   states = US_STATE_LIST.map((s) => s.abbr);
+  isLoading = false;
+  modalMsg?: string = undefined;
 
   constructor(
     private route: ActivatedRoute,
@@ -33,8 +37,7 @@ export class UserProfileComponent implements OnInit {
     city: new FormControl('', [Validators.required, trimStringLength(1)]),
     state: new FormControl('', [Validators.required]),
     zipcode: new FormControl('', [Validators.required, Validators.pattern(/^\d{5}(?:[-\s]\d{4})?$/)]),
-    //slightly different regex for phoneNumber (vs. account creation) to match how it comes in from the backend
-    phoneNumber: new FormControl('', [Validators.required, USPhoneNumberValidator, Validators.pattern(/^\d{3}-\d{3}-\d{4}$/)]),  
+    phoneNumber: new FormControl('', [Validators.required, USPhoneNumberValidator, Validators.pattern(/^\(\d{3}\)\s\d{3}-\d{4}$/)]),  
     loyaltyPoints: new FormControl({ disabled: true }),
     ticketEmails: new FormControl(''),
     flightEmails: new FormControl('')
@@ -64,6 +67,8 @@ export class UserProfileComponent implements OnInit {
       this.fillThisUserAddr();
       //must set values after fillThisUserAddr, when address is flattened onto the user
       this.userProfileForm.patchValue(this.user);
+      //must format phone number properly for the validator's sake
+      this.formatPhoneForFrontend();
     } else if (this.checkIsError(response)) {
       this.error = response;
     }
@@ -71,9 +76,33 @@ export class UserProfileComponent implements OnInit {
 
   updateUser(): void {
     if (this.checkIsValidUser(this.user)) {
-      this.userService.updateUser(this.user)
-        .subscribe(updatedUser => this.setUser(updatedUser));
+      this.pullInUserFormValues();
+      this.userService.updateUser(this.user).subscribe(
+        (res) => {
+          //update succeeded
+          this.modalMsg = 'Your profile was updated successfully!';
+        },
+        (err) => {
+          this.modalMsg = 'There was an error updating your profile, please try again later.'
+        }
+      );
     }
+  }
+
+  //get values from the form to update our user in preparation for sending to the backend
+  pullInUserFormValues(): void {
+    (this.user as User).firstName = this.userProfileForm.get('firstName')?.value.trim();
+    (this.user as User).lastName = this.userProfileForm.get('lastName')?.value.trim();
+    (this.user as User).email = this.userProfileForm.get('email')?.value.trim();
+    (this.user as User).addrLine1 = this.userProfileForm.get('addrLine1')?.value.trim();
+    (this.user as User).addrLine2 = this.userProfileForm.get('addrLine2')?.value.trim();
+    (this.user as User).city = this.userProfileForm.get('city')?.value.trim();
+    (this.user as User).state = this.userProfileForm.get('state')?.value.trim();
+    (this.user as User).zipcode = this.userProfileForm.get('zipcode')?.value.trim();
+    (this.user as User).phoneNumber = this.updatePhoneNumberFormat();
+    //loyaltyPoints NOT updated
+    (this.user as User).ticketEmails = this.userProfileForm.get('ticketEmails')?.value;
+    (this.user as User).flightEmails = this.userProfileForm.get('flightEmails')?.value;
   }
 
   checkIsValidUser(returnedValue: User | HttpErrorResponse | undefined): returnedValue is User {
@@ -98,6 +127,35 @@ export class UserProfileComponent implements OnInit {
       this.user.state = this.user.addresses[0].state;
       this.user.zipcode = this.user.addresses[0].zipcode;
     }
+  }
+
+  //display number as (555) 555-5555 in the frontend
+  formatPhoneForFrontend(): void {
+    const phoneControl = this.userProfileForm.get('phoneNumber');
+    if (phoneControl) {
+      const number = this.phoneUtil.parse(phoneControl.value, 'US');
+      const formatted = this.phoneUtil.format(
+        number,
+        PhoneNumberFormat.NATIONAL
+      );
+      if (phoneControl.value !== formatted) {
+        phoneControl.patchValue(formatted);
+      }
+    }
+  }
+
+  //save number as 555-555-5555 for the backend
+  updatePhoneNumberFormat(): string {
+    const control = this.userProfileForm.get('phoneNumber');
+    if (control && control.valid) {
+      const val = control.value.replaceAll(/\D/g, '');
+      return val.slice(0, 3) + '-' + val.slice(3, 6) + '-' + val.slice(6, 11);
+    }
+    return '';
+  }
+
+  onCloseAlert() {
+    this.modalMsg = undefined;
   }
 
   ngOnInit(): void {

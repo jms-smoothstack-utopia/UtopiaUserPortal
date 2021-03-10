@@ -1,3 +1,8 @@
+<app-alert
+    *ngIf="modalMsg"
+    [message]="modalMsg"
+    (closeEvent)="onCloseAlert()">
+  </app-alert>
 <div *ngIf="user">
     <h2>{{user.firstName}} {{user.lastName}}</h2>
     <!-- User ID used to be displayed here, but removed since UUIDs can't be interacted with and are a bit ugly -->
@@ -90,19 +95,17 @@
                 </li>
                 <li>
                     <label for='phoneNumber'>Phone number:</label>
-                    <input placeholder="###-###-####" type="text"
+                    <input placeholder="###-###-####" type="tel"
                         name="phoneNumber" id="phoneNumber" class="form-control"
-                        formControlName="phoneNumber" required />
+                        formControlName="phoneNumber" required 
+                        (focusout)="formatPhoneForFrontend()"/>
                     <div id="phoneNumberErrorText" class="alert alert-danger"
                         [ngClass]="showErrorForField('phoneNumber') ? 'shownErrorText' : 'hiddenErrorText' ">
                         Invalid phone number.
                     </div>
                 </li>
                 <li>
-                    <label for='loyaltyPoints'>Loyalty Points:</label>
-                    <input type="number"
-                        name="loyaltyPoints" id="loyaltyPoints" class="form-control"
-                        formControlName="loyaltyPoints" />
+                    <p>Loyalty Points: {{user.loyaltyPoints}}</p>
                 </li>
                 <br>
                 <li>
@@ -122,7 +125,8 @@
     </form>
     <button id="updateButton" class="updateButton"
         [ngClass]="userProfileForm.valid ? 'updateButtonEnabled' : 'updateButtonDisabled'"
-        type="submit" [disabled]="!userProfileForm.valid">
+        type="submit" [disabled]="!userProfileForm.valid"
+        (click)="updateUser()">
         Update Profile Information
     </button>
 </div>
