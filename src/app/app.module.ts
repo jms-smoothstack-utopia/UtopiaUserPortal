@@ -31,6 +31,8 @@ import { HomeComponent } from "./home/home.component";
 import { ClickAwayDirective } from './shared/directives/click-away.directive';
 import { ServicingareadropComponent } from './home/servicingareadrop/servicingareadrop.component';
 import { AirportdropComponent } from './home/airportdrop/airportdrop.component';
+import { FlightsearchComponent } from './flightsearch/flightsearch.component';
+import { SearchboxComponent } from './searchbox/searchbox.component';
 
 @NgModule({
   declarations: [
@@ -58,6 +60,8 @@ import { AirportdropComponent } from './home/airportdrop/airportdrop.component';
     ClickAwayDirective,
     ServicingareadropComponent,
     AirportdropComponent,
+    FlightsearchComponent,
+    SearchboxComponent,
   ],
   imports: [
     BrowserModule,

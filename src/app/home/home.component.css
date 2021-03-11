@@ -1,5 +1,5 @@
 .sidings{
-    margin-left: 24px;
+    margin-left: 0px;
 }
 
 .firstrow{
@@ -10,14 +10,6 @@
 .secondMainRowFirstRow{
     margin-top: 48px;
     margin-bottom: 12px;
-}
-
-.firstdropdown{
-    margin-right: 20px;
-}
-
-.seconddropdown{
-    margin-right: 20px;
 }
 
 .headertext{
@@ -36,190 +28,18 @@
     -webkit-text-fill-color: transparent;
 }
 
-.dropdown-toggle{
-    padding-left: 0px;
-    padding-right: 0px;
-    color: black;
-    background-color: white;
-    font-size: 15px;
-    border-style: none;
-    font-family: 'Lato', sans-serif;
-    font-weight: bold;
-}
-
-.btn-secondary:focus, .btn-secondary:hover{
-    box-shadow: 0 0 0 0.2rem rgb(0, 123, 255, 25%);
-}
-
-.btn-secondary:not(:disabled):not(.disabled):active, .show>.btn-secondary.dropdown-toggle{
-    background-color: white;
-    color: black;
-    box-shadow: 0 0 0 0.2rem rgb(0, 123, 255, 25%);
-    border: none;
-}
-
-.thirdrow{
-    margin-top: 5px;
-    margin-right: 24px;
-}
-
-.firstbox, .secondbox, .thirdbox, .fourthbox, .fifthbox{
-    margin-right: 18px;
-}
-
-input[type=text]{
-    font-family: 'Lato', sans-serif;
-    font-weight: bold;
-    font-size: 14px;
-}
-
-.dropdownRow label{
-    margin-bottom: 0px;
-}
-
-#childrenAmount{
-    border-bottom-left-radius: 20px;
-    border-bottom-right-radius: 20px;
-}
-
-#childrenAmount:focus, #childrenAmount:hover, #childrenAmount:active{
-    outline: none;
-    display: inline-block;
-    box-shadow: 0 0 0 2px rgb(0, 95, 204);
-    border-bottom-left-radius: 20px;
-    border-bottom-right-radius: 20px;
-}
-
-#numberOverlay label{
-    padding-left: 5px;
-    font-weight: bold;
-    font-family: 'Lato', sans-serif;
-}
-
-input[type=number]{
-    font-family: 'Lato', sans-serif;
-    font-weight: bold;
-    font-size: 14px;
-    width: 100%;
-    border-style: none;
-    padding: 8px;
-}
-
-.form-control, .input-group-text{
-    height: 50px;
-    border-radius: 0px;
-    border: none;
-    background-color: #e5e8ea;
-    color: black;
-}
-
-.swapbutton{
-    background-color: #e5e8ea;
-    height: 50px;
-    border-radius: 0px;
-}
-
-.swapbutton:hover{
-    background-color: #9a9b9c;
-}
-
-.form-control::placeholder{
-    font-weight: bolder;
-    color: black;
-    font-family: 'Lato', sans-serif;
-}
-
-.input-group{
-    height: 24px;
-}
-
-.fa-search{
-    color: white;
-}
-
-.searchbutton{
-    border: none;
-    height: 50px;
-    border-radius: 0px;
-    background: linear-gradient(52deg, #1508AF, #8E2AE3);
-}
-
-#calendar2{
-    border-left: darkgrey 1px solid;
-}
-
-.searchbutton:hover{
-    background: linear-gradient(52deg, #0c0558, #631ba1);
-}
-
-.thirdrowmobile{
-    display: none;
-}
-
-.dropdownButton{
-    width: 100%;
-    font-weight: bolder;
-    color: black;
-    font-family: 'Lato', sans-serif;
-    background-color: white;
-    border:none;
-}
-
-.dropdownButton:hover, .dropdownButton:focus, .dropdownButton:active{
-    background-color: grey;
-}
-
-.firstSelection{
-    border-top-left-radius: 20px;
-    border-top-right-radius: 20px;
-}
-
-.secondSelection{
-    border-bottom-left-radius: 20px;
-    border-bottom-right-radius: 20px;
-}
-
-.dropdownRow{
-    height: 50%;
-}
-
-.overlay{
-    display: none;
-    position: absolute;
-    top: -10px;
-    left: -30px;
-    z-index: 10;
-    width: 150px;
-    height: 150px;
-    background-color: white;
-    border-radius: 20px;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-}
-
-.airportoverlay{
-    top: 50px;
-    display: none;
-    position: absolute;
-    z-index: 10;
-    width: 350px;
-    height: 200px;
-    background-color: white;
-    border-radius: 0px 0px 20px 20px;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-}
-
 .mapHolder{
     background-image: url("./MapOFFlights.png");
     background-size: cover;
     background-position: center;
     height: 300px;
     width: calc(100vw - 215px);
-    border-radius: 20px;
+    border-radius: 5px;
 }
 
 .carousel-inner{
     width: calc(100vw - 215px);
-    border-radius: 20px;
+    border-radius: 5px;
 }
 
 .maprow{
@@ -231,68 +51,7 @@ input[type=number]{
     font-weight: bolder;
 }
 
-.overlayHolderIcon{
-    margin-top: 50px;
-    color: black;
-    animation: shake1 10s;
-    animation-iteration-count: infinite;
-}
-
-.sadface{
-    margin-right: 15px;
-    color: #1508AF;
-}
-
-.special{
-    color:#8E2AE3;
-}
-
-.servicingArea{
-    margin-left: 15px;
-}
-
-.rowInDropdown{
-    margin-top: 20px;
-}
-
-.dropdownText{
-    font-family: 'Futura';
-    font-size: 14px;
-    font-weight: bold;
-}
-
-@keyframes shake1 {
-    0% { transform: translate(2px, 2px) rotate(0deg); }
-    10% { transform: translate(-2px, -4px) rotate(-5deg); }
-    20% { transform: translate(-6px, 0px) rotate(5deg); }
-    30% { transform: translate(6px, 4px) rotate(0deg); }
-    40% { transform: translate(2px, -2px) rotate(5deg); }
-    50% { transform: translate(-2px, 4px) rotate(-5deg); }
-    60% { transform: translate(-6px, 2px) rotate(0deg); }
-    70% { transform: translate(6px, 2px) rotate(-5deg); }
-    80% { transform: translate(-2px, -2px) rotate(5deg); }
-    90% { transform: translate(2px, 4px) rotate(0deg); }
-    95% { transform: translate(6px, 10px) rotate(-5deg); }
-    100% { transform: translate(0px, 0px) rotate(0deg); }
-}
-
 @media screen and (max-width: 1000px) {
-
-    .col-3{
-        max-width: 100%;
-    }
-
-    .firstdropdown{
-        margin-right: 80px;
-    }
-    
-    .seconddropdown{
-        margin-right: 80px;
-    }
-
-    .firstbox{
-        margin-bottom: 20px;
-    }
 
     .mapHolder, .carousel-inner{
         width: 100%;
@@ -301,24 +60,8 @@ input[type=number]{
 
 @media screen and (max-width: 800px) {
 
-    .fifthbox{
-        margin-top: 0px;
-    }
-    
-    .searchbutton, .swapbutton{
-        width: 100%;
-    }
-
-    .firstbox, .thirdbox, .fourthbox{
-        margin-bottom: 15px;
-    }
-
-    .secondbox{
-        margin-bottom: 5px;
-    }
-
-    .firstbox, .secondbox, .thirdbox, .fourthbox, .fifthbox{
-        margin-right: 0px;
+    .sidings{
+        margin-left: 24px;
     }
 
     .mapHolder, .carousel-inner{

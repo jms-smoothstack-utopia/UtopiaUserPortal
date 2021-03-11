@@ -14,6 +14,7 @@ import { NotfoundComponent } from './notfound/notfound.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import { ConfirmRegistrationComponent } from './account/confirm-registration/confirm-registration.component';
 import { HomeComponent } from './home/home.component';
+import { FlightsearchComponent } from './flightsearch/flightsearch.component';
 
 const routes: Routes = [
   {
@@ -60,12 +61,16 @@ const routes: Routes = [
     component: LayoutComponent,
     children: [
       {
+        path:"",
+        component:HomeComponent
+      },
+      {
         path: 'myprofile/:id',
         component: UserProfileComponent,
       },
       {
-        path:"",
-        component:HomeComponent
+        path: 'flight-search',
+        component: FlightsearchComponent,
       }
     ],
   },

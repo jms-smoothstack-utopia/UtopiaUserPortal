@@ -9,6 +9,7 @@ export const environment = {
   authEndpoint: 'http://localhost:8080/authenticate',
   accountsEndpoint: 'http://localhost:8080/accounts',
   airportsEndpoint: 'http://localhost:8080/airports',
+  flightsEndpoint: "http://localhost:8080/flights",
   logLevel: NgxLoggerLevel.DEBUG,
   hostUrl: 'http://localhost:8080',
 };
