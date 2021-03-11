@@ -29,6 +29,7 @@ import { ConfirmRegistrationComponent } from './account/confirm-registration/con
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import { UserFlightHistoryComponent } from './user-flight-history/user-flight-history.component';
 import { UserFlightUpcomingComponent } from './user-flight-upcoming/user-flight-upcoming.component';
+import { UserNavbarComponent } from './user-navbar/user-navbar.component';
 
 @NgModule({
   declarations: [
@@ -54,6 +55,7 @@ import { UserFlightUpcomingComponent } from './user-flight-upcoming/user-flight-
     ConfirmRegistrationComponent,
     UserFlightHistoryComponent,
     UserFlightUpcomingComponent,
+    UserNavbarComponent,
   ],
   imports: [
     BrowserModule,
