@@ -31,7 +31,9 @@ export class UserFlightHistoryComponent implements OnInit {
     }
   }
   setHistory(history: Ticket[]): void {
-    if (this.checkIsValidTickets(history)) {
+    if (history === null) {   //if there are no returned tickets
+      this.tickets = [];
+    } else if (this.checkIsValidTickets(history)) {
       this.tickets = history;
     } else if (this.checkIsError(history)) {
       this.error = history;

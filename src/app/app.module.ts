@@ -28,6 +28,7 @@ import { DpDatePickerModule } from 'ng2-date-picker';
 import { ConfirmRegistrationComponent } from './account/confirm-registration/confirm-registration.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import { UserFlightHistoryComponent } from './user-flight-history/user-flight-history.component';
+import { UserFlightUpcomingComponent } from './user-flight-upcoming/user-flight-upcoming.component';
 
 @NgModule({
   declarations: [
@@ -52,6 +53,7 @@ import { UserFlightHistoryComponent } from './user-flight-history/user-flight-hi
     UserProfileComponent,
     ConfirmRegistrationComponent,
     UserFlightHistoryComponent,
+    UserFlightUpcomingComponent,
   ],
   imports: [
     BrowserModule,

@@ -1,10 +1,9 @@
-<!-- layout idea: table with past flights, and for each flight, ngFor a new row -->
 <div *ngIf="tickets">
     <p *ngIf="tickets.length == 0">
-        There are no past tickets to display. We look forward to your first flight with us!
+        There are no upcoming tickets. Why not book a flight somewhere?
     </p>
     <div *ngIf="tickets.length != 0" class="col-4">
-        <h3>Past flight tickets:</h3>
+        <h3>Upcoming flight tickets:</h3>
         <table class="table" id="ticketsTable">
             <thead>
                 <tr>
