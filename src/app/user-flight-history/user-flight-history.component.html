@@ -1,1 +1,35 @@
-<p>user-flight-history works!</p>
+<!-- layout idea: table with past flights, and for each flight, ngFor a new row -->
+<div *ngIf="tickets">
+    <p *ngIf="tickets.length == 0">
+        There are no past tickets to display. We look forward to your first flight with us!
+    </p>
+    <div class="col-4">
+        <table class="table" id="ticketsTable">
+            <thead>
+                <tr>
+                    <th>Flight ID</th>
+                    <th>Name</th>
+                    <th>Seat class</th>
+                    <th>Seat number</th>
+                    <th>Status</th>
+                    <th>Date/Time</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let ticket of tickets">
+                    <td>{{ticket.flightId}}</td>
+                    <td>{{ticket.passengerName}}</td>
+                    <td>{{ticket.seatClass}}</td>
+                    <td>{{ticket.seatNumber}}</td>
+                    <td>{{ticket.status}}</td>
+                    <td>{{ticket.flightTime}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div *ngIf="error">
+    <h2>{{error.status}} Error</h2>
+    <p>{{error.message}}</p>
+</div>
