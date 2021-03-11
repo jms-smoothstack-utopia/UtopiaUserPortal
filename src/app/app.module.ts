@@ -27,11 +27,16 @@ import { BlankComponent } from './blank/blank.component';
 import { DpDatePickerModule } from 'ng2-date-picker';
 import { ConfirmRegistrationComponent } from './account/confirm-registration/confirm-registration.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
+import { HomeComponent } from "./home/home.component";
+import { ClickAwayDirective } from './shared/directives/click-away.directive';
+import { ServicingareadropComponent } from './home/servicingareadrop/servicingareadrop.component';
+import { AirportdropComponent } from './home/airportdrop/airportdrop.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
+    HomeComponent,
     LoginFormComponent,
     PasswordResetComponent,
     PasswordConfirmationComponent,
@@ -50,6 +55,9 @@ import { UserProfileComponent } from './user-profile/user-profile.component';
     LoadingSpinnerComponent,
     UserProfileComponent,
     ConfirmRegistrationComponent,
+    ClickAwayDirective,
+    ServicingareadropComponent,
+    AirportdropComponent,
   ],
   imports: [
     BrowserModule,
@@ -63,7 +71,7 @@ import { UserProfileComponent } from './user-profile/user-profile.component';
     DpDatePickerModule,
     NgbModule,
   ],
-
+  exports: [ClickAwayDirective],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
   ],

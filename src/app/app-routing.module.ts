@@ -13,6 +13,7 @@ import { ConfirmationComponent } from './login/resetform/confirmation/confirmati
 import { NotfoundComponent } from './notfound/notfound.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import { ConfirmRegistrationComponent } from './account/confirm-registration/confirm-registration.component';
+import { HomeComponent } from './home/home.component';
 
 const routes: Routes = [
   {
@@ -59,11 +60,13 @@ const routes: Routes = [
     component: LayoutComponent,
     children: [
       {
-        //path: PathConstants.USER_PROFILE,
-        //todo get this in paths.ts
         path: 'myprofile/:id',
         component: UserProfileComponent,
       },
+      {
+        path:"",
+        component:HomeComponent
+      }
     ],
   },
   {path: "404/notfound", component: NotfoundComponent},
