@@ -35,6 +35,10 @@ export class UserFlightHistoryComponent implements OnInit {
       this.tickets = [];
     } else if (this.checkIsValidTickets(history)) {
       this.tickets = history;
+      this.tickets.forEach(ticket => {
+        var rawDate: Date = new Date(ticket.flightTime);
+        ticket.timePrettyPrint = rawDate.toString();
+      });
     } else if (this.checkIsError(history)) {
       this.error = history;
     }

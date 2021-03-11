@@ -3,7 +3,7 @@
     <p *ngIf="tickets.length == 0">
         There are no past tickets to display. We look forward to your first flight with us!
     </p>
-    <div *ngIf="tickets.length != 0" class="col-4">
+    <div *ngIf="tickets.length != 0" class="col-6">
         <h3>Past flight tickets:</h3>
         <table class="table" id="ticketsTable">
             <thead>
@@ -23,7 +23,7 @@
                     <td>{{ticket.seatClass}}</td>
                     <td>{{ticket.seatNumber}}</td>
                     <td>{{ticket.status}}</td>
-                    <td>{{ticket.flightTime}}</td>
+                    <td>{{ticket.timePrettyPrint}}</td>
                 </tr>
             </tbody>
         </table>
