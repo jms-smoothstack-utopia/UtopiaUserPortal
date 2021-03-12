@@ -3,6 +3,18 @@ import {
   HttpClientTestingModule,
   HttpTestingController,
 } from '@angular/common/http/testing';
+import {
+  LoggerConfig,
+  NGXLogger,
+  NGXLoggerHttpService,
+  NgxLoggerLevel,
+  NGXMapperService,
+} from 'ngx-logger';
+import {
+  NGXLoggerHttpServiceMock,
+  NGXMapperServiceMock,
+} from 'ngx-logger/testing';
+import { DatePipe } from '@angular/common';
 import { UserService } from './user.service';
 
 describe('UserService', () => {
@@ -12,6 +24,13 @@ describe('UserService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule],
+      providers: [
+        NGXLogger,
+        { provide: NGXLoggerHttpService, useClass: NGXLoggerHttpServiceMock },
+        { provide: NGXMapperService, useClass: NGXMapperServiceMock },
+        { provide: LoggerConfig, useValue: { level: NgxLoggerLevel.ERROR } },
+        DatePipe,
+      ],
     });
 
     service = TestBed.inject(UserService);
