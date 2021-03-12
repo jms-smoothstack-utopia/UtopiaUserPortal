@@ -30,6 +30,8 @@ export class SearchboxComponent implements OnInit {
   fromCalendar:string = "";
   toCalendar:string = "";
 
+  disableToCalendar = true;
+
   //Keeping track of the overlays
   overlay!: string;
 
@@ -72,21 +74,25 @@ export class SearchboxComponent implements OnInit {
         }
         if (Object.keys(tempDict).length > 0){
           this.airportData = tempDict;
+          console.log(this.airportData);
+        }
+        else{
+          this.adultErrorMsg = "There was an error getting our data. Please try again later.";
         }
       },
       (err: HttpErrorResponse) => 
       {
         console.log(err);
-        this.mainErrorMsg = "There was an error getting our data. Please try again later."
+        this.adultErrorMsg = "There was an error getting our data. Please try again later.";
       },
     );
   }
   updateNumberOfPerson(person: string,event:any){
     if (person == "Adult"){
-      this.adult = event.target.value;
+      this.adult = parseInt(event.target.value);
     }
     if (person == "Children"){
-      this.children = event.target.value;
+      this.children = parseInt(event.target.value);
     }
     this.numberOfPeople = this.adult + " Adult";
     if(this.children != 0){
@@ -102,6 +108,12 @@ export class SearchboxComponent implements OnInit {
     if ("tripRB" == dataStore){
       this.tripRB = choice;
       this.closeOverlay(overlay);
+      if(this.tripRB != "One-Way"){
+          this.disableToCalendar = false;
+      }
+      else{
+        this.disableToCalendar = true;
+      }
       return;
     }
     if("nonStopRB" == dataStore){
@@ -147,10 +159,19 @@ export class SearchboxComponent implements OnInit {
     //Make a list to contain processedInformation
     let processedSearch = [];
     for (let i = 0; i < tempDict.length; i++){
+
+      //If its exactly the same
       if(event.target.value.toUpperCase() == tempDict[i][0].toUpperCase()){
         processedSearch.unshift(tempDict[i]);
       }
       else{
+
+        //If its similar then push to back of list
+        if(tempDict[i][0].toUpperCase().includes(event.target.value.toUpperCase())){
+          processedSearch.push(tempDict[i]);
+          continue;
+        }
+
         let tempList:any =  tempDict[i][1];
         for(let j = 0; j < tempList.length; j++){
             let tempObject = tempList[j];
@@ -191,6 +212,14 @@ export class SearchboxComponent implements OnInit {
       else{
         this.toAirportPossibleDestinations = processedSearch;
         this.toAirport = listOfLocations
+      }
+    }
+    else{
+      if (where == "from"){
+        this.fromAirportPossibleDestinations = [];
+      }
+      else{
+        this.toAirportPossibleDestinations = [];
       }
     }
   }
@@ -290,19 +319,28 @@ export class SearchboxComponent implements OnInit {
         baseSearchURL = baseSearchURL.slice(0,-1);
       }
 
-      console.log(baseSearchURL);
       this.httpService.get(baseSearchURL).subscribe(
         (res:any) => {console.log(res)},
         (err: HttpErrorResponse) => {console.log(err)}
       )
 
-      let queryParamsInit = {
+      let queryParamsInit:any = {
         origin: this.fromAirport,
         destinations: this.toAirport, 
         departure: this.fromCalendar, 
-        return: this.toCalendar, 
-        passengecount: passengerCount,
       };
+
+      if (passengerCount > 1){
+        queryParamsInit["passengerCount"] = passengerCount;
+      }
+
+      if(this.nonStopRB != "Non-Stop"){
+        queryParamsInit["multiHop"] = true;
+      }
+
+      if(this.toCalendar != ""){
+        queryParamsInit["return"] = this.toCalendar;
+      }
 
       this.router.navigate(['/flight-search'], {queryParams: queryParamsInit})
     }
