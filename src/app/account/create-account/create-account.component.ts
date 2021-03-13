@@ -150,7 +150,7 @@ export class CreateAccountComponent implements OnInit {
         this.log.debug(res);
         this.isLoading = false;
         this.authService.login(email, password).subscribe(() => {
-          this.router.navigate([PathConstants.USER_PROFILE, res.id]);
+          this.router.navigate([PathConstants.USER_PROFILE]);
         });
       },
       (err) => {

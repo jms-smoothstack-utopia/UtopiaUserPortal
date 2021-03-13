@@ -220,7 +220,7 @@ describe('CreateAccountComponent', () => {
     });
   });
 
-  it('TODO: #onSubmit happy path', async () => {
+  it('#onSubmit happy path', async () => {
     setFormValidAndDetectChanges();
     const mockResponse = {
       id: '1234',
@@ -242,16 +242,15 @@ describe('CreateAccountComponent', () => {
     };
 
     spyOn(accountServiceSpy, 'createAccount').and.returnValue(of(mockResponse));
-    const login = spyOn(authServiceSpy, 'login');
+    const login = spyOn(authServiceSpy, 'login').and.returnValue(
+      of({ userId: 'abc', token: 'def', expiresAt: 5 })
+    );
     const navigation = spyOn(mockRouter, 'navigate');
 
     component.onSubmit();
 
     expect(login).toHaveBeenCalledWith('test@test.com', 'abCD1234!@');
-    expect(navigation).toHaveBeenCalledWith([
-      PathConstants.USER_PROFILE,
-      mockResponse.id,
-    ]);
+    expect(navigation).toHaveBeenCalledWith([PathConstants.USER_PROFILE]);
 
     expect(component.isLoading).toBeFalse();
     expect(component.errorMsg).toBeUndefined();

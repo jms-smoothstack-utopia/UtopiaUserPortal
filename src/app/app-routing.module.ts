@@ -13,6 +13,8 @@ import { ConfirmationComponent } from './login/resetform/confirmation/confirmati
 import { NotfoundComponent } from './notfound/notfound.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import { ConfirmRegistrationComponent } from './account/confirm-registration/confirm-registration.component';
+import { DeleteAccountComponent } from './account/delete-account/delete-account.component';
+import { PerformDeletionComponent } from './account/perform-deletion/perform-deletion.component';
 
 const routes: Routes = [
   {
@@ -37,18 +39,26 @@ const routes: Routes = [
         component: ValidateemailComponent,
       },
       {
-        path:"password/resetform/:token",
+        path: 'password/resetform/:token',
         component: ResetformComponent,
       },
       {
-        path:"password/confirmationchange",
-        component: ConfirmationComponent
-      }
-    ]
+        path: 'password/confirmationchange',
+        component: ConfirmationComponent,
+      },
+    ],
   },
   {
     path: PathConstants.CREATE_ACCOUNT,
     component: CreateAccountComponent,
+  },
+  {
+    path: PathConstants.PERFORM_DELETE_ACCOUNT,
+    component: PerformDeletionComponent,
+  },
+  {
+    path: PathConstants.DELETE_ACCOUNT,
+    component: DeleteAccountComponent,
   },
   {
     path: PathConstants.CONFIRM_REGISTRATION + '/:confirmationTokenId',
@@ -61,13 +71,13 @@ const routes: Routes = [
       {
         //path: PathConstants.USER_PROFILE,
         //todo get this in paths.ts
-        path: 'myprofile/:id',
+        path: 'myprofile',
         component: UserProfileComponent,
       },
     ],
   },
-  {path: "404/notfound", component: NotfoundComponent},
-  {path: "**", redirectTo: "404/notfound"}
+  { path: '404/notfound', component: NotfoundComponent },
+  { path: '**', redirectTo: '404/notfound' },
 ];
 
 @NgModule({
