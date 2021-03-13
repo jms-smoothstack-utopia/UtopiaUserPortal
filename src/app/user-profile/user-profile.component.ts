@@ -1,18 +1,18 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { Component, Input, OnInit } from '@angular/core';
 import { HttpErrorResponse } from '@angular/common/http';
 
 import { User } from '../user';
-import { UserService } from "../services/user.service";
+import { UserService } from '../services/user.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { trimStringLength, USPhoneNumberValidator } from '../utils/validators';
 import { PhoneNumberFormat, PhoneNumberUtil } from 'google-libphonenumber';
 import US_STATE_LIST from '../services/us-state/us-states';
+import { AuthService } from '../services/auth/auth.service';
 
 @Component({
   selector: 'app-user-profile',
   templateUrl: './user-profile.component.html',
-  styleUrls: ['./user-profile.component.css']
+  styleUrls: ['./user-profile.component.css'],
 })
 export class UserProfileComponent implements OnInit {
   @Input() user: User | undefined;
@@ -23,10 +23,16 @@ export class UserProfileComponent implements OnInit {
   isLoading = false;
   modalMsg?: string = undefined;
 
+  showDeleteModal = false;
+
   constructor(
-    private route: ActivatedRoute,
     private userService: UserService,
-  ) { }
+    private authService: AuthService
+  ) {}
+
+  ngOnInit(): void {
+    this.getUser();
+  }
 
   userProfileForm: FormGroup = new FormGroup({
     firstName: new FormControl('', [Validators.required, trimStringLength(1)]),
@@ -36,28 +42,34 @@ export class UserProfileComponent implements OnInit {
     addrLine2: new FormControl('', [trimStringLength(1)]), //NOT required
     city: new FormControl('', [Validators.required, trimStringLength(1)]),
     state: new FormControl('', [Validators.required]),
-    zipcode: new FormControl('', [Validators.required, Validators.pattern(/^\d{5}(?:[-\s]\d{4})?$/)]),
-    phoneNumber: new FormControl('', [Validators.required, USPhoneNumberValidator, Validators.pattern(/^\(\d{3}\)\s\d{3}-\d{4}$/)]),  
+    zipcode: new FormControl('', [
+      Validators.required,
+      Validators.pattern(/^\d{5}(?:[-\s]\d{4})?$/),
+    ]),
+    phoneNumber: new FormControl('', [
+      Validators.required,
+      USPhoneNumberValidator,
+      Validators.pattern(/^\(\d{3}\)\s\d{3}-\d{4}$/),
+    ]),
     loyaltyPoints: new FormControl({ disabled: true }),
     ticketEmails: new FormControl(''),
-    flightEmails: new FormControl('')
+    flightEmails: new FormControl(''),
   });
 
   //should we show an error for the specified field?
   showErrorForField(field: string) {
-    const control = this.userProfileForm.get(field);  //get the specified form field, such as firstNameControl
+    const control = this.userProfileForm.get(field); //get the specified form field, such as firstNameControl
     //yes, if the specified field exists, has been used by the user, and isn't valid
     return control && control.touched && control.invalid;
   }
 
   getUser(): void {
-    const rawId = this.route.snapshot.paramMap.get('id');
-    //have to do this check since the application is in strict mode
-    if (rawId === null) {
-      //TODO: do some kind of error thing
+    const id = this.authService.userId;
+
+    if (!id) {
+      //todo navigate to login
     } else {
-      const id = rawId;
-      this.userService.getUser(id).subscribe(myUser => this.setUser(myUser));
+      this.userService.getUser(id).subscribe((myUser) => this.setUser(myUser));
     }
   }
 
@@ -83,7 +95,8 @@ export class UserProfileComponent implements OnInit {
           this.modalMsg = 'Your profile was updated successfully!';
         },
         (err) => {
-          this.modalMsg = 'There was an error updating your profile, please try again later.'
+          this.modalMsg =
+            'There was an error updating your profile, please try again later.';
         }
       );
     }
@@ -91,21 +104,37 @@ export class UserProfileComponent implements OnInit {
 
   //get values from the form to update our user in preparation for sending to the backend
   pullInUserFormValues(): void {
-    (this.user as User).firstName = this.userProfileForm.get('firstName')?.value.trim();
-    (this.user as User).lastName = this.userProfileForm.get('lastName')?.value.trim();
+    (this.user as User).firstName = this.userProfileForm
+      .get('firstName')
+      ?.value.trim();
+    (this.user as User).lastName = this.userProfileForm
+      .get('lastName')
+      ?.value.trim();
     (this.user as User).email = this.userProfileForm.get('email')?.value.trim();
-    (this.user as User).addrLine1 = this.userProfileForm.get('addrLine1')?.value.trim();
-    (this.user as User).addrLine2 = this.userProfileForm.get('addrLine2')?.value.trim();
+    (this.user as User).addrLine1 = this.userProfileForm
+      .get('addrLine1')
+      ?.value.trim();
+    (this.user as User).addrLine2 = this.userProfileForm
+      .get('addrLine2')
+      ?.value.trim();
     (this.user as User).city = this.userProfileForm.get('city')?.value.trim();
     (this.user as User).state = this.userProfileForm.get('state')?.value.trim();
-    (this.user as User).zipcode = this.userProfileForm.get('zipcode')?.value.trim();
+    (this.user as User).zipcode = this.userProfileForm
+      .get('zipcode')
+      ?.value.trim();
     (this.user as User).phoneNumber = this.updatePhoneNumberFormat();
     //loyaltyPoints NOT updated
-    (this.user as User).ticketEmails = this.userProfileForm.get('ticketEmails')?.value;
-    (this.user as User).flightEmails = this.userProfileForm.get('flightEmails')?.value;
+    (this.user as User).ticketEmails = this.userProfileForm.get(
+      'ticketEmails'
+    )?.value;
+    (this.user as User).flightEmails = this.userProfileForm.get(
+      'flightEmails'
+    )?.value;
   }
 
-  checkIsValidUser(returnedValue: User | HttpErrorResponse | undefined): returnedValue is User {
+  checkIsValidUser(
+    returnedValue: User | HttpErrorResponse | undefined
+  ): returnedValue is User {
     //try to cast it to a User and check its firstName to see if it's actually a user
     return (returnedValue as User).firstName !== undefined;
   }
@@ -118,7 +147,7 @@ export class UserProfileComponent implements OnInit {
   necessary because the customer microservice expects address info to be
   on the user directly, when updating the user
   */
-  
+
   fillThisUserAddr(): void {
     if (this.checkIsValidUser(this.user)) {
       this.user.addrLine1 = this.user.addresses[0].line1;
@@ -157,9 +186,4 @@ export class UserProfileComponent implements OnInit {
   onCloseAlert() {
     this.modalMsg = undefined;
   }
-
-  ngOnInit(): void {
-    this.getUser();
-  }
-
 }

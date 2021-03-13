@@ -27,6 +27,8 @@ import { BlankComponent } from './blank/blank.component';
 import { DpDatePickerModule } from 'ng2-date-picker';
 import { ConfirmRegistrationComponent } from './account/confirm-registration/confirm-registration.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
+import { PerformDeletionComponent } from './account/perform-deletion/perform-deletion.component';
+import { DeleteAccountComponent } from './account/delete-account/delete-account.component';
 
 @NgModule({
   declarations: [
@@ -50,6 +52,8 @@ import { UserProfileComponent } from './user-profile/user-profile.component';
     LoadingSpinnerComponent,
     UserProfileComponent,
     ConfirmRegistrationComponent,
+    PerformDeletionComponent,
+    DeleteAccountComponent,
   ],
   imports: [
     BrowserModule,

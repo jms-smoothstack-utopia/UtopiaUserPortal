@@ -7,26 +7,48 @@ import { UserService } from '../services/user.service';
 import { User } from '../user';
 import { Address } from '../address';
 import { HttpErrorResponse } from '@angular/common/http';
+import {
+  LoggerConfig,
+  NGXLogger,
+  NGXLoggerHttpService,
+  NgxLoggerLevel,
+  NGXMapperService,
+} from 'ngx-logger';
+import {
+  NGXLoggerHttpServiceMock,
+  NGXMapperServiceMock,
+} from 'ngx-logger/testing';
+import { DatePipe } from '@angular/common';
 
 describe('UserProfileComponent', () => {
   let component: UserProfileComponent;
   let fixture: ComponentFixture<UserProfileComponent>;
   let userServiceSpy: UserService;
   const expectedFormFields = [
-    'firstName', 'lastName', 'email',
-    'addrLine1', 'addrLine2', 'city',
-    'state', 'zipcode', 'phoneNumber',
-    'loyaltyPoints', 'ticketEmails', 'flightEmails'
+    'firstName',
+    'lastName',
+    'email',
+    'addrLine1',
+    'addrLine2',
+    'city',
+    'state',
+    'zipcode',
+    'phoneNumber',
+    'loyaltyPoints',
+    'ticketEmails',
+    'flightEmails',
   ];
 
-  const mockAddrs: Address[] = [ {
-    id: 0,
-    line1: '123 Fake St',
-    line2: '#1',
-    city: 'Anywhere',
-    state: 'VA',
-    zipcode: '12345'
-  } ];
+  const mockAddrs: Address[] = [
+    {
+      id: 0,
+      line1: '123 Fake St',
+      line2: '#1',
+      city: 'Anywhere',
+      state: 'VA',
+      zipcode: '12345',
+    },
+  ];
   const mockUser: User = {
     id: '00000000-0000-0000-0000-000000000000',
     firstName: 'Foo',
@@ -34,19 +56,26 @@ describe('UserProfileComponent', () => {
     email: 'foo@example.com',
     addresses: mockAddrs,
     loyaltyPoints: 1,
-    phoneNumber: "555-555-1234",
+    phoneNumber: '555-555-1234',
     addrLine1: '',
     addrLine2: '',
     city: '',
     state: '',
     zipcode: '',
     ticketEmails: true,
-    flightEmails: true
-  }
+    flightEmails: true,
+  };
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [UserProfileComponent],
+      providers: [
+        NGXLogger,
+        { provide: NGXLoggerHttpService, useClass: NGXLoggerHttpServiceMock },
+        { provide: NGXMapperService, useClass: NGXMapperServiceMock },
+        { provide: LoggerConfig, useValue: { level: NgxLoggerLevel.ERROR } },
+        DatePipe,
+      ],
       imports: [HttpClientTestingModule, RouterTestingModule],
     }).compileComponents();
   });
@@ -92,7 +121,7 @@ describe('UserProfileComponent', () => {
   it('form should create', () => {
     expect(component.userProfileForm).toBeTruthy();
   });
-  
+
   it('form should have all expected fields', () => {
     expectedFormFields.forEach((field) => {
       expect(component.userProfileForm.contains(field)).toBeTrue();
@@ -117,5 +146,5 @@ describe('UserProfileComponent', () => {
     component.setUser(mockUser);
 
     expect(component.userProfileForm.invalid).toBeFalse();
-  })
+  });
 });
