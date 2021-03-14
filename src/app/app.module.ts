@@ -29,10 +29,9 @@ import { ConfirmRegistrationComponent } from './account/confirm-registration/con
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import { HomeComponent } from "./home/home.component";
 import { ClickAwayDirective } from './shared/directives/click-away.directive';
-import { ServicingareadropComponent } from './home/servicingareadrop/servicingareadrop.component';
-import { AirportdropComponent } from './home/airportdrop/airportdrop.component';
 import { FlightsearchComponent } from './flightsearch/flightsearch.component';
 import { SearchboxComponent } from './searchbox/searchbox.component';
+import { DatePipe } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -58,8 +57,6 @@ import { SearchboxComponent } from './searchbox/searchbox.component';
     UserProfileComponent,
     ConfirmRegistrationComponent,
     ClickAwayDirective,
-    ServicingareadropComponent,
-    AirportdropComponent,
     FlightsearchComponent,
     SearchboxComponent,
   ],
@@ -78,6 +75,7 @@ import { SearchboxComponent } from './searchbox/searchbox.component';
   exports: [ClickAwayDirective],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
+    DatePipe,
   ],
   bootstrap: [AppComponent],
 })

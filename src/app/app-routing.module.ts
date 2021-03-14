@@ -71,7 +71,7 @@ const routes: Routes = [
       {
         path: 'flight-search',
         component: FlightsearchComponent,
-      }
+      },
     ],
   },
   {path: "404/notfound", component: NotfoundComponent},

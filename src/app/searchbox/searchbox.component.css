@@ -240,6 +240,20 @@ input[type=number]{
     font-weight: bold;
 }
 
+.servicingArea{
+    margin-left: 15px;
+}
+
+.rowInDropdown{
+    margin-top: 20px;
+}
+
+.dropdownText{
+    font-family: 'Futura';
+    font-size: 14px;
+    font-weight: bold;
+}
+
 @keyframes shake1 {
     0% { transform: translate(2px, 2px) rotate(0deg); }
     10% { transform: translate(-2px, -4px) rotate(-5deg); }
@@ -255,14 +269,34 @@ input[type=number]{
     100% { transform: translate(0px, 0px) rotate(0deg); }
 }
 
+.calendar{
+    border: none;
+}
+
+.calendar1 .btn{
+    padding: 0rem 0rem;
+}
+
+input
+{
+    font-family: 'Lato', sans-serif;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.form-control[disabled]{
+    font-size: 14px;
+    font-style: italic;
+}
+
 @media screen and (max-width: 1000px) {
 
     .firstdropdown{
-        margin-right: 80px;
+        margin-right: 70px;
     }
     
     .seconddropdown{
-        margin-right: 80px;
+        margin-right: 60px;
     }
 
     .firstbox{

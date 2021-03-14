@@ -39,11 +39,11 @@
             <div class="overlay" id="numberOverlay" appClickAway (clickOutside)="closeOverlay('numberOverlay')">
               <div class="row no-gutters dropdownRow" style="padding-top: 10px;">
                 <label for="adults">Adults</label>
-                <input type="number" value="1" id="adults" min="1" max="8" (change)="updateNumberOfPerson('Adult', $event)">
+                <input type="number" [value]="adult" id="adults" min="1" max="8" (change)="updateNumberOfPerson('Adult', $event)">
               </div>
               <div class="row no-gutters dropdownRow">
                 <label for="children">Children</label>
-                <input type="number" value="0" id="childrenAmount" min="0" max="8" (change)="updateNumberOfPerson('Children', $event)">
+                <input type="number" [value]="children" id="childrenAmount" min="0" max="8" (change)="updateNumberOfPerson('Children', $event)">
               </div>
             </div>
           </div>
@@ -60,31 +60,8 @@
             </div>
 
             <!-- Airport Input -->
-            <input type="text" class="form-control" [value]="fromAirportInput" placeholder="From..." (focus)="toggleOverlay('fromairports', $event)" (blur)="closeOverlay('fromairports')" (keyup)="airportSearch($event, 'from')">
+            <input type="text" class="form-control" [value]="fromAirport" placeholder="From..." (keyup) = "setInput($event, 'from')">
           </div>
-          <div class="airportoverlay fromairports" id="fromairports" (clickOutside)="closeOverlay('fromairports')">
-            <div *ngIf="!fromAirportInput; else elseBlock" class="overlayHolder">
-              <div class="row no-gutters justify-content-center">
-                <i class="fas fa-plane fa-3x overlayHolderIcon"></i>
-              </div>
-              <div class="row no-gutters justify-content-center" style="margin-top: 15px;">
-                <span class="headertext">Type to start flying</span>
-              </div>
-            </div>
-            <ng-template #elseBlock>
-              <div *ngIf="fromAirportPossibleDestinations.length == 0; else elseBlock1">
-                <div class="row no-gutters justify-content-center">
-                  <i class="fas fa-sad-cry fa-3x overlayHolderIcon sadface"></i>
-                </div>
-                <div class="row no-gutters justify-content-center" style="margin-top: 15px;">
-                  <span class="headertext">Could not find anything D:</span>
-                </div>
-              </div>
-              <ng-template #elseBlock1>
-                <!-- <app-servicingareadrop [city]="city" [where]= "where" (result)="displayResult($event)"></app-servicingareadrop> -->
-              </ng-template>
-            </ng-template>
-          </div>  
     </div>
     <div class="col-md-auto secondbox flightsearch">
         <button class="btn swapbutton" (click)="swapLocations()"><i class="fas fa-exchange-alt fa-lg"></i></button>
@@ -99,48 +76,34 @@
             </div>
 
             <!-- Airport Input -->
-            <input type="text" class="form-control" [value]="toAirportInput" placeholder="To..." (focus)="toggleOverlay('toairports', $event)" (blur)="closeOverlay('toairports')" (keyup)="airportSearch($event, 'to')">
-          </div>
-          <div class="airportoverlay toairports" id="toairports" (clickOutside)="closeOverlay('toairports')">
-            <div *ngIf="!toAirportInput; else elseBlock" class="overlayHolder">
-              <div class="row no-gutters justify-content-center">
-                <i class="fas fa-plane fa-3x overlayHolderIcon"></i>
-              </div>
-              <div class="row no-gutters justify-content-center" style="margin-top: 15px;">
-                <span class="headertext">Type to start flying</span>
-              </div>
-            </div>
-            <ng-template #elseBlock>
-              <div *ngIf="toAirportPossibleDestinations.length == 0; else elseBlock1">
-                <div class="row no-gutters justify-content-center">
-                  <i class="fas fa-sad-cry fa-3x overlayHolderIcon sadface"></i>
-                </div>
-                <div class="row no-gutters justify-content-center" style="margin-top: 15px;">
-                  <span class="headertext">Could not find anything D:</span>
-                </div>
-              </div>
-              <ng-template #elseBlock1>
-                <!-- <app-servicingareadrop [city]="city" [where]= "where" (result)="displayResult($event)"></app-servicingareadrop> -->
-              </ng-template>
-            </ng-template>
-          </div>       
+            <input type="text" class="form-control" [value]="toAirport" placeholder="To..." (keyup) = "setInput($event, 'to')">
+          </div>     
     </div>
-    <div class="col-md-4 fourthbox flightsearch">
+    <div class="col-md-2 fourthbox flightsearch">
         <div class="errContainer" *ngIf="calendarErrorMsg">
           <span class="errText" [innerHTML]="calendarErrorMsg"></span>
         </div>
-        <div class="input-group mb-3">
-            <div class="input-group-prepend">
-              <span class="input-group-text" id="calendar1"><i class="fas fa-calendar-day fa-lg"></i></span>
+          <div class="input-group mb-3">
+            <div class="input-group-prepend calendar1">
+              <button class="btn btn-outline-secondary calendar" (click)="d.toggle()" type="button">
+                <span class="input-group-text" id="calendar1"><i class="fas fa-calendar-day fa-lg"></i></span>
+              </button>
             </div>
-            <input type="text" class="form-control" placeholder="From..." (keyup)="addCalendar($event, 'from')">
-            <div [hidden]="disableToCalendar">
-            <div class="input-group-prepend">
-              <span class="input-group-text" id="calendar2"><i class="fas fa-calendar-alt fa-lg"></i></span>
-            <input type="text" class="form-control" placeholder="To" (keyup)="addCalendar($event, 'to')">
+            <input class="form-control" [(ngModel)]="fromModel" placeholder="From: yyyy-mm-dd" name="d" ngbDatepicker #d="ngbDatepicker">
           </div>
-          </div>
+    </div>
+    <div class="col-md-2 fourthbox flightsearch">
+      <div class="errContainer" *ngIf="returnCalendarErrorMsg">
+        <span class="errText" [innerHTML]="returnCalendarErrorMsg"></span>
+      </div>
+      <div class="input-group mb-3">
+        <div class="input-group-prepend calendar1">
+          <button class="btn btn-outline-secondary calendar" (click)="d1.toggle()" type="button">
+            <span class="input-group-text" id="calendar1"><i class="fas fa-calendar-alt fa-lg"></i></span>
+          </button>
         </div>
+        <input class="form-control" [(ngModel)]="toModel"  placeholder="{{ placeHolder }}" name="d2" [disabled]="disableToCalendar" ngbDatepicker #d1="ngbDatepicker">
+      </div>
     </div>
     <div class="col-md-auto fifthbox flightsearch">
         <button class="btn searchbutton" (click)="search()"><i class="fas fa-search fa-lg"></i></button>

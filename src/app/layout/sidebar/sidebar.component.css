@@ -50,4 +50,8 @@ hr{
     .sidebarwrapper{
         display: none;
     }
+
+    .hello{
+        display: none;
+    }
 }

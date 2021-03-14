@@ -1,1 +1,77 @@
-<p>flightsearch works!</p>
+<div class="row no-gutters firstrow sidings">
+    <div class="col-md-11">
+        <span class="headertext">Let's find your <span class="textGradient">Utopia</span></span>
+    </div>
+</div>
+<app-searchbox
+[tripRB] = "tripRB"
+[nonStopRB] = "nonStopRB"
+[numberOfPeople] = "numberOfPeople"
+[adult] = "adult"
+[children] = "children"
+[fromAirport] = "fromAirport"
+[toAirport] = "toAirport"
+[fromModel] = "fromModel"
+[toModel] = "toModel"
+[disableToCalendar] = "disableToCalendar"
+></app-searchbox>
+<hr class="breakLine">
+<div class="flightsContainer" *ngIf="flightsData.length != 0; else elseBlock">
+    <div class="singleEntry" *ngFor="let flight of flightsData;let indexOfelement = index">
+        <div class="row no-gutters">
+            <div class="col-md-11 flightsBorder" (click)="toggleTicket(indexOfelement, $event)">
+                <div class="row no-gutters fullHeight">
+                    <div class="col-md-2 coloredBoxes">
+                        <div class="row no-gutters fullHeight" style="padding-left: 60px;">
+                            <div class="col-md-4 boxGradient">
+                            </div>
+                            <div class="col-md-4 boxGradient" style="margin-left: 30px;">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-10">
+                        <!-- {{ flight["route"] }} -->
+                        <div class="row no-gutters topRow justify-content-between">
+                            <div class="col-md-4 d-flex align-items-center">
+                                <i class="fas fa-plus-square fa-2x"></i>
+                                <span class="subheadertext smallMarginLeft">COVID-19 Policies and Guidelines</span>
+                            </div>
+                            <div class="col-md-4 d-flex align-items-center justify-content-end">
+                                <span class="loyaltyPointsText">{{ flight["loyaltyPoints"] }} Loyalty Points</span>
+                            </div>
+                        </div>
+                        <div class="row no-gutters secondFlightsRow justify-content-between">
+                            <div class="col-md-8 d-flex align-items-center">
+                                <i class="fas fa-plane fa-2x rotateUp"></i>
+                                <span class="plaintext smallMarginLeft"><span *ngIf="flight['multihop'] == true">First Flight: </span>{{ flight["fromDateTime"] | date:'shortTime'}} - {{ flight["toDateTime"] | date:'shortTime' }} ({{flight[ "duration"]}})</span>
+                            </div>
+                            <div class="col-md-4 d-flex align-items-center justify-content-end mobileSizes">
+                                <span class="iataText textGradient">{{ flight["iataId"] }}</span>
+                                <span class="priceText">{{ flight["basePrice"] }}</span>
+                            </div>
+                        </div>
+                        <div class="row no-gutters thirdFlightsRow justify-content-between">
+                            <div class="col-md-12 d-flex align-items-center">
+                                <span class="plainRouteText smallMarginLeft">{{ flight["route"] }}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row no-gutters overlayForAdditionalDetails" id="{{ indexOfelement }}">
+            <div class="col-md-11">
+                <div class="row no-gutters d-flex justify-content-end">
+                    <div class="col-md-10 flightsOverlay" appClickAway (clickOutside)="close(indexOfelement)">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> 
+</div>
+<ng-template #elseBlock>
+    <div class="noResults">
+        
+    </div>
+</ng-template>
