@@ -1,15 +1,17 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
 import { tap } from 'rxjs/operators';
 import { NGXLogger } from 'ngx-logger';
 
 interface AuthResponse {
+  userId: string;
   token: string;
   expiresAt: number;
 }
 
 interface AuthData {
+  userId: string;
   token: string;
   expiresAt: Date;
   userEmail: string;
@@ -20,12 +22,15 @@ interface AuthData {
   providedIn: 'root',
 })
 export class AuthService {
+  public userId?: string;
   public token?: string;
   public expiresAt?: Date;
   public userEmail?: string;
   private tokenExpirationTimer?: any;
 
-  readonly URL = environment.hostUrl + '/login';
+  readonly LOGIN_URL = environment.hostUrl + '/login';
+  readonly CONFIRM_REGISTRATION_URL = environment.hostUrl + '/accounts/confirm';
+  readonly DELETE_ACCOUNT_URL = environment.hostUrl + '/customers';
 
   readonly STORAGE_KEY = 'AUTH_DATA';
 
@@ -34,7 +39,7 @@ export class AuthService {
   login(email: string, password: string) {
     this.log.debug('Attempt authentication', email);
     return this.http
-      .post<AuthResponse>(this.URL, {
+      .post<AuthResponse>(this.LOGIN_URL, {
         email,
         password,
       })
@@ -50,6 +55,7 @@ export class AuthService {
 
     this.token = res.token;
     this.expiresAt = new Date(res.expiresAt);
+    this.userId = !!this.token ? res.userId : undefined;
     this.userEmail = !!this.token ? userEmail : undefined;
 
     this.tokenExpirationTimer = this.setAutoLogout(
@@ -59,6 +65,7 @@ export class AuthService {
     localStorage.setItem(
       this.STORAGE_KEY,
       JSON.stringify({
+        userId: this.userId,
         token: this.token,
         expiresAt: this.expiresAt,
         userEmail: this.userEmail,
@@ -79,6 +86,7 @@ export class AuthService {
 
     this.log.debug('Refreshing authentication data.');
 
+    this.userId = authData.userId;
     this.token = authData.token;
     this.expiresAt = new Date(authData.expiresAt);
     this.userEmail = authData.userEmail;
@@ -90,6 +98,7 @@ export class AuthService {
 
   logout() {
     this.log.debug('Logout');
+    this.userId = undefined;
     this.token = undefined;
     this.expiresAt = undefined;
     this.userEmail = undefined;
@@ -107,13 +116,31 @@ export class AuthService {
     return !!this.token;
   }
 
-  readonly CONFIRM_REGISTRATION_URL = environment.hostUrl + '/accounts/confirm';
-
   confirmRegistration(confirmationTokenId: string) {
     this.log.debug(
       'Confirm account registration, tokenId=' + confirmationTokenId
     );
     const url = this.CONFIRM_REGISTRATION_URL + '/' + confirmationTokenId;
     return this.http.put(url, null);
+  }
+
+  deleteAccount(email: string, password: string) {
+    const options = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+      }),
+      body: { id: this.userId, email: email, password: password },
+    };
+
+    return this.http.delete(this.DELETE_ACCOUNT_URL, options);
+  }
+
+  confirmDeletion(confirmationToken: string) {
+    const url = this.DELETE_ACCOUNT_URL + '/confirm/' + confirmationToken;
+    return this.http.delete(url).pipe(
+      tap((res) => {
+        this.logout();
+      })
+    );
   }
 }

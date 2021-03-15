@@ -54,7 +54,7 @@
                 <li>
                     <label for='addrLine2'>Address line 2:</label>
                     <input placeholder="address line 2" type="text"
-                        id="addrLine2" name="addrLine2" class="form-control" 
+                        id="addrLine2" name="addrLine2" class="form-control"
                         formControlName="addrLine2" />
                     <!-- Address line 2 is not required. However, we should have a spot in the template and
                         let the component class do the error checking logic now that this is reactive. -->
@@ -98,7 +98,7 @@
                     <label for='phoneNumber'>Phone number:</label>
                     <input placeholder="###-###-####" type="tel"
                         name="phoneNumber" id="phoneNumber" class="form-control"
-                        formControlName="phoneNumber" required 
+                        formControlName="phoneNumber" required
                         (focusout)="formatPhoneForFrontend()"/>
                     <div id="phoneNumberErrorText" class="alert alert-danger"
                         [ngClass]="showErrorForField('phoneNumber') ? 'shownErrorText' : 'hiddenErrorText' ">
@@ -130,6 +130,9 @@
         (click)="updateUser()">
         Update Profile Information
     </button>
+
+    <button (click)="showDeleteModal = true">Delete my Account</button>
+  <div *ngIf="showDeleteModal"><app-delete-account (closeEvent)="showDeleteModal = false"></app-delete-account></div>
 </div>
 <div *ngIf="error">
     <h2>{{error.status}} Error</h2>

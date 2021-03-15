@@ -30,6 +30,9 @@ import { UserProfileComponent } from './user-profile/user-profile.component';
 import { UserFlightHistoryComponent } from './user-flight-history/user-flight-history.component';
 import { UserFlightUpcomingComponent } from './user-flight-upcoming/user-flight-upcoming.component';
 import { UserNavbarComponent } from './user-navbar/user-navbar.component';
+import { PerformDeletionComponent } from './account/perform-deletion/perform-deletion.component';
+import { DeleteAccountComponent } from './account/delete-account/delete-account.component';
+
 
 @NgModule({
   declarations: [
@@ -56,6 +59,8 @@ import { UserNavbarComponent } from './user-navbar/user-navbar.component';
     UserFlightHistoryComponent,
     UserFlightUpcomingComponent,
     UserNavbarComponent,
+    PerformDeletionComponent,
+    DeleteAccountComponent,
   ],
   imports: [
     BrowserModule,

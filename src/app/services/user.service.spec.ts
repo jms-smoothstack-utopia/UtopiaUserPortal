@@ -16,6 +16,18 @@ import {
 } from 'ngx-logger/testing';
 import { DatePipe } from '@angular/common';
 import { UserService } from './user.service';
+import {
+  LoggerConfig,
+  NGXLogger,
+  NGXLoggerHttpService,
+  NgxLoggerLevel,
+  NGXMapperService,
+} from 'ngx-logger';
+import {
+  NGXLoggerHttpServiceMock,
+  NGXMapperServiceMock,
+} from 'ngx-logger/testing';
+import { DatePipe } from '@angular/common';
 
 describe('UserService', () => {
   let service: UserService;
