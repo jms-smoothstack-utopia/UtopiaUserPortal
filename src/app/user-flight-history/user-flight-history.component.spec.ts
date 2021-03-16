@@ -17,16 +17,19 @@ import {
 import { DatePipe } from '@angular/common';
 import { FlightRecordsService } from '../services/flight-records/flight-records.service';
 import { Ticket } from '../ticket';
+import { AuthService } from '../services/auth/auth.service';
+import { AppRoutingModule } from '../app-routing.module';
 
 describe('UserFlightHistoryComponent', () => {
   let component: UserFlightHistoryComponent;
   let fixture: ComponentFixture<UserFlightHistoryComponent>;
   let flightRecordsServiceSpy: FlightRecordsService;
+  let authService: AuthService;
 
   const mockTime = new Date(Date.now() - 1000); //past tickets
   const mockTimeStr = mockTime.toString();
 
-  var mockTicket1: Ticket = {
+  let mockTicket1: Ticket = {
     id: 1,
     flightId: 1,
     flightTime: mockTime,
@@ -35,10 +38,10 @@ describe('UserFlightHistoryComponent', () => {
     seatClass: 'First',
     seatNumber: '1B',
     status: 'CHECKED_IN',
-    timePrettyPrint: '',    //expect to be filled in
-  }
+    timePrettyPrint: '', //expect to be filled in
+  };
 
-  var mockTicket2: Ticket = {
+  let mockTicket2: Ticket = {
     id: 2,
     flightId: 1,
     flightTime: mockTime,
@@ -47,10 +50,10 @@ describe('UserFlightHistoryComponent', () => {
     seatClass: 'Business',
     seatNumber: '13B',
     status: 'CHECKED_IN',
-    timePrettyPrint: '', 
-  }
+    timePrettyPrint: '',
+  };
 
-  var mockTicket3: Ticket = {
+  let mockTicket3: Ticket = {
     id: 3,
     flightId: 1,
     flightTime: mockTime,
@@ -60,34 +63,38 @@ describe('UserFlightHistoryComponent', () => {
     seatNumber: '30B',
     status: 'CHECKED_IN',
     timePrettyPrint: '',
-  }
+  };
 
-  var mockTicketArr = [mockTicket1, mockTicket2, mockTicket3];
+  let mockTicketArr = [mockTicket1, mockTicket2, mockTicket3];
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ UserFlightHistoryComponent ],
-      imports: [HttpClientTestingModule, RouterTestingModule],
+      declarations: [UserFlightHistoryComponent],
+      imports: [HttpClientTestingModule, RouterTestingModule, AppRoutingModule],
       providers: [
         NGXLogger,
         { provide: NGXLoggerHttpService, useClass: NGXLoggerHttpServiceMock },
         { provide: NGXMapperService, useClass: NGXMapperServiceMock },
         { provide: LoggerConfig, useValue: { level: NgxLoggerLevel.ERROR } },
         DatePipe,
-      ]
-    })
-    .compileComponents();
+      ],
+    }).compileComponents();
   });
 
   beforeEach(() => {
     fixture = TestBed.createComponent(UserFlightHistoryComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
-    flightRecordsServiceSpy = fixture.debugElement.injector.get(FlightRecordsService);
+    flightRecordsServiceSpy = fixture.debugElement.injector.get(
+      FlightRecordsService
+    );
+    authService = fixture.debugElement.injector.get(AuthService);
+
+    spyOn(authService, 'isLoggedIn').and.returnValue(true);
   });
 
   afterEach(() => {
-    mockTicketArr.forEach(ticket => {
+    mockTicketArr.forEach((ticket) => {
       ticket.timePrettyPrint = '';
     });
   });
@@ -107,9 +114,8 @@ describe('UserFlightHistoryComponent', () => {
   it('setHistory should set tickets, fill in their date/time strings', () => {
     component.setHistory(mockTicketArr);
 
-    (component.tickets as Ticket[]).forEach(ticket => {
+    (component.tickets as Ticket[]).forEach((ticket) => {
       expect(ticket.timePrettyPrint == mockTimeStr);
     });
   });
-
 });

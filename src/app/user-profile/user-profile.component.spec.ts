@@ -18,19 +18,6 @@ import { DatePipe } from '@angular/common';
 import { UserService } from '../services/user.service';
 import { User } from '../user';
 import { Address } from '../address';
-import { HttpErrorResponse } from '@angular/common/http';
-import {
-  LoggerConfig,
-  NGXLogger,
-  NGXLoggerHttpService,
-  NgxLoggerLevel,
-  NGXMapperService,
-} from 'ngx-logger';
-import {
-  NGXLoggerHttpServiceMock,
-  NGXMapperServiceMock,
-} from 'ngx-logger/testing';
-import { DatePipe } from '@angular/common';
 
 describe('UserProfileComponent', () => {
   let component: UserProfileComponent;
@@ -89,13 +76,6 @@ describe('UserProfileComponent', () => {
         DatePipe,
       ],
       imports: [HttpClientTestingModule, RouterTestingModule],
-      providers: [
-        NGXLogger,
-        { provide: NGXLoggerHttpService, useClass: NGXLoggerHttpServiceMock },
-        { provide: NGXMapperService, useClass: NGXMapperServiceMock },
-        { provide: LoggerConfig, useValue: { level: NgxLoggerLevel.ERROR } },
-        DatePipe,
-      ]
     }).compileComponents();
   });
 

@@ -6,7 +6,7 @@ import { AuthService } from '../services/auth/auth.service';
 @Component({
   selector: 'app-user-navbar',
   templateUrl: './user-navbar.component.html',
-  styleUrls: ['./user-navbar.component.css']
+  styleUrls: ['./user-navbar.component.css'],
 })
 export class UserNavbarComponent implements OnInit {
   private customerId: string | undefined;
@@ -14,11 +14,11 @@ export class UserNavbarComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private authService: AuthService,
-    private router: Router,
-  ) { }
+    private router: Router
+  ) {}
 
   goToProfile(): void {
-    this.router.navigateByUrl(`/myprofile/${this.customerId}`);
+    this.router.navigate([PathConstants.USER_PROFILE]);
   }
 
   goToHistory(): void {
@@ -33,8 +33,6 @@ export class UserNavbarComponent implements OnInit {
     if (!this.authService.isLoggedIn()) {
       this.router.navigate([PathConstants.LOGIN]);
     }
-    this.customerId = this.route.snapshot.paramMap.get('id') as string;
+    this.customerId = this.authService.userId;
   }
-
-
 }
