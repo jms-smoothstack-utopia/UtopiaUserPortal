@@ -3,7 +3,6 @@ import {
   HttpClientTestingModule,
   HttpTestingController,
 } from '@angular/common/http/testing';
-import { UserService } from './user.service';
 import {
   LoggerConfig,
   NGXLogger,
@@ -16,6 +15,7 @@ import {
   NGXMapperServiceMock,
 } from 'ngx-logger/testing';
 import { DatePipe } from '@angular/common';
+import { UserService } from './user.service';
 
 describe('UserService', () => {
   let service: UserService;

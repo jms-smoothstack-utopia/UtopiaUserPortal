@@ -13,8 +13,11 @@ import { ConfirmationComponent } from './login/resetform/confirmation/confirmati
 import { NotfoundComponent } from './notfound/notfound.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import { ConfirmRegistrationComponent } from './account/confirm-registration/confirm-registration.component';
+import { UserFlightHistoryComponent } from './user-flight-history/user-flight-history.component';
+import { UserFlightUpcomingComponent } from './user-flight-upcoming/user-flight-upcoming.component';
 import { DeleteAccountComponent } from './account/delete-account/delete-account.component';
 import { PerformDeletionComponent } from './account/perform-deletion/perform-deletion.component';
+
 
 const routes: Routes = [
   {
@@ -69,10 +72,17 @@ const routes: Routes = [
     component: LayoutComponent,
     children: [
       {
-        //path: PathConstants.USER_PROFILE,
-        //todo get this in paths.ts
-        path: 'myprofile',
+        path: PathConstants.USER_PROFILE + '/:id',
+
         component: UserProfileComponent,
+      },
+      {
+        path: PathConstants.FLIGHT_HISTORY + '/:id',
+        component: UserFlightHistoryComponent,
+      },
+      {
+        path: PathConstants.FLIGHT_UPCOMING + '/:id',
+        component: UserFlightUpcomingComponent,
       },
     ],
   },

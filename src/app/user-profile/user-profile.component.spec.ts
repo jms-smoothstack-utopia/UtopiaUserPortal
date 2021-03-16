@@ -3,10 +3,6 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { UserProfileComponent } from './user-profile.component';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { RouterTestingModule } from '@angular/router/testing';
-import { UserService } from '../services/user.service';
-import { User } from '../user';
-import { Address } from '../address';
-import { HttpErrorResponse } from '@angular/common/http';
 import {
   LoggerConfig,
   NGXLogger,
@@ -19,6 +15,9 @@ import {
   NGXMapperServiceMock,
 } from 'ngx-logger/testing';
 import { DatePipe } from '@angular/common';
+import { UserService } from '../services/user.service';
+import { User } from '../user';
+import { Address } from '../address';
 
 describe('UserProfileComponent', () => {
   let component: UserProfileComponent;
