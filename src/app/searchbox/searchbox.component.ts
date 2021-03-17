@@ -90,10 +90,22 @@ export class SearchboxComponent implements OnInit {
   //Update the number of people function
   updateNumberOfPerson(person: string,event:any){
     if (person == "Adult"){
-      this.adult = parseInt(event.target.value);
+      let tempAdult = parseInt(event.target.value);
+      if (tempAdult < 0)
+      {
+        this.adult = 1;
+      }else{
+        this.adult = tempAdult;
+      }
     }
     if (person == "Children"){
-      this.countOfChildren = parseInt(event.target.value);
+      let tempChildren = parseInt(event.target.value);
+      if (tempChildren < 0){
+        this.countOfChildren = 0;
+      }
+      else{
+        this.countOfChildren = tempChildren;
+      }
     }
     this.numberOfPeople = this.adult + " Adult";
     if(this.countOfChildren > 0){
