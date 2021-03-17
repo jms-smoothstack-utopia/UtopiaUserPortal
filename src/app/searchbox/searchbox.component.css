@@ -330,4 +330,8 @@ input
         margin-right: 0px;
     }
 
+    .fa-exchange-alt{
+        transform: rotate(90deg);
+    }
+
 }

@@ -1,0 +1,11 @@
+<div *ngIf="!!message">
+    <div class="backdrop" (click)="onClose()"></div>
+    <div class="alert-box">
+      <p>{{ message }}</p>
+      <div class="alert-box-actions">
+        <button id="homeButton" class="navigateToHomePage" style="margin-right: 10px;" (click)="goBackToHomePage()">Navigate back to home page</button>
+        <button id="closeButton" class="close-button" style="margin-left: 10px;" (click)="onClose()">Cool, let me see those results</button>
+      </div>
+    </div>
+  </div>
+  

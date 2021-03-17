@@ -3,7 +3,7 @@ import { Component, Input, OnInit} from '@angular/core';
 import { Router } from '@angular/router';
 import { HttpService } from 'src/app/shared/methods/http.service';
 import { environment } from 'src/environments/environment';
-import {NgbDateStruct} from '@ng-bootstrap/ng-bootstrap';
+import {NgbDatepickerConfig, NgbDateStruct} from '@ng-bootstrap/ng-bootstrap';
 
 
 @Component({
@@ -19,7 +19,7 @@ export class SearchboxComponent implements OnInit {
   @Input() nonStopRB: string = "Non-Stop";
   @Input() numberOfPeople: string = "1 Adult";
   @Input() adult = 1;
-  @Input() children = 0;
+  @Input() countOfChildren = 0;
   @Input() fromAirport: string = "";
   @Input() toAirport: string = "";
   @Input() fromCalendar:string = "";
@@ -32,7 +32,6 @@ export class SearchboxComponent implements OnInit {
   airportData: any;
 
   //variables to hold error messages for the user
-  mainErrorMsg:string = "";
   calendarErrorMsg:string = "";
   returnCalendarErrorMsg: string = "";
   toAirportErrorMsg:string = "";
@@ -41,8 +40,16 @@ export class SearchboxComponent implements OnInit {
 
   //variable for the only disabled input
   placeHolder:string = "No return date needed";
+  minDate: NgbDateStruct;
 
-  constructor(private httpService: HttpService, private router: Router) { }
+  constructor(private httpService: HttpService, private router: Router, private config: NgbDatepickerConfig) { 
+    const current = new Date();
+    this.minDate = {
+      year: current.getFullYear(),
+      month: current.getMonth() + 1,
+      day: current.getDate(),
+    }
+  }
 
   ngOnInit(): void 
   {
@@ -53,7 +60,8 @@ export class SearchboxComponent implements OnInit {
       (res:any) => 
       {
         if (res.length == 0){
-          this.mainErrorMsg = "Utopia currently does not offer any airports we service";
+          this.adultErrorMsg = "Utopia currently does not offer any airports we service";
+          return;
         }
         let tempDict: {[key:string]: Array<string>} = {};
         for (let i = 0; i < res.length; i++){
@@ -69,12 +77,7 @@ export class SearchboxComponent implements OnInit {
               tempDict[servicingArea] = tempList;
             }
         }
-        if (Object.keys(tempDict).length > 0){
-          this.airportData = tempDict;
-        }
-        else{
-          this.adultErrorMsg = "There was an error getting our data. Please try again later.";
-        }
+        this.airportData = tempDict;
       },
       (err: HttpErrorResponse) => 
       {
@@ -90,11 +93,11 @@ export class SearchboxComponent implements OnInit {
       this.adult = parseInt(event.target.value);
     }
     if (person == "Children"){
-      this.children = parseInt(event.target.value);
+      this.countOfChildren = parseInt(event.target.value);
     }
     this.numberOfPeople = this.adult + " Adult";
-    if(this.children > 0){
-      this.numberOfPeople += "; " + this.children + " Children"; 
+    if(this.countOfChildren > 0){
+      this.numberOfPeople += "; " + this.countOfChildren + " Children"; 
     }
   }
 
@@ -162,7 +165,36 @@ export class SearchboxComponent implements OnInit {
     this.fromAirport = [this.toAirport, this.toAirport = this.fromAirport][0];
   }
 
+  compareDates(date: NgbDateStruct | undefined, comparisonDate:NgbDateStruct | undefined){
+    if (date == undefined || comparisonDate == undefined){
+      return false;
+    }
+    if(date.year < comparisonDate.year){
+      return false;
+    }
+    if (date.year > comparisonDate.year){
+      return true;
+    }
+    if (date.month == comparisonDate.month){
+      if (date.day < comparisonDate.day){
+        return false;
+      }
+      return true;
+    }
+    if (date.month < comparisonDate.month){
+      return false;
+    }
+    return true;
+  }
+
   search(){
+
+    const current = new Date();
+    let minDate = {
+      year: current.getFullYear(),
+      month: current.getMonth() + 1,
+      day: current.getDate(),
+    }
 
     let searchValid = true;
     if(this.adult == 0){
@@ -170,7 +202,7 @@ export class SearchboxComponent implements OnInit {
       setTimeout(() => this.adultErrorMsg = "", 5000);
       searchValid = false;
     }
-    if(this.adult < 0 || this.children < 0){
+    if(this.adult < 0 || this.countOfChildren < 0){
       this.adultErrorMsg = "Negative people do not exist D:";
       setTimeout(() => this.adultErrorMsg = "", 5000);
       searchValid = false;
@@ -189,15 +221,26 @@ export class SearchboxComponent implements OnInit {
       this.calendarErrorMsg = "You need to include a date to fly!";
       setTimeout(() => this.calendarErrorMsg = "", 5000);
       searchValid = false;
+      return;
     }
-    if (this.tripRB == "Round-Trip" && this.toModel == undefined){
-      this.returnCalendarErrorMsg = "Need to include a return date";
+    if (!this.compareDates(this.fromModel, minDate)){
+      this.calendarErrorMsg = "Cannot include a date in the past!";
       setTimeout(() => this.calendarErrorMsg = "", 5000);
       searchValid = false;
     }
+    if (this.tripRB == "Round-Trip" && this.toModel == undefined){
+      this.returnCalendarErrorMsg = "Need to include a return date";
+      setTimeout(() => this.returnCalendarErrorMsg = "", 5000);
+      searchValid = false;
+      return;
+    }
+    if(this.tripRB == "Round-Trip" && !this.compareDates(this.toModel, this.fromModel)){
+      this.returnCalendarErrorMsg = "Return date must be after trip date";
+      setTimeout(() => this.returnCalendarErrorMsg = "", 5000);
+      searchValid = false;
+    }
+
     if (searchValid){
-
-
 
       let queryParamsInit:any = {
         origin: this.fromAirport,
@@ -211,8 +254,8 @@ export class SearchboxComponent implements OnInit {
 
       queryParamsInit["adults"] = this.adult;
 
-      if (this.children > 0){
-        queryParamsInit["children"] = this.children;
+      if (this.countOfChildren > 0){
+        queryParamsInit["children"] = this.countOfChildren;
       }
 
       if(this.nonStopRB == "Multihop"){

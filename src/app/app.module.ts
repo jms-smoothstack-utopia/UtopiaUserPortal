@@ -32,6 +32,7 @@ import { ClickAwayDirective } from './shared/directives/click-away.directive';
 import { FlightsearchComponent } from './flightsearch/flightsearch.component';
 import { SearchboxComponent } from './searchbox/searchbox.component';
 import { DatePipe } from '@angular/common';
+import { ReturnalertComponent } from './shared/returnalert/returnalert.component';
 
 @NgModule({
   declarations: [
@@ -59,6 +60,7 @@ import { DatePipe } from '@angular/common';
     ClickAwayDirective,
     FlightsearchComponent,
     SearchboxComponent,
+    ReturnalertComponent,
   ],
   imports: [
     BrowserModule,

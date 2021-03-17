@@ -6,7 +6,7 @@
 <div class="row no-gutters secondrow sidings">
     <div class="col-1 firstdropdown">
         <div class="btn-group">
-            <button class="btn btn-secondary btn-sm dropdown-toggle" [innerHTML]="tripRB" (click)="toggleOverlay('tripRBOverlay', $event)" type="button">
+            <button id="tripRBId" class="btn btn-secondary btn-sm dropdown-toggle" [innerHTML]="tripRB" (click)="toggleOverlay('tripRBOverlay', $event)" type="button">
             </button>
             <div class="overlay" id="tripRBOverlay" appClickAway (clickOutside)="closeOverlay('tripRBOverlay')">
                 <div class="row no-gutters dropdownRow">
@@ -20,7 +20,7 @@
     </div>
     <div class="col-1 seconddropdown">
         <div class="btn-group">
-            <button class="btn btn-secondary btn-sm dropdown-toggle" [innerHTML]="nonStopRB" (click)="toggleOverlay('nonStopOverlay', $event)" type="button">
+            <button id="nonStopRBId" class="btn btn-secondary btn-sm dropdown-toggle" [innerHTML]="nonStopRB" (click)="toggleOverlay('nonStopOverlay', $event)" type="button">
             </button>
             <div class="overlay" id="nonStopOverlay" appClickAway (clickOutside)="closeOverlay('nonStopOverlay')">
               <div class="row no-gutters dropdownRow">
@@ -34,7 +34,7 @@
     </div>
     <div class="col-1 thirddropdown">
         <div class="btn-group">
-            <button class="btn btn-secondary btn-sm dropdown-toggle" [innerHTML]="numberOfPeople" (click)="toggleOverlay('numberOverlay', $event)" type="button">
+            <button id="numberOfPeopleId" class="btn btn-secondary btn-sm dropdown-toggle" [innerHTML]="numberOfPeople" (click)="toggleOverlay('numberOverlay', $event)" type="button">
             </button>
             <div class="overlay" id="numberOverlay" appClickAway (clickOutside)="closeOverlay('numberOverlay')">
               <div class="row no-gutters dropdownRow" style="padding-top: 10px;">
@@ -43,7 +43,7 @@
               </div>
               <div class="row no-gutters dropdownRow">
                 <label for="children">Children</label>
-                <input type="number" [value]="children" id="childrenAmount" min="0" max="8" (change)="updateNumberOfPerson('Children', $event)">
+                <input type="number" [value]="countOfChildren" id="childrenAmount" min="0" max="8" (change)="updateNumberOfPerson('Children', $event)">
               </div>
             </div>
           </div>
@@ -60,7 +60,7 @@
             </div>
 
             <!-- Airport Input -->
-            <input type="text" class="form-control" [value]="fromAirport" placeholder="From..." (keyup) = "setInput($event, 'from')">
+            <input type="text" id="from" class="form-control" [value]="fromAirport" placeholder="From..." (keyup) = "setInput($event, 'from')">
           </div>
     </div>
     <div class="col-md-auto secondbox flightsearch">
@@ -76,10 +76,10 @@
             </div>
 
             <!-- Airport Input -->
-            <input type="text" class="form-control" [value]="toAirport" placeholder="To..." (keyup) = "setInput($event, 'to')">
+            <input type="text" id="to" class="form-control" [value]="toAirport" placeholder="To..." (keyup) = "setInput($event, 'to')">
           </div>     
     </div>
-    <div class="col-md-2 fourthbox flightsearch">
+    <div class="fourthbox flightsearch" [ngClass]="disableToCalendar ? 'col-md-4' : 'col-md-2'">
         <div class="errContainer" *ngIf="calendarErrorMsg">
           <span class="errText" [innerHTML]="calendarErrorMsg"></span>
         </div>
@@ -89,10 +89,10 @@
                 <span class="input-group-text" id="calendar1"><i class="fas fa-calendar-day fa-lg"></i></span>
               </button>
             </div>
-            <input class="form-control" [(ngModel)]="fromModel" placeholder="From: yyyy-mm-dd" name="d" ngbDatepicker #d="ngbDatepicker">
+            <input class="form-control" [(ngModel)]="fromModel" [minDate]="minDate" placeholder="From: yyyy-mm-dd" name="d" ngbDatepicker #d="ngbDatepicker">
           </div>
     </div>
-    <div class="col-md-2 fourthbox flightsearch">
+    <div class="col-md-2 fourthbox flightsearch" *ngIf="!disableToCalendar">
       <div class="errContainer" *ngIf="returnCalendarErrorMsg">
         <span class="errText" [innerHTML]="returnCalendarErrorMsg"></span>
       </div>
@@ -102,7 +102,7 @@
             <span class="input-group-text" id="calendar1"><i class="fas fa-calendar-alt fa-lg"></i></span>
           </button>
         </div>
-        <input class="form-control" [(ngModel)]="toModel"  placeholder="{{ placeHolder }}" name="d2" [disabled]="disableToCalendar" ngbDatepicker #d1="ngbDatepicker">
+        <input class="form-control" [(ngModel)]="toModel" [minDate]="minDate"  placeholder="{{ placeHolder }}" name="d2" [disabled]="disableToCalendar" ngbDatepicker #d1="ngbDatepicker">
       </div>
     </div>
     <div class="col-md-auto fifthbox flightsearch">
