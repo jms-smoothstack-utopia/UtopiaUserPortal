@@ -5,6 +5,17 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import {NgbDateStruct} from '@ng-bootstrap/ng-bootstrap';
 
+enum SortMethod {
+  EXPENSIVE = "expensive",
+  CHEAPEST = "cheapest",
+  MOST_RECENT = "most recent",
+  OLDEST = "oldest",
+  LOW_HOPS = "Low number of hops",
+  HIGH_HOPS = "High number of hops",
+  SHORTEST_DURATION = "Shortest duration",
+  LONGEST_DURATION = "Longest duration"
+}
+
 @Component({
   selector: 'app-flightsearch',
   templateUrl: './flightsearch.component.html',
@@ -55,13 +66,13 @@ export class FlightsearchComponent implements OnInit {
   noResultsErrorMsg: string = "";
   returnTripErrorMsg: string = "";
 
-  constructor(private activatedRoute: ActivatedRoute, private httpService: HttpService) 
-  { 
+  constructor(private activatedRoute: ActivatedRoute, private httpService: HttpService)
+  {
 
   }
 
-  ngOnInit(): void 
-  { 
+  ngOnInit(): void
+  {
 
     this.activatedRoute.queryParams.subscribe(params => {
       let tempFromAirport = params["origin"]
@@ -75,7 +86,7 @@ export class FlightsearchComponent implements OnInit {
       this.fromAirport = (tempFromAirport == null ? "": tempFromAirport);
       this.toAirport = (tempToAirport == null ? "" : tempToAirport);
       this.fromCalendar = (tempCalendarFrom == null ? "": tempCalendarFrom);
-      
+
       if (this.fromCalendar != ""){
           //Create the model for the from calendar
           let tempFromCalendar:any = this.fromCalendar.split("-");
@@ -112,7 +123,7 @@ export class FlightsearchComponent implements OnInit {
           month: parseInt(tempToCalendar[1]),
           day: parseInt(tempToCalendar[2])
         }
-      } 
+      }
 
       this.tripRB = (this.toCalendar == "" ? "One-Way": "Round-Trip");
       this.disableToCalendar = (this.toCalendar == "" ? true: false);
@@ -135,17 +146,17 @@ export class FlightsearchComponent implements OnInit {
 
         //Add origin
         baseSearchURL += "origin=" + this.fromAirport + "&";
-  
+
         //Add destination
         baseSearchURL += "destinations=" + this.toAirport + "&";
-  
+
         //Add departure
         baseSearchURL += "departure=" + this.fromCalendar;
 
         if(this.toCalendar != ""){
           baseSearchURL += "&return=" + this.toCalendar;
         }
-        
+
         let passengerCount = this.adult + this.countOfChildren;
         if (passengerCount > 1){
           baseSearchURL += "&passengercount=" + passengerCount;
@@ -157,13 +168,13 @@ export class FlightsearchComponent implements OnInit {
 
         //Do the GET request
         this.httpService.get(baseSearchURL).subscribe(
-          (res:any) => 
+          (res:any) =>
           {
             //We need to process search results
             console.log(res);
             this.processGetResults(res);
           },
-          (err: HttpErrorResponse) => 
+          (err: HttpErrorResponse) =>
           {
             console.log(err);
             this.viewData = [];
@@ -175,7 +186,7 @@ export class FlightsearchComponent implements OnInit {
         let servicingAreaURL = environment.servicingAreaEndpoint;
 
         this.httpService.get(servicingAreaURL).subscribe(
-          (res:any) => 
+          (res:any) =>
           {
             res.forEach((element:any) => {
               if(!this.cityData.includes(element.servicingArea)){
@@ -205,7 +216,7 @@ export class FlightsearchComponent implements OnInit {
       return;
     }
     else
-    { 
+    {
       let processedData = this.standardizeResults(originToDestination);
       if (processedData.length == 0){
         this.flightsData = [];
@@ -232,7 +243,7 @@ export class FlightsearchComponent implements OnInit {
         return;
       }
       else
-      { 
+      {
         let processedData = this.standardizeResults(destinationToOrigin);
         if (processedData.length == 0){
           this.returnFlightsData = [];
@@ -364,7 +375,7 @@ export class FlightsearchComponent implements OnInit {
   initializePeopleString(): void{
   this.numberOfPeople = this.adult + " Adult";
   if (this.countOfChildren > 0){
-    this.numberOfPeople += "; " + this.countOfChildren + " Children"; 
+    this.numberOfPeople += "; " + this.countOfChildren + " Children";
     }
   }
 
@@ -394,7 +405,7 @@ export class FlightsearchComponent implements OnInit {
     //Checks if user want to remove the sort return back to default
     if (specificElement.classList.contains("selected")){
       specificElement.classList.remove("selected");
-      this.sort = "expensive";
+      this.sort = SortMethod.EXPENSIVE;
       this.sortData();
       return;
     }
@@ -404,7 +415,7 @@ export class FlightsearchComponent implements OnInit {
     for (let i = 0; i < elements.length; i++){
       elements[i].classList.remove("selected");
     }
-    
+
     specificElement.classList.add("selected");
     this.sort = sortMethod;
     this.sortData();
@@ -413,28 +424,28 @@ export class FlightsearchComponent implements OnInit {
   sortData(){
     let data = this.viewData;
     switch(this.sort){
-      case "expensive":
+      case SortMethod.EXPENSIVE:
         data = data.sort((a,b) => b.basePrice.replace(/[$,]+/g,"") - a.basePrice.replace(/[$,]+/g,""));
       break;
-      case "cheapest":
+      case SortMethod.CHEAPEST:
         data = data.sort((a,b) => a.basePrice.replace(/[$,]+/g,"") - b.basePrice.replace(/[$,]+/g,""));
         break;
-      case "oldest":
+      case SortMethod.OLDEST:
           data = data.sort((a,b) => + new Date(a.creationTime) -  + new Date(b.creationTime));
           break;
-      case "most recent":
+      case SortMethod.MOST_RECENT:
           data = data.sort((a,b) => + new Date(b.creationTime) -  + new Date(a.creationTime));
           break;
-      case "Low number of hops":
+      case SortMethod.LOW_HOPS:
           data = data.sort((a,b) => a.numberOfHops - b.numberOfHops);
           break;
-      case "High number of hops":
+      case SortMethod.HIGH_HOPS:
         data = data.sort((a,b) => b.numberOfHops - a.numberOfHops);
         break;
-      case "Shortest duration":
+      case SortMethod.SHORTEST_DURATION:
         data = data.sort((a,b) => a.durationInMilliseconds - b.durationInMilliseconds);
         break;
-      case "Longest duration":
+      case SortMethod.LONGEST_DURATION:
         data = data.sort((a,b) => b.durationInMilliseconds - a.durationInMilliseconds);
         break;
       default:
@@ -457,7 +468,7 @@ export class FlightsearchComponent implements OnInit {
     //However, at the moment, I will just populate the return flights for now
     if (this.tripRB == "Round-Trip" && this.returnFlightsData.length != 0){
       this.viewData = this.returnFlightsData;
-      this.sortData;      
+      this.sortData;
       this.lookingAtReturnFlights = true;
 
       //Then we need to reset filters and remove sort expanded
@@ -489,13 +500,13 @@ export class FlightsearchComponent implements OnInit {
     const element = document.getElementById(city) as HTMLElement;
     if (element.classList.contains("selected")){
       element.classList.remove("selected");
-      
+
       //Get index of element in this.filter
       const index = this.filter.indexOf(city);
       if (index > -1){
         this.filter.splice(index, 1);
       }
-    } 
+    }
     else{
       element.classList.add("selected");
       this.filter.push(city);
