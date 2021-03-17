@@ -1,0 +1,25 @@
+.error {
+  border: red solid !important;
+}
+
+.hiddenErrorText {
+  display: none;
+}
+
+/* no special rule for shownErrorText */
+
+.updateButtonEnabled {
+  opacity: 100%;
+}
+
+.updateButtonEnabled:hover {
+  opacity: 100%;
+}
+
+.updateButtonDisabled {
+  opacity: 25%;
+}
+
+.updateButtonDisabled:hover {
+  opacity: 25%;
+}

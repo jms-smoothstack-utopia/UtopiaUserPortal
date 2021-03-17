@@ -27,12 +27,17 @@ import { BlankComponent } from './blank/blank.component';
 import { DpDatePickerModule } from 'ng2-date-picker';
 import { ConfirmRegistrationComponent } from './account/confirm-registration/confirm-registration.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
-import { HomeComponent } from "./home/home.component";
+import { HomeComponent } from './home/home.component';
 import { ClickAwayDirective } from './shared/directives/click-away.directive';
 import { FlightsearchComponent } from './flightsearch/flightsearch.component';
 import { SearchboxComponent } from './searchbox/searchbox.component';
 import { DatePipe } from '@angular/common';
 import { ReturnalertComponent } from './shared/returnalert/returnalert.component';
+import { UserFlightHistoryComponent } from './user-flight-history/user-flight-history.component';
+import { UserFlightUpcomingComponent } from './user-flight-upcoming/user-flight-upcoming.component';
+import { UserNavbarComponent } from './user-navbar/user-navbar.component';
+import { PerformDeletionComponent } from './account/perform-deletion/perform-deletion.component';
+import { DeleteAccountComponent } from './account/delete-account/delete-account.component';
 
 @NgModule({
   declarations: [
@@ -61,6 +66,11 @@ import { ReturnalertComponent } from './shared/returnalert/returnalert.component
     FlightsearchComponent,
     SearchboxComponent,
     ReturnalertComponent,
+    UserFlightHistoryComponent,
+    UserFlightUpcomingComponent,
+    UserNavbarComponent,
+    PerformDeletionComponent,
+    DeleteAccountComponent,
   ],
   imports: [
     BrowserModule,
