@@ -113,7 +113,12 @@ describe('UserFlightUpcomingComponent', () => {
   it('setHistory should set tickets, fill in their date/time strings', () => {
     component.setUpcoming(mockTicketArr);
 
-    (component.tickets as Ticket[]).forEach((ticket) => {
+    const tickets = component.tickets;
+
+    expect(tickets).toBeTruthy();
+    expect(tickets?.length).toBeGreaterThan(0);
+
+    tickets!.forEach((ticket) => {
       expect(ticket.timePrettyPrint == mockTimeStr);
     });
   });

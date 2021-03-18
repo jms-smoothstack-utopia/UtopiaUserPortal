@@ -1,6 +1,9 @@
 import { TestBed } from '@angular/core/testing';
 import { FlightsearchService } from './flightsearch.service';
-import { HttpClientTestingModule, HttpTestingController,} from '@angular/common/http/testing';
+import {
+  HttpClientTestingModule,
+  HttpTestingController,
+} from '@angular/common/http/testing';
 
 describe('FlightsearchService', () => {
   let service: FlightsearchService;
@@ -18,13 +21,12 @@ describe('FlightsearchService', () => {
     expect(service).toBeTruthy();
   });
 
-  it("should GET with minimum data", () => {
-    const fakeParams = "origin=D.C&destinations=LA&departure=2021-05-17";
-    const mockResponse = {Origintodestination: any[]}
+  it('should GET with minimum data', () => {
+    const fakeParams = 'origin=D.C&destinations=LA&departure=2021-05-17';
+    const mockResponse = { Origintodestination: [] };
 
-    service.getFlights(fakeParms).subscribe((res:any) => {
+    service.getFlights(fakeParams).subscribe((res: any) => {
       expect(res).toEqual(mockResponse);
-    })
-  })
-
+    });
+  });
 });
