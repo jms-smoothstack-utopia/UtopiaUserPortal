@@ -13,11 +13,12 @@ import { ConfirmationComponent } from './login/resetform/confirmation/confirmati
 import { NotfoundComponent } from './notfound/notfound.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import { ConfirmRegistrationComponent } from './account/confirm-registration/confirm-registration.component';
+import { HomeComponent } from './home/home.component';
+import { FlightsearchComponent } from './flightsearch/flightsearch.component';
 import { UserFlightHistoryComponent } from './user-flight-history/user-flight-history.component';
 import { UserFlightUpcomingComponent } from './user-flight-upcoming/user-flight-upcoming.component';
 import { DeleteAccountComponent } from './account/delete-account/delete-account.component';
 import { PerformDeletionComponent } from './account/perform-deletion/perform-deletion.component';
-
 
 const routes: Routes = [
   {
@@ -72,8 +73,19 @@ const routes: Routes = [
     component: LayoutComponent,
     children: [
       {
-        path: PathConstants.USER_PROFILE + '/:id',
-
+        path: '',
+        component: HomeComponent,
+      },
+      {
+        path: 'myprofile/:id',
+        component: UserProfileComponent,
+      },
+      {
+        path: 'flight-search',
+        component: FlightsearchComponent,
+      },
+      {
+        path: PathConstants.USER_PROFILE,
         component: UserProfileComponent,
       },
       {

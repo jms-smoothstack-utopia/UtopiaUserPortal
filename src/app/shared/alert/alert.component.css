@@ -1,5 +1,6 @@
 p{
   font-family: "Lato", sans-serif;
+  font-weight: bold;
 }
 
 a{
@@ -36,14 +37,18 @@ a:focus{
 }
 
 .close-button {
-  font-family: "Lato", sans-serif;
+  font-family: "Futura";
   font-weight: 600;
   color: white;
   font-size: large;
-  background-color: #2b5bb0;
+  background-color: #1508AF;
   padding: 7px 20px;
   margin: 40px 0 0 0;
   border: none;
   cursor: pointer;
   width: 80%;
+}
+
+.close-button:hover{
+  background-color: #0c0558;
 }
