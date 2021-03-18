@@ -452,61 +452,26 @@ describe('FlightsearchComponent', () => {
     expect(component.noResultsErrorMsg).toEqual("We could not find any flights with your search results. Please try again with different parameters")
   })
 
-  // it("processGetResults but standardize results but no destination to origin", () => {
-  //   fixture = TestBed.createComponent(FlightsearchComponent);
-  //   component = fixture.componentInstance;
-  //   TestBed.inject(ActivatedRoute).queryParams = of
-  //   (data)
-  //   fixture.detectChanges();
+  it("processGetResults but standardize results but destination to origin exists", () => {
+    fixture = TestBed.createComponent(FlightsearchComponent);
+    component = fixture.componentInstance;
+    TestBed.inject(ActivatedRoute).queryParams = of
+    (data)
+    fixture.detectChanges();
 
-  //   const spy = spyOn(component, "standardizeResults");
-  //   spy.and.returnValue([{basePrice: "$100.00"}, {basePrice: "$150.00"}]);
+    let processedInfo = component.standardizeResults(fakeData);
+    processedInfo = processedInfo.sort((a,b) => b.basePrice.replace(/[$,]+/g,"") - a.basePrice.replace(/[$,]+/g,""));
 
-  //   let fakeRes = {"Origin to destination": [1,2,3,4,5], "Destination to origin": []}
-  //   component.processGetResults(fakeRes);
+    const spy = spyOn(component, "standardizeResults");
+    spy.and.returnValue(processedInfo);
+
+    let fakeRes = {"Origin to destination": [1,2,3,4,5], "Destination to origin": [1,2,3,4,5]}
+    component.processGetResults(fakeRes);
     
-  //   expect(spy).toHaveBeenCalled();
-  //   expect(component.flightsData).toEqual([{basePrice: "$100.00"}, {basePrice: "$150.00"}]);
-  //   expect(component.viewData).toEqual([{basePrice: "$150.00"}, {basePrice: "$100.00"}]);
-  //   expect(component.returnTripErrorMsg).toEqual("We could not find any flights that return from your destination. Do you still want to view your results?")
-  // })
-
-  // it("processGetResults but standardize results but destination to origin exists", () => {
-  //   fixture = TestBed.createComponent(FlightsearchComponent);
-  //   component = fixture.componentInstance;
-  //   TestBed.inject(ActivatedRoute).queryParams = of
-  //   (data)
-  //   fixture.detectChanges();
-
-  //   const spy = spyOn(component, "standardizeResults");
-  //   spy.and.returnValues([{basePrice: "$100.00"}, {basePrice: "$150.00"}], []);
-
-  //   let fakeRes = {"Origin to destination": [1,2,3,4,5], "Destination to origin": [1,2,3,4,5]}
-  //   component.processGetResults(fakeRes);
-    
-  //   expect(spy).toHaveBeenCalled();
-  //   expect(component.flightsData).toEqual([{basePrice: "$100.00"}, {basePrice: "$150.00"}]);
-  //   expect(component.viewData).toEqual([{basePrice: "$150.00"}, {basePrice: "$100.00"}]);
-  //   expect(component.returnTripErrorMsg).toEqual("We could not find any flights that return from your destination. Do you still want to view your results?");
-  // })
-
-  // it("processGetResults but standardize results but destination to origin exists", () => {
-  //   fixture = TestBed.createComponent(FlightsearchComponent);
-  //   component = fixture.componentInstance;
-  //   TestBed.inject(ActivatedRoute).queryParams = of
-  //   (data)
-  //   fixture.detectChanges();
-
-  //   const spy = spyOn(component, "standardizeResults");
-  //   spy.and.returnValue(fakeData);
-
-  //   let fakeRes = {"Origin to destination": [1,2,3,4,5], "Destination to origin": [1,2,3,4,5]}
-  //   component.processGetResults(fakeRes);
-    
-  //   expect(spy).toHaveBeenCalled();
-  //   expect(component.flightsData).toEqual(fakeData);
-  //   expect(component.viewData).toEqual(fakeData);
-  // })
+    expect(spy).toHaveBeenCalled();
+    expect(component.flightsData).toEqual(processedInfo);
+    expect(component.viewData).toEqual(processedInfo);
+  })
 
   it("standardizeResults, nonstop", () => {
     fixture = TestBed.createComponent(FlightsearchComponent);
