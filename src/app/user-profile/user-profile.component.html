@@ -1,11 +1,11 @@
-<app-user-navbar></app-user-navbar>
+<app-user-navbar [parentComponent]="activeForNav"></app-user-navbar>
 <app-alert
     *ngIf="modalMsg"
     [message]="modalMsg"
     (closeEvent)="onCloseAlert()">
   </app-alert>
 <div *ngIf="user">
-    <h2>{{user.firstName}} {{user.lastName}}</h2>
+    <h2 class="headertext">{{user.firstName}} {{user.lastName}}</h2>
     <!-- User ID used to be displayed here, but removed since UUIDs can't be interacted with and are a bit ugly -->
     <form [formGroup]="userProfileForm">
         <div class="col-3">

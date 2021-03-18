@@ -15,6 +15,7 @@ import { Ticket } from '../ticket';
 export class UserFlightUpcomingComponent implements OnInit {
   @Input() tickets: Ticket[] | undefined;
   @Input() error: HttpErrorResponse | undefined;
+  activeForNav: string = 'upcoming';
 
   constructor(
     private route: ActivatedRoute,

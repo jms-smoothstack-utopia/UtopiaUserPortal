@@ -15,6 +15,7 @@ import { Ticket } from '../ticket';
 export class UserFlightHistoryComponent implements OnInit {
   @Input() tickets: Ticket[] | undefined;
   @Input() error: HttpErrorResponse | undefined;
+  activeForNav: string = 'history';
 
   constructor(
     private route: ActivatedRoute,
