@@ -1,32 +1,24 @@
 import { Component, OnInit} from '@angular/core';
 import { ActivatedRoute} from '@angular/router';
-import { HttpService } from 'src/app/shared/methods/http.service';
+import { FlightsearchService } from 'src/app/services/flightsearch/flightsearch.service';
+import { NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
+import { SortMethod, TripType, StopType, flight } from '../shared/methods/flightsearchObjects';
 import { HttpErrorResponse } from '@angular/common/http';
-import { environment } from 'src/environments/environment';
-import {NgbDateStruct} from '@ng-bootstrap/ng-bootstrap';
 
-enum SortMethod {
-  EXPENSIVE = "expensive",
-  CHEAPEST = "cheapest",
-  MOST_RECENT = "most recent",
-  OLDEST = "oldest",
-  LOW_HOPS = "Low number of hops",
-  HIGH_HOPS = "High number of hops",
-  SHORTEST_DURATION = "Shortest duration",
-  LONGEST_DURATION = "Longest duration"
-}
 
 @Component({
   selector: 'app-flightsearch',
   templateUrl: './flightsearch.component.html',
   styleUrls: ['./flightsearch.component.css']
-})
+    })
 export class FlightsearchComponent implements OnInit {
 
+  //Enum
+  SortMethod = SortMethod;
 
   //Data from query params which we will pass in to the flight search component
-  tripRB:string = "One-Way";
-  nonStopRB: string = "Non-Stop";
+  tripRB:string = TripType.ONE_WAY;
+  nonStopRB: string = StopType.NON_STOP;
   adult: number = 1;
   countOfChildren: number = 0;
   numberOfPeople: string = "1 Adult";
@@ -39,34 +31,43 @@ export class FlightsearchComponent implements OnInit {
   fromModel: NgbDateStruct | undefined;
   toModel: NgbDateStruct | undefined;
 
-  rawData:Array<any> = [];
+  //Just raw data, storing it just in case
+  rawData:any = [];
 
   //Processed data list (only holds Origin to Destination)
-  flightsData: Array<any> = [];
+  flightsData: flight[] = [];
 
   //Processed data list (only holds Destination to Origin)
-  returnFlightsData: Array<any> = [];
+  returnFlightsData: flight[] = [];
 
   //The list we tie to the frontend
-  viewData: Array<any> = [];
+  viewData: flight[] = [];
   lookingAtReturnFlights: boolean = false;
 
   //Need to sort the data
-  sort:string = "expensive";
-  filter:Array<string> = [];
+  sort:string = SortMethod.EXPENSIVE;
+  filter:string[] = [];
 
   //Holds cityData from backend
-  cityData:Array<any> = [];
+  cityData:string[] = [];
 
   //Holds generic pagination number
   paginationCount:number = 10;
   page:number = 1;
 
   //Errors if there is a problem with searching and/or no results from database
+  //This is binded to some HTML element on the frontend
   noResultsErrorMsg: string = "";
   returnTripErrorMsg: string = "";
 
-  constructor(private activatedRoute: ActivatedRoute, private httpService: HttpService)
+  //Common error strings across the code
+  couldNotFindAnyResults:string = "We could not find any flights with your search results. Please try again with different parameters";
+  pleaseProvideTheMinimumRequirements:string = "Please include an origin, destination, and atleast a date when you want to fly";
+  couldNotFindReturnTrips:string = "We could not find any flights that return from your destination. Do you still want to view your results?";
+  inputError:string = "Input Error";
+  problemExists:string = "There was a problem. Please try again";
+
+  constructor(private activatedRoute: ActivatedRoute, private flightSearch: FlightsearchService)
   {
 
   }
@@ -88,61 +89,40 @@ export class FlightsearchComponent implements OnInit {
       this.fromCalendar = (tempCalendarFrom == null ? "": tempCalendarFrom);
 
       if (this.fromCalendar != ""){
-          //Create the model for the from calendar
-          let tempFromCalendar:any = this.fromCalendar.split("-");
-
-          if(tempFromCalendar.length != 3){
-            this.flightsData = [];
-            this.viewData = [];
-            this.noResultsErrorMsg = "Input error"
-            return;
-          }
-
-          this.fromModel = {
-            year: parseInt(tempFromCalendar[0]),
-            month: parseInt(tempFromCalendar[1]),
-            day: parseInt(tempFromCalendar[2])
-          }
+        let val = this.parseCalendarString(this.fromCalendar);
+        if (val != undefined){
+          this.fromModel = val;
+        }
       }
 
       this.toCalendar = (tempCalendarTo == null ? "" : tempCalendarTo);
 
       if (this.toCalendar != ""){
-        //Create the model for the to calendar
-        let tempToCalendar:any = this.toCalendar.split("-");
-
-        if(tempToCalendar.length != 3){
-          this.flightsData = [];
-          this.viewData = [];
-          this.noResultsErrorMsg = "Input error"
-          return;
-        }
-
-        this.toModel = {
-          year: parseInt(tempToCalendar[0]),
-          month: parseInt(tempToCalendar[1]),
-          day: parseInt(tempToCalendar[2])
+        let val = this.parseCalendarString(this.toCalendar)
+        if (val != undefined){
+          this.toModel = val;
         }
       }
 
-      this.tripRB = (this.toCalendar == "" ? "One-Way": "Round-Trip");
-      this.disableToCalendar = (this.toCalendar == "" ? true: false);
+      this.tripRB = (this.toCalendar == "" ? TripType.ONE_WAY: TripType.ROUND_TRIP);
+      this.disableToCalendar = (this.toCalendar == "");
       this.adult = (tempAdults == null ? 1 : parseInt(tempAdults));
       this.countOfChildren = (tempChildren == null ? 0 : parseInt(tempChildren));
-      this.nonStopRB = (tempNonStopRB == "true"? "Multihop": "Non-Stop");
+      this.nonStopRB = (tempNonStopRB == "true"? StopType.MULTIHOP: StopType.NON_STOP);
       this.initializePeopleString();
 
       //These three parameters cannot be empty; they are mandatory
+      //Received from URL parameters
       if (this.fromAirport == "" || this.toAirport == "" || this.fromCalendar == ""){
-        this.flightsData = [];
-        this.viewData = [];
-        this.noResultsErrorMsg = "Please include an origin, destination, and atleast a date when you want to fly"
+        if(this.noResultsErrorMsg == ""){
+          this.noValidData(this.pleaseProvideTheMinimumRequirements, undefined);
+        }
       }
       else{
 
         //Now, we need to do the post request to get the flights data
 
-        let baseSearchURL = environment.flightsEndpoint + "/flight-search?"
+        let baseSearchURL = "";
 
         //Add origin
         baseSearchURL += "origin=" + this.fromAirport + "&";
@@ -165,81 +145,88 @@ export class FlightsearchComponent implements OnInit {
         if (this.nonStopRB == "Multihop"){
           baseSearchURL += "&multihop=" + true;
         }
-
-        //Do the GET request
-        this.httpService.get(baseSearchURL).subscribe(
-          (res:any) =>
-          {
-            //We need to process search results
-            console.log(res);
+        
+        this.flightSearch.getFlights(baseSearchURL).subscribe(
+          (res) => 
+          { 
+            this.rawData = res;
             this.processGetResults(res);
           },
           (err: HttpErrorResponse) =>
           {
             console.log(err);
-            this.viewData = [];
-            this.noResultsErrorMsg = "There was an error processing your search. Please try again!"
+            this.noValidData(this.problemExists, undefined);
+            return;
           }
-        );
-
-        //Now get city information
-        let servicingAreaURL = environment.servicingAreaEndpoint;
-
-        this.httpService.get(servicingAreaURL).subscribe(
-          (res:any) =>
+        )
+        //Do  the search for the servicing areas
+        this.flightSearch.getServicingArea().subscribe(
+          (res) => 
           {
-            res.forEach((element:any) => {
-              if(!this.cityData.includes(element.servicingArea)){
-                this.cityData.push(element.servicingArea);
-              }
+            res.forEach((element) => {
+              this.cityData.push(element.servicingArea);
             });
-            this.cityData.sort();
           },
-          (err: HttpErrorResponse) =>
-          {
+          (err: HttpErrorResponse) => {
             console.log(err);
-            this.viewData = [];
-            this.noResultsErrorMsg = "There was an error processing your search. Please try again!"
+            this.noValidData(this.problemExists, undefined);
           }
         )
       }
     });
   }
 
+  parseCalendarString(dateString: string) {
+    let tempVal: string[] = dateString.split("-");
+    if (tempVal.length != 3){
+      this.noValidData(this.inputError, undefined);
+      return;
+    }else{
+      return {
+        year: parseInt(tempVal[0]),
+        month: parseInt(tempVal[1]),
+        day: parseInt(tempVal[2])
+      }
+    }
+  }
+
+  noValidData(errorMsg: string | undefined, returnTripErrorMsg: string | undefined):void{
+    this.flightsData = [];
+    this.viewData = []
+    if (errorMsg != undefined){
+      this.noResultsErrorMsg = errorMsg;
+    }
+    if (returnTripErrorMsg != undefined){
+      this.returnTripErrorMsg = returnTripErrorMsg;
+    }
+  }
+
   processGetResults(res: any){
     let originToDestination = res["Origin to destination"];
 
     if (originToDestination.length == 0){
-      this.flightsData = [];
-      this.viewData = [];
-      this.noResultsErrorMsg = "We could not find any flights with your search results. Please try again with different parameters";
+      this.noValidData(this.couldNotFindAnyResults, undefined);
       return;
     }
     else
     {
       let processedData = this.standardizeResults(originToDestination);
       if (processedData.length == 0){
-        this.flightsData = [];
-        this.viewData = [];
-        this.noResultsErrorMsg = "We could not find any flights with your search results. Please try again with different parameters";
+        this.noValidData(this.couldNotFindAnyResults, undefined);
         return;
       }
       else{
-
         this.flightsData = processedData;
-        //Tie it into the viewData list
         this.viewData = [...this.flightsData];
         this.sortData();
       }
     }
-
     //So round trip flights
-    if (this.tripRB != "One-Way"){
+    if (this.tripRB == TripType.ROUND_TRIP){
       let destinationToOrigin = res["Destination to origin"];
-
       if(destinationToOrigin.length == 0){
         this.returnFlightsData = [];
-        this.returnTripErrorMsg = "We could not find any flights that return from your destination. Do you still want to view your results?";
+        this.noValidData(undefined, this.couldNotFindReturnTrips);
         return;
       }
       else
@@ -247,11 +234,11 @@ export class FlightsearchComponent implements OnInit {
         let processedData = this.standardizeResults(destinationToOrigin);
         if (processedData.length == 0){
           this.returnFlightsData = [];
-          this.returnTripErrorMsg = "We could not find any flights that return from your destination. Do you still want to view your results?";
+          this.noValidData(undefined, this.couldNotFindReturnTrips);
           return;
         }
         else{
-          //Do not make it viewdata; just need to store it
+          //Do not make it viewdata; just need to store it for when user chooses initial flight
           this.returnFlightsData = processedData;
         }
       }
@@ -266,110 +253,78 @@ export class FlightsearchComponent implements OnInit {
       currency: "USD",
     });
 
-    let getCorrectFlights:any = [];
-    if (this.nonStopRB == "Multihop"){
-      data.forEach((element: any) => {
-        let tempObject:any = {};
+    let getCorrectFlights: flight[] = [];
 
-        //Only one flight
-        if (element.length == 1){
-           tempObject = this.nonStopFlight(element);
-        }
+    data.forEach((element: any) => {
 
-        //More than one flight
-        else{
-          let tempPrice = 0;
-          let tempLoyaltyPoints = 0;
-          let tempDuration = 0;
-          let tempIataId = "";
-          let tempCities = [];
+      //Shared information between nonstop and multihop
+      let newFlight = <flight>{};
+      newFlight.airplane = element[0].airplane;
+      newFlight.business = element[0].seats.filter((x:any) => x.seatClass == "BUSINESS" && x.seatStatus=="AVAILABLE").length;
+      newFlight.creationTime = element[0].creationDateTime;
+      newFlight.destination = element[element.length - 1].destination;
+      newFlight.economy = element[0].seats.filter((x:any) => x.seatClass == "ECONOMY" && x.seatStatus=="AVAILABLE").length;
+      newFlight.fromDateTime = element[0].approximateDateTimeStart;
+      newFlight.multihop = (element.length == 1? false: true);
+      newFlight.numberOfHops = element.length;
+      newFlight.origin = element[0].origin;
+      newFlight.seats = element[0].seats;
+      newFlight.toDateTime = element[0].approximateDateTimeEnd;
 
-          //Go through each element
-          element.forEach((flight: any, index:number) => {
-            tempLoyaltyPoints += flight.possibleLoyaltyPoints;
-            tempPrice += flight.seats[0].price;
-            if (index == 0){
-              tempIataId += flight.origin.iataId + " to " + flight.destination.iataId;
-            }
-            else{
-              tempIataId += " to " + flight.destination.iataId;
-            }
-            tempCities.push(flight.origin.servicingArea.servicingArea);
-            tempDuration += new Date(flight.approximateDateTimeEnd).getTime() - new Date(flight.approximateDateTimeStart).getTime();
-          });
+      //Is multihop
+      if (element.length > 1){
+        let tempSum = 0;
+        let tempPointsSum = 0;
+        let tempDuration = 0;
+        let tempIataId = "";
+        let tempCities: string[] = [];
 
-          let economySeats = element[0].seats.filter((x:any) => x.seatClass == "ECONOMY" && x.seatStatus=="AVAILABLE");
-          let businessSeats = element[0].seats.filter((x:any) => x.seatClass == "BUSINESS" && x.seatStatus=="AVAILABLE")
-          tempObject["economy"] = economySeats.length;
-          tempObject["business"] = businessSeats.length;
-          tempObject["origin"] = element[0].origin;
-          tempObject["airplane"] = element[0].airplane;
-          tempObject["seats"] = element[0].seats;
-          tempObject["destination"] = element[element.length - 1].destination;
-          tempCities.push(element[element.length - 1].destination.servicingArea.servicingArea);
-          tempObject["cities"] = tempCities;
-          tempObject["basePrice"] = formatter.format(tempPrice);
-          tempObject["loyaltyPoints"] = tempLoyaltyPoints;
-          tempObject["fromDateTime"] = element[0].approximateDateTimeStart;
-          tempObject["toDateTime"] = element[0].approximateDateTimeEnd;
-          let minutes = ((tempDuration / (1000* 60)) % 60);
-          let hours = Math.floor(((tempDuration / (1000 * 60 * 60)) % 24));
-          tempObject["duration"] = hours + "h " + minutes + "m" + " Overall Flight duration";
-          tempObject["route"] = "Multi-hop from " + element[0].origin.name + " to " + element[element.length - 1].destination.name;
-          tempObject["iataId"] = tempIataId;
-          tempObject["multihop"] = true;
-          tempObject["numberOfHops"] = element.length;
-          tempObject["creationTime"] = element[0].creationDateTime;
-          tempObject["durationInMilliseconds"] = tempDuration;
-        }
-        getCorrectFlights.push(tempObject);
-      })
+        element.forEach((flight: any, index:number) => {
+          tempPointsSum += flight.possibleLoyaltyPoints;
+          tempSum += flight.seats[0].price;
+          if (index == 0){
+            tempIataId += flight.origin.iataId + " to " + flight.destination.iataId;
+          }
+          else{
+            tempIataId += " to " + flight.destination.iataId;
+          }
+          tempCities.push(flight.origin.servicingArea.servicingArea);
+          tempDuration += new Date(flight.approximateDateTimeEnd).getTime() - new Date(flight.approximateDateTimeStart).getTime();
+        });
+
+        let minutes = ((tempDuration / (1000* 60)) % 60);
+        let hours = Math.floor(((tempDuration/ (1000 * 60 * 60)) % 24));
+
+        newFlight.basePrice = formatter.format(tempSum);
+        newFlight.cities = tempCities;
+        newFlight.duration = hours + "h " + minutes + "m" + " Overall Flight duration";
+        newFlight.durationInMilliseconds = tempDuration;
+        newFlight.iataId = tempIataId;
+        newFlight.loyaltyPoints = tempPointsSum;
+        newFlight.route = "Multi-hop from " + element[0].origin.name + " to " + element[element.length - 1].destination.name;
+      } else{
+        let duration = new Date(element[0].approximateDateTimeEnd).getTime() - new Date(element[0].approximateDateTimeStart).getTime();
+        let minutes = ((duration / (1000* 60)) % 60);
+        let hours = Math.floor(((duration / (1000 * 60 * 60)) % 24));
+
+        newFlight.basePrice = formatter.format(element[0].seats[0].price);
+        newFlight.cities = [element[0].origin.servicingArea.servicingArea, element[0].destination.servicingArea.servicingArea]
+        newFlight.duration = hours + "h " + minutes + "m";
+        newFlight.durationInMilliseconds = duration;
+        newFlight.iataId = element[0].origin.iataId + " to " + element[0].destination.iataId;
+        newFlight.loyaltyPoints = element[0].possibleLoyaltyPoints;
+        newFlight.route = "Non-stop from " + element[0].origin.name + " to " + element[0].destination.name;
+      }
+      getCorrectFlights.push(newFlight);
+    })
+
+    //Once processing is done, check what type of flights the user wants
+    if (this.nonStopRB == StopType.MULTIHOP){
+      return getCorrectFlights;
     }
     else{
-      data.forEach((element:any) => {
-        if (element.length == 1){
-          let tempObject = this.nonStopFlight(element);
-          getCorrectFlights.push(tempObject);
-        }
-      });
+      return getCorrectFlights.filter(x => x.multihop == false);
     }
-    return getCorrectFlights;
-  }
-
-  nonStopFlight(element:any){
-
-    //Include the formatter
-    let formatter = new Intl.NumberFormat("en-US", {
-      style: "currency",
-      currency: "USD",
-    });
-
-    //Start creating the object
-    let tempObject:any = {};
-    tempObject["iataId"] = element[0].origin.iataId + " to " + element[0].destination.iataId;
-    tempObject["route"] = "Non-stop from " + element[0].origin.name + " to " + element[0].destination.name;
-    tempObject["origin"] = element[0].origin;
-    tempObject["cities"] = [element[0].origin.servicingArea.servicingArea, element[0].destination.servicingArea.servicingArea]
-    tempObject["destination"] = element[0].destination;
-    tempObject["fromDateTime"] = element[0].approximateDateTimeStart;
-    tempObject["toDateTime"] = element[0].approximateDateTimeEnd;
-    let duration = new Date(element[0].approximateDateTimeEnd).getTime() - new Date(element[0].approximateDateTimeStart).getTime();
-    let minutes = ((duration / (1000* 60)) % 60);
-    let hours = Math.floor(((duration / (1000 * 60 * 60)) % 24));
-    tempObject["duration"] = hours + "h " + minutes + "m";
-    tempObject["loyaltyPoints"] = element[0].possibleLoyaltyPoints;
-    tempObject["basePrice"] = formatter.format(element[0].seats[0].price);
-    tempObject["multihop"] = false;
-    tempObject["airplane"] = element[0].airplane;
-    tempObject["seats"] = element[0].seats;
-    let economySeats = element[0].seats.filter((x:any) => x.seatClass == "ECONOMY" && x.seatStatus=="AVAILABLE");
-    let businessSeats = element[0].seats.filter((x:any) => x.seatClass == "BUSINESS" && x.seatStatus=="AVAILABLE")
-    tempObject["economy"] = economySeats.length;
-    tempObject["business"] = businessSeats.length;
-    tempObject["creationTime"] = element[0].creationDateTime;
-    tempObject["numberOfHops"] = element.length;
-    tempObject["durationInMilliseconds"] = duration;
-    return tempObject;
   }
 
   initializePeopleString(): void{
@@ -462,13 +417,15 @@ export class FlightsearchComponent implements OnInit {
   //Maxwell, look here for booking
   addFlightToCart(flight:any){
 
-    //Ideally, a modal would popup
+    //Ideally, a modal would popup with flight information
+    //Passed in flight information it might need to change depending on usage of other things
+    console.log(flight);
 
 
     //However, at the moment, I will just populate the return flights for now
-    if (this.tripRB == "Round-Trip" && this.returnFlightsData.length != 0){
+    if (this.tripRB == TripType.ROUND_TRIP && this.returnFlightsData.length != 0){
       this.viewData = this.returnFlightsData;
-      this.sortData;
+      this.sortData();
       this.lookingAtReturnFlights = true;
 
       //Then we need to reset filters and remove sort expanded
@@ -528,9 +485,10 @@ export class FlightsearchComponent implements OnInit {
     });
 
     if (filteredList.length == 0){
-      this.noResultsErrorMsg = "We could not find any flights with your filter results. Please filter again with different parameters";
+      this.noResultsErrorMsg = this.couldNotFindAnyResults;
     }
     this.viewData = filteredList;
+    this.sortData();
   }
 
   toggleSortFilterDropdown(){

@@ -47,14 +47,14 @@
             <div class="col-md-6 sortSidings dropContainer mobileDropDown"> 
                 <span class="sortDropdownText">Sort by:</span>
                 <ul class="dropdownList overflow">
-                    <li class="hoverListItem" id="PriceLowToHigh" (click)="eventSort('cheapest', 'PriceLowToHigh')">Price: Low to High</li>
-                    <li class="hoverListItem" id="PriceHighToLow" (click)="eventSort('expensive', 'PriceHighToLow')">Price: High to Low</li>
-                    <li class="hoverListItem" id="MostRecentToOldest" (click)="eventSort('most recent', 'MostRecentToOldest')">Time: Most Recent to Oldest</li>
-                    <li class="hoverListItem" id="OldestToMostRecent" (click)="eventSort('oldest', 'OldestToMostRecent')">Time: Oldest to Most Recent</li>
-                    <li class="hoverListItem" id="HopsLowToHigh" (click)="eventSort('Low number of hops', 'HopsLowToHigh')"># of Hops: Low to High</li>
-                    <li class="hoverListItem" id="HopsHighToLow" (click)="eventSort('High number of hops', 'HopsHighToLow')"># of Hops: High to Low</li>
-                    <li class="hoverListItem" id="DurationShortToLong" (click)="eventSort('Shortest duration', 'DurationShortToLong')">Flight Duration: Shortest to Longest</li>
-                    <li class="hoverListItem" id="DurationLongToShort" (click)="eventSort('Longest duration', 'DurationLongToShort')" >Flight Duration: Longest to Shortest</li>
+                    <li class="hoverListItem" id="PriceLowToHigh" (click)="eventSort(SortMethod.CHEAPEST, 'PriceLowToHigh')">Price: Low to High</li>
+                    <li class="hoverListItem" id="PriceHighToLow" (click)="eventSort(SortMethod.EXPENSIVE, 'PriceHighToLow')">Price: High to Low</li>
+                    <li class="hoverListItem" id="MostRecentToOldest" (click)="eventSort(SortMethod.MOST_RECENT, 'MostRecentToOldest')">Time: Most Recent to Oldest</li>
+                    <li class="hoverListItem" id="OldestToMostRecent" (click)="eventSort(SortMethod.OLDEST, 'OldestToMostRecent')">Time: Oldest to Most Recent</li>
+                    <li class="hoverListItem" id="HopsLowToHigh" (click)="eventSort(SortMethod.LOW_HOPS, 'HopsLowToHigh')"># of Hops: Low to High</li>
+                    <li class="hoverListItem" id="HopsHighToLow" (click)="eventSort(SortMethod.HIGH_HOPS, 'HopsHighToLow')"># of Hops: High to Low</li>
+                    <li class="hoverListItem" id="DurationShortToLong" (click)="eventSort(SortMethod.SHORTEST_DURATION, 'DurationShortToLong')">Flight Duration: Shortest to Longest</li>
+                    <li class="hoverListItem" id="DurationLongToShort" (click)="eventSort(SortMethod.LONGEST_DURATION, 'DurationLongToShort')" >Flight Duration: Longest to Shortest</li>
                 </ul>
             </div>
         </div>

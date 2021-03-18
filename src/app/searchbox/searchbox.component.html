@@ -10,10 +10,10 @@
             </button>
             <div class="overlay" id="tripRBOverlay" appClickAway (clickOutside)="closeOverlay('tripRBOverlay')">
                 <div class="row no-gutters dropdownRow">
-                  <button class="dropdownButton firstSelection" (click)="afterChoosingAnOption('tripRBOverlay', 'One-Way', 'tripRB')">One-Way</button>
+                  <button class="dropdownButton firstSelection" (click)="afterChoosingAnOption('tripRBOverlay', TripType.ONE_WAY, 'tripRB')">One-Way</button>
                 </div>
                 <div class="row no-gutters dropdownRow">
-                  <button class="dropdownButton secondSelection" (click)="afterChoosingAnOption('tripRBOverlay', 'Round-Trip', 'tripRB')">Round-Trip</button>
+                  <button class="dropdownButton secondSelection" (click)="afterChoosingAnOption('tripRBOverlay', TripType.ROUND_TRIP, 'tripRB')">Round-Trip</button>
                 </div>
             </div>
           </div>
@@ -24,10 +24,10 @@
             </button>
             <div class="overlay" id="nonStopOverlay" appClickAway (clickOutside)="closeOverlay('nonStopOverlay')">
               <div class="row no-gutters dropdownRow">
-                <button class="dropdownButton firstSelection" (click)="afterChoosingAnOption('nonStopOverlay', 'Non-Stop', 'nonStopRB')">Non-Stop</button>
+                <button class="dropdownButton firstSelection" (click)="afterChoosingAnOption('nonStopOverlay', StopType.NON_STOP, 'nonStopRB')">Non-Stop</button>
               </div>
               <div class="row no-gutters dropdownRow">
-                <button class="dropdownButton secondSelection" (click)="afterChoosingAnOption('nonStopOverlay', 'Multihop', 'nonStopRB')">Multihop</button>
+                <button class="dropdownButton secondSelection" (click)="afterChoosingAnOption('nonStopOverlay', StopType.MULTIHOP, 'nonStopRB')">Multihop</button>
               </div>
           </div>
           </div>
@@ -39,11 +39,11 @@
             <div class="overlay" id="numberOverlay" appClickAway (clickOutside)="closeOverlay('numberOverlay')">
               <div class="row no-gutters dropdownRow" style="padding-top: 10px;">
                 <label for="adults">Adults</label>
-                <input type="number" [value]="adult" id="adults" min="1" max="8" (change)="updateNumberOfPerson('Adult', $event)">
+                <input type="number" [value]="adult" id="adults" min="1" max="8" (change)="updateNumberOfPerson(PersonType.ADULT, $event)">
               </div>
               <div class="row no-gutters dropdownRow">
                 <label for="children">Children</label>
-                <input type="number" [value]="countOfChildren" id="childrenAmount" min="0" max="8" (change)="updateNumberOfPerson('Children', $event)">
+                <input type="number" [value]="countOfChildren" id="childrenAmount" min="0" max="8" (change)="updateNumberOfPerson(PersonType.CHILDREN, $event)">
               </div>
             </div>
           </div>
@@ -60,7 +60,7 @@
             </div>
 
             <!-- Airport Input -->
-            <input type="text" id="from" class="form-control" [value]="fromAirport" placeholder="From..." (keyup) = "setInput($event, 'from')">
+            <input type="text" id="from" class="form-control" [value]="fromAirport" placeholder="From..." (keyup) = "setInput($event, WhereType.FROM)">
           </div>
     </div>
     <div class="col-md-auto secondbox flightsearch">
@@ -76,7 +76,7 @@
             </div>
 
             <!-- Airport Input -->
-            <input type="text" id="to" class="form-control" [value]="toAirport" placeholder="To..." (keyup) = "setInput($event, 'to')">
+            <input type="text" id="to" class="form-control" [value]="toAirport" placeholder="To..." (keyup) = "setInput($event, WhereType.TO)">
           </div>     
     </div>
     <div class="fourthbox flightsearch" [ngClass]="disableToCalendar ? 'col-md-4' : 'col-md-2'">

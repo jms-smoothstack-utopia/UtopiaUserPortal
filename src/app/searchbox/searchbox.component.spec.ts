@@ -179,12 +179,12 @@ describe('SearchboxComponent', () => {
     //Test Adults
     component.updateNumberOfPerson("Adult", event);
     expect(component.adult).toEqual(2);
-    expect(component.numberOfPeople).toEqual("2 Adult");
+    expect(component.numberOfPeople).toEqual("2 Adults");
 
     //Test Children
     component.updateNumberOfPerson("Children", nextEvent);
     expect(component.countOfChildren).toEqual(1);
-    expect(component.numberOfPeople).toEqual("2 Adult; 1 Children")
+    expect(component.numberOfPeople).toEqual("2 Adults; 1 Children")
 
     fixture.detectChanges();
     const nextMessage = fixture.debugElement.nativeElement.querySelector("#numberOfPeopleId").innerHTML;
@@ -509,75 +509,5 @@ describe('SearchboxComponent', () => {
     }
     let boolean = component.compareDates(date1, date2);
     expect(boolean).toBe(true);
-  })
-
-  it("should show errorMsg if GET request is unsuccessful", () => {
-    const req = httpMock.expectOne(environment.airportsEndpoint);
-    req.flush(null, {status:404, statusText: "NOT FOUND"})
-    expect(req.request.method).toBe("GET");
-    expect(component.adultErrorMsg).toEqual("There was an error getting our data. Please try again later.")
-  })
-
-  it("should still show errorMsg if GET request is was successful but there are no results", () => {
-    const req = httpMock.expectOne(environment.airportsEndpoint);
-    req.flush([], {status:200, statusText: "Airports"})
-    expect(req.request.method).toBe("GET");
-    expect(component.adultErrorMsg).toEqual("Utopia currently does not offer any airports we service")
-  })
-
-  it("should still show errorMsg if GET request is was successful but there are no results", () => {
-    const req = httpMock.expectOne(environment.airportsEndpoint);
-
-    let tempData = [
-      {
-        iataId: "IAD",
-        servicingArea: 
-        {
-          servicingArea: "D.C"
-        }
-      },
-      {
-        iataId: "DCA",
-        servicingArea: 
-        {
-          servicingArea: "D.C"
-        }
-      },
-      {
-        iataId: "LAX",
-        servicingArea: 
-        {
-          servicingArea: "LA"
-        }
-      }
-    ]
-
-    let tempDict = {"D.C": [
-      {
-        iataId: "IAD",
-        servicingArea: 
-        {
-          servicingArea: "D.C"
-        }
-      }, 
-      {
-        iataId: "DCA",
-        servicingArea: 
-        {
-          servicingArea: "D.C"
-        }
-      },
-    ], 
-    "LA": [{
-      iataId: "LAX",
-      servicingArea: 
-      {
-        servicingArea: "LA"
-      }
-    }]
-    }
-    req.flush(tempData, {status:200, statusText: "Airports"})
-    expect(req.request.method).toBe("GET");
-    expect(component.airportData).toEqual(tempDict);
   })
 });

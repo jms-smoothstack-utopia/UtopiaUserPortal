@@ -1,9 +1,7 @@
-import { HttpErrorResponse } from '@angular/common/http';
 import { Component, Input, OnInit} from '@angular/core';
 import { Router } from '@angular/router';
-import { HttpService } from 'src/app/shared/methods/http.service';
-import { environment } from 'src/environments/environment';
-import {NgbDatepickerConfig, NgbDateStruct} from '@ng-bootstrap/ng-bootstrap';
+import { NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
+import { TripType, StopType, PersonType, WhereType } from '../shared/methods/flightsearchObjects';
 
 
 @Component({
@@ -13,10 +11,18 @@ import {NgbDatepickerConfig, NgbDateStruct} from '@ng-bootstrap/ng-bootstrap';
 })
 export class SearchboxComponent implements OnInit {
 
+
+  //Public Enum to keep track of constants
+  TripType = TripType;
+  StopType = StopType;
+  PersonType = PersonType;
+  WhereType = WhereType;
+
+
   @Input() fromModel: NgbDateStruct | undefined;
   @Input() toModel: NgbDateStruct | undefined;
-  @Input() tripRB:string = "One-Way";
-  @Input() nonStopRB: string = "Non-Stop";
+  @Input() tripRB:string = TripType.ONE_WAY;
+  @Input() nonStopRB: string = StopType.NON_STOP;
   @Input() numberOfPeople: string = "1 Adult";
   @Input() adult = 1;
   @Input() countOfChildren = 0;
@@ -27,9 +33,6 @@ export class SearchboxComponent implements OnInit {
 
   //Keeping track of the overlays
   overlay!: string;
-
-  //variables to hold airportData
-  airportData: any;
 
   //variables to hold error messages for the user
   calendarErrorMsg:string = "";
@@ -42,7 +45,9 @@ export class SearchboxComponent implements OnInit {
   placeHolder:string = "No return date needed";
   minDate: NgbDateStruct;
 
-  constructor(private httpService: HttpService, private router: Router, private config: NgbDatepickerConfig) { 
+  constructor(private router: Router) { 
+
+    //Need this inorder to disable calendar
     const current = new Date();
     this.minDate = {
       year: current.getFullYear(),
@@ -53,43 +58,12 @@ export class SearchboxComponent implements OnInit {
 
   ngOnInit(): void 
   {
-    //get airport data from airport service
 
-    let url = environment.airportsEndpoint;
-    this.httpService.get(url).subscribe(
-      (res:any) => 
-      {
-        if (res.length == 0){
-          this.adultErrorMsg = "Utopia currently does not offer any airports we service";
-          return;
-        }
-        let tempDict: {[key:string]: Array<string>} = {};
-        for (let i = 0; i < res.length; i++){
-            let airport = res[i];
-            let servicingArea = airport["servicingArea"]["servicingArea"];
-            if (servicingArea in tempDict){
-              let airportList = tempDict[servicingArea];
-              airportList.push(airport);
-              tempDict[servicingArea] = airportList;
-            }
-            else{
-              let tempList = [airport];
-              tempDict[servicingArea] = tempList;
-            }
-        }
-        this.airportData = tempDict;
-      },
-      (err: HttpErrorResponse) => 
-      {
-        console.log(err);
-        this.adultErrorMsg = "There was an error getting our data. Please try again later.";
-      },
-    );
   }
 
   //Update the number of people function
   updateNumberOfPerson(person: string,event:any){
-    if (person == "Adult"){
+    if (person == PersonType.ADULT){
       let tempAdult = parseInt(event.target.value);
       if (tempAdult < 0)
       {
@@ -98,7 +72,7 @@ export class SearchboxComponent implements OnInit {
         this.adult = tempAdult;
       }
     }
-    if (person == "Children"){
+    if (person == PersonType.CHILDREN){
       let tempChildren = parseInt(event.target.value);
       if (tempChildren < 0){
         this.countOfChildren = 0;
@@ -107,7 +81,13 @@ export class SearchboxComponent implements OnInit {
         this.countOfChildren = tempChildren;
       }
     }
-    this.numberOfPeople = this.adult + " Adult";
+
+    if (this.adult > 1){
+      this.numberOfPeople = this.adult + " Adults";
+    }
+    else{
+      this.numberOfPeople = this.adult + " Adult";
+    }
     if(this.countOfChildren > 0){
       this.numberOfPeople += "; " + this.countOfChildren + " Children"; 
     }
@@ -118,7 +98,7 @@ export class SearchboxComponent implements OnInit {
     if ("tripRB" == dataStore){
       this.tripRB = choice;
       this.closeOverlay(overlay);
-      if(this.tripRB != "One-Way"){
+      if(this.tripRB == TripType.ROUND_TRIP){
           this.disableToCalendar = false;
           this.placeHolder = "To: yyyy-mm-dd";
       }
@@ -164,43 +144,58 @@ export class SearchboxComponent implements OnInit {
   //Set airport input from user
   setInput(event: any, where:string){
     let tempVal = event.target.value;
-    if (where == "from"){
+    if (where == WhereType.FROM){
       this.fromAirport = tempVal;
       return;
     }
-    if (where == "to"){
+    if (where == WhereType.TO){
       this.toAirport = tempVal;
     }
   }
 
+  //Weird swap magic
   swapLocations(){
     this.fromAirport = [this.toAirport, this.toAirport = this.fromAirport][0];
   }
 
-  compareDates(date: NgbDateStruct | undefined, comparisonDate:NgbDateStruct | undefined){
+  compareDates(date: NgbDateStruct | undefined, comparisonDate:NgbDateStruct | undefined):boolean{
     if (date == undefined || comparisonDate == undefined){
       return false;
     }
-    if(date.year < comparisonDate.year){
-      return false;
-    }
-    if (date.year > comparisonDate.year){
-      return true;
-    }
-    if (date.month == comparisonDate.month){
-      if (date.day < comparisonDate.day){
-        return false;
-      }
-      return true;
-    }
-    if (date.month < comparisonDate.month){
+    let dateToCheck = new Date(date.year, date.month, date.day);
+    let dateToCompare = new Date(comparisonDate.year, comparisonDate.month, comparisonDate.day);
+
+    if (dateToCheck < dateToCompare){
       return false;
     }
     return true;
   }
 
-  search(){
+  checkAdultsAndChildren():boolean {
+    if(this.adult == 0){
+      this.adultErrorMsg = "Atleast one adult needed";
+      return false;
+    }
+    if(this.adult < 0 || this.countOfChildren < 0){
+      this.adultErrorMsg = "Negative people do not exist D:";
+      return false;
+    }
+    return true;
+  }
 
+  checkAirports(): boolean {
+    if(this.fromAirport.length == 0){
+      this.fromAirportErrorMsg = "You need to include an airport to depart from!";
+      return false;
+    }
+    if(this.toAirport.length == 0){
+      this.toAirportErrorMsg = "You need to include a destination";
+      return false;
+    }
+    return true;
+  }
+
+  checkFromDate():boolean{
     const current = new Date();
     let minDate = {
       year: current.getFullYear(),
@@ -208,59 +203,56 @@ export class SearchboxComponent implements OnInit {
       day: current.getDate(),
     }
 
-    let searchValid = true;
-    if(this.adult == 0){
-      this.adultErrorMsg = "Atleast one adult needed";
-      setTimeout(() => this.adultErrorMsg = "", 5000);
-      searchValid = false;
-    }
-    if(this.adult < 0 || this.countOfChildren < 0){
-      this.adultErrorMsg = "Negative people do not exist D:";
-      setTimeout(() => this.adultErrorMsg = "", 5000);
-      searchValid = false;
-    }
-    if(this.fromAirport.length == 0){
-      this.fromAirportErrorMsg = "You need to include an airport to depart from!";
-      setTimeout(() => this.fromAirportErrorMsg = "", 5000);
-      searchValid = false;
-    }
-    if(this.toAirport.length == 0){
-      this.toAirportErrorMsg = "You need to include a destination";
-      setTimeout(() => this.toAirportErrorMsg = "", 5000);
-      searchValid = false;
-    }
     if(this.fromModel == undefined){
       this.calendarErrorMsg = "You need to include a date to fly!";
-      setTimeout(() => this.calendarErrorMsg = "", 5000);
-      searchValid = false;
-      return;
+      return false;
     }
     if (!this.compareDates(this.fromModel, minDate)){
       this.calendarErrorMsg = "Cannot include a date in the past!";
-      setTimeout(() => this.calendarErrorMsg = "", 5000);
-      searchValid = false;
+      return false;
     }
-    if (this.tripRB == "Round-Trip" && this.toModel == undefined){
-      this.returnCalendarErrorMsg = "Need to include a return date";
-      setTimeout(() => this.returnCalendarErrorMsg = "", 5000);
-      searchValid = false;
-      return;
-    }
-    if(this.tripRB == "Round-Trip" && !this.compareDates(this.toModel, this.fromModel)){
-      this.returnCalendarErrorMsg = "Return date must be after trip date";
-      setTimeout(() => this.returnCalendarErrorMsg = "", 5000);
-      searchValid = false;
-    }
+    return true;
+  }
 
+  checkReturnIfReturnIsSpecified() :boolean {
+    if (this.tripRB == TripType.ROUND_TRIP && this.toModel == undefined){
+      this.returnCalendarErrorMsg = "Need to include a return date";
+      return false;
+    }
+    if(this.tripRB == TripType.ROUND_TRIP && !this.compareDates(this.toModel, this.fromModel)){
+      this.returnCalendarErrorMsg = "Return date must be after trip date";
+      return false;
+    }
+    return true;
+  }
+
+  resetErrors(): void{
+    this.returnCalendarErrorMsg = "";
+    this.calendarErrorMsg = "";
+    this.toAirportErrorMsg = "";
+    this.fromAirportErrorMsg = "";
+    this.adultErrorMsg = "";
+  }
+
+  search(){
+
+    //Reset errors
+    this.resetErrors();
+
+    //Check if the search provided is valid~
+    let searchValid = (this.checkAdultsAndChildren() && this.checkAirports() && this.checkFromDate() && this.checkReturnIfReturnIsSpecified());
+
+    //Generate search parameters for URL
     if (searchValid){
 
+      //Have to do this black magic with the departure date to make in coincide with what the backend server wants
       let queryParamsInit:any = {
         origin: this.fromAirport,
         destinations: this.toAirport, 
         departure: this.fromModel?.year + "-" + this.fromModel?.month.toLocaleString("en-US", {minimumIntegerDigits: 2, useGrouping:false}) + "-" + this.fromModel?.day.toLocaleString("en-US", {minimumIntegerDigits: 2, useGrouping:false}),
       };
 
-      if(this.tripRB == "Round-Trip"){
+      if(this.tripRB == TripType.ROUND_TRIP){
         queryParamsInit["return"] = this.toModel?.year + "-" + this.toModel?.month.toLocaleString("en-US", {minimumIntegerDigits: 2, useGrouping:false}) + "-" + this.toModel?.day.toLocaleString("en-US", {minimumIntegerDigits: 2, useGrouping:false});
       }
 
@@ -270,7 +262,7 @@ export class SearchboxComponent implements OnInit {
         queryParamsInit["children"] = this.countOfChildren;
       }
 
-      if(this.nonStopRB == "Multihop"){
+      if(this.nonStopRB == StopType.MULTIHOP){
         queryParamsInit["multiHop"] = true;
       }
 
