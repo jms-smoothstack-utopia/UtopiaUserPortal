@@ -3,9 +3,9 @@
     <p *ngIf="tickets.length == 0">
         There are no past tickets to display. We look forward to your first flight with us!
     </p>
-    <div *ngIf="tickets.length != 0" class="col-6">
+    <div *ngIf="tickets.length != 0" class="col-12">
         <h3>Past flight tickets:</h3>
-        <table class="table" id="ticketsTable">
+        <table class="table table-responsive" id="ticketsTable">
             <thead>
                 <tr>
                     <th>Flight ID</th>

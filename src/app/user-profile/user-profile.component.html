@@ -5,22 +5,24 @@
     (closeEvent)="onCloseAlert()">
   </app-alert>
 <div *ngIf="user">
-    <h2 class="headertext">{{user.firstName}} {{user.lastName}}</h2>
     <!-- User ID used to be displayed here, but removed since UUIDs can't be interacted with and are a bit ugly -->
+    <h2>{{user.firstName}} {{user.lastName}}</h2>
+    <h6><p>Loyalty Points: {{user.loyaltyPoints}}</p></h6>
+
     <form [formGroup]="userProfileForm">
-        <div class="col-3">
-            <ul id="userData" >
-                <li>
+        <div id="userData">
+            <div class="row">
+                <div class="col-xs-3" class="selectContainer">
                     <label for="firstName">First name:</label>
                     <input placeholder="firstname" type="text"
-                         name="firstName" id="firstName" class="form-control"
-                         formControlName="firstName" required />
+                            name="firstName" id="firstName" class="form-control"
+                            formControlName="firstName" required />
                     <div id="firstNameErrorText" class="alert alert-danger"
                         [ngClass]="showErrorForField('firstName') ? 'shownErrorText' : 'hiddenErrorText' ">
                         Not a valid first name.
                     </div>
-                </li>
-                <li>
+                </div>
+                <div class="col-xs-3" class="selectContainer">
                     <label for='lastName'>Last name:</label>
                     <input placeholder="lastname" type="text"
                         name="lastName" id="lastName" class="form-control"
@@ -29,8 +31,8 @@
                         [ngClass]="showErrorForField('lastName') ? 'shownErrorText' : 'hiddenErrorText' ">
                         Not a valid last name.
                     </div>
-                </li>
-                <li>
+                </div>
+                <div class="col-xs-3" class="selectContainer">
                     <label for='email'>Email:</label>
                     <input placeholder="email" type="email"
                         name="email" id="email" class="form-control"
@@ -39,9 +41,11 @@
                         [ngClass]="showErrorForField('email') ? 'shownErrorText' : 'hiddenErrorText' ">
                         Not a valid email address.
                     </div>
-                </li>
-                <br>
-                <li>
+                </div>
+            </div>
+        <br>
+            <div class="row">
+                <div class="col-xs-3" class="selectContainer">
                     <label for='addrLine1'>Address line 1:</label>
                     <input placeholder="address line 1" type="text"
                         name="addrLine1" id="addrLine1" class="form-control"
@@ -50,8 +54,8 @@
                         [ngClass]="showErrorForField('addrLine1') ? 'shownErrorText' : 'hiddenErrorText' ">
                         Not a valid address line.
                     </div>
-                </li>
-                <li>
+                </div>
+                <div class="col-xs-3" class="selectContainer">
                     <label for='addrLine2'>Address line 2:</label>
                     <input placeholder="address line 2" type="text"
                         id="addrLine2" name="addrLine2" class="form-control"
@@ -62,8 +66,10 @@
                         [ngClass]="showErrorForField('addrLine2') ? 'shownErrorText' : 'hiddenErrorText' ">
                         Not a valid address line.
                     </div>
-                </li>
-                <li>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-4" class="selectContainer">
                     <label for='city'>City:</label>
                     <input placeholder="city" type="text"
                         name="city" id="city" class="form-control"
@@ -72,8 +78,9 @@
                         [ngClass]="showErrorForField('city') ? 'shownErrorText' : 'hiddenErrorText' ">
                         Not a valid city name.
                     </div>
-                </li>
-                <li>
+                </div>
+                <br>
+                <div class="col-xs-4" class="selectContainer">
                     <label for='state'>State:</label>
                     <select name="state" id="state" class="form-control"
                         formControlName="state" required>
@@ -83,8 +90,8 @@
                         [ngClass]="showErrorForField('state') ? 'shownErrorText' : 'hiddenErrorText' ">
                         Please select a state.
                     </div>
-                </li>
-                <li>
+                </div>
+                <div class="col-xs-4" class="selectContainer">
                     <label for='zipcode'>ZIP code:</label>
                     <input placeholder="zip code" type="text"
                         name="zipcode" id="zipcode" class="form-control"
@@ -93,8 +100,11 @@
                         [ngClass]="showErrorForField('zipcode') ? 'shownErrorText' : 'hiddenErrorText' ">
                         Invalid ZIP code (must be in the format of 12345, or 12345-6789).
                     </div>
-                </li>
-                <li>
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col-xs-3" class="selectContainer">
                     <label for='phoneNumber'>Phone number:</label>
                     <input placeholder="###-###-####" type="tel"
                         name="phoneNumber" id="phoneNumber" class="form-control"
@@ -104,26 +114,21 @@
                         [ngClass]="showErrorForField('phoneNumber') ? 'shownErrorText' : 'hiddenErrorText' ">
                         Invalid phone number.
                     </div>
-                </li>
-                <li>
-                    <p>Loyalty Points: {{user.loyaltyPoints}}</p>
-                </li>
-                <br>
-                <li>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-3" class="checkboxContainer">
                     <label for='ticketEmails'>Receive emails for ticket/booking notifications?</label>
-                    <input type="checkbox"
-                        id="ticketEmails" name="ticketEmails" class="form-control"
-                        formControlName="ticketEmails" />
-                </li>
-                <li>
+                    <input type="checkbox" id="ticketEmails" name="ticketEmails" class="form-control" formControlName="ticketEmails" />
+                </div>
+                <div class="col-xs-3" class="checkboxContainer">
                     <label for='flightEmails'>Receive emails for flight notifications?</label>
-                    <input type="checkbox"
-                        id="flightEmails" name="flightEmails" class="form-control"
-                        formControlName="flightEmails" />
-                </li>
-            </ul>
+                    <input type="checkbox" id="flightEmails" name="flightEmails" class="form-control" formControlName="flightEmails" />
+                </div>
+            </div>  
         </div>
     </form>
+    <br>
     <button id="updateButton" class="updateButton"
         [ngClass]="userProfileForm.valid ? 'updateButtonEnabled' : 'updateButtonDisabled'"
         type="submit" [disabled]="!userProfileForm.valid"
@@ -131,7 +136,8 @@
         Update Profile Information
     </button>
 
-    <button (click)="showDeleteModal = true">Delete my Account</button>
+    <button (click)="showDeleteModal = true"
+        id="deleteButton">Delete my Account</button>
   <div *ngIf="showDeleteModal"><app-delete-account (closeEvent)="showDeleteModal = false"></app-delete-account></div>
 </div>
 <div *ngIf="error">

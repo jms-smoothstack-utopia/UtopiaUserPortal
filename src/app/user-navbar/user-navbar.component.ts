@@ -1,6 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { element } from 'protractor';
 import PathConstants from 'src/environments/paths';
 import { AuthService } from '../services/auth/auth.service';
 
@@ -11,7 +10,6 @@ import { AuthService } from '../services/auth/auth.service';
 })
 export class UserNavbarComponent implements OnInit {
   @Input() parentComponent: string | undefined;
-  private customerId: string | undefined;
   profileActive: boolean = false;
   historyActive: boolean = false;
   upcomingActive: boolean = false;
@@ -27,24 +25,21 @@ export class UserNavbarComponent implements OnInit {
   }
 
   goToHistory(): void {
-    this.router.navigateByUrl(`/flights/history/${this.customerId}`);
+    this.router.navigate([PathConstants.FLIGHT_HISTORY]);
   }
 
   goToUpcoming(): void {
-    this.router.navigateByUrl(`/flights/upcoming/${this.customerId}`);
+    this.router.navigate([PathConstants.FLIGHT_UPCOMING]);
   }
 
   ngOnInit(): void {
     if (!this.authService.isLoggedIn()) {
       this.router.navigate([PathConstants.LOGIN]);
     }
-    this.customerId = this.authService.userId;
     this.determineActive();
   }
 
   determineActive(): void {
-    console.log('PARENTCOMPONENT:')
-    console.log(this.parentComponent);
     switch(this.parentComponent) {
       case 'profile':
         this.profileActive = true;

@@ -26,8 +26,8 @@ export class UserFlightHistoryComponent implements OnInit {
     ) { }
 
   getHistory(): void {
-    const customerId = this.route.snapshot.paramMap.get('id');
-    if (customerId !== null) {
+    const customerId = this.authService.userId;
+    if (customerId !== null && customerId !== undefined) {
       this.flightRecordsService.getTicketsHistory(customerId).subscribe(history => this.setHistory(history));
     }
   }
