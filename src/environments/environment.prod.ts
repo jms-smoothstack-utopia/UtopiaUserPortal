@@ -1,4 +1,4 @@
-import { NgxLoggerLevel } from "ngx-logger";
+import { NgxLoggerLevel } from 'ngx-logger';
 
 const hostUrl = 'https://services.utopia-air.click';
 
@@ -9,6 +9,6 @@ export const environment = {
   accountsEndpoint: `${hostUrl}/accounts`,
   airportsEndpoint: `${hostUrl}/airports`,
   flightsEndpoint: `${hostUrl}/flights`,
-  servicingAreaEndpoint : `${hostUrl}/servicing-area`,
+  servicingAreaEndpoint: `${hostUrl}/servicing-area`,
   hostUrl: hostUrl,
 };
