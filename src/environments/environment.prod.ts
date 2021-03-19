@@ -4,7 +4,7 @@ const hostUrl = 'https://services.utopia-air.click';
 
 export const environment = {
   production: true,
-  logLevel: NgxLoggerLevel.DEBUG,
+  logLevel: NgxLoggerLevel.ERROR,
   authEndpoint: `${hostUrl}/login`,
   accountsEndpoint: `${hostUrl}/accounts`,
   airportsEndpoint: `${hostUrl}/airports`,
