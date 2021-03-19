@@ -4,15 +4,17 @@
 
 import { NgxLoggerLevel } from 'ngx-logger';
 
+const hostUrl = "http://localhost:8080";
+
 export const environment = {
   production: false,
-  authEndpoint: 'http://localhost:8080/authenticate',
-  accountsEndpoint: 'http://localhost:8080/accounts',
-  airportsEndpoint: 'http://localhost:8080/airports',
-  flightsEndpoint: "http://localhost:8080/flights",
-  servicingAreaEndpoint : "http://localhost:8080/servicing-area",
   logLevel: NgxLoggerLevel.DEBUG,
-  hostUrl: 'http://localhost:8080',
+  authEndpoint: `${hostUrl}/login`,
+  accountsEndpoint: `${hostUrl}/accounts`,
+  airportsEndpoint: `${hostUrl}/airports`,
+  flightsEndpoint: `${hostUrl}/flights`,
+  servicingAreaEndpoint : `${hostUrl}/servicing-area`,
+  hostUrl: hostUrl,
 };
 
 /*
