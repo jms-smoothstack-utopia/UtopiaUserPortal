@@ -15,6 +15,7 @@ import { Ticket } from '../ticket';
 export class UserFlightHistoryComponent implements OnInit {
   @Input() tickets: Ticket[] | undefined;
   @Input() error: HttpErrorResponse | undefined;
+  activeForNav: string = 'history';
 
   constructor(
     private route: ActivatedRoute,
@@ -25,11 +26,9 @@ export class UserFlightHistoryComponent implements OnInit {
   ) {}
 
   getHistory(): void {
-    const customerId = this.route.snapshot.paramMap.get('id');
-    if (customerId !== null) {
-      this.flightRecordsService
-        .getTicketsHistory(customerId)
-        .subscribe((history) => this.setHistory(history));
+    const customerId = this.authService.userId;
+    if (customerId !== null && customerId !== undefined) {
+      this.flightRecordsService.getTicketsHistory(customerId).subscribe(history => this.setHistory(history));
     }
   }
   setHistory(history: Ticket[]): void {
