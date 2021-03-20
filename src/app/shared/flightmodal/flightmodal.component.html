@@ -1,0 +1,44 @@
+<div class="backdrop"></div>
+<div class="ticket-box">
+    <div class=mainBox *ngIf="!showTicketButtonAction">
+        <div class="row chooseSeat">
+            <div class="col-md-12 d-flex justify-content-between align-items-center" style="margin-bottom: 20px;">
+                <span class="headertext"> Choose your seats</span>
+                <span class="subheadertext textButton" (click)="onClose()"><i class="fas fa-window-close"></i></span>
+            </div>
+        </div>
+        <div class="progress">
+            <div id="progressBar" class="progress-bar movingGradient" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+        </div>
+        <div class="chooseFlight" *ngFor="let flight of flightInfo.actualFlights; let indexOfFlights = index">
+            <div class="row headerRow">
+                <div class="col-md-12 d-flex justify-content- align-items-center">
+                    <span class="flightPickerText">Choose seats for {{ flight.origin.iataId }} to {{ flight.destination.iataId }}:</span>
+                </div>
+            </div>          
+            <div class="row headerRow">
+                <div class="col-md-12 d-flex justify-content-start align-items-center">
+                    <button id="{{FlightSeatType.ECONOMY}}_{{indexOfFlights}}" [disabled]="numberOfPeople > seatsAvailability[indexOfFlights].economy" (click)="captureUserResponse($event, flight, indexOfFlights)" [value]="FlightSeatType.ECONOMY" class="economyButton" style="margin-right: 10px;">ECONOMY: {{seatsAvailability[indexOfFlights].economy}} seats available</button>
+                    <button id="{{FlightSeatType.BUSINESS}}_{{indexOfFlights}}" [disabled]="numberOfPeople > seatsAvailability[indexOfFlights].economy" (click)="captureUserResponse($event, flight, indexOfFlights)" [value]="FlightSeatType.BUSINESS" class="businessButton" style="margin-left: 10px;">BUSINESS: {{seatsAvailability[indexOfFlights].business}} seats available</button>
+                </div>
+            </div>
+        </div>
+        <div class="row" *ngIf="addToCartShow">
+            <div class="col-md-12 d-flex justify-content-center align-items-center">
+                <button class="addToCartButton" (click)="AddToCart()">Add Flights to Cart</button>
+            </div>
+        </div>
+    </div>
+    <div class="secondaryBox" *ngIf="showTicketButtonAction">
+        <div class="row">
+            <div class="col-md-12 d-flex justify-content-center align-items-center">
+                <span class="headertext">Your flight(s) have been added to the cart!</span>
+            </div>
+        </div>
+        <div class="ticket-box-actions">
+            <button id="goToHomeButton" class="close-button" style="margin-right: 10px;" (click)="goBackToHomePage()">Return Home</button>
+            <button id="goToCartButton" class="navigateToCart" style="margin-left: 10px;" *ngIf="!disabledButton" (click)="goToCart()">Go to Cart</button>
+            <button id="keepOnLookingAtFlightsButton" class="navigateToLookAtFlights" style="margin-right: 10px;" *ngIf="disabledButton" (click)="lookAtReturningFlight()">Look at returning flights now</button>
+        </div>
+    </div>  
+</div>

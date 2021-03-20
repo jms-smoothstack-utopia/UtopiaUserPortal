@@ -20,4 +20,7 @@ export class SidebarComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  goToCart(): void{
+    this.router.navigateByUrl("/shopping-cart");
+  }
 }

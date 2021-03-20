@@ -1,0 +1,177 @@
+p{
+    font-family: "Lato", sans-serif;
+    font-weight: bold;
+    font-size: 18px;
+}
+  
+  a{
+    font-family: "Lato", sans-serif;
+  }
+  
+  a:focus{
+    outline: 2px dashed #1508AF;
+  }
+  
+  .backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.75);
+    z-index: 50;
+  }
+  
+  .ticket-box {
+    position: fixed;
+    top: 30vh;
+    left: 20vw;
+    width: 60vw;
+    padding: 16px;
+    z-index: 100;
+    background-color: white;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
+    border-radius: 10px;
+  }
+  
+  .ticket-box-actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .close-button {
+    font-family: "Futura";
+    font-weight: 600;
+    color: white;
+    font-size: large;
+    background-color: #1508AF;
+    padding: 7px 20px;
+    margin: 40px 0 0 0;
+    border: none;
+    cursor: pointer;
+    width: 80%;
+  }
+  
+  .close-button:hover{
+    background-color: #0c0558;
+  }
+
+  .navigateToCart{
+    font-family: "Futura";
+    font-weight: 600;
+    color: white;
+    font-size: large;
+    background-color: #1ac45b;
+    padding: 7px 20px;
+    margin: 40px 0 0 0;
+    border: none;
+    cursor: pointer;
+    width: 80%; 
+  }
+
+  .navigateToHomePage:hover{
+    background-color: #156634;
+  }
+
+  .navigateToLookAtFlights{
+    font-family: "Futura";
+    font-weight: 600;
+    color: white;
+    font-size: large;
+    background-color: #7a7a7a;
+    padding: 7px 20px;
+    margin: 40px 0 0 0;
+    border: none;
+    cursor: pointer;
+    width: 80%;  
+  }
+
+  .navigateToLookAtFlights:hover{
+    background-color: #4d4d4d;
+  }
+
+  .chooseSeat{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .subheadertext{
+    font-family: 'Futura';
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.headertext{
+  font-family: 'Futura';
+  font-size: 32px;
+  font-weight: bold;
+}
+
+.textButton:hover{
+  color: #1508AF;
+  cursor: pointer;
+}
+
+.movingGradient {
+  background: linear-gradient(52deg, #1508AF, #0bc1da, #AFC3F2, #3E4C6E);
+  background-size: 800% 800%;
+  -webkit-animation: animatedGradient 40s ease infinite;
+  -moz-animation: animatedGradient 40s ease infinite;
+  animation: animatedGradient 40s ease infinite;
+}
+
+.progress{
+  margin-bottom: 20px;
+}
+
+.economyButton, .businessButton, .addToCartButton{
+  height: 50px;
+  padding: 7px 20px;
+  width: 80%;
+  border:none;
+  cursor: pointer;
+  color: white;
+  font-family: "Futura";
+  font-weight: 600;
+  font-size: large;
+}
+
+.economyButton{
+  background-color: #1508AF;
+}
+
+.economyButton:hover{
+  background-color: #0c0558;
+}
+
+.businessButton{
+  background-color: #8E2AE3;
+}
+
+.businessButton:hover{
+  background-color: #631ba1;
+}
+
+.addToCartButton{
+  background-color: #1ac45b
+}
+
+.addToCartButton:hover{
+  background-color: #156634;
+}
+
+.headerRow{
+  margin-bottom: 20px;
+}
+
+.flightPickerText{
+  font-family: 'Futura';
+  font-size: large;
+}
+
+.selected, .selected:focus{
+  outline: 5px dashed black;
+  outline-offset: 5px;
+}

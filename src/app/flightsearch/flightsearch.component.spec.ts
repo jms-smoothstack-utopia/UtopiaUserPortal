@@ -10,20 +10,20 @@ import { environment } from 'src/environments/environment';
 let fakeData = [
   [
     {
-      origin: 
+      origin:
       {
         iataId: "IAD",
         name: "Dulles International Airport",
-        servicingArea: 
+        servicingArea:
         {
           servicingArea: "D.C"
         }
       },
-      destination: 
+      destination:
       {
         iataId: "LAX",
         name: "Los Angles International Airport",
-        servicingArea: 
+        servicingArea:
         {
           servicingArea: "LA"
         }
@@ -33,7 +33,7 @@ let fakeData = [
       approximateDateTimeEnd: "2021-05-17T12:00:00-04:00",
       possibleLoyaltyPoints: 12,
       seats: [{price:100.00, seatClass: "ECONOMY", seatStatus:"AVAILABLE"}, {price:100.00, seatClass: "BUSINESS", seatStatus:"AVAILABLE"}],
-      airplane: 
+      airplane:
       {
         name: "Boeing 747",
       }
@@ -41,20 +41,20 @@ let fakeData = [
   ],
   [
     {
-      origin: 
+      origin:
       {
         iataId: "DCA",
         name: "Dulles International Airport",
-        servicingArea: 
+        servicingArea:
         {
           servicingArea: "D.C"
         }
       },
-      destination: 
+      destination:
       {
         iataId: "LAX",
         name: "Los Angles International Airport",
-        servicingArea: 
+        servicingArea:
         {
           servicingArea: "LA"
         }
@@ -64,7 +64,7 @@ let fakeData = [
       approximateDateTimeEnd: "2021-05-17T12:00:00-04:00",
       possibleLoyaltyPoints: 12,
       seats: [{price:100.00, seatClass: "ECONOMY", seatStatus:"AVAILABLE"}, {price:100.00, seatClass: "BUSINESS", seatStatus:"AVAILABLE"}],
-      airplane: 
+      airplane:
       {
         name: "Boeing 737",
       }
@@ -72,20 +72,20 @@ let fakeData = [
   ],
   [
     {
-      origin: 
+      origin:
       {
         iataId: "DCA",
         name: "Dulles International Airport",
-        servicingArea: 
+        servicingArea:
         {
           servicingArea: "D.C"
         }
       },
-      destination: 
+      destination:
       {
         iataId: "JFK",
         name: "Los Angles International Airport",
-        servicingArea: 
+        servicingArea:
         {
           servicingArea: "LA"
         }
@@ -95,26 +95,26 @@ let fakeData = [
       approximateDateTimeEnd: "2021-05-17T12:00:00-04:00",
       possibleLoyaltyPoints: 12,
       seats: [{price:100.00, seatClass: "ECONOMY", seatStatus:"AVAILABLE"}, {price:100.00, seatClass: "BUSINESS", seatStatus:"AVAILABLE"}],
-      airplane: 
+      airplane:
       {
         name: "Boeing 747",
       }
     },
     {
-      origin: 
+      origin:
       {
         iataId: "JFK",
         name: "Dulles International Airport",
-        servicingArea: 
+        servicingArea:
         {
           servicingArea: "NYC"
         }
       },
-      destination: 
+      destination:
       {
         iataId: "LAX",
         name: "Los Angles International Airport",
-        servicingArea: 
+        servicingArea:
         {
           servicingArea: "LA"
         }
@@ -124,7 +124,7 @@ let fakeData = [
       approximateDateTimeEnd: "2021-05-17T16:00:00-04:00",
       possibleLoyaltyPoints: 12,
       seats: [{price:100.00, seatClass: "ECONOMY", seatStatus:"AVAILABLE"}, {price:100.00, seatClass: "BUSINESS", seatStatus:"AVAILABLE"}],
-      airplane: 
+      airplane:
       {
         name: "Boeing 747",
       }
@@ -132,7 +132,7 @@ let fakeData = [
   ],
 ]
 
-const data = {  
+const data = {
   origin: "D.C",
   destinations: "LAX",
   departure: "2030-05-17",
@@ -149,14 +149,14 @@ describe('FlightsearchComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ 
-        FlightsearchComponent, 
+      declarations: [
+        FlightsearchComponent,
       ],
-      imports:[ 
+      imports:[
         RouterTestingModule,
-        HttpClientTestingModule 
+        HttpClientTestingModule
       ],
-      providers: 
+      providers:
       [],
     })
     .compileComponents();
@@ -196,7 +196,7 @@ describe('FlightsearchComponent', () => {
 
     flightReq.flush([], {status:503, statusText:"Service unavailable"})
     expect(flightReq.request.method).toBe("GET");
-    expect(component.noResultsErrorMsg).toEqual("There was a problem. Please try again")
+    expect(component.noResultsErrorMsg).toEqual("There was a problem. Please try again.")
     expect(component.viewData).toEqual([]);
   })
 
@@ -218,7 +218,7 @@ describe('FlightsearchComponent', () => {
 
     servicingAreaReq.flush([], {status:503, statusText:"Service unavailable"})
     expect(servicingAreaReq.request.method).toBe("GET");
-    expect(component.noResultsErrorMsg).toEqual("There was a problem. Please try again")
+    expect(component.noResultsErrorMsg).toEqual("There was a problem. Please try again.")
     expect(component.viewData).toEqual([]);
   })
 
@@ -231,7 +231,7 @@ describe('FlightsearchComponent', () => {
 
     expect(component.viewData).toEqual([]);
     expect(component.flightsData).toEqual([]);
-    expect(component.noResultsErrorMsg).toEqual("Please include an origin, destination, and atleast a date when you want to fly")
+    expect(component.noResultsErrorMsg).toEqual("Please include an origin, destination, and atleast a date when you want to fly.")
   })
 
   it("Going through ternary operators for from airport, null", () => {
@@ -293,7 +293,7 @@ describe('FlightsearchComponent', () => {
     fixture.detectChanges();
 
     expect(component.viewData).toEqual([]);
-    expect(component.noResultsErrorMsg).toEqual("Input Error");
+    expect(component.noResultsErrorMsg).toEqual("Input Error!");
   })
 
   it("Going through ternary operators for from calendar, included", () => {
@@ -302,7 +302,7 @@ describe('FlightsearchComponent', () => {
     TestBed.inject(ActivatedRoute).queryParams = of
     ({departure:"2021-10-12"})
     fixture.detectChanges();
-    
+
     //Added tempObject
     let tempObject = {
       year: 2021,
@@ -335,7 +335,7 @@ describe('FlightsearchComponent', () => {
     fixture.detectChanges();
     //hello
     expect(component.viewData).toEqual([]);
-    expect(component.noResultsErrorMsg).toEqual("Input Error");
+    expect(component.noResultsErrorMsg).toEqual("Input Error!");
   })
 
   it("Going through ternary operators for to calendar, included", () => {
@@ -344,7 +344,7 @@ describe('FlightsearchComponent', () => {
     TestBed.inject(ActivatedRoute).queryParams = of
     ({return:"2021-10-12"})
     fixture.detectChanges();
-    
+
     //Added tempObject
     let tempObject = {
       year: 2021,
@@ -374,7 +374,7 @@ describe('FlightsearchComponent', () => {
     TestBed.inject(ActivatedRoute).queryParams = of
     ({adults:2})
     fixture.detectChanges();
-  
+
     expect(component.adult).toEqual(2);
   })
 
@@ -394,7 +394,7 @@ describe('FlightsearchComponent', () => {
     TestBed.inject(ActivatedRoute).queryParams = of
     ({children:2})
     fixture.detectChanges();
-  
+
     expect(component.countOfChildren).toEqual(2);
   })
 
@@ -414,7 +414,7 @@ describe('FlightsearchComponent', () => {
     TestBed.inject(ActivatedRoute).queryParams = of
     ({multiHop: "true"})
     fixture.detectChanges();
-  
+
     expect(component.nonStopRB).toEqual("Multihop");
   })
 
@@ -427,10 +427,10 @@ describe('FlightsearchComponent', () => {
 
     let fakeRes = {"Origin to destination": [], "Destination to origin": []}
     component.processGetResults(fakeRes);
-    
+
     expect(component.flightsData).toEqual([]);
     expect(component.viewData).toEqual([]);
-    expect(component.noResultsErrorMsg).toEqual("We could not find any flights with your search results. Please try again with different parameters")
+    expect(component.noResultsErrorMsg).toEqual("We could not find any flights with your search results. Please try again with different parameters.")
   })
 
   it("processGetResults but no standardize results", () => {
@@ -445,11 +445,11 @@ describe('FlightsearchComponent', () => {
 
     let fakeRes = {"Origin to destination": [1,2,3,4,5], "Destination to origin": []}
     component.processGetResults(fakeRes);
-    
+
     expect(spy).toHaveBeenCalled();
     expect(component.flightsData).toEqual([]);
     expect(component.viewData).toEqual([]);
-    expect(component.noResultsErrorMsg).toEqual("We could not find any flights with your search results. Please try again with different parameters")
+    expect(component.noResultsErrorMsg).toEqual("We could not find any flights with your search results. Please try again with different parameters.")
   })
 
   it("processGetResults but standardize results but destination to origin exists", () => {
@@ -467,7 +467,7 @@ describe('FlightsearchComponent', () => {
 
     let fakeRes = {"Origin to destination": [1,2,3,4,5], "Destination to origin": [1,2,3,4,5]}
     component.processGetResults(fakeRes);
-    
+
     expect(spy).toHaveBeenCalled();
     expect(component.flightsData).toEqual(processedInfo);
     expect(component.viewData).toEqual(processedInfo);
@@ -476,7 +476,7 @@ describe('FlightsearchComponent', () => {
   it("standardizeResults, nonstop", () => {
     fixture = TestBed.createComponent(FlightsearchComponent);
     component = fixture.componentInstance;
-    TestBed.inject(ActivatedRoute).queryParams = of({  
+    TestBed.inject(ActivatedRoute).queryParams = of({
       origin: "D.C",
       destinations: "LAX",
       departure: "2030-05-17",
@@ -492,7 +492,7 @@ describe('FlightsearchComponent', () => {
   it("standardizeResults, multihop", () => {
     fixture = TestBed.createComponent(FlightsearchComponent);
     component = fixture.componentInstance;
-    TestBed.inject(ActivatedRoute).queryParams = of({  
+    TestBed.inject(ActivatedRoute).queryParams = of({
       origin: "D.C",
       destinations: "LAX",
       departure: "2030-05-17",
@@ -509,7 +509,7 @@ describe('FlightsearchComponent', () => {
   it("initializePeopleString", () => {
     fixture = TestBed.createComponent(FlightsearchComponent);
     component = fixture.componentInstance;
-    TestBed.inject(ActivatedRoute).queryParams = of({  
+    TestBed.inject(ActivatedRoute).queryParams = of({
       origin: "D.C",
       destinations: "LAX",
       departure: "2030-05-17",
@@ -524,7 +524,7 @@ describe('FlightsearchComponent', () => {
   it("initializePeopleString", () => {
     fixture = TestBed.createComponent(FlightsearchComponent);
     component = fixture.componentInstance;
-    TestBed.inject(ActivatedRoute).queryParams = of({  
+    TestBed.inject(ActivatedRoute).queryParams = of({
       origin: "D.C",
       destinations: "LAX",
       departure: "2030-05-17",
@@ -540,7 +540,7 @@ describe('FlightsearchComponent', () => {
   it("sort expensive", () => {
     fixture = TestBed.createComponent(FlightsearchComponent);
     component = fixture.componentInstance;
-    TestBed.inject(ActivatedRoute).queryParams = of({  
+    TestBed.inject(ActivatedRoute).queryParams = of({
       origin: "D.C",
       destinations: "LAX",
       departure: "2030-05-17",
@@ -563,7 +563,7 @@ describe('FlightsearchComponent', () => {
   it("sort cheapest", () => {
     fixture = TestBed.createComponent(FlightsearchComponent);
     component = fixture.componentInstance;
-    TestBed.inject(ActivatedRoute).queryParams = of({  
+    TestBed.inject(ActivatedRoute).queryParams = of({
       origin: "D.C",
       destinations: "LAX",
       departure: "2030-05-17",
@@ -588,7 +588,7 @@ describe('FlightsearchComponent', () => {
   it("sort most recent", () => {
     fixture = TestBed.createComponent(FlightsearchComponent);
     component = fixture.componentInstance;
-    TestBed.inject(ActivatedRoute).queryParams = of({  
+    TestBed.inject(ActivatedRoute).queryParams = of({
       origin: "D.C",
       destinations: "LAX",
       departure: "2030-05-17",
@@ -611,7 +611,7 @@ describe('FlightsearchComponent', () => {
   it("sort oldest", () => {
     fixture = TestBed.createComponent(FlightsearchComponent);
     component = fixture.componentInstance;
-    TestBed.inject(ActivatedRoute).queryParams = of({  
+    TestBed.inject(ActivatedRoute).queryParams = of({
       origin: "D.C",
       destinations: "LAX",
       departure: "2030-05-17",
@@ -634,7 +634,7 @@ describe('FlightsearchComponent', () => {
   it("low number of hops", () => {
     fixture = TestBed.createComponent(FlightsearchComponent);
     component = fixture.componentInstance;
-    TestBed.inject(ActivatedRoute).queryParams = of({  
+    TestBed.inject(ActivatedRoute).queryParams = of({
       origin: "D.C",
       destinations: "LAX",
       departure: "2030-05-17",
@@ -657,7 +657,7 @@ describe('FlightsearchComponent', () => {
   it("high number of hops", () => {
     fixture = TestBed.createComponent(FlightsearchComponent);
     component = fixture.componentInstance;
-    TestBed.inject(ActivatedRoute).queryParams = of({  
+    TestBed.inject(ActivatedRoute).queryParams = of({
       origin: "D.C",
       destinations: "LAX",
       departure: "2030-05-17",
@@ -680,7 +680,7 @@ describe('FlightsearchComponent', () => {
   it("shortest duration", () => {
     fixture = TestBed.createComponent(FlightsearchComponent);
     component = fixture.componentInstance;
-    TestBed.inject(ActivatedRoute).queryParams = of({  
+    TestBed.inject(ActivatedRoute).queryParams = of({
       origin: "D.C",
       destinations: "LAX",
       departure: "2030-05-17",
@@ -698,11 +698,11 @@ describe('FlightsearchComponent', () => {
     component.sortData()
     expect(component.viewData[0].durationInMilliseconds).toEqual(13800000);
   })
-  
+
   it("longest duration", () => {
     fixture = TestBed.createComponent(FlightsearchComponent);
     component = fixture.componentInstance;
-    TestBed.inject(ActivatedRoute).queryParams = of({  
+    TestBed.inject(ActivatedRoute).queryParams = of({
       origin: "D.C",
       destinations: "LAX",
       departure: "2030-05-17",
@@ -724,7 +724,7 @@ describe('FlightsearchComponent', () => {
   it("change pagination", () => {
     fixture = TestBed.createComponent(FlightsearchComponent);
     component = fixture.componentInstance;
-    TestBed.inject(ActivatedRoute).queryParams = of({  
+    TestBed.inject(ActivatedRoute).queryParams = of({
       origin: "D.C",
       destinations: "LAX",
       departure: "2030-05-17",
@@ -744,7 +744,7 @@ describe('FlightsearchComponent', () => {
   it("toggle ticket test", () => {
     fixture = TestBed.createComponent(FlightsearchComponent);
     component = fixture.componentInstance;
-    TestBed.inject(ActivatedRoute).queryParams = of({  
+    TestBed.inject(ActivatedRoute).queryParams = of({
       origin: "D.C",
       destinations: "LAX",
       departure: "2030-05-17",
@@ -765,7 +765,7 @@ describe('FlightsearchComponent', () => {
   it("closing toggle ticket test", () => {
     fixture = TestBed.createComponent(FlightsearchComponent);
     component = fixture.componentInstance;
-    TestBed.inject(ActivatedRoute).queryParams = of({  
+    TestBed.inject(ActivatedRoute).queryParams = of({
       origin: "D.C",
       destinations: "LAX",
       departure: "2030-05-17",
@@ -792,7 +792,7 @@ describe('FlightsearchComponent', () => {
   it("test eventSort", () => {
     fixture = TestBed.createComponent(FlightsearchComponent);
     component = fixture.componentInstance;
-    TestBed.inject(ActivatedRoute).queryParams = of({  
+    TestBed.inject(ActivatedRoute).queryParams = of({
       origin: "D.C",
       destinations: "LAX",
       departure: "2030-05-17",
@@ -811,7 +811,7 @@ describe('FlightsearchComponent', () => {
   it("test reclicking on same sort eventSort", () => {
     fixture = TestBed.createComponent(FlightsearchComponent);
     component = fixture.componentInstance;
-    TestBed.inject(ActivatedRoute).queryParams = of({  
+    TestBed.inject(ActivatedRoute).queryParams = of({
       origin: "D.C",
       destinations: "LAX",
       departure: "2030-05-17",
@@ -834,7 +834,7 @@ describe('FlightsearchComponent', () => {
   it("click on another sort eventSort", () => {
     fixture = TestBed.createComponent(FlightsearchComponent);
     component = fixture.componentInstance;
-    TestBed.inject(ActivatedRoute).queryParams = of({  
+    TestBed.inject(ActivatedRoute).queryParams = of({
       origin: "D.C",
       destinations: "LAX",
       departure: "2030-05-17",

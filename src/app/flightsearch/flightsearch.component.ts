@@ -42,6 +42,7 @@ export class FlightsearchComponent implements OnInit {
 
   //Processed data list (only holds Destination to Origin)
   returnFlightsData: flight[] = [];
+  returning: boolean = false;
 
   //The list we tie to the frontend
   viewData: flight[] = [];
@@ -63,36 +64,39 @@ export class FlightsearchComponent implements OnInit {
   noResultsErrorMsg: string = '';
   returnTripErrorMsg: string = '';
 
+  //Show Modal When AddFlightToCart is pressed
+  selectedFlight: flight = <flight>{};
+  showModal: boolean = false;
+
   //Common error strings across the code
-  couldNotFindAnyResults: string =
-    'We could not find any flights with your search results. Please try again with different parameters';
-  pleaseProvideTheMinimumRequirements: string =
-    'Please include an origin, destination, and atleast a date when you want to fly';
-  couldNotFindReturnTrips: string =
-    'We could not find any flights that return from your destination. Do you still want to view your results?';
-  inputError: string = 'Input Error';
-  problemExists: string = 'There was a problem. Please try again';
+  couldNotFindAnyResults:string = "We could not find any flights with your search results. Please try again with different parameters.";
+  pleaseProvideTheMinimumRequirements:string = "Please include an origin, destination, and atleast a date when you want to fly.";
+  couldNotFindReturnTrips:string = "We could not find any flights that return from your destination. Do you still want to view your results?";
+  inputError:string = "Input Error!";
+  problemExists:string = "There was a problem. Please try again.";
 
-  constructor(
-    private activatedRoute: ActivatedRoute,
-    private flightSearch: FlightsearchService
-  ) {}
+  constructor(private activatedRoute: ActivatedRoute, private flightSearch: FlightsearchService)
+  {
 
-  ngOnInit(): void {
-    this.activatedRoute.queryParams.subscribe((params) => {
-      let tempFromAirport = params['origin'];
-      let tempToAirport = params['destinations'];
-      let tempCalendarFrom = params['departure'];
-      let tempCalendarTo = params['return'];
-      let tempAdults = params['adults'];
-      let tempChildren = params['children'];
-      let tempNonStopRB = params['multiHop'];
+  }
 
-      this.fromAirport = tempFromAirport == null ? '' : tempFromAirport;
-      this.toAirport = tempToAirport == null ? '' : tempToAirport;
-      this.fromCalendar = tempCalendarFrom == null ? '' : tempCalendarFrom;
+  ngOnInit(): void
+  {
 
-      if (this.fromCalendar != '') {
+    this.activatedRoute.queryParams.subscribe(params => {
+      let tempFromAirport = params["origin"]
+      let tempToAirport = params["destinations"];
+      let tempCalendarFrom= params["departure"];
+      let tempCalendarTo = params["return"];
+      let tempAdults = params["adults"];
+      let tempChildren = params["children"];
+      let tempNonStopRB = params["multiHop"];
+
+      this.fromAirport = (tempFromAirport == null ? "": tempFromAirport);
+      this.toAirport = (tempToAirport == null ? "" : tempToAirport);
+      this.fromCalendar = (tempCalendarFrom == null ? "": tempCalendarFrom);
+
+      if (this.fromCalendar != ""){
         let val = this.parseCalendarString(this.fromCalendar);
         if (val != undefined) {
           this.fromModel = val;
@@ -195,13 +199,10 @@ export class FlightsearchComponent implements OnInit {
     }
   }
 
-  noValidData(
-    errorMsg: string | undefined,
-    returnTripErrorMsg: string | undefined
-  ): void {
-    this.flightsData = [];
-    this.viewData = [];
-    if (errorMsg != undefined) {
+  noValidData(errorMsg: string | undefined, returnTripErrorMsg: string | undefined):void{
+    if (errorMsg != undefined){
+      this.flightsData = [];
+      this.viewData = []
       this.noResultsErrorMsg = errorMsg;
     }
     if (returnTripErrorMsg != undefined) {
@@ -242,6 +243,7 @@ export class FlightsearchComponent implements OnInit {
         } else {
           //Do not make it viewdata; just need to store it for when user chooses initial flight
           this.returnFlightsData = processedData;
+          this.returning = true;
         }
       }
     }
@@ -282,6 +284,8 @@ export class FlightsearchComponent implements OnInit {
         let tempDuration = 0;
         let tempIataId = '';
         let tempCities: string[] = [];
+        let tempFlightId: number[] = [];
+        let tempFlights: any[] = [];
 
         element.forEach((flight: any, index: number) => {
           tempPointsSum += flight.possibleLoyaltyPoints;
@@ -293,9 +297,9 @@ export class FlightsearchComponent implements OnInit {
             tempIataId += ' to ' + flight.destination.iataId;
           }
           tempCities.push(flight.origin.servicingArea.servicingArea);
-          tempDuration +=
-            new Date(flight.approximateDateTimeEnd).getTime() -
-            new Date(flight.approximateDateTimeStart).getTime();
+          tempDuration += new Date(flight.approximateDateTimeEnd).getTime() - new Date(flight.approximateDateTimeStart).getTime();
+          tempFlightId.push(flight.id);
+          tempFlights.push(flight);
         });
 
         let minutes = (tempDuration / (1000 * 60)) % 60;
@@ -456,50 +460,45 @@ export class FlightsearchComponent implements OnInit {
     this.paginationCount = event.target.value;
   }
 
-  //Maxwell, look here for booking
-  addFlightToCart(flight: any) {
-    //Ideally, a modal would popup with flight information
-    //Passed in flight information it might need to change depending on usage of other things
-    console.log(flight);
+  hideInputAndModal() :void{
+    this.showModal = false;
+    this.selectedFlight = <flight>{};
+  }
 
-    //However, at the moment, I will just populate the return flights for now
-    if (
-      this.tripRB == TripType.ROUND_TRIP &&
-      this.returnFlightsData.length != 0
-    ) {
-      this.viewData = this.returnFlightsData;
-      this.sortData();
-      this.lookingAtReturnFlights = true;
+  showOtherFlights(): void{
+    this.hideInputAndModal();
+    console.log("Check other flights");
+    this.returning = false;
 
-      //Then we need to reset filters and remove sort expanded
+    this.viewData = this.returnFlightsData;
+    this.lookingAtReturnFlights = true;
+    this.sort = SortMethod.EXPENSIVE;
+    this.filter = [];
+    this.sortData();
 
-      this.filter = [];
-      this.sort = 'expensive';
+    const sortRow = document.getElementById("sortRow") as HTMLElement;
+    const sortRowExpanded = document.getElementById("sortRowExpanded") as HTMLElement;
+    sortRowExpanded.style.display = "none";
+    sortRow.style.display = "block";
 
-      const sortRow = document.getElementById('sortRow') as HTMLElement;
-      const sortRowExpanded = document.getElementById(
-        'sortRowExpanded'
-      ) as HTMLElement;
-      sortRowExpanded.style.display = 'none';
-      sortRow.style.display = 'block';
+    //Remove all selected from sortExpanded
 
-      //Remove all selected from sortExpanded
+    const filterElements = document.getElementsByClassName("hoverListItemA") as HTMLCollectionOf<HTMLElement>;
+    const sortElements = document.getElementsByClassName("hoverListItem") as HTMLCollectionOf<HTMLElement>;
 
-      const filterElements = document.getElementsByClassName(
-        'hoverListItemA'
-      ) as HTMLCollectionOf<HTMLElement>;
-      const sortElements = document.getElementsByClassName(
-        'hoverListItem'
-      ) as HTMLCollectionOf<HTMLElement>;
-
-      for (let i = 0; i < filterElements.length; i++) {
-        filterElements[i].classList.remove('selected');
-      }
-
-      for (let i = 0; i < sortElements.length; i++) {
-        sortElements[i].classList.remove('selected');
-      }
+    for (let i = 0; i < filterElements.length; i ++){
+      filterElements[i].classList.remove("selected");
     }
+
+    for (let i = 0; i < sortElements.length; i++){
+      sortElements[i].classList.remove("selected");
+    }
+  }
+
+  addFlightToCart(flight:any){
+
+    this.selectedFlight = flight;
+    this.showModal = true;
   }
 
   toggleFilter(city: string) {
@@ -517,7 +516,7 @@ export class FlightsearchComponent implements OnInit {
       this.filter.push(city);
     }
 
-    //Now we start filtering, then we need to look at processedFlightData
+    //Now we start filtering, then we need to look at processedlightData
     let tempList: any[];
     if (!this.lookingAtReturnFlights) {
       tempList = [...this.flightsData];
