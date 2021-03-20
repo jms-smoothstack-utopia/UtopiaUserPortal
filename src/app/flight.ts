@@ -9,7 +9,9 @@ export interface Flight {
     creationDateTime: Date,
     approximateDateTimeStart: Date,
     approximateDateTimeEnd: Date,
-    flightActive: boolean
+    flightActive: boolean,
+    departurePrettyPrint: string,
+    arrivalPrettyPrint: string
 }
 
 interface Airport {

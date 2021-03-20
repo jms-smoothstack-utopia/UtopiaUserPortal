@@ -39,6 +39,8 @@ export class UserFlightHistoryComponent implements OnInit {
       this.tickets.forEach(ticket => {
         var rawDate: Date = new Date(ticket.flightTime);
         ticket.timePrettyPrint = rawDate.toString();
+        ticket.statusPrettyPrint = 
+            ticket.status.replace('_', ' ').toLowerCase();
       });
     } else if (this.checkIsError(history)) {
       this.error = history;
