@@ -44,15 +44,17 @@ export class FlightmodalComponent implements OnInit {
   ngOnInit(): void {
 
     this.numberOfPeople = this.adult + this.countOfChildren;
-   
+
     //Need to get seat availability for all flights
-    this.flightInfo.actualFlights.forEach((element:any) => {
-      let seatOptions = <seatAvailable>{};
-      seatOptions.flightId = element.id;
-      seatOptions.economy = element.seats.filter((x:any) => x.seatClass == "ECONOMY" && x.seatStatus=="AVAILABLE").length;
-      seatOptions.business = element.seats.filter((x:any) => x.seatClass == "BUSINESS" && x.seatStatus=="AVAILABLE").length;
-      this.seatsAvailability.push(seatOptions);
-    });
+    if (!!this.flightInfo.actualFlights) {
+      this.flightInfo.actualFlights.forEach((element:any) => {
+        let seatOptions = <seatAvailable>{};
+        seatOptions.flightId = element.id;
+        seatOptions.economy = element.seats.filter((x:any) => x.seatClass == "ECONOMY" && x.seatStatus=="AVAILABLE").length;
+        seatOptions.business = element.seats.filter((x:any) => x.seatClass == "BUSINESS" && x.seatStatus=="AVAILABLE").length;
+        this.seatsAvailability.push(seatOptions);
+      });
+    }
   }
 
   onClose():void{

@@ -4,18 +4,20 @@
 
 import { NgxLoggerLevel } from 'ngx-logger';
 
+const hostUrl = "http://localhost:8080";
+
 export const environment = {
   production: false,
-  authEndpoint: 'http://localhost:8080/authenticate',
-  accountsEndpoint: 'http://localhost:8080/accounts',
-  airportsEndpoint: 'http://localhost:8080/airports',
-  flightsEndpoint: "http://localhost:8080/flights",
-  servicingAreaEndpoint : "http://localhost:8080/servicing-area",
   logLevel: NgxLoggerLevel.DEBUG,
-  hostUrl: 'http://localhost:8080',
   mapbox: {
     accessToken: "pk.eyJ1Ijoiam9yZGFuZGl2aW5hIiwiYSI6ImNrbWYyYzM4bDA4Mzgyb3FocW9xeWp0bzIifQ.VV2Rsag8L9Yohjc5eqlQkg",
-  }
+  },
+  authEndpoint: `${hostUrl}/login`,
+  accountsEndpoint: `${hostUrl}/accounts`,
+  airportsEndpoint: `${hostUrl}/airports`,
+  flightsEndpoint: `${hostUrl}/flights`,
+  servicingAreaEndpoint : `${hostUrl}/servicing-area`,
+  hostUrl: hostUrl,
 };
 
 /*

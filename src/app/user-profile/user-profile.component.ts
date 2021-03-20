@@ -17,6 +17,7 @@ import { AuthService } from '../services/auth/auth.service';
 export class UserProfileComponent implements OnInit {
   @Input() user: User | undefined;
   @Input() error: HttpErrorResponse | undefined;
+  activeForNav: string = 'profile';
 
   phoneUtil: PhoneNumberUtil = PhoneNumberUtil.getInstance();
   states = US_STATE_LIST.map((s) => s.abbr);
