@@ -9,6 +9,10 @@ const hostUrl = 'http://localhost:8080';
 export const environment = {
   production: false,
   logLevel: NgxLoggerLevel.DEBUG,
+  mapbox: {
+    accessToken:
+      'pk.eyJ1Ijoiam9yZGFuZGl2aW5hIiwiYSI6ImNrbWYyYzM4bDA4Mzgyb3FocW9xeWp0bzIifQ.VV2Rsag8L9Yohjc5eqlQkg',
+  },
   authEndpoint: `${hostUrl}/login`,
   accountsEndpoint: `${hostUrl}/accounts`,
   airportsEndpoint: `${hostUrl}/airports`,

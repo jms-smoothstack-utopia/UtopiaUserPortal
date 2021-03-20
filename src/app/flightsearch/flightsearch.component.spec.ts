@@ -191,7 +191,7 @@ describe('FlightsearchComponent', () => {
     flightReq.flush([], { status: 503, statusText: 'Service unavailable' });
     expect(flightReq.request.method).toBe('GET');
     expect(component.noResultsErrorMsg).toEqual(
-      'There was a problem. Please try again'
+      'There was a problem. Please try again.'
     );
     expect(component.viewData).toEqual([]);
   });
@@ -218,7 +218,7 @@ describe('FlightsearchComponent', () => {
     });
     expect(servicingAreaReq.request.method).toBe('GET');
     expect(component.noResultsErrorMsg).toEqual(
-      'There was a problem. Please try again'
+      'There was a problem. Please try again.'
     );
     expect(component.viewData).toEqual([]);
   });
@@ -236,7 +236,7 @@ describe('FlightsearchComponent', () => {
     expect(component.viewData).toEqual([]);
     expect(component.flightsData).toEqual([]);
     expect(component.noResultsErrorMsg).toEqual(
-      'Please include an origin, destination, and atleast a date when you want to fly'
+      'Please include an origin, destination, and atleast a date when you want to fly.'
     );
   });
 
@@ -293,7 +293,7 @@ describe('FlightsearchComponent', () => {
     fixture.detectChanges();
 
     expect(component.viewData).toEqual([]);
-    expect(component.noResultsErrorMsg).toEqual('Input Error');
+    expect(component.noResultsErrorMsg).toEqual('Input Error!');
   });
 
   it('Going through ternary operators for from calendar, included', () => {
@@ -334,7 +334,7 @@ describe('FlightsearchComponent', () => {
     fixture.detectChanges();
     //hello
     expect(component.viewData).toEqual([]);
-    expect(component.noResultsErrorMsg).toEqual('Input Error');
+    expect(component.noResultsErrorMsg).toEqual('Input Error!');
   });
 
   it('Going through ternary operators for to calendar, included', () => {
@@ -422,7 +422,7 @@ describe('FlightsearchComponent', () => {
     expect(component.flightsData).toEqual([]);
     expect(component.viewData).toEqual([]);
     expect(component.noResultsErrorMsg).toEqual(
-      'We could not find any flights with your search results. Please try again with different parameters'
+      'We could not find any flights with your search results. Please try again with different parameters.'
     );
   });
 
@@ -445,7 +445,7 @@ describe('FlightsearchComponent', () => {
     expect(component.flightsData).toEqual([]);
     expect(component.viewData).toEqual([]);
     expect(component.noResultsErrorMsg).toEqual(
-      'We could not find any flights with your search results. Please try again with different parameters'
+      'We could not find any flights with your search results. Please try again with different parameters.'
     );
   });
 

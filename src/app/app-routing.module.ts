@@ -19,6 +19,7 @@ import { UserFlightHistoryComponent } from './user-flight-history/user-flight-hi
 import { UserFlightUpcomingComponent } from './user-flight-upcoming/user-flight-upcoming.component';
 import { DeleteAccountComponent } from './account/delete-account/delete-account.component';
 import { PerformDeletionComponent } from './account/perform-deletion/perform-deletion.component';
+import { ShoppingcartComponent } from './shoppingcart/shoppingcart.component';
 
 const routes: Routes = [
   {
@@ -83,6 +84,10 @@ const routes: Routes = [
       {
         path: 'flight-search',
         component: FlightsearchComponent,
+      },
+      {
+        path: 'shopping-cart',
+        component: ShoppingcartComponent,
       },
       {
         path: PathConstants.USER_PROFILE,

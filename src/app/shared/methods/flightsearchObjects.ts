@@ -31,6 +31,7 @@ export enum WhereType {
 }
 
 export interface flight {
+  actualFlights: any;
   airplane: any;
   basePrice: any;
   business: number;
@@ -40,6 +41,7 @@ export interface flight {
   duration: string;
   durationInMilliseconds: number;
   economy: number;
+  flightID: any;
   fromDateTime: string;
   iataId: string;
   loyaltyPoints: number;
@@ -49,4 +51,22 @@ export interface flight {
   route: string;
   seats: {}[];
   toDateTime: string;
+}
+
+export enum FlightSeatType {
+  ECONOMY = 'economy',
+  BUSINESS = 'business',
+}
+
+export interface seatAvailable {
+  flightId: number;
+  economy: number;
+  business: number;
+}
+
+export interface bookingInfo {
+  flightId: number;
+  flight: any;
+  numberOfPeople: number;
+  seatClass: string;
 }
