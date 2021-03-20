@@ -1,124 +1,140 @@
-.componentContainer{
-    position: relative; 
-    margin-top: 180px;
+.componentContainer {
+  position: relative;
+  margin-top: 180px;
 }
 
-.movingGradient{
-    background: linear-gradient(52deg, #1508AF, #0bc1da, #8E2AE3);
-    background-size: 800% 800%;
-    -webkit-animation: animatedGradient 40s ease infinite;
-    -moz-animation: animatedGradient 40s ease infinite;
-    animation: animatedGradient 40s ease infinite;
+.movingGradient {
+  background: linear-gradient(52deg, #1508af, #0bc1da, #8e2ae3);
+  background-size: 800% 800%;
+  -webkit-animation: animatedGradient 40s ease infinite;
+  -moz-animation: animatedGradient 40s ease infinite;
+  animation: animatedGradient 40s ease infinite;
 }
 
-.textGradient{
-    font-size: larger;
-    font-family: 'Futura';
-    font-weight: bold;
-    background: linear-gradient(52deg, #1508AF,  #8E2AE3);
-    background-clip: text;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+.textGradient {
+  font-size: larger;
+  font-family: "Futura";
+  font-weight: bold;
+  background: linear-gradient(52deg, #1508af, #8e2ae3);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
-.loginBox{
-    height: 100%;
-    background-color: white;
-    display: flex;
-    flex-direction: column; 
-    justify-content: flex-start;
-    align-items: center;
+.loginBox {
+  height: 100%;
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
 }
 
-.loginBoxBorder{
-    width: 60%;
-    height: 240px;
-    padding: 4px;
+.loginBoxBorder {
+  width: 60%;
+  height: 240px;
+  padding: 4px;
 }
 
-h4{
-    margin-top: 32px;
-    margin-bottom: 24px;
+h4 {
+  margin-top: 32px;
+  margin-bottom: 24px;
 }
 
-h5{
-    margin-left: 32px;
-    margin-right: 16px;
-    font-weight: normal;
-    text-align: start;
-    font-family: 'Lato', sans-serif;
+h5 {
+  margin-left: 32px;
+  margin-right: 16px;
+  font-weight: normal;
+  text-align: start;
+  font-family: "Lato", sans-serif;
 }
 
 @-webkit-keyframes animatedGradient {
-    0%{background-position:0% 79%}
-    50%{background-position:100% 22%}
-    100%{background-position:0% 79%}
+  0% {
+    background-position: 0% 79%;
+  }
+  50% {
+    background-position: 100% 22%;
+  }
+  100% {
+    background-position: 0% 79%;
+  }
 }
 @-moz-keyframes animatedGradient {
-    0%{background-position:0% 79%}
-    50%{background-position:100% 22%}
-    100%{background-position:0% 79%}
+  0% {
+    background-position: 0% 79%;
+  }
+  50% {
+    background-position: 100% 22%;
+  }
+  100% {
+    background-position: 0% 79%;
+  }
 }
 @keyframes animatedGradient {
-    0%{background-position:0% 79%}
-    50%{background-position:100% 22%}
-    100%{background-position:0% 79%}
+  0% {
+    background-position: 0% 79%;
+  }
+  50% {
+    background-position: 100% 22%;
+  }
+  100% {
+    background-position: 0% 79%;
+  }
 }
 
-  
-  /* Add a hover effect for buttons */
-  .submitButton:hover {
-    background-color: #16891F;
+/* Add a hover effect for buttons */
+.submitButton:hover {
+  background-color: #16891f;
+}
+
+@media screen and (max-width: 1058px) {
+  .loginBoxBorder {
+    width: 80%;
+  }
+}
+
+@media screen and (max-width: 800px) {
+  .componentContainer {
+    margin-top: 0px;
   }
 
-@media screen and (max-width: 1058px){
- 
-    .loginBoxBorder{
-        width: 80%;
-    }
-}
+  h4,
+  h5 {
+    margin-right: auto;
+  }
 
-@media screen and (max-width:800px){
-    .componentContainer{
-        margin-top: 0px;
-    }
-
-    h4, h5{
-        margin-right: auto;
-    }
-
-    h5{
-        margin-left: 0px;
-    }
-    .loginBoxBorder{
-        visibility: hidden;
-        width: 100%;
-        margin: 0px;
-    }
-    .loginBox{
-        visibility: initial;
-        width: 100%;
-    }
-    .submitButton{
-        padding: 7px 0px;
-        margin: 24px;
-    }
+  h5 {
+    margin-left: 0px;
+  }
+  .loginBoxBorder {
+    visibility: hidden;
+    width: 100%;
+    margin: 0px;
+  }
+  .loginBox {
+    visibility: initial;
+    width: 100%;
+  }
+  .submitButton {
+    padding: 7px 0px;
+    margin: 24px;
+  }
 }
 
 .submitButton:hover {
-    background-color: #16891f;
+  background-color: #16891f;
 }
 
 .submitButton {
-    font-family: "Lato", sans-serif;
-    font-weight: 600;
-    color: white;
-    font-size: large;
-    background-color: #4caf50;
-    padding: 7px 20px;
-    margin: 15px 0px 0px 0px;
-    border: none;
-    cursor: pointer;
-    width: 60%;
-  }
-  
+  font-family: "Lato", sans-serif;
+  font-weight: 600;
+  color: white;
+  font-size: large;
+  background-color: #4caf50;
+  padding: 7px 20px;
+  margin: 15px 0px 0px 0px;
+  border: none;
+  cursor: pointer;
+  width: 60%;
+}

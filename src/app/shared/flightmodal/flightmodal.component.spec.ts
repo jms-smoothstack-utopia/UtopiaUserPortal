@@ -9,10 +9,9 @@ describe('FlightmodalComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ FlightmodalComponent ],
-      imports: [RouterTestingModule]
-    })
-    .compileComponents();
+      declarations: [FlightmodalComponent],
+      imports: [RouterTestingModule],
+    }).compileComponents();
   });
 
   beforeEach(() => {

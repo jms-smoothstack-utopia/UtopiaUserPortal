@@ -1,20 +1,25 @@
 <app-mainheader [hideSignInButton]="true"></app-mainheader>
 <div class="container-fluid componentContainer">
-    <div class="row">
-        <div class="col d-flex justify-content-center">
-            <div class="container loginBoxBorder movingGradient">
-                <div class="loginBox container-fluid">
-                    <h4 class="headerText"><span class="textGradient">Your password has been changed!</span></h4>
-                    <h5>Your password has successfully been changed. Click the button below to return to the login page!</h5>
-                    <button
-                    class="submitButton"
-                    (keyup.enter)="goToLoginPage()"
-                    (click)="goToLoginPage()"
-                    >
-                    Return to Login page
-                  </button>
-                </div>
-            </div>
+  <div class="row">
+    <div class="col d-flex justify-content-center">
+      <div class="container loginBoxBorder movingGradient">
+        <div class="loginBox container-fluid">
+          <h4 class="headerText">
+            <span class="textGradient">Your password has been changed!</span>
+          </h4>
+          <h5>
+            Your password has successfully been changed. Click the button below
+            to return to the login page!
+          </h5>
+          <button
+            class="submitButton"
+            (keyup.enter)="goToLoginPage()"
+            (click)="goToLoginPage()"
+          >
+            Return to Login page
+          </button>
         </div>
+      </div>
     </div>
+  </div>
 </div>

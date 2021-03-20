@@ -5,22 +5,18 @@ import PathConstants from 'src/environments/paths';
 @Component({
   selector: 'app-sidebar',
   templateUrl: './sidebar.component.html',
-  styleUrls: ['./sidebar.component.css']
+  styleUrls: ['./sidebar.component.css'],
 })
 export class SidebarComponent implements OnInit {
-
-  constructor(
-    private router: Router
-  ) { }
+  constructor(private router: Router) {}
 
   goToProfile(): void {
     this.router.navigate([PathConstants.USER_PROFILE]);
   }
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
-  goToCart(): void{
-    this.router.navigateByUrl("/shopping-cart");
+  goToCart(): void {
+    this.router.navigateByUrl('/shopping-cart');
   }
 }

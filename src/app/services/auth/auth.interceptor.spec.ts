@@ -60,9 +60,7 @@ describe('AuthInterceptor', () => {
       expect(res).toBeTruthy();
     });
 
-    const req = httpTestingController.expectOne(
-      environment.hostUrl + '/login'
-    );
+    const req = httpTestingController.expectOne(environment.hostUrl + '/login');
     expect(req.request.headers.get('Authorization')).toBeFalsy();
 
     req.flush('dummy');
