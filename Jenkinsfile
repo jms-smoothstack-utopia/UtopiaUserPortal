@@ -8,9 +8,19 @@ pipeline {
     }
     stage('Test') {
       steps {
-        sh 'npx ng test --watch=false'
+        sh 'npx ng test --watch=false --code-coverage'
       }
     }
+    stage('Code Analysis: Sonarqube') {
+      steps {
+        sh 'npm run sonar'
+      }
+    }
+//    stage('Await Quality Gate') {
+//      steps {
+//        waitForQualityGate abortPipeline: true
+//      }
+//    }
     stage('Build and push DEV to S3') {
       when {
         branch 'dev'
