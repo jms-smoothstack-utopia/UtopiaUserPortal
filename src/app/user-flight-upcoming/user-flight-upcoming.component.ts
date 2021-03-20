@@ -15,6 +15,7 @@ import { Ticket } from '../ticket';
 export class UserFlightUpcomingComponent implements OnInit {
   @Input() tickets: Ticket[] | undefined;
   @Input() error: HttpErrorResponse | undefined;
+  activeForNav: string = 'upcoming';
 
   constructor(
     private route: ActivatedRoute,
@@ -25,8 +26,8 @@ export class UserFlightUpcomingComponent implements OnInit {
     ) { }
 
     getUpcoming(): void {
-      const customerId = this.route.snapshot.paramMap.get('id');
-      if (customerId !== null) {
+      const customerId = this.authService.userId;
+      if (customerId !== null && customerId !== undefined) {
         this.flightRecordsService.getTicketsUpcoming(customerId).subscribe(tickets => this.setUpcoming(tickets));
       }
     }

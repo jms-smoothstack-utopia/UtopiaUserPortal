@@ -90,11 +90,11 @@ const routes: Routes = [
         component: UserProfileComponent,
       },
       {
-        path: PathConstants.FLIGHT_HISTORY + '/:id',
+        path: PathConstants.FLIGHT_HISTORY,
         component: UserFlightHistoryComponent,
       },
       {
-        path: PathConstants.FLIGHT_UPCOMING + '/:id',
+        path: PathConstants.FLIGHT_UPCOMING,
         component: UserFlightUpcomingComponent,
       },
       {
