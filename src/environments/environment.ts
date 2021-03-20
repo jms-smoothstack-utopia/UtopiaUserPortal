@@ -13,6 +13,9 @@ export const environment = {
   servicingAreaEndpoint : "http://localhost:8080/servicing-area",
   logLevel: NgxLoggerLevel.DEBUG,
   hostUrl: 'http://localhost:8080',
+  mapbox: {
+    accessToken: "pk.eyJ1Ijoiam9yZGFuZGl2aW5hIiwiYSI6ImNrbWYyYzM4bDA4Mzgyb3FocW9xeWp0bzIifQ.VV2Rsag8L9Yohjc5eqlQkg",
+  }
 };
 
 /*

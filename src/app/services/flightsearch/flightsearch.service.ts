@@ -6,6 +6,8 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root'
 })
 
+//Todo Try and catch
+
 export class FlightsearchService {
 
   private flightsURL = environment.flightsEndpoint;

@@ -29,9 +29,9 @@
 }
 
 .mapHolder{
-    background-image: url("src/app/home/MapOFFlights.png");
+    /* background-image: url("src/app/home/MapOFFlights.png");
     background-size: cover;
-    background-position: center;
+    background-position: center; */
     height: 300px;
     width: calc(100vw - 215px);
     border-radius: 5px;
