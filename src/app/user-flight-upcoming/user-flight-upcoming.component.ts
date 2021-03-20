@@ -25,12 +25,13 @@ export class UserFlightUpcomingComponent implements OnInit {
     private log: NGXLogger
   ) {}
 
-    getUpcoming(): void {
-      const customerId = this.authService.userId;
-      if (customerId !== null && customerId !== undefined) {
-        this.flightRecordsService.getTicketsUpcoming(customerId).subscribe(tickets => this.setUpcoming(tickets));
+  getUpcoming(): void {
+    const customerId = this.authService.userId;
+    if (customerId !== null && customerId !== undefined) {
+      this.flightRecordsService
+        .getTicketsUpcoming(customerId)
+        .subscribe((tickets) => this.setUpcoming(tickets));
     }
-    
   }
   setUpcoming(value: Ticket[]): void {
     if (value === null) {

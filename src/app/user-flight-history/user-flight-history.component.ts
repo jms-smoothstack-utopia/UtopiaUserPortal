@@ -28,7 +28,9 @@ export class UserFlightHistoryComponent implements OnInit {
   getHistory(): void {
     const customerId = this.authService.userId;
     if (customerId !== null && customerId !== undefined) {
-      this.flightRecordsService.getTicketsHistory(customerId).subscribe(history => this.setHistory(history));
+      this.flightRecordsService
+        .getTicketsHistory(customerId)
+        .subscribe((history) => this.setHistory(history));
     }
   }
   setHistory(history: Ticket[]): void {

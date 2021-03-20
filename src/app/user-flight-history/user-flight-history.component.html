@@ -1,33 +1,34 @@
 <app-user-navbar [parentComponent]="activeForNav"></app-user-navbar>
 <div *ngIf="tickets">
-    <p *ngIf="tickets.length == 0">
-        There are no past tickets to display. We look forward to your first flight with us!
-    </p>
-    <div *ngIf="tickets.length != 0" class="col-12">
-        <h3>Past flight tickets:</h3>
-        <table class="table table-responsive" id="ticketsTable">
-            <thead>
-                <tr>
-                    <th>Flight ID</th>
-                    <th>Name</th>
-                    <th>Seat class</th>
-                    <th>Seat number</th>
-                    <th>Status</th>
-                    <th>Date/Time</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr *ngFor="let ticket of tickets">
-                    <td>{{ticket.flightId}}</td>
-                    <td>{{ticket.passengerName}}</td>
-                    <td>{{ticket.seatClass}}</td>
-                    <td>{{ticket.seatNumber}}</td>
-                    <td>{{ticket.status}}</td>
-                    <td>{{ticket.timePrettyPrint}}</td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
+  <p *ngIf="tickets.length == 0">
+    There are no past tickets to display. We look forward to your first flight
+    with us!
+  </p>
+  <div *ngIf="tickets.length != 0" class="col-12">
+    <h3>Past flight tickets:</h3>
+    <table class="table table-responsive" id="ticketsTable">
+      <thead>
+        <tr>
+          <th>Flight ID</th>
+          <th>Name</th>
+          <th>Seat class</th>
+          <th>Seat number</th>
+          <th>Status</th>
+          <th>Date/Time</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let ticket of tickets">
+          <td>{{ ticket.flightId }}</td>
+          <td>{{ ticket.passengerName }}</td>
+          <td>{{ ticket.seatClass }}</td>
+          <td>{{ ticket.seatNumber }}</td>
+          <td>{{ ticket.status }}</td>
+          <td>{{ ticket.timePrettyPrint }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 </div>
 
 <div *ngIf="error">

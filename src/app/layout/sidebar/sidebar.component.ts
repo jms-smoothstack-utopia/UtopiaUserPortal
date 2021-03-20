@@ -8,16 +8,11 @@ import PathConstants from 'src/environments/paths';
   styleUrls: ['./sidebar.component.css'],
 })
 export class SidebarComponent implements OnInit {
-
-  constructor(
-    private router: Router
-  ) { }
+  constructor(private router: Router) {}
 
   goToProfile(): void {
     this.router.navigate([PathConstants.USER_PROFILE]);
   }
 
-  ngOnInit(): void {
-  }
-
+  ngOnInit(): void {}
 }
