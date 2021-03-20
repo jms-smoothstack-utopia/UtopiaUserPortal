@@ -19,6 +19,7 @@ import { UserFlightHistoryComponent } from './user-flight-history/user-flight-hi
 import { UserFlightUpcomingComponent } from './user-flight-upcoming/user-flight-upcoming.component';
 import { DeleteAccountComponent } from './account/delete-account/delete-account.component';
 import { PerformDeletionComponent } from './account/perform-deletion/perform-deletion.component';
+import { TicketDetailComponent } from './ticket-detail/ticket-detail.component';
 
 const routes: Routes = [
   {
@@ -95,6 +96,10 @@ const routes: Routes = [
       {
         path: PathConstants.FLIGHT_UPCOMING + '/:id',
         component: UserFlightUpcomingComponent,
+      },
+      {
+        path: PathConstants.TICKET_DETAIL,
+        component: TicketDetailComponent,
       },
     ],
   },

@@ -38,6 +38,7 @@ import { UserFlightUpcomingComponent } from './user-flight-upcoming/user-flight-
 import { UserNavbarComponent } from './user-navbar/user-navbar.component';
 import { PerformDeletionComponent } from './account/perform-deletion/perform-deletion.component';
 import { DeleteAccountComponent } from './account/delete-account/delete-account.component';
+import { TicketDetailComponent } from './ticket-detail/ticket-detail.component';
 
 @NgModule({
   declarations: [
@@ -71,6 +72,7 @@ import { DeleteAccountComponent } from './account/delete-account/delete-account.
     UserNavbarComponent,
     PerformDeletionComponent,
     DeleteAccountComponent,
+    TicketDetailComponent,
   ],
   imports: [
     BrowserModule,

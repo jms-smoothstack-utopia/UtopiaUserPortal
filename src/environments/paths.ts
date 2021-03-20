@@ -8,6 +8,7 @@ const PathConstants = {
   CONFIRM_REGISTRATION: 'account/confirm',
   FLIGHT_HISTORY: 'flights/history',
   FLIGHT_UPCOMING: 'flights/upcoming',
+  TICKET_DETAIL: 'tickets/:id',
 };
 
 export default PathConstants;
