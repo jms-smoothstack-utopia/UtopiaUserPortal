@@ -1,57 +1,58 @@
-body, html{
-    height: 100%;
+body,
+html {
+  height: 100%;
 }
 
-.container-fluid{
-    padding: 0px;
-    height: calc(100vh - 75px);
+.container-fluid {
+  padding: 0px;
+  height: calc(100vh - 75px);
 }
 
-.firstsidebarrow{
-    margin-top: 35px;
+.firstsidebarrow {
+  margin-top: 35px;
 }
 
-.sidebaricon{
-    font-size: 25px;
-    color: rgb(78, 78, 78);
+.sidebaricon {
+  font-size: 25px;
+  color: rgb(78, 78, 78);
 }
 
-button .sidebaricon:hover{
-    color: black;
+button .sidebaricon:hover {
+  color: black;
 }
 
-button{
-    width: 100%;
-    height: 100%;
-    background-color: white;
-    border: none;
+button {
+  width: 100%;
+  height: 100%;
+  background-color: white;
+  border: none;
 }
 
-hr{
-    margin-top: 30px;
-    margin-bottom: 30px;
-    margin-left: 10px;
-    margin-right: 10px;
-    background: #BFBABA;
+hr {
+  margin-top: 30px;
+  margin-bottom: 30px;
+  margin-left: 10px;
+  margin-right: 10px;
+  background: #bfbaba;
 }
 
-.sidebarcol{
-    display: flex;
-    justify-content: center;
-    align-items: center;
+.sidebarcol {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-.sidebarwrapper{
-    border-right: 1px solid #BFBABA;
-    background-color: white;
+.sidebarwrapper {
+  border-right: 1px solid #bfbaba;
+  background-color: white;
 }
 
-@media screen and (max-width:800px){
-    .sidebarwrapper{
-        display: none;
-    }
+@media screen and (max-width: 800px) {
+  .sidebarwrapper {
+    display: none;
+  }
 
-    .hello{
-        display: none;
-    }
+  .hello {
+    display: none;
+  }
 }

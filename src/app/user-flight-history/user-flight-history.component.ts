@@ -10,7 +10,7 @@ import { Ticket } from '../ticket';
 @Component({
   selector: 'app-user-flight-history',
   templateUrl: './user-flight-history.component.html',
-  styleUrls: ['./user-flight-history.component.css']
+  styleUrls: ['./user-flight-history.component.css'],
 })
 export class UserFlightHistoryComponent implements OnInit {
   @Input() tickets: Ticket[] | undefined;
@@ -22,20 +22,23 @@ export class UserFlightHistoryComponent implements OnInit {
     private flightRecordsService: FlightRecordsService,
     private router: Router,
     private log: NGXLogger
-    ) { }
+  ) {}
 
   getHistory(): void {
     const customerId = this.route.snapshot.paramMap.get('id');
     if (customerId !== null) {
-      this.flightRecordsService.getTicketsHistory(customerId).subscribe(history => this.setHistory(history));
+      this.flightRecordsService
+        .getTicketsHistory(customerId)
+        .subscribe((history) => this.setHistory(history));
     }
   }
   setHistory(history: Ticket[]): void {
-    if (history === null) {   //if there are no returned tickets
+    if (history === null) {
+      //if there are no returned tickets
       this.tickets = [];
     } else if (this.checkIsValidTickets(history)) {
       this.tickets = history;
-      this.tickets.forEach(ticket => {
+      this.tickets.forEach((ticket) => {
         var rawDate: Date = new Date(ticket.flightTime);
         ticket.timePrettyPrint = rawDate.toString();
       });
@@ -44,13 +47,15 @@ export class UserFlightHistoryComponent implements OnInit {
     }
   }
 
-  checkIsValidTickets(returnedValue: Ticket[] | HttpErrorResponse | undefined): returnedValue is Ticket[] {
+  checkIsValidTickets(
+    returnedValue: Ticket[] | HttpErrorResponse | undefined
+  ): returnedValue is Ticket[] {
     if ((returnedValue as HttpErrorResponse).status !== undefined) {
       //if it's an error
       return false;
     } else if ((returnedValue as Ticket[]).length == 0) {
       //if empty array, true
-      return true
+      return true;
     }
     //assumes there are tickets
     return (returnedValue as Ticket[])[0].flightId !== undefined;

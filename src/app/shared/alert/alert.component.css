@@ -1,14 +1,14 @@
-p{
+p {
   font-family: "Lato", sans-serif;
   font-weight: bold;
 }
 
-a{
+a {
   font-family: "Lato", sans-serif;
 }
 
-a:focus{
-  outline: 2px dashed #1508AF;
+a:focus {
+  outline: 2px dashed #1508af;
 }
 
 .backdrop {
@@ -41,7 +41,7 @@ a:focus{
   font-weight: 600;
   color: white;
   font-size: large;
-  background-color: #1508AF;
+  background-color: #1508af;
   padding: 7px 20px;
   margin: 40px 0 0 0;
   border: none;
@@ -49,6 +49,6 @@ a:focus{
   width: 80%;
 }
 
-.close-button:hover{
+.close-button:hover {
   background-color: #0c0558;
 }

@@ -4,7 +4,7 @@
 
 import { NgxLoggerLevel } from 'ngx-logger';
 
-const hostUrl = "http://localhost:8080";
+const hostUrl = 'http://localhost:8080';
 
 export const environment = {
   production: false,
@@ -13,7 +13,7 @@ export const environment = {
   accountsEndpoint: `${hostUrl}/accounts`,
   airportsEndpoint: `${hostUrl}/airports`,
   flightsEndpoint: `${hostUrl}/flights`,
-  servicingAreaEndpoint : `${hostUrl}/servicing-area`,
+  servicingAreaEndpoint: `${hostUrl}/servicing-area`,
   hostUrl: hostUrl,
 };
 
