@@ -1,30 +1,42 @@
 <div class="row no-gutters sidings firstrow">
-    <div class="col-md-11 d-flex justify-content-start align-items-center">
-        <span class="cartheader">Shopping Cart</span>
-    </div>
+  <div class="col-md-11 d-flex justify-content-start align-items-center">
+    <span class="cartheader">Shopping Cart</span>
+  </div>
 </div>
-<div *ngIf="viewList.length > 0;else elseblock secondrow">
-    <div *ngFor="let item of viewList">
-        <hr class="greyline">
-        <div class="row no-gutters sidings">
-            <div class="col-md-11 no-gutters cartrow d-flex justify-content-between align-items-center">
-                <span class="firstitem">{{item.seatClass | titlecase}} for {{item.numberOfPeople}}</span>
-                <span class="seconditem textGradient">{{item.flight.origin.iataId}} to {{item.flight.destination.iataId}}</span>
-                <span class="thirditem">{{item.flight.seats[0].price | currency:"US"}} per person</span>
-            </div>
-        </div>
+<div *ngIf="viewList.length > 0; else elseblock; secondrow">
+  <div *ngFor="let item of viewList">
+    <hr class="greyline" />
+    <div class="row no-gutters sidings">
+      <div
+        class="col-md-11 no-gutters cartrow d-flex justify-content-between align-items-center"
+      >
+        <span class="firstitem"
+          >{{ item.seatClass | titlecase }} for {{ item.numberOfPeople }}</span
+        >
+        <span class="seconditem textGradient"
+          >{{ item.flight.origin.iataId }} to
+          {{ item.flight.destination.iataId }}</span
+        >
+        <span class="thirditem"
+          >{{ item.flight.seats[0].price | currency: "US" }} per person</span
+        >
+      </div>
     </div>
-    <hr class="greyline">
-    <div class="row no gutters sidings" style="margin-top: 24px;">
-        <div class="col-md-11 d-flex justify-content-end align-items-center">
-            <button class="buybutton">Confirm Bookings</button>
-        </div>
+  </div>
+  <hr class="greyline" />
+  <div class="row no gutters sidings" style="margin-top: 24px">
+    <div class="col-md-11 d-flex justify-content-end align-items-center">
+      <button class="buybutton">Confirm Bookings</button>
     </div>
+  </div>
 </div>
 <ng-template #elseblock>
-    <div class="row no-gutters sidings secondrow">
-        <div class="col-md-11 d-flex justify-content-start align-items-center">
-            <span class="textGradient bigText">There seems to be nothing in your cart. Maybe its time to do some shopping...</span>
-        </div>
+  <div class="row no-gutters sidings secondrow">
+    <div class="col-md-11 d-flex justify-content-start align-items-center">
+      <span class="textGradient bigText"
+        >There seems to be nothing in your cart. Maybe its time to do some
+        shopping...</span
+      >
     </div>
-</ng-template> 
+  </div>
+</ng-template>

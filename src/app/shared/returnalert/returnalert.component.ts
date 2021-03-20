@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-returnalert',
   templateUrl: './returnalert.component.html',
-  styleUrls: ['./returnalert.component.css']
+  styleUrls: ['./returnalert.component.css'],
 })
 export class ReturnalertComponent implements OnInit {
   @Input() message?: string;
@@ -20,7 +20,7 @@ export class ReturnalertComponent implements OnInit {
     this.closeEvent.emit();
   }
 
-  goBackToHomePage(){
-    this.router.navigateByUrl("/", {replaceUrl: true});
+  goBackToHomePage() {
+    this.router.navigateByUrl('/', { replaceUrl: true });
   }
 }

@@ -87,7 +87,7 @@ const routes: Routes = [
       },
       {
         path: 'shopping-cart',
-        component: ShoppingcartComponent
+        component: ShoppingcartComponent,
       },
       {
         path: PathConstants.USER_PROFILE,
