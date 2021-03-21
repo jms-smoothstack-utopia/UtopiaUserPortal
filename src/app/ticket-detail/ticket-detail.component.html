@@ -75,8 +75,20 @@
             </div>
         </div>
     </div>
+    <br>
+    <button (click)="showConfirmCancel = true" id="cancelButton">
+        Cancel This Booking
+    </button>
+    <div *ngIf="showConfirmCancel">
+        <app-cancel-ticket (closeEvent)="showConfirmCancel = false"
+            [ticketId]="ticket.id"
+            [flightTime]="flight.approximateDateTimeStart"
+            [alreadyCancelled]="ticket.status === 'CANCELLED' ? true : false">
+        </app-cancel-ticket>
+        <!-- todo: refactor status check (and statuses in general)
+                to use a TS enum class -->
+    </div>
 </div>
-<br>
 <div *ngIf="error">
     <h2>{{error.status}} Error</h2>
     <p>{{error.message}}</p>

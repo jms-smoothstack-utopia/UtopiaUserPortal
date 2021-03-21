@@ -15,6 +15,7 @@ export class FlightRecordsService {
   private ticketHistoryUrl = environment.hostUrl + '/tickets/history';
   private ticketUpcomingUrl = environment.hostUrl + '/tickets/upcoming';
   private ticketDetailUrl = environment.hostUrl + '/tickets';
+  private ticketCancelUrl = environment.hostUrl + '/tickets/cancel';
   private flightUrl = environment.hostUrl + '/flights';
   private httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' })};
 
@@ -33,6 +34,12 @@ export class FlightRecordsService {
   getTicketById(ticketId: string): Observable<Ticket> {
     const url = `${this.ticketDetailUrl}/${ticketId}`;
     return this.http.get<Ticket>(url);
+  }
+
+  cancelTicketById(ticketId: number) {
+    const url = `${this.ticketCancelUrl}/${ticketId}`;
+    return this.http.put(url, this.httpOptions);
+    //no content, just the put request and ID in the URL
   }
 
   getFlightById(flightId: number): Observable<Flight> {

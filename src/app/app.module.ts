@@ -39,6 +39,7 @@ import { UserNavbarComponent } from './user-navbar/user-navbar.component';
 import { PerformDeletionComponent } from './account/perform-deletion/perform-deletion.component';
 import { DeleteAccountComponent } from './account/delete-account/delete-account.component';
 import { TicketDetailComponent } from './ticket-detail/ticket-detail.component';
+import { CancelTicketComponent } from './cancel-ticket/cancel-ticket.component';
 
 @NgModule({
   declarations: [
@@ -73,6 +74,7 @@ import { TicketDetailComponent } from './ticket-detail/ticket-detail.component';
     PerformDeletionComponent,
     DeleteAccountComponent,
     TicketDetailComponent,
+    CancelTicketComponent,
   ],
   imports: [
     BrowserModule,

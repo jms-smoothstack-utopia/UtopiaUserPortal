@@ -18,6 +18,7 @@ export class TicketDetailComponent implements OnInit {
   ticket: Ticket | undefined;
   flight: Flight | undefined;
   error: HttpErrorResponse | undefined;
+  showConfirmCancel: boolean = false;
 
   constructor(
     private route: ActivatedRoute,
@@ -81,6 +82,11 @@ export class TicketDetailComponent implements OnInit {
       //but flight info failed?
       this.error = response;
     }
+  }
+
+  cancelTicket(): void {
+    //pop up the cancel-ticket component
+    //might delete this
   }
 
   doPrettyPrinting(): void {
