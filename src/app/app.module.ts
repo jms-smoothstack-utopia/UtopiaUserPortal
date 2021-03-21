@@ -40,6 +40,9 @@ import { PerformDeletionComponent } from './account/perform-deletion/perform-del
 import { DeleteAccountComponent } from './account/delete-account/delete-account.component';
 import { TicketDetailComponent } from './ticket-detail/ticket-detail.component';
 import { CancelTicketComponent } from './cancel-ticket/cancel-ticket.component';
+import { MapComponent } from './map/map.component';
+import { ShoppingcartComponent } from './shoppingcart/shoppingcart.component';
+import { FlightmodalComponent } from './shared/flightmodal/flightmodal.component';
 
 @NgModule({
   declarations: [
@@ -75,6 +78,9 @@ import { CancelTicketComponent } from './cancel-ticket/cancel-ticket.component';
     DeleteAccountComponent,
     TicketDetailComponent,
     CancelTicketComponent,
+    MapComponent,
+    ShoppingcartComponent,
+    FlightmodalComponent,
   ],
   imports: [
     BrowserModule,

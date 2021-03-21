@@ -6,10 +6,8 @@ import { Ticket } from 'src/app/ticket';
 import { Flight } from 'src/app/flight'
 import { environment } from 'src/environments/environment';
 
-
-
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class FlightRecordsService {
   private ticketHistoryUrl = environment.hostUrl + '/tickets/history';
@@ -17,9 +15,11 @@ export class FlightRecordsService {
   private ticketDetailUrl = environment.hostUrl + '/tickets';
   private ticketCancelUrl = environment.hostUrl + '/tickets/cancel';
   private flightUrl = environment.hostUrl + '/flights';
-  private httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' })};
+  private httpOptions = {
+    headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
+  };
 
-  constructor(private http: HttpClient, private log: NGXLogger) { }
+  constructor(private http: HttpClient, private log: NGXLogger) {}
 
   getTicketsHistory(customerId: string): Observable<Ticket[]> {
     const url = `${this.ticketHistoryUrl}/${customerId}`;

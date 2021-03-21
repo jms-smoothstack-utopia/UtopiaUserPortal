@@ -40,7 +40,7 @@ export class UserNavbarComponent implements OnInit {
   }
 
   determineActive(): void {
-    switch(this.parentComponent) {
+    switch (this.parentComponent) {
       case 'profile':
         this.profileActive = true;
         break;
@@ -51,8 +51,8 @@ export class UserNavbarComponent implements OnInit {
         this.upcomingActive = true;
         break;
       default:
-        //do nothing
-        //conveniently, nothing in the navbar will be styled as active, in this case
+      //do nothing
+      //conveniently, nothing in the navbar will be styled as active, in this case
     }
   }
 }

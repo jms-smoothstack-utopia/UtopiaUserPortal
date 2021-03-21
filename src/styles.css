@@ -1,26 +1,26 @@
-@font-face{
-    font-family: 'Lato', sans-serif;
-    src: url(/assets/fonts/Lato-Regular.ttf) format("truetype");
+@font-face {
+  font-family: "Lato", sans-serif;
+  src: url(/assets/fonts/Lato-Regular.ttf) format("truetype");
 }
 
-@font-face{
-    font-family: 'Lato', sans-serif;
-    src: url(/assets/fonts/Lato-Bold.ttf) format("truetype");
-    font-weight: 700;
+@font-face {
+  font-family: "Lato", sans-serif;
+  src: url(/assets/fonts/Lato-Bold.ttf) format("truetype");
+  font-weight: 700;
 }
 
-@font-face{
-    font-family: 'American Typewriter';
-    src: url(/assets/fonts/American\ Typewriter\ Regular.ttf) format("truetype");
+@font-face {
+  font-family: "American Typewriter";
+  src: url(/assets/fonts/American\ Typewriter\ Regular.ttf) format("truetype");
 }
 
-@font-face{
-    font-family: 'Futura';
-    src: url(/assets/fonts/Futura-Bold-03.ttf) format("truetype");
+@font-face {
+  font-family: "Futura";
+  src: url(/assets/fonts/Futura-Bold-03.ttf) format("truetype");
 }
 
-@font-face{
-    font-family: 'VT323';
-    src: url(/assets/fonts/VT323-Regular.ttf) format("truetype");
-    font-weight: 400;
+@font-face {
+  font-family: "VT323";
+  src: url(/assets/fonts/VT323-Regular.ttf) format("truetype");
+  font-weight: 400;
 }

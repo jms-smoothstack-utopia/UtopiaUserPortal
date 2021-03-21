@@ -9,39 +9,38 @@ import { environment } from 'src/environments/environment';
 @Component({
   selector: 'app-resetform',
   templateUrl: './resetform.component.html',
-  styleUrls: ['./resetform.component.css']
+  styleUrls: ['./resetform.component.css'],
 })
 export class ResetformComponent implements OnInit {
   errorMsg?: string = undefined;
-  passwordRegex: string = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[!@#$%^&*-_=+,.?])[A-Za-z\\d!@#$%^&*-_=+,.?]{10,128}$";
+  passwordRegex: string =
+    '^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[!@#$%^&*-_=+,.?])[A-Za-z\\d!@#$%^&*-_=+,.?]{10,128}$';
   isLoading = false;
   userToken: any;
   form: NgForm | undefined;
 
   constructor(
     private httpService: HttpService,
-    private route:ActivatedRoute,
-    private log:NGXLogger,
+    private route: ActivatedRoute,
+    private log: NGXLogger,
     private router: Router
-    ) {
-    this.route.params.subscribe(params => {
-      this.userToken = params["token"];
+  ) {
+    this.route.params.subscribe((params) => {
+      this.userToken = params['token'];
     });
 
     //We need to verify the token. If it is a valid token, then let user see page.
     //Otherwise, send to 404 page
 
-    let url = environment.accountsEndpoint + "/new-password/" + this.userToken;
+    let url = environment.accountsEndpoint + '/new-password/' + this.userToken;
 
     this.httpService.get(url).subscribe(
-      () => 
-      {},
-      (err: HttpErrorResponse) => 
-      { 
+      () => {},
+      (err: HttpErrorResponse) => {
         console.log(err);
-        this.router.navigate(["404/notfound"], {replaceUrl: true});
-      },
-    )
+        this.router.navigate(['404/notfound'], { replaceUrl: true });
+      }
+    );
   }
 
   ngOnInit(): void {}
@@ -50,44 +49,44 @@ export class ResetformComponent implements OnInit {
     this.errorMsg = undefined;
   }
 
-  onSubmitPasswordResetWithToken(onSubmitPasswordResetWithToken: NgForm){
-
+  onSubmitPasswordResetWithToken(onSubmitPasswordResetWithToken: NgForm) {
     this.form = onSubmitPasswordResetWithToken;
 
-    if (!onSubmitPasswordResetWithToken.valid){
-      this.log.debug("Invalid form")
-      this.errorMsg = "Please enter your new password.";
+    if (!onSubmitPasswordResetWithToken.valid) {
+      this.log.debug('Invalid form');
+      this.errorMsg = 'Please enter your new password.';
       return;
     }
 
     const newPassword = onSubmitPasswordResetWithToken.value.password;
-    const newPasswordValidation = onSubmitPasswordResetWithToken.value.passwordvalidation;
+    const newPasswordValidation =
+      onSubmitPasswordResetWithToken.value.passwordvalidation;
 
     var res = newPassword.match(this.passwordRegex);
-    
-    if (newPassword != newPasswordValidation){
-      this.log.debug("Invalid form");
-      this.errorMsg = "Please enter the same password in both input boxes";
-      return;
-    } 
 
-    if (res == null){
-      this.log.debug("Invalid form");
-      this.errorMsg = "Password must be between 10 and 128 characters,"
-      + " contain at least one lowercase letter,"
-      + " at least one uppercase letter,"
-      + " at least one number,"
-      + " and at least one special character from the following: !@#$%^&*-_=+,.?";
+    if (newPassword != newPasswordValidation) {
+      this.log.debug('Invalid form');
+      this.errorMsg = 'Please enter the same password in both input boxes';
       return;
     }
 
-    let JSONObject = 
-    {
-      "password": newPassword,
-      "token": this.userToken
+    if (res == null) {
+      this.log.debug('Invalid form');
+      this.errorMsg =
+        'Password must be between 10 and 128 characters,' +
+        ' contain at least one lowercase letter,' +
+        ' at least one uppercase letter,' +
+        ' at least one number,' +
+        ' and at least one special character from the following: !@#$%^&*-_=+,.?';
+      return;
+    }
+
+    let JSONObject = {
+      password: newPassword,
+      token: this.userToken,
     };
 
-    let url = environment.accountsEndpoint + "/new-password";
+    let url = environment.accountsEndpoint + '/new-password';
 
     this.httpService.post(url, JSONObject).subscribe(
       () => {
@@ -95,41 +94,39 @@ export class ResetformComponent implements OnInit {
       },
       (err: HttpErrorResponse) => {
         this.passwordIsNotReset(err);
-      },
+      }
     );
   }
 
-  resetPageForm(){
-    if(this.form != undefined){
+  resetPageForm() {
+    if (this.form != undefined) {
       this.form.reset();
     }
   }
 
-  async passwordIsReset(){
+  async passwordIsReset() {
     this.errorMsg = undefined;
     this.isLoading = false;
-    this.router.navigateByUrl("login/password/confirmationchange")
+    this.router.navigateByUrl('login/password/confirmationchange');
   }
 
-  async passwordIsNotReset(err: HttpErrorResponse){
-    this.log.debug("Failure", err);
+  async passwordIsNotReset(err: HttpErrorResponse) {
+    this.log.debug('Failure', err);
     this.isLoading = false;
-    if (err.status == 404)
-    {
-      this.errorMsg = "The token you provided is expired or invalid. Please resetting your password again."
-      this.router.navigateByUrl("login")
-    }
-    else if(err.status == 400)
-    {
-      this.errorMsg = "Password must be between 10 and 128 characters,"
-      + " contain at least one lowercase letter,"
-      + " at least one uppercase letter,"
-      + " at least one number,"
-      + " and at least one special character from the following: !@#$%^&*-_=+,.?";
-    }
-    else
-    {
-      this.errorMsg = "An error occured while trying to process your request. Please try again."
+    if (err.status == 404) {
+      this.errorMsg =
+        'The token you provided is expired or invalid. Please resetting your password again.';
+      this.router.navigateByUrl('login');
+    } else if (err.status == 400) {
+      this.errorMsg =
+        'Password must be between 10 and 128 characters,' +
+        ' contain at least one lowercase letter,' +
+        ' at least one uppercase letter,' +
+        ' at least one number,' +
+        ' and at least one special character from the following: !@#$%^&*-_=+,.?';
+    } else {
+      this.errorMsg =
+        'An error occured while trying to process your request. Please try again.';
     }
   }
 }

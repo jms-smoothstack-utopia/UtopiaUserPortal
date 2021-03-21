@@ -1,9 +1,9 @@
-.textGradient{
-    font-size: 100px;
-    font-family: 'Futura';
-    font-weight: bold;
-    background: linear-gradient(52deg, #1508AF,  #8E2AE3);
-    background-clip: text;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+.textGradient {
+  font-size: 100px;
+  font-family: "Futura";
+  font-weight: bold;
+  background: linear-gradient(52deg, #1508af, #8e2ae3);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }

@@ -4,19 +4,14 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-confirmation',
   templateUrl: './confirmation.component.html',
-  styleUrls: ['./confirmation.component.css']
+  styleUrls: ['./confirmation.component.css'],
 })
 export class ConfirmationComponent implements OnInit {
+  constructor(private router: Router) {}
 
-  constructor(
-    private router: Router
-  ) { }
+  ngOnInit(): void {}
 
-  ngOnInit(): void {
+  goToLoginPage() {
+    this.router.navigateByUrl('login');
   }
-
-  goToLoginPage(){
-    this.router.navigateByUrl("login");
-  }
-
 }
