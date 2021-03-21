@@ -33,7 +33,8 @@ describe('FlightRecordsService', () => {
     seatClass: 'First',
     seatNumber: '1B',
     status: 'CHECKED_IN',
-    timePrettyPrint: '', //expect to be filled in
+    statusPrettyPrint: '', //these are filled in by components that use the service
+    timePrettyPrint: '', 
   };
 
   let mockTicket2: Ticket = {
@@ -45,6 +46,7 @@ describe('FlightRecordsService', () => {
     seatClass: 'Business',
     seatNumber: '13B',
     status: 'CHECKED_IN',
+    statusPrettyPrint: '',
     timePrettyPrint: '',
   };
   let mockTickets: Ticket[] = [mockTicket1, mockTicket2];

@@ -84,11 +84,6 @@ export class TicketDetailComponent implements OnInit {
     }
   }
 
-  cancelTicket(): void {
-    //pop up the cancel-ticket component
-    //might delete this
-  }
-
   doPrettyPrinting(): void {
     //in this context, the ticket's date string only needs to be the date, not also time
     (this.ticket as Ticket).timePrettyPrint = 
