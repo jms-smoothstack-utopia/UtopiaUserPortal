@@ -15,6 +15,7 @@ import {
 import { DatePipe } from '@angular/common';
 
 import { UserNavbarComponent } from './user-navbar.component';
+import { AppRoutingModule } from '../app-routing.module';
 
 describe('UserNavbarComponent', () => {
   let component: UserNavbarComponent;
@@ -22,17 +23,16 @@ describe('UserNavbarComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ UserNavbarComponent ],
-      imports: [HttpClientTestingModule, RouterTestingModule],
+      declarations: [UserNavbarComponent],
+      imports: [HttpClientTestingModule, RouterTestingModule, AppRoutingModule],
       providers: [
         NGXLogger,
         { provide: NGXLoggerHttpService, useClass: NGXLoggerHttpServiceMock },
         { provide: NGXMapperService, useClass: NGXMapperServiceMock },
         { provide: LoggerConfig, useValue: { level: NgxLoggerLevel.ERROR } },
         DatePipe,
-      ]
-    })
-    .compileComponents();
+      ],
+    }).compileComponents();
   });
 
   beforeEach(() => {

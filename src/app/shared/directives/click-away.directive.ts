@@ -1,18 +1,23 @@
-import { Directive, Output, EventEmitter, ElementRef, HostListener } from '@angular/core';
+import {
+  Directive,
+  Output,
+  EventEmitter,
+  ElementRef,
+  HostListener,
+} from '@angular/core';
 
 @Directive({
-  selector: '[appClickAway]'
+  selector: '[appClickAway]',
 })
 export class ClickAwayDirective {
-
   @Output() clickOutside = new EventEmitter<void>();
 
-  constructor(private el: ElementRef) { }
+  constructor(private el: ElementRef) {}
 
   @HostListener('document:click', ['$event.target'])
-  public onClick(target:Event){
+  public onClick(target: Event) {
     const clickedInside = this.el.nativeElement.contains(target);
-    if (!clickedInside){
+    if (!clickedInside) {
       this.clickOutside.emit();
     }
   }

@@ -1,4 +1,4 @@
-import { Address } from "./address";
+import { Address } from './address';
 
 /*
     UUIDs aren't strictly strings. However, since an ID's main purpose in the frontend
@@ -7,18 +7,18 @@ import { Address } from "./address";
 */
 
 export interface User {
-    id: string,
-    firstName: string,
-    lastName: string,
-    email: string, 
-    addresses: Address[],
-    loyaltyPoints: number,
-    phoneNumber: string,
-    addrLine1: string,
-    addrLine2: string,
-    city: string,
-    state: string,
-    zipcode: string,
-    ticketEmails: boolean,
-    flightEmails: boolean
+  id: string;
+  firstName: string;
+  lastName: string;
+  email: string;
+  addresses: Address[];
+  loyaltyPoints: number;
+  phoneNumber: string;
+  addrLine1: string;
+  addrLine2: string;
+  city: string;
+  state: string;
+  zipcode: string;
+  ticketEmails: boolean;
+  flightEmails: boolean;
 }

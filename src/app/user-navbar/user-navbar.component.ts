@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import PathConstants from 'src/environments/paths';
 import { AuthService } from '../services/auth/auth.service';
@@ -9,7 +9,10 @@ import { AuthService } from '../services/auth/auth.service';
   styleUrls: ['./user-navbar.component.css'],
 })
 export class UserNavbarComponent implements OnInit {
-  private customerId: string | undefined;
+  @Input() parentComponent: string | undefined;
+  profileActive: boolean = false;
+  historyActive: boolean = false;
+  upcomingActive: boolean = false;
 
   constructor(
     private route: ActivatedRoute,
@@ -22,17 +25,34 @@ export class UserNavbarComponent implements OnInit {
   }
 
   goToHistory(): void {
-    this.router.navigateByUrl(`/flights/history/${this.customerId}`);
+    this.router.navigate([PathConstants.FLIGHT_HISTORY]);
   }
 
   goToUpcoming(): void {
-    this.router.navigateByUrl(`/flights/upcoming/${this.customerId}`);
+    this.router.navigate([PathConstants.FLIGHT_UPCOMING]);
   }
 
   ngOnInit(): void {
     if (!this.authService.isLoggedIn()) {
       this.router.navigate([PathConstants.LOGIN]);
     }
-    this.customerId = this.authService.userId;
+    this.determineActive();
+  }
+
+  determineActive(): void {
+    switch (this.parentComponent) {
+      case 'profile':
+        this.profileActive = true;
+        break;
+      case 'history':
+        this.historyActive = true;
+        break;
+      case 'upcoming':
+        this.upcomingActive = true;
+        break;
+      default:
+      //do nothing
+      //conveniently, nothing in the navbar will be styled as active, in this case
+    }
   }
 }

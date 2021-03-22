@@ -3,9 +3,10 @@
   <div *ngIf="isLoading">
     <app-loading-spinner></app-loading-spinner>
   </div>
-  <app-alert *ngIf="alertMsg"
-             [message]="alertMsg"
-             (closeEvent)="onCloseAlert()">
+  <app-alert
+    *ngIf="alertMsg"
+    [message]="alertMsg"
+    (closeEvent)="onCloseAlert()"
+  >
   </app-alert>
 </div>
-

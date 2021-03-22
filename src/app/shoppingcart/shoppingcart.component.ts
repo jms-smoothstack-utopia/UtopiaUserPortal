@@ -9,10 +9,9 @@ import { NGXLogger } from 'ngx-logger';
 @Component({
   selector: 'app-shoppingcart',
   templateUrl: './shoppingcart.component.html',
-  styleUrls: ['./shoppingcart.component.css']
+  styleUrls: ['./shoppingcart.component.css'],
 })
 export class ShoppingcartComponent implements OnInit {
-
   viewList: any[] = this.cart.showCart();
 
   constructor(
@@ -48,5 +47,4 @@ export class ShoppingcartComponent implements OnInit {
       }
     });
   }
-
 }

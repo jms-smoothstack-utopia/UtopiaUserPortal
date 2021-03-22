@@ -1,19 +1,22 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import PathConstants from 'src/environments/paths';
 
 @Component({
   selector: 'app-sidebar',
   templateUrl: './sidebar.component.html',
-  styleUrls: ['./sidebar.component.css']
+  styleUrls: ['./sidebar.component.css'],
 })
 export class SidebarComponent implements OnInit {
+  constructor(private router: Router) {}
 
-  constructor(private router: Router) { }
-
-  ngOnInit(): void {
+  goToProfile(): void {
+    this.router.navigate([PathConstants.USER_PROFILE]);
   }
 
-  goToCart(): void{
-    this.router.navigateByUrl("/shopping-cart");
+  ngOnInit(): void {}
+
+  goToCart(): void {
+    this.router.navigateByUrl('/shopping-cart');
   }
 }
