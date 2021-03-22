@@ -23,7 +23,7 @@ describe('TicketDetailComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ TicketDetailComponent ],
+      declarations: [TicketDetailComponent],
       imports: [HttpClientTestingModule, RouterTestingModule, AppRoutingModule],
       providers: [
         NGXLogger,
@@ -32,8 +32,7 @@ describe('TicketDetailComponent', () => {
         { provide: LoggerConfig, useValue: { level: NgxLoggerLevel.ERROR } },
         DatePipe,
       ],
-    })
-    .compileComponents();
+    }).compileComponents();
   });
 
   beforeEach(() => {

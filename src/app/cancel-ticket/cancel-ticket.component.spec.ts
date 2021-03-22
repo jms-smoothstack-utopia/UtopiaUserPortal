@@ -27,7 +27,7 @@ describe('CancelTicketComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ CancelTicketComponent ],
+      declarations: [CancelTicketComponent],
       imports: [HttpClientTestingModule, RouterTestingModule, AppRoutingModule],
       providers: [
         NGXLogger,
@@ -36,8 +36,7 @@ describe('CancelTicketComponent', () => {
         { provide: LoggerConfig, useValue: { level: NgxLoggerLevel.ERROR } },
         DatePipe,
       ],
-    })
-    .compileComponents();
+    }).compileComponents();
   });
 
   beforeEach(() => {
@@ -45,7 +44,9 @@ describe('CancelTicketComponent', () => {
     component = fixture.componentInstance;
     fixture.detectChanges();
 
-    flightRecordsServiceSpy = fixture.debugElement.injector.get(FlightRecordsService);
+    flightRecordsServiceSpy = fixture.debugElement.injector.get(
+      FlightRecordsService
+    );
   });
 
   it('should create', () => {
@@ -57,7 +58,7 @@ describe('CancelTicketComponent', () => {
       flightRecordsServiceSpy,
       'cancelTicketById'
     ).and.returnValue(of({}));
-    
+
     component.ticketId = 1;
     component.confirmCancel();
 

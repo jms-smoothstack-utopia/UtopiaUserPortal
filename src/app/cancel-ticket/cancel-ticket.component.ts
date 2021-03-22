@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { FlightRecordsService } from '../services/flight-records/flight-records.service'
+import { FlightRecordsService } from '../services/flight-records/flight-records.service';
 import { NGXLogger } from 'ngx-logger';
 import { Router } from '@angular/router';
 import PathConstants from 'src/environments/paths';
@@ -9,8 +9,8 @@ import PathConstants from 'src/environments/paths';
   templateUrl: './cancel-ticket.component.html',
   styleUrls: [
     '../shared/alert/alert.component.css',
-    './cancel-ticket.component.css'
-  ]
+    './cancel-ticket.component.css',
+  ],
 })
 export class CancelTicketComponent implements OnInit {
   @Input() ticketId: number | undefined;
@@ -27,7 +27,7 @@ export class CancelTicketComponent implements OnInit {
     private flightRecordsService: FlightRecordsService,
     private log: NGXLogger,
     private router: Router
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     this.checkCanCancel();
@@ -35,13 +35,14 @@ export class CancelTicketComponent implements OnInit {
 
   checkCanCancel(): void {
     //if flight time less than now, i.e. in the past
-    if (this.flightTime && (this.flightTime < new Date(Date.now()))) {
+    if (this.flightTime && this.flightTime < new Date(Date.now())) {
       this.badCancel = true;
-      this.badCancelMessage = 'This booking is for a past flight and cannot be cancelled.';
+      this.badCancelMessage =
+        'This booking is for a past flight and cannot be cancelled.';
     }
     if (this.alreadyCancelled) {
       this.badCancel = true;
-      this.badCancelMessage = 'This booking has already been cancelled.'
+      this.badCancelMessage = 'This booking has already been cancelled.';
       //conveniently, this overwrites the past message in the event of a past cancellation
     }
   }
@@ -72,7 +73,7 @@ export class CancelTicketComponent implements OnInit {
     this.isLoading = true;
     if (this.ticketId !== undefined) {
       this.flightRecordsService.cancelTicketById(this.ticketId).subscribe(
-        (res) =>  {
+        (res) => {
           this.log.info('ticket successfully cancelled');
           this.isLoading = false;
           this.cancelConfirmed = true;
@@ -86,5 +87,4 @@ export class CancelTicketComponent implements OnInit {
       );
     }
   }
-
 }

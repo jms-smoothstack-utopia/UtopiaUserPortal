@@ -18,11 +18,10 @@ export class FlightsearchService {
     return this.http.get(url);
   }
 
-  getServicingArea(){
-
-    interface servicingArea{
-      id: number,
-      areaName: string
+  getServicingArea() {
+    interface servicingArea {
+      id: number;
+      areaName: string;
     }
 
     const url = this.servicingAreaURL;

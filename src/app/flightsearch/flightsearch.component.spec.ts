@@ -18,23 +18,19 @@ import { environment } from 'src/environments/environment';
 let fakeData = [
   [
     {
-      origin:
-      {
-        iataId: "IAD",
-        name: "Dulles International Airport",
-        servicingArea:
-        {
-          areaName: "D.C"
-        }
+      origin: {
+        iataId: 'IAD',
+        name: 'Dulles International Airport',
+        servicingArea: {
+          areaName: 'D.C',
+        },
       },
-      destination:
-      {
-        iataId: "LAX",
-        name: "Los Angles International Airport",
-        servicingArea:
-        {
-          areaName: "LA"
-        }
+      destination: {
+        iataId: 'LAX',
+        name: 'Los Angles International Airport',
+        servicingArea: {
+          areaName: 'LA',
+        },
       },
       creationDateTime: '2021-03-17T17:30:56.760945-04:00',
       approximateDateTimeStart: '2021-05-17T08:10:00-04:00',
@@ -51,23 +47,19 @@ let fakeData = [
   ],
   [
     {
-      origin:
-      {
-        iataId: "DCA",
-        name: "Dulles International Airport",
-        servicingArea:
-        {
-          areaName: "D.C"
-        }
+      origin: {
+        iataId: 'DCA',
+        name: 'Dulles International Airport',
+        servicingArea: {
+          areaName: 'D.C',
+        },
       },
-      destination:
-      {
-        iataId: "LAX",
-        name: "Los Angles International Airport",
-        servicingArea:
-        {
-          areaName: "LA"
-        }
+      destination: {
+        iataId: 'LAX',
+        name: 'Los Angles International Airport',
+        servicingArea: {
+          areaName: 'LA',
+        },
       },
       creationDateTime: '2021-03-15T17:30:56.760945-04:00',
       approximateDateTimeStart: '2021-05-17T08:10:00-04:00',
@@ -84,23 +76,19 @@ let fakeData = [
   ],
   [
     {
-      origin:
-      {
-        iataId: "DCA",
-        name: "Dulles International Airport",
-        servicingArea:
-        {
-          areaName: "D.C"
-        }
+      origin: {
+        iataId: 'DCA',
+        name: 'Dulles International Airport',
+        servicingArea: {
+          areaName: 'D.C',
+        },
       },
-      destination:
-      {
-        iataId: "JFK",
-        name: "Los Angles International Airport",
-        servicingArea:
-        {
-          areaName: "LA"
-        }
+      destination: {
+        iataId: 'JFK',
+        name: 'Los Angles International Airport',
+        servicingArea: {
+          areaName: 'LA',
+        },
       },
       creationDateTime: '2021-03-16T17:30:56.760945-04:00',
       approximateDateTimeStart: '2021-05-17T08:10:00-04:00',
@@ -115,23 +103,19 @@ let fakeData = [
       },
     },
     {
-      origin:
-      {
-        iataId: "JFK",
-        name: "Dulles International Airport",
-        servicingArea:
-        {
-          areaName: "NYC"
-        }
+      origin: {
+        iataId: 'JFK',
+        name: 'Dulles International Airport',
+        servicingArea: {
+          areaName: 'NYC',
+        },
       },
-      destination:
-      {
-        iataId: "LAX",
-        name: "Los Angles International Airport",
-        servicingArea:
-        {
-          areaName: "LA"
-        }
+      destination: {
+        iataId: 'LAX',
+        name: 'Los Angles International Airport',
+        servicingArea: {
+          areaName: 'LA',
+        },
       },
       creationDateTime: '2021-03-16T17:30:56.760945-04:00',
       approximateDateTimeStart: '2021-05-17T14:10:00-04:00',
