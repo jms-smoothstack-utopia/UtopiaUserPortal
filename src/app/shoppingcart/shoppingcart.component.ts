@@ -4,7 +4,9 @@ import { CartService } from "../services/cart/cart.service";
 import { PurchaseTicketService } from '../services/purchase-ticket/purchase-ticket.service';
 import { UserService } from '../services/user.service';
 import { User } from '../user';
+import PathConstants from 'src/environments/paths';
 import { NGXLogger } from 'ngx-logger';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-shoppingcart',
@@ -19,15 +21,20 @@ export class ShoppingcartComponent implements OnInit {
       private purchaseTicketService: PurchaseTicketService,
       private userService: UserService,
       private authService: AuthService,
+      private router: Router,
       private log: NGXLogger,
     ) { }
 
   ngOnInit(): void {
-    this.log.debug(this.viewList);
+    if (!this.authService.isLoggedIn()) {
+      this.log.debug('Not logged in, redirecting to login screen.');
+      this.router.navigate([PathConstants.LOGIN]);
+    } else {
+      this.log.debug(this.viewList);
+    }
   }
 
   doPurchase(): void {
-    //effectively checking if user is logged in here
     let userId: string = '';
     if (this.authService.userId !== undefined) {
       userId = this.authService.userId;
@@ -37,8 +44,10 @@ export class ShoppingcartComponent implements OnInit {
         let userName: string = (res as User).firstName + ' ' + (res as User).lastName;
         this.purchaseTicketService.purchaseTickets(this.viewList, userName).subscribe(
           (res) => {
-            //do something now that the purchase succeeded
-            //prob. redirect to ticket upcoming view
+            //redirect to upcoming flights so user can see their new tickets
+            //or consider redirecting to the ticket detail view for a new ticket
+            //and maybe a "Success!" splash page or modal
+            this.router.navigate([PathConstants.FLIGHT_UPCOMING]);
           }
         )
       } else {

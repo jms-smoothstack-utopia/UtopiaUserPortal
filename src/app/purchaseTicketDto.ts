@@ -7,5 +7,6 @@ export interface purchaseTicketDto {
 export interface TicketItem {
     seatClass: string,
     seatNumber: string,
-    passengerName: string
+    passengerName: string,
+    flightTime: Date,
 }
