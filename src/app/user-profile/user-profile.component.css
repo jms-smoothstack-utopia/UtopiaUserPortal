@@ -9,19 +9,19 @@
 /* no special rule for shownErrorText */
 
 .updateButtonEnabled {
-  opacity: 100%;
+  opacity: 1;
 }
 
 .updateButtonEnabled:hover {
-  opacity: 100%;
+  opacity: 1;
 }
 
 .updateButtonDisabled {
-  opacity: 25%;
+  opacity: 0.25;
 }
 
 .updateButtonDisabled:hover {
-  opacity: 25%;
+  opacity: 0.25;
 }
 
 .headertext {
