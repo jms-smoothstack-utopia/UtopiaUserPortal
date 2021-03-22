@@ -26,7 +26,7 @@ pipeline {
         branch 'dev'
       }
       steps {
-        sh 'npx ng build --prod'
+        sh 'npx ng build --configuration=dev'
         sh 'aws s3 rm s3://dev.utopia-air.click --recursive'
         sh 'aws s3 cp ./dist/UtopiaUserPortal s3://dev.utopia-air.click --recursive'
       }
