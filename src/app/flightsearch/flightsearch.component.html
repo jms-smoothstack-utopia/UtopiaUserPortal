@@ -1,7 +1,7 @@
 <div class="row no-gutters firstrow sidings">
   <div class="col-md-11">
     <span class="headertext"
-      >Let's find your <span class="textGradient">Utopia</span></span
+    >Let's find your <span class="textGradient">Utopia</span></span
     >
   </div>
 </div>
@@ -18,7 +18,7 @@
   [disableToCalendar]="disableToCalendar"
 >
 </app-searchbox>
-<app-returnalert [message]="returnTripErrorMsg"> </app-returnalert>
+<app-returnalert [message]="returnTripErrorMsg"></app-returnalert>
 <app-flightmodal
   *ngIf="showModal"
   [flightInfo]="selectedFlight"
@@ -30,12 +30,14 @@
 >
 </app-flightmodal>
 <hr class="breakLine" />
-<div class="row no-gutters sortRow" id="sortRow">
+<div class="row no-gutters sortRow"
+     id="sortRow">
   <div
     class="col-md-11 d-flex justify-content-between flex-row-reverse align-items-center"
   >
-    <span class="subheadertext textButton" (click)="toggleSortFilterDropdown()"
-      ><i class="fas fa-filter"></i> SORT/FILTER</span
+    <span class="subheadertext textButton"
+          (click)="toggleSortFilterDropdown()"
+    ><i class="fas fa-filter"></i> SORT/FILTER</span
     >
     <select
       name="Pagination"
@@ -50,12 +52,14 @@
     </select>
   </div>
 </div>
-<div class="row no-gutters sortRowExpanded" id="sortRowExpanded">
+<div class="row no-gutters sortRowExpanded"
+     id="sortRowExpanded">
   <div class="col-md-11 sortContainer">
     <div class="row no-gutters sortPadding">
       <div class="col-md-12 d-flex justify-content-end align-items-center">
-        <span class="subheadertext textButton" (click)="closeSortDropdown()"
-          ><i class="fas fa-window-close"></i> SORT/FILTER</span
+        <span class="subheadertext textButton"
+              (click)="closeSortDropdown()"
+        ><i class="fas fa-window-close"></i> SORT/FILTER</span
         >
       </div>
     </div>
@@ -141,7 +145,8 @@
     </div>
   </div>
 </div>
-<div class="flightsContainer" *ngIf="viewData.length != 0; else elseBlock">
+<div class="flightsContainer"
+     *ngIf="viewData.length != 0; else elseBlock">
   <div
     class="singleEntry"
     *ngFor="
@@ -157,9 +162,11 @@
       >
         <div class="row no-gutters fullHeight">
           <div class="col-md-2 coloredBoxes">
-            <div class="row no-gutters fullHeight" style="padding-left: 60px">
+            <div class="row no-gutters fullHeight"
+                 style="padding-left: 60px">
               <div class="col-md-4 boxGradient"></div>
-              <div class="col-md-4 boxGradient" style="margin-left: 30px"></div>
+              <div class="col-md-4 boxGradient"
+                   style="margin-left: 30px"></div>
             </div>
           </div>
           <div class="col-md-10">
@@ -168,14 +175,14 @@
               <div class="col-md-4 d-flex align-items-center">
                 <i class="fas fa-plus-square fa-2x"></i>
                 <span class="subheadertext smallMarginLeft"
-                  >COVID-19 Policies and Guidelines</span
+                >COVID-19 Policies and Guidelines</span
                 >
               </div>
               <div
                 class="col-md-4 d-flex align-items-center justify-content-end"
               >
                 <span class="loyaltyPointsText"
-                  >{{ flight["loyaltyPoints"] }} Loyalty Points</span
+                >{{ flight["loyaltyPoints"] }} Loyalty Points</span
                 >
               </div>
             </div>
@@ -185,10 +192,10 @@
               <div class="col-md-8 d-flex align-items-center">
                 <i class="fas fa-plane fa-2x rotateUp"></i>
                 <span class="plaintext smallMarginLeft"
-                  ><span *ngIf="flight['multihop'] == true">First Flight: </span
-                  >from {{ flight["fromDateTime"] | date: "short" }} to
+                ><span *ngIf="flight['multihop'] == true">First Flight: </span
+                >from {{ flight["fromDateTime"] | date: "short" }} to
                   {{ flight["toDateTime"] | date: "short" }} ({{
-                    flight["duration"]
+                  flight["duration"]
                   }})</span
                 >
               </div>
@@ -197,7 +204,7 @@
               >
                 <span class="iataText textGradient">{{
                   flight["iataId"]
-                }}</span>
+                  }}</span>
                 <span class="priceText">{{ flight["basePrice"] }}</span>
               </div>
             </div>
@@ -205,175 +212,103 @@
               <div class="col-md-12 d-flex align-items-center">
                 <span class="plainRouteText smallMarginLeft">{{
                   flight["route"]
-                }}</span>
+                  }}</span>
               </div>
             </div>
           </div>
         </div>
       </div>
     </div>
-    <div
-      class="row no-gutters overlayForAdditionalDetails"
-      id="{{ indexOfelement }}"
-    >
+    <div class="row no-gutters overlayForAdditionalDetails"
+         id="{{ indexOfelement }}">
       <div class="col-md-11">
         <div class="row no-gutters d-flex justify-content-end">
-          <div
-            class="col-md-10 flightsOverlay"
-            appClickAway
-            (clickOutside)="close(indexOfelement)"
-          >
+          <div class="col-md-10 flightsOverlay"
+               appClickAway
+               (clickOutside)="close(indexOfelement)">
             <div class="row no-gutters minorSidings">
-              <div
-                class="col-md-12 maskRequired d-flex justify-content-center align-items-center"
-              >
-                <span class="maskRequiredText"
-                  >Mask <i class="fas fa-head-side-mask"></i> required
-                </span>
+              <div class="col-md-12 maskRequired d-flex justify-content-center align-items-center">
+                <span class="maskRequiredText">Mask <i class="fas fa-head-side-mask"></i> required </span>
               </div>
             </div>
             <div class="row no-gutters minorSidings verticalMargin">
               <div class="col-md-6 airplaneWeightContainer containerDesktop">
                 <div class="container-fluid backgroundColor">
-                  <div
-                    class="row no-gutters d-flex justify-content-center align-items-center"
-                  >
-                    <span class="infoBoxHeader">{{
-                      flight.origin.iataId
-                    }}</span>
+                  <div class="row no-gutters d-flex justify-content-center align-items-center">
+                    <span class="infoBoxHeader">{{flight.origin.iataId}}</span>
                   </div>
-                  <div class="row no-gutters" style="margin-bottom: 10px">
-                    <span class="infoBoxText"
-                      >{{ flight.origin.name }} ({{ flight.origin.iataId }})
-                      services the
-                      {{
-                        flight.origin.servicingArea.servicingArea
-                      }}
-                      area.</span
-                    >
+                  <div class="row no-gutters"
+                       style="margin-bottom: 10px;">
+                    <span class="infoBoxText">{{ flight.origin.name }} ({{ flight.origin.iataId }}) services the {{ flight.origin.servicingArea.areaName }}
+                                                                       area.</span>
                   </div>
                   <div class="row no-gutters">
-                    <span class="infoBoxText"
-                      >{{ flight.origin.name }} is located at
-                      {{ flight.origin.streetAddress }},
-                      {{ flight.origin.city }}; {{ flight.origin.state }},
-                      {{ flight.origin.zipcode }}.</span
-                    >
+                    <span class="infoBoxText">{{ flight.origin.name }}
+                      is located at {{flight.origin.streetAddress}}, {{flight.origin.city}}
+                      ; {{flight.origin.state}}, {{flight.origin.zipcode}}.</span>
                   </div>
                 </div>
               </div>
               <div class="col-md-6 airplaneWeightContainer containerDesktop1">
                 <div class="container-fluid backgroundColor">
-                  <div
-                    class="row no-gutters d-flex justify-content-center align-items-center"
-                  >
-                    <span class="infoBoxHeader">{{
-                      flight.destination.iataId
-                    }}</span>
+                  <div class="row no-gutters d-flex justify-content-center align-items-center">
+                    <span class="infoBoxHeader">{{flight.destination.iataId}}</span>
                   </div>
-                  <div class="row no-gutters" style="margin-bottom: 10px">
-                    <span class="infoBoxText"
-                      >{{ flight.destination.name }} ({{
-                        flight.destination.iataId
-                      }}) services the
-                      {{
-                        flight.destination.servicingArea.servicingArea
-                      }}
-                      area.</span
-                    >
+                  <div class="row no-gutters"
+                       style="margin-bottom: 10px;">
+                    <span class="infoBoxText">{{ flight.destination.name }}
+                      ({{ flight.destination.iataId }}
+                      ) services the {{ flight.destination.servicingArea.areaName }} area.</span>
                   </div>
                   <div class="row no-gutters">
-                    <span class="infoBoxText"
-                      >{{ flight.destination.name }} is located at
-                      {{ flight.destination.streetAddress }},
-                      {{ flight.destination.city }};
-                      {{ flight.destination.state }},
-                      {{ flight.destination.zipcode }}.</span
-                    >
+                    <span class="infoBoxText">{{ flight.destination.name }}
+                      is located at {{flight.destination.streetAddress}}
+                      , {{flight.destination.city}}; {{flight.destination.state}}
+                      , {{flight.destination.zipcode}}.</span>
                   </div>
                 </div>
               </div>
             </div>
-        </div>
-        <div class="row no-gutters overlayForAdditionalDetails" id="{{ indexOfelement }}">
-            <div class="col-md-11">
-                <div class="row no-gutters d-flex justify-content-end">
-                    <div class="col-md-10 flightsOverlay" appClickAway (clickOutside)="close(indexOfelement)">
-                        <div class="row no-gutters minorSidings">
-                            <div class="col-md-12 maskRequired d-flex justify-content-center align-items-center">
-                                <span class="maskRequiredText">Mask <i class="fas fa-head-side-mask"></i> required </span>
-                            </div>
-                        </div>
-                        <div class="row no-gutters minorSidings verticalMargin">
-                            <div class="col-md-6 airplaneWeightContainer containerDesktop">
-                                <div class="container-fluid backgroundColor">
-                                    <div class="row no-gutters d-flex justify-content-center align-items-center">
-                                       <span class="infoBoxHeader">{{flight.origin.iataId}}</span>
-                                    </div>
-                                    <div class="row no-gutters" style="margin-bottom: 10px;">
-                                        <span class="infoBoxText">{{ flight.origin.name }} ({{ flight.origin.iataId }}) services the {{ flight.origin.servicingArea.areaName }} area.</span>
-                                    </div>
-                                    <div class="row no-gutters">
-                                        <span class="infoBoxText">{{ flight.origin.name }} is located at {{flight.origin.streetAddress}}, {{flight.origin.city}}; {{flight.origin.state}}, {{flight.origin.zipcode}}.</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-6 airplaneWeightContainer containerDesktop1">
-                                <div class="container-fluid backgroundColor">
-                                    <div class="row no-gutters d-flex justify-content-center align-items-center">
-                                        <span class="infoBoxHeader">{{flight.destination.iataId}}</span>
-                                     </div>
-                                     <div class="row no-gutters" style="margin-bottom: 10px;">
-                                         <span class="infoBoxText">{{ flight.destination.name }} ({{ flight.destination.iataId }}) services the {{ flight.destination.servicingArea.areaName }} area.</span>
-                                     </div>
-                                     <div class="row no-gutters">
-                                         <span class="infoBoxText">{{ flight.destination.name }} is located at {{flight.destination.streetAddress}}, {{flight.destination.city}}; {{flight.destination.state}}, {{flight.destination.zipcode}}.</span>
-                                     </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row no-gutters minorSidings verticalMargin">
-                            <div class="col-md-6 airplaneWeightContainer containerDesktop">
-                                <div class="container-fluid backgroundColor flightInfo">
-                                    <div class="row no-gutters d-flex justify-content-center align-items-center">
-                                        <span class="infoBoxHeader">Flight information <i class="far fa-question-circle fa-lg"></i></span>
-                                     </div>
-                                     <div class="row no-gutters d-flex align-items-center justify-content-start" style="margin-bottom: 10px;">
-                                        <span class="infoBoxText" style="margin-left:12px;"> Your Utopia airplane is the {{flight.airplane.name}}.</span>
-                                    </div>
-                                    <div class="row no-gutters d-flex align-items-center justify-content-start">
-                                        <span class="infoBoxText" style="margin-left:12px;"> Carry-on must not exceed 22lbs/10kgs. Checked-in luggage must not exceed 50lbs/23kgs.</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-6 airplaneWeightContainer containerDesktop1">
-                                <div class="container-fluid backgroundColor">
-                                    <div class="row no-gutters d-flex justify-content-center align-items-center">
-                                        <span class="infoBoxHeader">Seats remaining</span>
-                                     </div>
-                                     <div class="row no-gutters d-flex align-items-center justify-content-start" style="margin-bottom: 10px;">
-                                        <span class="seatCounts" style="margin-left:12px;"> Economy: {{flight.economy}} remaining</span>
-                                    </div>
-                                    <div class="row no-gutters d-flex align-items-center justify-content-start" style="margin-bottom: 10px;">
-                                        <span class="seatCounts" style="margin-left:12px;"> Business Class: {{flight.business}} remaining</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row no-gutters minorSidings">
-                            <div class="col-md-12 addFlightToCart d-flex justify-content-center align-items-center" (click)="addFlightToCart( flight )">
-                                <span class="maskRequiredText">Add Flight to Cart</span>
-                            </div>
-                        </div>
-                    </div>
+            <div class="row no-gutters minorSidings verticalMargin">
+              <div class="col-md-6 airplaneWeightContainer containerDesktop">
+                <div class="container-fluid backgroundColor flightInfo">
+                  <div class="row no-gutters d-flex justify-content-center align-items-center">
+                    <span class="infoBoxHeader">Flight information <i class="far fa-question-circle fa-lg"></i></span>
+                  </div>
+                  <div class="row no-gutters d-flex align-items-center justify-content-start"
+                       style="margin-bottom: 10px;">
+                    <span class="infoBoxText"
+                          style="margin-left:12px;"> Your Utopia airplane is the {{flight.airplane.name}}
+                                                     .</span>
+                  </div>
+                  <div class="row no-gutters d-flex align-items-center justify-content-start">
+                    <span class="infoBoxText"
+                          style="margin-left:12px;"> Carry-on must not exceed 22lbs/10kgs. Checked-in luggage must not exceed 50lbs/23kgs.</span>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6 airplaneWeightContainer containerDesktop1">
+                <div class="container-fluid backgroundColor">
+                  <div class="row no-gutters d-flex justify-content-center align-items-center">
+                    <span class="infoBoxHeader">Seats remaining</span>
+                  </div>
+                  <div class="row no-gutters d-flex align-items-center justify-content-start"
+                       style="margin-bottom: 10px;">
+                    <span class="seatCounts"
+                          style="margin-left:12px;"> Economy: {{flight.economy}} remaining</span>
+                  </div>
+                  <div class="row no-gutters d-flex align-items-center justify-content-start"
+                       style="margin-bottom: 10px;">
+                    <span class="seatCounts"
+                          style="margin-left:12px;"> Business Class: {{flight.business}}
+                                                     remaining</span>
+                  </div>
                 </div>
               </div>
             </div>
             <div class="row no-gutters minorSidings">
-              <div
-                class="col-md-12 addFlightToCart d-flex justify-content-center align-items-center"
-                (click)="addFlightToCart(flight)"
-              >
+              <div class="col-md-12 addFlightToCart d-flex justify-content-center align-items-center"
+                   (click)="addFlightToCart( flight )">
                 <span class="maskRequiredText">Add Flight to Cart</span>
               </div>
             </div>
@@ -381,17 +316,27 @@
         </div>
       </div>
     </div>
-  </div>
-  <div class="row no-gutters d-flex justify-content-center align-items-center">
-    <ngb-pagination
-      [collectionSize]="viewData.length"
-      [(page)]="page"
-      [pageSize]="paginationCount"
-      [rotate]="true"
-    >
-    </ngb-pagination>
+    <div class="row no-gutters minorSidings">
+      <div
+        class="col-md-12 addFlightToCart d-flex justify-content-center align-items-center"
+        (click)="addFlightToCart(flight)"
+      >
+        <span class="maskRequiredText">Add Flight to Cart</span>
+      </div>
+    </div>
   </div>
 </div>
+
+<div class="row no-gutters d-flex justify-content-center align-items-center">
+  <ngb-pagination
+    [collectionSize]="viewData.length"
+    [(page)]="page"
+    [pageSize]="paginationCount"
+    [rotate]="true"
+  >
+  </ngb-pagination>
+</div>
+
 <ng-template #elseBlock>
   <div class="col-md-11 noResults d-flex justify-content-center">
     <h1
