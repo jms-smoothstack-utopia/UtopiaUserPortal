@@ -174,7 +174,9 @@ export class FlightsearchComponent implements OnInit {
         this.flightSearch.getServicingArea().subscribe(
           (res) => {
             res.forEach((element) => {
-              this.cityData.push(element.servicingArea);
+              if (!this.cityData.includes(element.areaName)) {
+                this.cityData.push(element.areaName);
+              }
             });
           },
           (err: HttpErrorResponse) => {
@@ -300,7 +302,7 @@ export class FlightsearchComponent implements OnInit {
           } else {
             tempIataId += ' to ' + flight.destination.iataId;
           }
-          tempCities.push(flight.origin.servicingArea.servicingArea);
+          tempCities.push(flight.origin.servicingArea.areaName);
           tempDuration +=
             new Date(flight.approximateDateTimeEnd).getTime() -
             new Date(flight.approximateDateTimeStart).getTime();
@@ -332,8 +334,8 @@ export class FlightsearchComponent implements OnInit {
 
         newFlight.basePrice = formatter.format(element[0].seats[0].price);
         newFlight.cities = [
-          element[0].origin.servicingArea.servicingArea,
-          element[0].destination.servicingArea.servicingArea,
+          element[0].origin.servicingArea.areaName,
+          element[0].destination.servicingArea.areaName,
         ];
         newFlight.duration = hours + 'h ' + minutes + 'm';
         newFlight.durationInMilliseconds = duration;

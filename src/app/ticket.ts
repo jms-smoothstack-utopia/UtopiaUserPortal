@@ -7,6 +7,6 @@ export interface Ticket {
   seatClass: string;
   seatNumber: string;
   status: string; //TicketStatus enum
-  statusPrettyPrint: string,
+  statusPrettyPrint: string;
   timePrettyPrint: string;
 }

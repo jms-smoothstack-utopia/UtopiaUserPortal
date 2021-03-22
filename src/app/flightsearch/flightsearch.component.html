@@ -18,7 +18,7 @@
   [disableToCalendar]="disableToCalendar"
 >
 </app-searchbox>
-<app-returnalert [message]="returnTripErrorMsg"> </app-returnalert>
+<app-returnalert [message]="returnTripErrorMsg"></app-returnalert>
 <app-flightmodal
   *ngIf="showModal"
   [flightInfo]="selectedFlight"
@@ -246,17 +246,14 @@
                     <span class="infoBoxText"
                       >{{ flight.origin.name }} ({{ flight.origin.iataId }})
                       services the
-                      {{
-                        flight.origin.servicingArea.servicingArea
-                      }}
-                      area.</span
+                      {{ flight.origin.servicingArea.areaName }} area.</span
                     >
                   </div>
                   <div class="row no-gutters">
                     <span class="infoBoxText"
                       >{{ flight.origin.name }} is located at
                       {{ flight.origin.streetAddress }},
-                      {{ flight.origin.city }}; {{ flight.origin.state }},
+                      {{ flight.origin.city }} ; {{ flight.origin.state }},
                       {{ flight.origin.zipcode }}.</span
                     >
                   </div>
@@ -275,9 +272,10 @@
                     <span class="infoBoxText"
                       >{{ flight.destination.name }} ({{
                         flight.destination.iataId
-                      }}) services the
+                      }}
+                      ) services the
                       {{
-                        flight.destination.servicingArea.servicingArea
+                        flight.destination.servicingArea.areaName
                       }}
                       area.</span
                     >
@@ -285,9 +283,9 @@
                   <div class="row no-gutters">
                     <span class="infoBoxText"
                       >{{ flight.destination.name }} is located at
-                      {{ flight.destination.streetAddress }},
+                      {{ flight.destination.streetAddress }} ,
                       {{ flight.destination.city }};
-                      {{ flight.destination.state }},
+                      {{ flight.destination.state }} ,
                       {{ flight.destination.zipcode }}.</span
                     >
                   </div>
@@ -311,7 +309,7 @@
                   >
                     <span class="infoBoxText" style="margin-left: 12px">
                       Your Utopia airplane is the
-                      {{ flight.airplane.name }}.</span
+                      {{ flight.airplane.name }} .</span
                     >
                   </div>
                   <div
@@ -362,17 +360,27 @@
         </div>
       </div>
     </div>
-  </div>
-  <div class="row no-gutters d-flex justify-content-center align-items-center">
-    <ngb-pagination
-      [collectionSize]="viewData.length"
-      [(page)]="page"
-      [pageSize]="paginationCount"
-      [rotate]="true"
-    >
-    </ngb-pagination>
+    <div class="row no-gutters minorSidings">
+      <div
+        class="col-md-12 addFlightToCart d-flex justify-content-center align-items-center"
+        (click)="addFlightToCart(flight)"
+      >
+        <span class="maskRequiredText">Add Flight to Cart</span>
+      </div>
+    </div>
   </div>
 </div>
+
+<div class="row no-gutters d-flex justify-content-center align-items-center">
+  <ngb-pagination
+    [collectionSize]="viewData.length"
+    [(page)]="page"
+    [pageSize]="paginationCount"
+    [rotate]="true"
+  >
+  </ngb-pagination>
+</div>
+
 <ng-template #elseBlock>
   <div class="col-md-11 noResults d-flex justify-content-center">
     <h1

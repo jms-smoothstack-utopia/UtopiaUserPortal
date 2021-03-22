@@ -22,14 +22,14 @@ let fakeData = [
         iataId: 'IAD',
         name: 'Dulles International Airport',
         servicingArea: {
-          servicingArea: 'D.C',
+          areaName: 'D.C',
         },
       },
       destination: {
         iataId: 'LAX',
         name: 'Los Angles International Airport',
         servicingArea: {
-          servicingArea: 'LA',
+          areaName: 'LA',
         },
       },
       creationDateTime: '2021-03-17T17:30:56.760945-04:00',
@@ -51,14 +51,14 @@ let fakeData = [
         iataId: 'DCA',
         name: 'Dulles International Airport',
         servicingArea: {
-          servicingArea: 'D.C',
+          areaName: 'D.C',
         },
       },
       destination: {
         iataId: 'LAX',
         name: 'Los Angles International Airport',
         servicingArea: {
-          servicingArea: 'LA',
+          areaName: 'LA',
         },
       },
       creationDateTime: '2021-03-15T17:30:56.760945-04:00',
@@ -80,14 +80,14 @@ let fakeData = [
         iataId: 'DCA',
         name: 'Dulles International Airport',
         servicingArea: {
-          servicingArea: 'D.C',
+          areaName: 'D.C',
         },
       },
       destination: {
         iataId: 'JFK',
         name: 'Los Angles International Airport',
         servicingArea: {
-          servicingArea: 'LA',
+          areaName: 'LA',
         },
       },
       creationDateTime: '2021-03-16T17:30:56.760945-04:00',
@@ -107,14 +107,14 @@ let fakeData = [
         iataId: 'JFK',
         name: 'Dulles International Airport',
         servicingArea: {
-          servicingArea: 'NYC',
+          areaName: 'NYC',
         },
       },
       destination: {
         iataId: 'LAX',
         name: 'Los Angles International Airport',
         servicingArea: {
-          servicingArea: 'LA',
+          areaName: 'LA',
         },
       },
       creationDateTime: '2021-03-16T17:30:56.760945-04:00',

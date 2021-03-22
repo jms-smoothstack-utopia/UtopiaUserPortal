@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { NGXLogger } from 'ngx-logger';
 import { Observable } from 'rxjs';
 import { Ticket } from 'src/app/ticket';
-import { Flight } from 'src/app/flight'
+import { Flight } from 'src/app/flight';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
