@@ -19,6 +19,7 @@ import { UserFlightHistoryComponent } from './user-flight-history/user-flight-hi
 import { UserFlightUpcomingComponent } from './user-flight-upcoming/user-flight-upcoming.component';
 import { DeleteAccountComponent } from './account/delete-account/delete-account.component';
 import { PerformDeletionComponent } from './account/perform-deletion/perform-deletion.component';
+import { TicketDetailComponent } from './ticket-detail/ticket-detail.component';
 import { ShoppingcartComponent } from './shoppingcart/shoppingcart.component';
 
 const routes: Routes = [
@@ -87,19 +88,23 @@ const routes: Routes = [
       },
       {
         path: 'shopping-cart',
-        component: ShoppingcartComponent
+        component: ShoppingcartComponent,
       },
       {
         path: PathConstants.USER_PROFILE,
         component: UserProfileComponent,
       },
       {
-        path: PathConstants.FLIGHT_HISTORY + '/:id',
+        path: PathConstants.FLIGHT_HISTORY,
         component: UserFlightHistoryComponent,
       },
       {
-        path: PathConstants.FLIGHT_UPCOMING + '/:id',
+        path: PathConstants.FLIGHT_UPCOMING,
         component: UserFlightUpcomingComponent,
+      },
+      {
+        path: PathConstants.TICKET_DETAIL,
+        component: TicketDetailComponent,
       },
     ],
   },

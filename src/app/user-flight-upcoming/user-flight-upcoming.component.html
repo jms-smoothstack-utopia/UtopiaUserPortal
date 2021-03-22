@@ -1,36 +1,38 @@
-<app-user-navbar></app-user-navbar>
+<app-user-navbar [parentComponent]="activeForNav"></app-user-navbar>
 <div *ngIf="tickets">
-    <p *ngIf="tickets.length == 0">
-        There are no upcoming tickets. Why not book a flight somewhere?
-    </p>
-    <div *ngIf="tickets.length != 0" class="col-6">
-        <h3>Upcoming flight tickets:</h3>
-        <table class="table" id="ticketsTable">
-            <thead>
-                <tr>
-                    <th>Flight ID</th>
-                    <th>Name</th>
-                    <th>Seat class</th>
-                    <th>Seat number</th>
-                    <th>Status</th>
-                    <th>Date/Time</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr *ngFor="let ticket of tickets">
-                    <td>{{ticket.flightId}}</td>
-                    <td>{{ticket.passengerName}}</td>
-                    <td>{{ticket.seatClass}}</td>
-                    <td>{{ticket.seatNumber}}</td>
-                    <td>{{ticket.status}}</td>
-                    <td>{{ticket.timePrettyPrint}}</td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
+  <p *ngIf="tickets.length == 0">
+    There are no upcoming tickets. Why not book a flight somewhere?
+  </p>
+  <div *ngIf="tickets.length != 0" class="col-12">
+    <h3>Upcoming flight tickets:</h3>
+    <table class="table table-responsive" id="ticketsTable">
+      <thead>
+        <tr>
+          <th></th>   <!-- detail link -->
+          <th>Flight ID</th>
+          <th>Name</th>
+          <th>Seat class</th>
+          <th>Seat number</th>
+          <th>Status</th>
+          <th>Date/Time</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let ticket of tickets">
+          <td><a href="/tickets/{{  ticket.id  }}">Details</a></td>
+          <td>{{ ticket.flightId }}</td>
+          <td>{{ ticket.passengerName }}</td>
+          <td>{{ ticket.seatClass }}</td>
+          <td>{{ ticket.seatNumber }}</td>
+          <td>{{ ticket.statusPrettyPrint }}</td>
+          <td>{{ ticket.timePrettyPrint }}</td>
+        </tr>
+      </tbody>
+    </table>
+</div>
 </div>
 
 <div *ngIf="error">
-    <h2>{{error.status}} Error</h2>
-    <p>{{error.message}}</p>
+  <h2>{{ error.status }} Error</h2>
+  <p>{{ error.message }}</p>
 </div>

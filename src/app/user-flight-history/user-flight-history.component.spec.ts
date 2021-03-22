@@ -28,6 +28,7 @@ describe('UserFlightHistoryComponent', () => {
 
   const mockTime = new Date(Date.now() - 1000); //past tickets
   const mockTimeStr = mockTime.toString();
+  const mockPrettyStatusStr = 'checked in';
 
   let mockTicket1: Ticket = {
     id: 1,
@@ -38,7 +39,8 @@ describe('UserFlightHistoryComponent', () => {
     seatClass: 'First',
     seatNumber: '1B',
     status: 'CHECKED_IN',
-    timePrettyPrint: '', //expect to be filled in
+    statusPrettyPrint: '',
+    timePrettyPrint: '', //expect these to be filled in
   };
 
   let mockTicket2: Ticket = {
@@ -50,6 +52,7 @@ describe('UserFlightHistoryComponent', () => {
     seatClass: 'Business',
     seatNumber: '13B',
     status: 'CHECKED_IN',
+    statusPrettyPrint: '',
     timePrettyPrint: '',
   };
 
@@ -62,6 +65,7 @@ describe('UserFlightHistoryComponent', () => {
     seatClass: 'Coach',
     seatNumber: '30B',
     status: 'CHECKED_IN',
+    statusPrettyPrint: '',
     timePrettyPrint: '',
   };
 
@@ -111,11 +115,17 @@ describe('UserFlightHistoryComponent', () => {
     expect(component.checkIsValidTickets([])).toBeTrue();
   });
 
-  it('setHistory should set tickets, fill in their date/time strings', () => {
+  it('setHistory should set tickets, fill in their date/time and pretty status strings', () => {
     component.setHistory(mockTicketArr);
 
-    (component.tickets as Ticket[]).forEach((ticket) => {
+    const tickets = component.tickets;
+
+    expect(tickets).toBeTruthy();
+    expect(tickets?.length).toBeGreaterThan(0);
+
+    tickets!.forEach((ticket) => {
       expect(ticket.timePrettyPrint == mockTimeStr);
+      expect(ticket.statusPrettyPrint == mockPrettyStatusStr);
     });
   });
 });

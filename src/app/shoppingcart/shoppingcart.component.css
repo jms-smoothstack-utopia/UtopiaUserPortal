@@ -1,89 +1,89 @@
-.sidings{
-    margin-left: 24px;
-    margin-right: 24px;
+.sidings {
+  margin-left: 24px;
+  margin-right: 24px;
 }
 
-.cartheader{
-    font-family: "Futura";
-    font-weight: bold;
-    font-size: 40px;
-    color: black;
+.cartheader {
+  font-family: "Futura";
+  font-weight: bold;
+  font-size: 40px;
+  color: black;
 }
 
-.firstrow{
-    margin-top: 20px;
+.firstrow {
+  margin-top: 20px;
 }
 
-.secondrow{
-    margin-top: 10px;
+.secondrow {
+  margin-top: 10px;
 }
 
 .textGradient {
-    font-size: larger;
-    font-family: 'Futura';
-    font-weight: bold;
-    background: linear-gradient(52deg, #1508AF, #8E2AE3);
-    background-clip: text;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+  font-size: larger;
+  font-family: "Futura";
+  font-weight: bold;
+  background: linear-gradient(52deg, #1508af, #8e2ae3);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
-.bigText{
-    font-size: 60px;
+.bigText {
+  font-size: 60px;
 }
 
-.greyline{
-    margin-right: 48px;
-    margin-top: 15px;
-    margin-bottom: 15px;
+.greyline {
+  margin-right: 48px;
+  margin-top: 15px;
+  margin-bottom: 15px;
 }
 
 .buybutton {
-    font-family: "Lato", sans-serif;
-    font-weight: 600;
-    background: linear-gradient(52deg, #1508AF, #8E2AE3);
-    color: white;
-    font-size: large;
-    padding: 7px 20px;
-    margin: 8px 12px;
-    border: none;
-    cursor: pointer;
-    width: 20%;
+  font-family: "Lato", sans-serif;
+  font-weight: 600;
+  background: linear-gradient(52deg, #1508af, #8e2ae3);
+  color: white;
+  font-size: large;
+  padding: 7px 20px;
+  margin: 8px 12px;
+  border: none;
+  cursor: pointer;
+  width: 20%;
 }
 
-.buybutton:hover{
-    background: linear-gradient(52deg, #0c0558, #631ba1);
+.buybutton:hover {
+  background: linear-gradient(52deg, #0c0558, #631ba1);
 }
 
-.firstitem{
-    font-size: larger;
-    font-family: 'Futura';
-    font-weight: bold;
-    color: black;
+.firstitem {
+  font-size: larger;
+  font-family: "Futura";
+  font-weight: bold;
+  color: black;
 }
 
-.seconditem{
-    font-size: larger;
-    font-family: 'Futura';
-    font-weight: bold;
+.seconditem {
+  font-size: larger;
+  font-family: "Futura";
+  font-weight: bold;
 }
 
-.thirditem{
-    font-family: "Lato", sans-serif;
-    font-weight: 600; 
+.thirditem {
+  font-family: "Lato", sans-serif;
+  font-weight: 600;
 }
 
 @media screen and (max-width: 800px) {
-    .greyline{
-        margin-left: 12px;
-        margin-right: 12px;
-    }
+  .greyline {
+    margin-left: 12px;
+    margin-right: 12px;
+  }
 
-    .bigText{
-        font-size: 40px;
-    }
+  .bigText {
+    font-size: 40px;
+  }
 
-    .buybutton{
-        width: 100%;
-    }
+  .buybutton {
+    width: 100%;
+  }
 }

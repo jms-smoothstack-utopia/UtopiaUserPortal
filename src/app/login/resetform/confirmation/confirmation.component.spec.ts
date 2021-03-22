@@ -9,10 +9,9 @@ describe('ConfirmationComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ RouterTestingModule ],
-      declarations: [ ConfirmationComponent ]
-    })
-    .compileComponents();
+      imports: [RouterTestingModule],
+      declarations: [ConfirmationComponent],
+    }).compileComponents();
   });
 
   beforeEach(() => {

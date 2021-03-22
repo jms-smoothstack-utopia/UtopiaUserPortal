@@ -1,116 +1,298 @@
 <div class="row no-gutters firstrow sidings">
-    <div class="col-md-11">
-        <span class="headertext">Let's find your <span class="textGradient">Utopia</span></span>
-    </div>
+  <div class="col-md-11">
+    <span class="headertext"
+      >Let's find your <span class="textGradient">Utopia</span></span
+    >
+  </div>
 </div>
 <app-searchbox
-[tripRB] = "tripRB"
-[nonStopRB] = "nonStopRB"
-[numberOfPeople] = "numberOfPeople"
-[adult] = "adult"
-[countOfChildren] = "countOfChildren"
-[fromAirport] = "fromAirport"
-[toAirport] = "toAirport"
-[fromModel] = "fromModel"
-[toModel] = "toModel"
-[disableToCalendar] = "disableToCalendar">
+  [tripRB]="tripRB"
+  [nonStopRB]="nonStopRB"
+  [numberOfPeople]="numberOfPeople"
+  [adult]="adult"
+  [countOfChildren]="countOfChildren"
+  [fromAirport]="fromAirport"
+  [toAirport]="toAirport"
+  [fromModel]="fromModel"
+  [toModel]="toModel"
+  [disableToCalendar]="disableToCalendar"
+>
 </app-searchbox>
-<app-returnalert
-[message]="returnTripErrorMsg">
-</app-returnalert>
+<app-returnalert [message]="returnTripErrorMsg"> </app-returnalert>
 <app-flightmodal
-*ngIf="showModal" 
-[flightInfo]="selectedFlight" 
-[adult] = "adult"
-[countOfChildren] = "countOfChildren"
-[areWeReturning] = "returning"
-(closeEvent)="hideInputAndModal()"
-(lookAtOtherFlights)="showOtherFlights()"
+  *ngIf="showModal"
+  [flightInfo]="selectedFlight"
+  [adult]="adult"
+  [countOfChildren]="countOfChildren"
+  [areWeReturning]="returning"
+  (closeEvent)="hideInputAndModal()"
+  (lookAtOtherFlights)="showOtherFlights()"
 >
 </app-flightmodal>
-<hr class="breakLine">
+<hr class="breakLine" />
 <div class="row no-gutters sortRow" id="sortRow">
-    <div class="col-md-11 d-flex justify-content-between flex-row-reverse align-items-center">
-        <span class="subheadertext textButton" (click)="toggleSortFilterDropdown()"><i class="fas fa-filter"></i> SORT/FILTER</span>
-        <select name="Pagination" id="Pagination" *ngIf="viewData.length > 10" (change)="changePagination($event)">
-            <option value="10">10 results per page</option>
-            <option value="15">15 results per page</option>
-            <option value="20">20 results per page</option>
-            <option value="25">25 results per page</option>
-          </select>
-    </div>
+  <div
+    class="col-md-11 d-flex justify-content-between flex-row-reverse align-items-center"
+  >
+    <span class="subheadertext textButton" (click)="toggleSortFilterDropdown()"
+      ><i class="fas fa-filter"></i> SORT/FILTER</span
+    >
+    <select
+      name="Pagination"
+      id="Pagination"
+      *ngIf="viewData.length > 10"
+      (change)="changePagination($event)"
+    >
+      <option value="10">10 results per page</option>
+      <option value="15">15 results per page</option>
+      <option value="20">20 results per page</option>
+      <option value="25">25 results per page</option>
+    </select>
+  </div>
 </div>
 <div class="row no-gutters sortRowExpanded" id="sortRowExpanded">
-    <div class="col-md-11 sortContainer">
-        <div class="row no-gutters sortPadding">
-            <div class="col-md-12 d-flex justify-content-end align-items-center">
-                <span class="subheadertext textButton" (click)="closeSortDropdown()"><i class="fas fa-window-close"></i> SORT/FILTER</span>
-            </div>
-        </div>
-        <div class="row no-gutters sortSecondRow">
-            <div class="col-md-6 sortSidings dropContainer"> 
-                <span class="sortDropdownText">Filter by cities:</span>
-                <ul class="dropdownList overflow">
-                    <li *ngFor="let city of cityData; let indexOfCities = index" class="hoverListItemA" (click)="toggleFilter( city )" id="{{ city }}">{{city}}</li>
-                </ul>
-            </div>
-            <div class="col-md-6 sortSidings dropContainer mobileDropDown"> 
-                <span class="sortDropdownText">Sort by:</span>
-                <ul class="dropdownList overflow">
-                    <li class="hoverListItem" id="PriceLowToHigh" (click)="eventSort(SortMethod.CHEAPEST, 'PriceLowToHigh')">Price: Low to High</li>
-                    <li class="hoverListItem" id="PriceHighToLow" (click)="eventSort(SortMethod.EXPENSIVE, 'PriceHighToLow')">Price: High to Low</li>
-                    <li class="hoverListItem" id="MostRecentToOldest" (click)="eventSort(SortMethod.MOST_RECENT, 'MostRecentToOldest')">Time: Most Recent to Oldest</li>
-                    <li class="hoverListItem" id="OldestToMostRecent" (click)="eventSort(SortMethod.OLDEST, 'OldestToMostRecent')">Time: Oldest to Most Recent</li>
-                    <li class="hoverListItem" id="HopsLowToHigh" (click)="eventSort(SortMethod.LOW_HOPS, 'HopsLowToHigh')"># of Hops: Low to High</li>
-                    <li class="hoverListItem" id="HopsHighToLow" (click)="eventSort(SortMethod.HIGH_HOPS, 'HopsHighToLow')"># of Hops: High to Low</li>
-                    <li class="hoverListItem" id="DurationShortToLong" (click)="eventSort(SortMethod.SHORTEST_DURATION, 'DurationShortToLong')">Flight Duration: Shortest to Longest</li>
-                    <li class="hoverListItem" id="DurationLongToShort" (click)="eventSort(SortMethod.LONGEST_DURATION, 'DurationLongToShort')" >Flight Duration: Longest to Shortest</li>
-                </ul>
-            </div>
-        </div>
+  <div class="col-md-11 sortContainer">
+    <div class="row no-gutters sortPadding">
+      <div class="col-md-12 d-flex justify-content-end align-items-center">
+        <span class="subheadertext textButton" (click)="closeSortDropdown()"
+          ><i class="fas fa-window-close"></i> SORT/FILTER</span
+        >
+      </div>
     </div>
+    <div class="row no-gutters sortSecondRow">
+      <div class="col-md-6 sortSidings dropContainer">
+        <span class="sortDropdownText">Filter by cities:</span>
+        <ul class="dropdownList overflow">
+          <li
+            *ngFor="let city of cityData; let indexOfCities = index"
+            class="hoverListItemA"
+            (click)="toggleFilter(city)"
+            id="{{ city }}"
+          >
+            {{ city }}
+          </li>
+        </ul>
+      </div>
+      <div class="col-md-6 sortSidings dropContainer mobileDropDown">
+        <span class="sortDropdownText">Sort by:</span>
+        <ul class="dropdownList overflow">
+          <li
+            class="hoverListItem"
+            id="PriceLowToHigh"
+            (click)="eventSort(SortMethod.CHEAPEST, 'PriceLowToHigh')"
+          >
+            Price: Low to High
+          </li>
+          <li
+            class="hoverListItem"
+            id="PriceHighToLow"
+            (click)="eventSort(SortMethod.EXPENSIVE, 'PriceHighToLow')"
+          >
+            Price: High to Low
+          </li>
+          <li
+            class="hoverListItem"
+            id="MostRecentToOldest"
+            (click)="eventSort(SortMethod.MOST_RECENT, 'MostRecentToOldest')"
+          >
+            Time: Most Recent to Oldest
+          </li>
+          <li
+            class="hoverListItem"
+            id="OldestToMostRecent"
+            (click)="eventSort(SortMethod.OLDEST, 'OldestToMostRecent')"
+          >
+            Time: Oldest to Most Recent
+          </li>
+          <li
+            class="hoverListItem"
+            id="HopsLowToHigh"
+            (click)="eventSort(SortMethod.LOW_HOPS, 'HopsLowToHigh')"
+          >
+            # of Hops: Low to High
+          </li>
+          <li
+            class="hoverListItem"
+            id="HopsHighToLow"
+            (click)="eventSort(SortMethod.HIGH_HOPS, 'HopsHighToLow')"
+          >
+            # of Hops: High to Low
+          </li>
+          <li
+            class="hoverListItem"
+            id="DurationShortToLong"
+            (click)="
+              eventSort(SortMethod.SHORTEST_DURATION, 'DurationShortToLong')
+            "
+          >
+            Flight Duration: Shortest to Longest
+          </li>
+          <li
+            class="hoverListItem"
+            id="DurationLongToShort"
+            (click)="
+              eventSort(SortMethod.LONGEST_DURATION, 'DurationLongToShort')
+            "
+          >
+            Flight Duration: Longest to Shortest
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
 </div>
 <div class="flightsContainer" *ngIf="viewData.length != 0; else elseBlock">
-    <div class="singleEntry" *ngFor="let flight of viewData | slice: (page - 1) * paginationCount: page * paginationCount;let indexOfelement = index">
-        <div class="row no-gutters">
-            <div class="col-md-11 flightsBorder" (click)="toggleTicket(indexOfelement, $event)">
-                <div class="row no-gutters fullHeight">
-                    <div class="col-md-2 coloredBoxes">
-                        <div class="row no-gutters fullHeight" style="padding-left: 60px;">
-                            <div class="col-md-4 boxGradient">
-                            </div>
-                            <div class="col-md-4 boxGradient" style="margin-left: 30px;">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-10">
-                        <!-- {{ flight["route"] }} -->
-                        <div class="row no-gutters topRow justify-content-between covidRow">
-                            <div class="col-md-4 d-flex align-items-center">
-                                <i class="fas fa-plus-square fa-2x"></i>
-                                <span class="subheadertext smallMarginLeft">COVID-19 Policies and Guidelines</span>
-                            </div>
-                            <div class="col-md-4 d-flex align-items-center justify-content-end">
-                                <span class="loyaltyPointsText">{{ flight["loyaltyPoints"] }} Loyalty Points</span>
-                            </div>
-                        </div>
-                        <div class="row no-gutters secondFlightsRow justify-content-between">
-                            <div class="col-md-8 d-flex align-items-center">
-                                <i class="fas fa-plane fa-2x rotateUp"></i>
-                                <span class="plaintext smallMarginLeft"><span *ngIf="flight['multihop'] == true">First Flight: </span>from {{ flight["fromDateTime"] | date:'short'}} to {{ flight["toDateTime"] | date:'short' }} ({{flight[ "duration"]}})</span>
-                            </div>
-                            <div class="col-md-4 d-flex align-items-center justify-content-end mobileSizes">
-                                <span class="iataText textGradient">{{ flight["iataId"] }}</span>
-                                <span class="priceText">{{ flight["basePrice"] }}</span>
-                            </div>
-                        </div>
-                        <div class="row no-gutters thirdFlightsRow justify-content-between">
-                            <div class="col-md-12 d-flex align-items-center">
-                                <span class="plainRouteText smallMarginLeft">{{ flight["route"] }}</span>
-                            </div>
-                        </div>
-                    </div>
+  <div
+    class="singleEntry"
+    *ngFor="
+      let flight of viewData
+        | slice: (page - 1) * paginationCount:page * paginationCount;
+      let indexOfelement = index
+    "
+  >
+    <div class="row no-gutters">
+      <div
+        class="col-md-11 flightsBorder"
+        (click)="toggleTicket(indexOfelement, $event)"
+      >
+        <div class="row no-gutters fullHeight">
+          <div class="col-md-2 coloredBoxes">
+            <div class="row no-gutters fullHeight" style="padding-left: 60px">
+              <div class="col-md-4 boxGradient"></div>
+              <div class="col-md-4 boxGradient" style="margin-left: 30px"></div>
+            </div>
+          </div>
+          <div class="col-md-10">
+            <!-- {{ flight["route"] }} -->
+            <div class="row no-gutters topRow justify-content-between covidRow">
+              <div class="col-md-4 d-flex align-items-center">
+                <i class="fas fa-plus-square fa-2x"></i>
+                <span class="subheadertext smallMarginLeft"
+                  >COVID-19 Policies and Guidelines</span
+                >
+              </div>
+              <div
+                class="col-md-4 d-flex align-items-center justify-content-end"
+              >
+                <span class="loyaltyPointsText"
+                  >{{ flight["loyaltyPoints"] }} Loyalty Points</span
+                >
+              </div>
+            </div>
+            <div
+              class="row no-gutters secondFlightsRow justify-content-between"
+            >
+              <div class="col-md-8 d-flex align-items-center">
+                <i class="fas fa-plane fa-2x rotateUp"></i>
+                <span class="plaintext smallMarginLeft"
+                  ><span *ngIf="flight['multihop'] == true">First Flight: </span
+                  >from {{ flight["fromDateTime"] | date: "short" }} to
+                  {{ flight["toDateTime"] | date: "short" }} ({{
+                    flight["duration"]
+                  }})</span
+                >
+              </div>
+              <div
+                class="col-md-4 d-flex align-items-center justify-content-end mobileSizes"
+              >
+                <span class="iataText textGradient">{{
+                  flight["iataId"]
+                }}</span>
+                <span class="priceText">{{ flight["basePrice"] }}</span>
+              </div>
+            </div>
+            <div class="row no-gutters thirdFlightsRow justify-content-between">
+              <div class="col-md-12 d-flex align-items-center">
+                <span class="plainRouteText smallMarginLeft">{{
+                  flight["route"]
+                }}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      class="row no-gutters overlayForAdditionalDetails"
+      id="{{ indexOfelement }}"
+    >
+      <div class="col-md-11">
+        <div class="row no-gutters d-flex justify-content-end">
+          <div
+            class="col-md-10 flightsOverlay"
+            appClickAway
+            (clickOutside)="close(indexOfelement)"
+          >
+            <div class="row no-gutters minorSidings">
+              <div
+                class="col-md-12 maskRequired d-flex justify-content-center align-items-center"
+              >
+                <span class="maskRequiredText"
+                  >Mask <i class="fas fa-head-side-mask"></i> required
+                </span>
+              </div>
+            </div>
+            <div class="row no-gutters minorSidings verticalMargin">
+              <div class="col-md-6 airplaneWeightContainer containerDesktop">
+                <div class="container-fluid backgroundColor">
+                  <div
+                    class="row no-gutters d-flex justify-content-center align-items-center"
+                  >
+                    <span class="infoBoxHeader">{{
+                      flight.origin.iataId
+                    }}</span>
+                  </div>
+                  <div class="row no-gutters" style="margin-bottom: 10px">
+                    <span class="infoBoxText"
+                      >{{ flight.origin.name }} ({{ flight.origin.iataId }})
+                      services the
+                      {{
+                        flight.origin.servicingArea.servicingArea
+                      }}
+                      area.</span
+                    >
+                  </div>
+                  <div class="row no-gutters">
+                    <span class="infoBoxText"
+                      >{{ flight.origin.name }} is located at
+                      {{ flight.origin.streetAddress }},
+                      {{ flight.origin.city }}; {{ flight.origin.state }},
+                      {{ flight.origin.zipcode }}.</span
+                    >
+                  </div>
                 </div>
+              </div>
+              <div class="col-md-6 airplaneWeightContainer containerDesktop1">
+                <div class="container-fluid backgroundColor">
+                  <div
+                    class="row no-gutters d-flex justify-content-center align-items-center"
+                  >
+                    <span class="infoBoxHeader">{{
+                      flight.destination.iataId
+                    }}</span>
+                  </div>
+                  <div class="row no-gutters" style="margin-bottom: 10px">
+                    <span class="infoBoxText"
+                      >{{ flight.destination.name }} ({{
+                        flight.destination.iataId
+                      }}) services the
+                      {{
+                        flight.destination.servicingArea.servicingArea
+                      }}
+                      area.</span
+                    >
+                  </div>
+                  <div class="row no-gutters">
+                    <span class="infoBoxText"
+                      >{{ flight.destination.name }} is located at
+                      {{ flight.destination.streetAddress }},
+                      {{ flight.destination.city }};
+                      {{ flight.destination.state }},
+                      {{ flight.destination.zipcode }}.</span
+                    >
+                  </div>
+                </div>
+              </div>
             </div>
         </div>
         <div class="row no-gutters overlayForAdditionalDetails" id="{{ indexOfelement }}">
@@ -185,16 +367,36 @@
                         </div>
                     </div>
                 </div>
+              </div>
             </div>
+            <div class="row no-gutters minorSidings">
+              <div
+                class="col-md-12 addFlightToCart d-flex justify-content-center align-items-center"
+                (click)="addFlightToCart(flight)"
+              >
+                <span class="maskRequiredText">Add Flight to Cart</span>
+              </div>
+            </div>
+          </div>
         </div>
+      </div>
     </div>
-    <div class="row no-gutters d-flex justify-content-center align-items-center">
-        <ngb-pagination [collectionSize]="viewData.length" [(page)]="page" [pageSize]="paginationCount" [rotate]="true">
-        </ngb-pagination>
-    </div> 
+  </div>
+  <div class="row no-gutters d-flex justify-content-center align-items-center">
+    <ngb-pagination
+      [collectionSize]="viewData.length"
+      [(page)]="page"
+      [pageSize]="paginationCount"
+      [rotate]="true"
+    >
+    </ngb-pagination>
+  </div>
 </div>
 <ng-template #elseBlock>
-    <div class="col-md-11 noResults d-flex justify-content-center">
-        <h1 class="textGradient largerErrorMessage" [innerHTML]="noResultsErrorMsg"></h1>
-    </div>
+  <div class="col-md-11 noResults d-flex justify-content-center">
+    <h1
+      class="textGradient largerErrorMessage"
+      [innerHTML]="noResultsErrorMsg"
+    ></h1>
+  </div>
 </ng-template>

@@ -38,6 +38,7 @@ export class AuthService {
 
   login(email: string, password: string) {
     this.log.debug('Attempt authentication', email);
+    this.log.debug('Posting to: ' + this.LOGIN_URL);
     return this.http
       .post<AuthResponse>(this.LOGIN_URL, {
         email,

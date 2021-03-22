@@ -1,447 +1,450 @@
-.sidings{
-    margin-left: 0px;
+.sidings {
+  margin-left: 0px;
 }
 
-.firstrow{
-    margin-top: 16px;
-    margin-bottom: 8px;
+.firstrow {
+  margin-top: 16px;
+  margin-bottom: 8px;
 }
 
-.headertext{
-    font-family: 'Futura';
-    font-size: 24px;
-    font-weight: bold;
+.headertext {
+  font-family: "Futura";
+  font-size: 24px;
+  font-weight: bold;
 }
 
-.subheadertext{
-    font-family: 'Futura';
-    font-size: 14px;
-    font-weight: bold;
+.subheadertext {
+  font-family: "Futura";
+  font-size: 14px;
+  font-weight: bold;
 }
 
-.sortDropdownText{
-    font-family: 'Futura';
-    font-size: 20px;
-    font-weight: bold;
-    text-decoration: underline;
+.sortDropdownText {
+  font-family: "Futura";
+  font-size: 20px;
+  font-weight: bold;
+  text-decoration: underline;
 }
 
-select{
-    border: none;
-    font-family: "Lato", sans-serif;
-    font-weight: 900;
-    font-size: 16px;
+select {
+  border: none;
+  font-family: "Lato", sans-serif;
+  font-weight: 900;
+  font-size: 16px;
 }
 
-.plaintext{
-    font-family: "Lato", sans-serif;
-    font-weight: 600;
-    font-size: 16px;
+.plaintext {
+  font-family: "Lato", sans-serif;
+  font-weight: 600;
+  font-size: 16px;
 }
 
-.plainRouteText{
-    font-family: "Lato", sans-serif;
-    font-weight: 600;
-    font-size: 14px;
+.plainRouteText {
+  font-family: "Lato", sans-serif;
+  font-weight: 600;
+  font-size: 14px;
 }
 
-.smallMarginLeft{
-    margin-left: 12px;
+.smallMarginLeft {
+  margin-left: 12px;
 }
 
-.loyaltyPointsText{
-    background: linear-gradient(52deg, #1508AF, #8E2AE3);
-    background-clip: text;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    font-family: 'Futura';
-    font-size: 14px;
-    font-style: italic;
+.loyaltyPointsText {
+  background: linear-gradient(52deg, #1508af, #8e2ae3);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-family: "Futura";
+  font-size: 14px;
+  font-style: italic;
 }
 
 .textGradient {
-    font-size: larger;
-    font-family: 'Futura';
-    font-weight: bold;
-    background: linear-gradient(52deg, #1508AF, #8E2AE3);
-    background-clip: text;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+  font-size: larger;
+  font-family: "Futura";
+  font-weight: bold;
+  background: linear-gradient(52deg, #1508af, #8e2ae3);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
-.dropdownList{
-    height: 100%;
-    padding: 0px;
-    margin-bottom: 0px;
+.dropdownList {
+  height: 100%;
+  padding: 0px;
+  margin-bottom: 0px;
 }
 
-.overflow{
-    overflow-y: scroll;
+.overflow {
+  overflow-y: scroll;
 }
 
-.dropContainer{
-    height: 100%;
+.dropContainer {
+  height: 100%;
 }
 
-.moneyTextGradient{
-    background: linear-gradient(52deg, #0DFF6A, #00C99A);
-    background-clip: text;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+.moneyTextGradient {
+  background: linear-gradient(52deg, #0dff6a, #00c99a);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
-.boxGradient{
-    background-image: linear-gradient(52deg, #1508AF, #8E2AE3);
+.boxGradient {
+  background-image: linear-gradient(52deg, #1508af, #8e2ae3);
 }
 
-.breakLine{
-    margin-top: 48px;
-    margin-bottom: 30px;
-    margin-right: 95px;
+.breakLine {
+  margin-top: 48px;
+  margin-bottom: 30px;
+  margin-right: 95px;
 }
 
-.singleEntry{
-    margin-bottom: 40px;
+.singleEntry {
+  margin-bottom: 40px;
 }
 
-.fullHeight{
-    height: 100%;
+.fullHeight {
+  height: 100%;
 }
 
-.flightsBorder{
-    height: 225px;
-    position: relative;
-    border-radius: 20px;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+.flightsBorder {
+  height: 225px;
+  position: relative;
+  border-radius: 20px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
-.coloredBox{
-    height: 100%;
+.coloredBox {
+  height: 100%;
 }
 
-.topRow{
-    margin-top: 10px;
-    margin-right: 30px;
+.topRow {
+  margin-top: 10px;
+  margin-right: 30px;
 }
 
-.secondFlightsRow{
-    margin-top: 50px;
-    margin-right: 30px;
-    margin-left: 30px;
+.secondFlightsRow {
+  margin-top: 50px;
+  margin-right: 30px;
+  margin-left: 30px;
 }
 
-.thirdFlightsRow{
-    margin-left: 20px;
-    margin-top: 20px;
+.thirdFlightsRow {
+  margin-left: 20px;
+  margin-top: 20px;
 }
 
-.rotateUp{
-    transform: rotate(270deg);
+.rotateUp {
+  transform: rotate(270deg);
 }
 
-.iataText{
-    font-family: "Lato", sans-serif;
-    font-weight: 600;
-    font-size: 24px;
-    margin-right: 24px;
+.iataText {
+  font-family: "Lato", sans-serif;
+  font-weight: 600;
+  font-size: 24px;
+  margin-right: 24px;
 }
 
-.priceText{
-    position: absolute;
-    font-family: "Lato", sans-serif;
-    font-weight: 600;
-    font-size: 24px;
-    margin-right: 32px;
-    top: 30px;
-    right: -8px;
+.priceText {
+  position: absolute;
+  font-family: "Lato", sans-serif;
+  font-weight: 600;
+  font-size: 24px;
+  margin-right: 32px;
+  top: 30px;
+  right: -8px;
 }
 
-.flightsBorder:hover{
-    box-shadow: 0 4px 8px 0 rgba(57, 62, 197, 0.75), 0 6px 20px 0 rgba(57, 62, 197, 0.75);
+.flightsBorder:hover {
+  box-shadow: 0 4px 8px 0 rgba(57, 62, 197, 0.75),
+    0 6px 20px 0 rgba(57, 62, 197, 0.75);
 }
 
-.overlayForAdditionalDetails{
-    display: none;
+.overlayForAdditionalDetails {
+  display: none;
 }
 
-.flightsOverlay{
-    margin-top: 20px;
-    height: 525px;
-    width: 100%;
-    position: relative;
-    border-bottom-left-radius: 20px;
-    border-bottom-right-radius: 20px;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+.flightsOverlay {
+  margin-top: 20px;
+  height: 525px;
+  width: 100%;
+  position: relative;
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
-.maskRequired{
-    background-image: linear-gradient(52deg, #0DFF6A, #00C99A);
-    height: 40px;
-    margin-top: 40px;
-    padding-left: 20px;
-    padding-right: 20px;
-    border-radius: 20px;
+.maskRequired {
+  background-image: linear-gradient(52deg, #0dff6a, #00c99a);
+  height: 40px;
+  margin-top: 40px;
+  padding-left: 20px;
+  padding-right: 20px;
+  border-radius: 20px;
 }
 
-.addFlightToCart{
-    background-image: linear-gradient(52deg, #1508AF, #8E2AE3);
-    color: white;
-    margin-top: 20px;
-    height: 50px;
-    padding-left: 20px;
-    padding-right: 20px;
+.addFlightToCart {
+  background-image: linear-gradient(52deg, #1508af, #8e2ae3);
+  color: white;
+  margin-top: 20px;
+  height: 50px;
+  padding-left: 20px;
+  padding-right: 20px;
 }
 
-.maskRequiredText{
-    font-family: 'Futura';
-    font-size: 24px;
-    font-style: bold;
+.maskRequiredText {
+  font-family: "Futura";
+  font-size: 24px;
+  font-style: bold;
 }
 
-.minorSidings{
-    margin-left: 32px;
-    margin-right: 32px;
+.minorSidings {
+  margin-left: 32px;
+  margin-right: 32px;
 }
 
-.verticalMargin{
-    margin-top: 20px;
+.verticalMargin {
+  margin-top: 20px;
 }
 
-.airplaneWeightContainer{
-    height: 160px;
+.airplaneWeightContainer {
+  height: 160px;
 }
 
-.backgroundColor{
-    background-color: #E2D2EF;
-    border-radius: 20px;
-    height: 100%;
+.backgroundColor {
+  background-color: #e2d2ef;
+  border-radius: 20px;
+  height: 100%;
 }
 
-.infoBoxHeader{
-    font-family: 'Futura';
-    font-size: 24px;
-    font-weight: bold;
-    margin-bottom: 12px;
-    margin-top: 12px;
+.infoBoxHeader {
+  font-family: "Futura";
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 12px;
+  margin-top: 12px;
 }
 
-.containerDesktop{
-    padding-right: 10px;
+.containerDesktop {
+  padding-right: 10px;
 }
 
-.containerDesktop1{
-    padding-left: 10px;
+.containerDesktop1 {
+  padding-left: 10px;
 }
 
-.seatCounts{
-    font-family: 'Futura';
-    font-size: 18px;
-    font-weight: bold;
-    margin-top: 6px;
+.seatCounts {
+  font-family: "Futura";
+  font-size: 18px;
+  font-weight: bold;
+  margin-top: 6px;
 }
 
-.infoBoxText{
-    font-family: "Lato", sans-serif;
-    font-weight: bold;
-    font-size: 14px;
+.infoBoxText {
+  font-family: "Lato", sans-serif;
+  font-weight: bold;
+  font-size: 14px;
 }
 
-.addFlightToCart:hover{
-    background: linear-gradient(52deg, #0c0558, #631ba1);
-    cursor: pointer;
+.addFlightToCart:hover {
+  background: linear-gradient(52deg, #0c0558, #631ba1);
+  cursor: pointer;
 }
 
-.noResults{
-    height: 180px;
+.noResults {
+  height: 180px;
 }
 
-.largerErrorMessage{
-    font-size: 48px;
+.largerErrorMessage {
+  font-size: 48px;
 }
 
-.sortRow{
-    margin-bottom: 30px;
+.sortRow {
+  margin-bottom: 30px;
 }
 
-.sortContainer{
-    background-color: #e5e8ea;
-    height: 300px;
-    border-top-left-radius: 20px;
-    border-bottom-right-radius: 20px;
-    border-bottom-left-radius: 20px;
+.sortContainer {
+  background-color: #e5e8ea;
+  height: 300px;
+  border-top-left-radius: 20px;
+  border-bottom-right-radius: 20px;
+  border-bottom-left-radius: 20px;
 }
 
-.sortRowExpanded{
-    margin-bottom: 30px;
-    display: none;
+.sortRowExpanded {
+  margin-bottom: 30px;
+  display: none;
 }
 
-.sortPadding{
-    padding-right: 20px;
-    padding-top: 20px;
+.sortPadding {
+  padding-right: 20px;
+  padding-top: 20px;
 }
 
-.textButton:hover{
-    color: #1508AF;
-    cursor: pointer;
+.textButton:hover {
+  color: #1508af;
+  cursor: pointer;
 }
 
-.selected{
-    color: #1508AF;
-    border: 5px dashed #1508AF;
+.selected {
+  color: #1508af;
+  border: 5px dashed #1508af;
 }
 
-.sortSidings{
-    padding-left: 80px;
+.sortSidings {
+  padding-left: 80px;
 }
 
-.hoverListItem, .hoverListItemA{
-    font-family: "Lato", sans-serif;
-    font-size: 16px;
-    font-weight: bold;
-    margin-top: 2px;
+.hoverListItem,
+.hoverListItemA {
+  font-family: "Lato", sans-serif;
+  font-size: 16px;
+  font-weight: bold;
+  margin-top: 2px;
 }
 
-.hoverListItem:hover, .hoverListItemA:hover{
-    color: #1508AF;
-    cursor: pointer;
+.hoverListItem:hover,
+.hoverListItemA:hover {
+  color: #1508af;
+  cursor: pointer;
 }
 
-.sortSecondRow{
-    height: 200px;
+.sortSecondRow {
+  height: 200px;
 }
 
 ngb-pagination ::ng-deep ul > li.active > a {
-    background-color: #1508AF !important;
-    border-color: #1508AF !important;
-    color: white !important;
+  background-color: #1508af !important;
+  border-color: #1508af !important;
+  color: white !important;
 }
 
 ngb-pagination ::ng-deep ul > li > a {
-    color: #1508AF !important;
+  color: #1508af !important;
 }
 
 ngb-pagination ::ng-deep ul > li.disabled > a {
-    color: grey!important;
+  color: grey !important;
 }
 
 @media screen and (max-width: 800px) {
+  .iataText {
+    margin-right: 0px;
+  }
 
-    .iataText{
-        margin-right: 0px;
-    }
+  .priceText {
+    position: relative;
+    top: 0px;
+  }
 
-    .priceText{
-        position: relative;
-        top: 0px;
-    }
+  .fa-question-circle {
+    display: none;
+  }
 
-    .fa-question-circle{
-        display: none;
-    }
+  .sortContainer {
+    padding-left: 15px;
+    height: 500px;
+  }
 
-    .sortContainer{
-        padding-left: 15px;
-        height: 500px;
-    }
+  .flightInfo {
+    overflow-y: scroll;
+  }
 
-    .flightInfo{
-        overflow-y: scroll;
-    }
+  .containerDesktop {
+    margin-bottom: 20px;
+  }
 
-    .containerDesktop{
-        margin-bottom: 20px;
-    }
+  .secondFlightsRow {
+    margin-top: 20px;
+  }
 
-    .secondFlightsRow{
-        margin-top: 20px;
-    }
+  .containerDesktop,
+  .containerDesktop1 {
+    padding-right: 0px;
+    padding-left: 0px;
+  }
+  .maskRequiredText {
+    font-family: "Futura";
+    font-size: 16px;
+    font-style: bold;
+  }
 
-    .containerDesktop, .containerDesktop1{
-        padding-right: 0px;
-        padding-left: 0px;
-    }
-    .maskRequiredText{
-        font-family: 'Futura';
-        font-size: 16px;
-        font-style: bold;
-    }
+  .sidings {
+    margin-left: 24px;
+  }
 
-    .sidings{
-        margin-left: 24px;
-    }
+  .breakLine {
+    margin-right: 0px;
+  }
 
-    .breakLine{
-        margin-right: 0px;
-    }
+  .plainRouteText {
+    margin-top: 40px;
+  }
 
-    .plainRouteText{
-        margin-top: 40px;
-    }
+  .mobileSizes {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
 
-    .mobileSizes{
-        margin-top: 20px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
+  .mobileDropDown {
+    margin-top: 30px;
+  }
 
-    .mobileDropDown{
-        margin-top: 30px;
-    }
+  .flightsBorder {
+    border-bottom-right-radius: 0px;
+    border-top-left-radius: 0px;
+    height: auto;
+    margin-left: 24px;
+    margin-right: 24px;
+  }
 
-    .flightsBorder{
-        border-bottom-right-radius: 0px;
-        border-top-left-radius: 0px;
-        height: auto;
-        margin-left: 24px;
-        margin-right: 24px;
-    }
+  .airplaneWeightContainer {
+    height: 200px;
+  }
 
-    .airplaneWeightContainer{
-        height: 200px;
-    }
+  .flightsOverlay {
+    height: 1050px;
+    margin-left: 24px;
+    margin-right: 24px;
+  }
 
-    .flightsOverlay{
-        height: 1050px;
-        margin-left: 24px;
-        margin-right: 24px;
-    }
+  .topRow {
+    margin-left: 30px;
+  }
 
-    .topRow{
-        margin-left: 30px;
-    }
+  .subheadertext {
+    font-family: "Futura";
+    font-size: 10px;
+    font-weight: bold;
+  }
 
-    .subheadertext{
-        font-family: 'Futura';
-        font-size: 10px;
-        font-weight: bold;
-    }
+  .coloredBoxes {
+    display: none;
+  }
 
-    .coloredBoxes{
-        display: none;
-    }
+  .sortRow {
+    margin-right: 24px;
+    margin-left: 24px;
+  }
 
-    .sortRow{
-        margin-right: 24px;
-        margin-left: 24px;
-    }
+  .sortRowExpanded {
+    margin-right: 24px;
+    margin-left: 24px;
+  }
 
-    .sortRowExpanded{
-        margin-right: 24px;
-        margin-left: 24px;
-    }
+  .sortSidings {
+    padding-left: 0px;
+  }
 
-    .sortSidings{
-        padding-left: 0px;
-    }
+  .plainRouteText {
+    margin-left: 0px;
+    margin-bottom: 20px;
+  }
 
-    .plainRouteText{
-        margin-left: 0px;
-        margin-bottom: 20px;
-    }
-
-    .loyaltyPointsText{
-        display: none;
-    }
+  .loyaltyPointsText {
+    display: none;
+  }
 }
