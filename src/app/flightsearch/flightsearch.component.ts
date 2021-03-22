@@ -325,6 +325,7 @@ export class FlightsearchComponent implements OnInit {
           element[0].origin.name +
           ' to ' +
           element[element.length - 1].destination.name;
+        newFlight.actualFlights = tempFlights;
       } else {
         let duration =
           new Date(element[0].approximateDateTimeEnd).getTime() -
@@ -347,6 +348,7 @@ export class FlightsearchComponent implements OnInit {
           element[0].origin.name +
           ' to ' +
           element[0].destination.name;
+        newFlight.actualFlights = [element[0]];
       }
       getCorrectFlights.push(newFlight);
     });
@@ -510,6 +512,8 @@ export class FlightsearchComponent implements OnInit {
   }
 
   addFlightToCart(flight: any) {
+
+    console.log(flight);
     this.selectedFlight = flight;
     this.showModal = true;
   }
