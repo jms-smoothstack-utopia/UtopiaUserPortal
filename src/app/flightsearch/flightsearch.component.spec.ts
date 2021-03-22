@@ -16,7 +16,7 @@ let fakeData = [
         name: "Dulles International Airport",
         servicingArea: 
         {
-          servicingArea: "D.C"
+          areaName: "D.C"
         }
       },
       destination: 
@@ -25,7 +25,7 @@ let fakeData = [
         name: "Los Angles International Airport",
         servicingArea: 
         {
-          servicingArea: "LA"
+          areaName: "LA"
         }
       },
       creationDateTime: "2021-03-17T17:30:56.760945-04:00",
@@ -47,7 +47,7 @@ let fakeData = [
         name: "Dulles International Airport",
         servicingArea: 
         {
-          servicingArea: "D.C"
+          areaName: "D.C"
         }
       },
       destination: 
@@ -56,7 +56,7 @@ let fakeData = [
         name: "Los Angles International Airport",
         servicingArea: 
         {
-          servicingArea: "LA"
+          areaName: "LA"
         }
       },
       creationDateTime: "2021-03-15T17:30:56.760945-04:00",
@@ -78,7 +78,7 @@ let fakeData = [
         name: "Dulles International Airport",
         servicingArea: 
         {
-          servicingArea: "D.C"
+          areaName: "D.C"
         }
       },
       destination: 
@@ -87,7 +87,7 @@ let fakeData = [
         name: "Los Angles International Airport",
         servicingArea: 
         {
-          servicingArea: "LA"
+          areaName: "LA"
         }
       },
       creationDateTime: "2021-03-16T17:30:56.760945-04:00",
@@ -107,7 +107,7 @@ let fakeData = [
         name: "Dulles International Airport",
         servicingArea: 
         {
-          servicingArea: "NYC"
+          areaName: "NYC"
         }
       },
       destination: 
@@ -116,7 +116,7 @@ let fakeData = [
         name: "Los Angles International Airport",
         servicingArea: 
         {
-          servicingArea: "LA"
+          areaName: "LA"
         }
       },
       creationDateTime: "2021-03-16T17:30:56.760945-04:00",

@@ -24,7 +24,7 @@ export class FlightsearchService {
 
     interface servicingArea{
       id: number,
-      servicingArea: string
+      areaName: string
     }
 
     const url = this.servicingAreaURL;

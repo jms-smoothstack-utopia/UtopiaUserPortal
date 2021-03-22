@@ -129,7 +129,7 @@
                                        <span class="infoBoxHeader">{{flight.origin.iataId}}</span>
                                     </div>
                                     <div class="row no-gutters" style="margin-bottom: 10px;">
-                                        <span class="infoBoxText">{{ flight.origin.name }} ({{ flight.origin.iataId }}) services the {{ flight.origin.servicingArea.servicingArea }} area.</span>
+                                        <span class="infoBoxText">{{ flight.origin.name }} ({{ flight.origin.iataId }}) services the {{ flight.origin.servicingArea.areaName }} area.</span>
                                     </div>
                                     <div class="row no-gutters">
                                         <span class="infoBoxText">{{ flight.origin.name }} is located at {{flight.origin.streetAddress}}, {{flight.origin.city}}; {{flight.origin.state}}, {{flight.origin.zipcode}}.</span>
@@ -142,7 +142,7 @@
                                         <span class="infoBoxHeader">{{flight.destination.iataId}}</span>
                                      </div>
                                      <div class="row no-gutters" style="margin-bottom: 10px;">
-                                         <span class="infoBoxText">{{ flight.destination.name }} ({{ flight.destination.iataId }}) services the {{ flight.destination.servicingArea.servicingArea }} area.</span>
+                                         <span class="infoBoxText">{{ flight.destination.name }} ({{ flight.destination.iataId }}) services the {{ flight.destination.servicingArea.areaName }} area.</span>
                                      </div>
                                      <div class="row no-gutters">
                                          <span class="infoBoxText">{{ flight.destination.name }} is located at {{flight.destination.streetAddress}}, {{flight.destination.city}}; {{flight.destination.state}}, {{flight.destination.zipcode}}.</span>

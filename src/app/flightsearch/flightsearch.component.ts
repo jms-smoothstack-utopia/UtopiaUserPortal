@@ -169,7 +169,7 @@ export class FlightsearchComponent implements OnInit {
           (res) => 
           {
             res.forEach((element) => {
-              this.cityData.push(element.servicingArea);
+              this.cityData.push(element.areaName);
             });
           },
           (err: HttpErrorResponse) => {
@@ -296,7 +296,7 @@ export class FlightsearchComponent implements OnInit {
           else{
             tempIataId += " to " + flight.destination.iataId;
           }
-          tempCities.push(flight.origin.servicingArea.servicingArea);
+          tempCities.push(flight.origin.servicingArea.areaName);
           tempDuration += new Date(flight.approximateDateTimeEnd).getTime() - new Date(flight.approximateDateTimeStart).getTime();
           tempFlightId.push(flight.id);
           tempFlights.push(flight);
@@ -320,7 +320,7 @@ export class FlightsearchComponent implements OnInit {
         let hours = Math.floor(((duration / (1000 * 60 * 60)) % 24));
         newFlight.actualFlights = [element[0]];
         newFlight.basePrice = formatter.format(element[0].seats[0].price);
-        newFlight.cities = [element[0].origin.servicingArea.servicingArea, element[0].destination.servicingArea.servicingArea]
+        newFlight.cities = [element[0].origin.servicingArea.areaName, element[0].destination.servicingArea.areaName]
         newFlight.duration = hours + "h " + minutes + "m";
         newFlight.durationInMilliseconds = duration;
         newFlight.iataId = element[0].origin.iataId + " to " + element[0].destination.iataId;
