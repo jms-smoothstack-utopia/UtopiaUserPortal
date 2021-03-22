@@ -41,8 +41,9 @@ export class TicketDetailComponent implements OnInit {
     }
 
   getTicket(): void {
-    const ticketId = this.route.snapshot.paramMap.get('id');
-    if (ticketId !== null) {
+    const rawTicketId = this.route.snapshot.paramMap.get('id');
+    if (rawTicketId !== null) {
+      const ticketId = +rawTicketId;
       this.flightRecordsService.getTicketById(ticketId).subscribe(
             (myTicket) => this.setTicket(myTicket)
       );

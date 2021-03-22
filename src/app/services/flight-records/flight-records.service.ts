@@ -31,7 +31,7 @@ export class FlightRecordsService {
     return this.http.get<Ticket[]>(url);
   }
 
-  getTicketById(ticketId: string): Observable<Ticket> {
+  getTicketById(ticketId: number): Observable<Ticket> {
     const url = `${this.ticketDetailUrl}/${ticketId}`;
     return this.http.get<Ticket>(url);
   }
