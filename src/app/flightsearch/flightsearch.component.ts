@@ -169,7 +169,9 @@ export class FlightsearchComponent implements OnInit {
           (res) => 
           {
             res.forEach((element) => {
-              this.cityData.push(element.areaName);
+              if (!this.cityData.includes(element.areaName)){
+                this.cityData.push(element.areaName);
+              }
             });
           },
           (err: HttpErrorResponse) => {
