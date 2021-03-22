@@ -63,7 +63,7 @@ export class LoginFormComponent implements OnInit {
   async handleLoginFailure(err: HttpErrorResponse) {
     this.log.debug('Failure', err);
     this.isLoading = false;
-    if (err.status == 403) {
+    if (err.status === 403 || err.status === 401) {
       this.errorMsg = 'Invalid email or password';
     } else {
       this.errorMsg = 'An error occurred while logging in. Please try again.';
