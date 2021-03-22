@@ -1,0 +1,30 @@
+h1,
+h4 {
+  font-family: "Futura";
+  font-weight: bold;
+}
+
+p {
+  font-family: "Lato", sans-serif;
+}
+
+button {
+  border: none;
+  border-radius: 0px;
+  margin: 3px;
+  font-family: "Futura";
+  font-weight: bold;
+}
+
+button:hover {
+  background: #444444;
+}
+
+#confirm {
+  background: #ee3030;
+  color: #fff;
+}
+
+#confirm:hover {
+  background: #9b0000;
+}

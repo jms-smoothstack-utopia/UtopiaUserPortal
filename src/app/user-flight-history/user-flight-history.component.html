@@ -9,6 +9,7 @@
     <table class="table table-responsive" id="ticketsTable">
       <thead>
         <tr>
+          <th></th>   <!-- detail link -->
           <th>Flight ID</th>
           <th>Name</th>
           <th>Seat class</th>
@@ -19,11 +20,12 @@
       </thead>
       <tbody>
         <tr *ngFor="let ticket of tickets">
+          <td><a href="/tickets/{{  ticket.id  }}">Details</a></td>
           <td>{{ ticket.flightId }}</td>
           <td>{{ ticket.passengerName }}</td>
           <td>{{ ticket.seatClass }}</td>
           <td>{{ ticket.seatNumber }}</td>
-          <td>{{ ticket.status }}</td>
+          <td>{{ ticket.statusPrettyPrint }}</td>
           <td>{{ ticket.timePrettyPrint }}</td>
         </tr>
       </tbody>
