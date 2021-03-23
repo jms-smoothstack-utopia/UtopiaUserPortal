@@ -1,0 +1,28 @@
+<div class="backdrop" (click)="goBack()"></div>
+<div class="alert-box">
+  <div *ngIf="isLoading" style="text-align: center">
+    <app-loading-spinner></app-loading-spinner>
+  </div>
+  <div *ngIf="!isLoading && !cancelConfirmed && !errorMessage && !badCancel">
+    <h1>Confirm Cancellation</h1>
+    <h4>
+      If you wish to cancel this booking, click the "Confirm Cancellation"
+      button below. Your payment will be refunded if you do so.
+    </h4>
+    <button (click)="confirmCancel()" id="confirm">Confirm Cancellation</button>
+    <button (click)="goBack()">Go Back</button>
+  </div>
+  <div *ngIf="!isLoading && badCancel">
+    <p>{{ badCancelMessage }}</p>
+    <button (click)="goBack()">OK</button>
+  </div>
+  <div *ngIf="!isLoading && cancelConfirmed">
+    <p>Your booking has been cancelled.</p>
+    <button (click)="goBack()">OK</button>
+  </div>
+  <div *ngIf="errorMessage">
+    <p>{{ errorMessage }}</p>
+    <button type="reset" (click)="onRetryFromError()">Retry</button>
+    <button (click)="goBack()">Go Back</button>
+  </div>
+</div>

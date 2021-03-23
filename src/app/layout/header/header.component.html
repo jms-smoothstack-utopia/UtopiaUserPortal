@@ -1,0 +1,23 @@
+<!-- Navbar -->
+
+<nav class="navbar" aria-label="Navigation bar">
+  <div class="container-fluid">
+    <a
+      class="navbar-brand mb-0 h1 leftHeader"
+      href=""
+      aria-label="Return back to Utopia home page"
+      >UTOPIA</a
+    >
+    <ul class="nav navbar-nav navbar-right">
+      <li>
+        <button
+          *ngIf="!hideSignInButton"
+          (keyup.enter)="onClickButton()"
+          (click)="onClickButton()"
+        >
+          {{ buttonMsg }}
+        </button>
+      </li>
+    </ul>
+  </div>
+</nav>

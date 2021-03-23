@@ -1,0 +1,9 @@
+<div *ngIf="!!message">
+  <div class="backdrop" (click)="onClose()"></div>
+  <div class="alert-box">
+    <p>{{ message }}</p>
+    <div class="alert-box-actions">
+      <button class="close-button" (click)="onClose()">OK</button>
+    </div>
+  </div>
+</div>

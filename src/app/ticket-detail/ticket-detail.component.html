@@ -1,0 +1,87 @@
+<div *ngIf="flight && ticket">
+  <h2>
+    Flight details for {{ flight.origin.iataId }} to
+    {{ flight.destination.iataId }} on {{ ticket.timePrettyPrint }}
+  </h2>
+  <div id="flightDetails">
+    <div class="row">
+      <div class="col border flightDetailBox">
+        <span class="flightDetailKey"> From: </span>
+        <span class="flightDetailValue">
+          {{ flight.origin.name }}
+        </span>
+      </div>
+      <div class="col border flightDetailBox">
+        <span class="flightDetailKey"> To: </span>
+        <span class="flightDetailValue">
+          {{ flight.destination.name }}
+        </span>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col border flightDetailBox">
+        <span class="flightDetailKey"> Expected departure time: </span>
+        <span class="flightDetailValue">
+          {{ flight.departurePrettyPrint }}
+        </span>
+      </div>
+      <div class="col border flightDetailBox">
+        <span class="flightDetailKey"> Expected arrival time: </span>
+        <span class="flightDetailValue">
+          {{ flight.arrivalPrettyPrint }}
+        </span>
+      </div>
+    </div>
+    <br />
+    <div class="row">
+      <div class="col border flightDetailBox">
+        <span class="flightDetailKey"> Passenger: </span>
+        <span class="flightDetailValue">
+          {{ ticket.passengerName }}
+        </span>
+      </div>
+      <div class="col border flightDetailBox">
+        <span class="flightDetailKey"> Seat: </span>
+        <span class="flightDetailValue">
+          {{ ticket.seatClass }} {{ ticket.seatNumber }}
+        </span>
+      </div>
+      <div class="col border flightDetailBox">
+        <span class="flightDetailKey"> Flying aboard: </span>
+        <span class="flightDetailValue">
+          {{ flight.airplane.name }}
+        </span>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col border flightDetailBox">
+        <span class="flightDetailKey"> Ticket status: </span>
+        <span class="flightDetailValue">
+          {{ ticket.statusPrettyPrint }}
+        </span>
+      </div>
+    </div>
+  </div>
+  <br />
+  <button (click)="showConfirmCancel = true" id="cancelButton">
+    Cancel This Booking
+  </button>
+  <div *ngIf="showConfirmCancel">
+    <app-cancel-ticket
+      (closeEvent)="showConfirmCancel = false"
+      [ticketId]="ticket.id"
+      [flightTime]="flight.approximateDateTimeStart"
+      [alreadyCancelled]="ticket.status === 'CANCELLED' ? true : false"
+    >
+    </app-cancel-ticket>
+    <!-- todo: refactor status check (and statuses in general)
+                to use a TS enum class -->
+  </div>
+</div>
+<div *ngIf="error">
+  <h2>{{ error.status }} Error</h2>
+  <p>{{ error.message }}</p>
+</div>
+<!-- instead of pulling in the user navbar, just use a generic back button since 
+    this view might be accessed from ways other than upcoming tickets -->
+<button id="backButton" (click)="back()">Go Back</button>

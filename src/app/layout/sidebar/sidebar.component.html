@@ -1,0 +1,64 @@
+<div class="container-fluid d-flex flex-column no-gutters">
+  <div class="row h-100 no-gutters">
+    <div class="col-md-1 fullheight hello">
+      <div class="row h-100 no-gutters">
+        <div class="col-md-8 fullheight sidebarwrapper">
+          <div class="row no-gutters firstsidebarrow">
+            <div class="col-md-12 sidebarcol">
+              <button><i class="fas fa-bars fa-2x sidebaricon"></i></button>
+            </div>
+          </div>
+          <div class="row no-gutters firstsidebarrow">
+            <div class="col-md-12 sidebarcol">
+              <button (click)="goToProfile()">
+                <i
+                  class="fas fa-user-circle fa-2x sidebaricon"
+                  style="font-size: 28px"
+                ></i>
+              </button>
+            </div>
+          </div>
+          <div class="row no-gutters firstsidebarrow">
+            <div class="col-md-12 sidebarcol">
+              <button (click)="goToCart()">
+                <i
+                  class="fas fa-shopping-cart fa-2x sidebaricon"
+                  style="font-size: 24px"
+                ></i>
+              </button>
+            </div>
+          </div>
+          <hr />
+          <div class="row no-gutters firstsidebarrow">
+            <div class="col-md-12 sidebarcol">
+              <button><i class="fas fa-plane fa-2x sidebaricon"></i></button>
+            </div>
+          </div>
+          <div class="row no-gutters firstsidebarrow">
+            <div class="col-md-12 sidebarcol">
+              <button>
+                <i class="fas fa-money-bill-wave fa-2x sidebaricon"></i>
+              </button>
+            </div>
+          </div>
+          <div class="row no-gutters firstsidebarrow">
+            <div class="col-md-12 sidebarcol">
+              <button>
+                <i class="fas fa-camera-retro fa-2x sidebaricon"></i>
+              </button>
+            </div>
+          </div>
+          <hr />
+          <div class="row no-gutters firstsidebarrow">
+            <div class="col-md-12 sidebarcol">
+              <button><i class="fas fa-cog fa-2x sidebaricon"></i></button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-11 fullheight pagewrapper">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+</div>

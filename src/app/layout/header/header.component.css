@@ -1,0 +1,121 @@
+.navbar {
+  position: relative;
+  height: 75px;
+  width: 100%;
+  background: linear-gradient(52deg, #1508af, #0bc1da, #afc3f2, #3e4c6e);
+  background-size: 800% 800%;
+  -webkit-animation: animatedGradient 40s ease infinite;
+  -moz-animation: animatedGradient 40s ease infinite;
+  animation: animatedGradient 40s ease infinite;
+}
+
+@-webkit-keyframes animatedGradient {
+  0% {
+    background-position: 0% 79%;
+  }
+  50% {
+    background-position: 100% 22%;
+  }
+  100% {
+    background-position: 0% 79%;
+  }
+}
+@-moz-keyframes animatedGradient {
+  0% {
+    background-position: 0% 79%;
+  }
+  50% {
+    background-position: 100% 22%;
+  }
+  100% {
+    background-position: 0% 79%;
+  }
+}
+@keyframes animatedGradient {
+  0% {
+    background-position: 0% 79%;
+  }
+  50% {
+    background-position: 100% 22%;
+  }
+  100% {
+    background-position: 0% 79%;
+  }
+}
+
+.navbar-brand {
+  color: white;
+  font-family: "Futura";
+  font-size: 30px;
+  font-weight: bolder;
+}
+
+.navbar a:focus {
+  outline: 5px dashed white;
+}
+
+.navbar a:hover:not(:focus) {
+  animation: shake 10s;
+  animation-iteration-count: infinite;
+}
+
+@keyframes shake {
+  0% {
+    transform: translate(1px, 1px) rotate(0deg);
+  }
+  10% {
+    transform: translate(-1px, -2px) rotate(-1deg);
+  }
+  20% {
+    transform: translate(-3px, 0px) rotate(1deg);
+  }
+  30% {
+    transform: translate(3px, 2px) rotate(0deg);
+  }
+  40% {
+    transform: translate(1px, -1px) rotate(1deg);
+  }
+  50% {
+    transform: translate(-1px, 2px) rotate(-1deg);
+  }
+  60% {
+    transform: translate(-3px, 1px) rotate(0deg);
+  }
+  70% {
+    transform: translate(3px, 1px) rotate(-1deg);
+  }
+  80% {
+    transform: translate(-1px, -1px) rotate(1deg);
+  }
+  90% {
+    transform: translate(1px, 2px) rotate(0deg);
+  }
+  95% {
+    transform: translate(1px, -2px) rotate(-1deg);
+  }
+  100% {
+    transform: translate(0px, 0px) rotate(0deg);
+  }
+}
+
+.nav button {
+  font-family: "Lato", sans-serif;
+  font-weight: 600;
+  color: black;
+  background-color: white;
+  font-size: large;
+  padding: 4px 16px;
+  margin: 8px 8px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  width: 100%;
+}
+
+.nav button:hover {
+  background-color: rgb(228, 222, 222);
+}
+
+.nav button:focus {
+  outline: 5px dashed white;
+}

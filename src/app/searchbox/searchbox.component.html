@@ -1,0 +1,249 @@
+<div class="row no-gutters secondrow sidings">
+  <div class="errContainerSpecial" *ngIf="adultErrorMsg">
+    <span class="errText" [innerHTML]="adultErrorMsg"></span>
+  </div>
+</div>
+<div class="row no-gutters secondrow sidings">
+  <div class="col-1 firstdropdown">
+    <div class="btn-group">
+      <button
+        id="tripRBId"
+        class="btn btn-secondary btn-sm dropdown-toggle"
+        [innerHTML]="tripRB"
+        (click)="toggleOverlay('tripRBOverlay', $event)"
+        type="button"
+      ></button>
+      <div
+        class="overlay"
+        id="tripRBOverlay"
+        appClickAway
+        (clickOutside)="closeOverlay('tripRBOverlay')"
+      >
+        <div class="row no-gutters dropdownRow">
+          <button
+            class="dropdownButton firstSelection"
+            (click)="
+              afterChoosingAnOption('tripRBOverlay', TripType.ONE_WAY, 'tripRB')
+            "
+          >
+            One-Way
+          </button>
+        </div>
+        <div class="row no-gutters dropdownRow">
+          <button
+            class="dropdownButton secondSelection"
+            (click)="
+              afterChoosingAnOption(
+                'tripRBOverlay',
+                TripType.ROUND_TRIP,
+                'tripRB'
+              )
+            "
+          >
+            Round-Trip
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-1 seconddropdown">
+    <div class="btn-group">
+      <button
+        id="nonStopRBId"
+        class="btn btn-secondary btn-sm dropdown-toggle"
+        [innerHTML]="nonStopRB"
+        (click)="toggleOverlay('nonStopOverlay', $event)"
+        type="button"
+      ></button>
+      <div
+        class="overlay"
+        id="nonStopOverlay"
+        appClickAway
+        (clickOutside)="closeOverlay('nonStopOverlay')"
+      >
+        <div class="row no-gutters dropdownRow">
+          <button
+            class="dropdownButton firstSelection"
+            (click)="
+              afterChoosingAnOption(
+                'nonStopOverlay',
+                StopType.NON_STOP,
+                'nonStopRB'
+              )
+            "
+          >
+            Non-Stop
+          </button>
+        </div>
+        <div class="row no-gutters dropdownRow">
+          <button
+            class="dropdownButton secondSelection"
+            (click)="
+              afterChoosingAnOption(
+                'nonStopOverlay',
+                StopType.MULTIHOP,
+                'nonStopRB'
+              )
+            "
+          >
+            Multihop
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-1 thirddropdown">
+    <div class="btn-group">
+      <button
+        id="numberOfPeopleId"
+        class="btn btn-secondary btn-sm dropdown-toggle"
+        [innerHTML]="numberOfPeople"
+        (click)="toggleOverlay('numberOverlay', $event)"
+        type="button"
+      ></button>
+      <div
+        class="overlay"
+        id="numberOverlay"
+        appClickAway
+        (clickOutside)="closeOverlay('numberOverlay')"
+      >
+        <div class="row no-gutters dropdownRow" style="padding-top: 10px">
+          <label for="adults">Adults</label>
+          <input
+            type="number"
+            [value]="adult"
+            id="adults"
+            min="1"
+            max="8"
+            (change)="updateNumberOfPerson(PersonType.ADULT, $event)"
+          />
+        </div>
+        <div class="row no-gutters dropdownRow">
+          <label for="children">Children</label>
+          <input
+            type="number"
+            [value]="countOfChildren"
+            id="childrenAmount"
+            min="0"
+            max="8"
+            (change)="updateNumberOfPerson(PersonType.CHILDREN, $event)"
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row no-gutters thirdrow sidings">
+  <div class="col-md-3 firstbox flightsearch">
+    <div class="errContainer" *ngIf="fromAirportErrorMsg">
+      <span class="errText" [innerHTML]="fromAirportErrorMsg"></span>
+    </div>
+    <div class="input-group mb-3">
+      <div class="input-group-prepend">
+        <span class="input-group-text" id="basic-addon1"
+          ><i class="fas fa-plane-departure fa-lg"></i
+        ></span>
+      </div>
+
+      <!-- Airport Input -->
+      <input
+        type="text"
+        id="from"
+        class="form-control"
+        [value]="fromAirport"
+        placeholder="From..."
+        (keyup)="setInput($event, WhereType.FROM)"
+      />
+    </div>
+  </div>
+  <div class="col-md-auto secondbox flightsearch">
+    <button class="btn swapbutton" (click)="swapLocations()">
+      <i class="fas fa-exchange-alt fa-lg"></i>
+    </button>
+  </div>
+  <div class="col-md-3 thirdbox flightsearch">
+    <div class="errContainer" *ngIf="toAirportErrorMsg">
+      <span class="errText" [innerHTML]="toAirportErrorMsg"></span>
+    </div>
+    <div class="input-group mb-3">
+      <div class="input-group-prepend">
+        <span class="input-group-text" id="basic-addon1"
+          ><i class="fas fa-plane-arrival fa-lg"></i
+        ></span>
+      </div>
+
+      <!-- Airport Input -->
+      <input
+        type="text"
+        id="to"
+        class="form-control"
+        [value]="toAirport"
+        placeholder="To..."
+        (keyup)="setInput($event, WhereType.TO)"
+      />
+    </div>
+  </div>
+  <div
+    class="fourthbox flightsearch"
+    [ngClass]="disableToCalendar ? 'col-md-4' : 'col-md-2'"
+  >
+    <div class="errContainer" *ngIf="calendarErrorMsg">
+      <span class="errText" [innerHTML]="calendarErrorMsg"></span>
+    </div>
+    <div class="input-group mb-3">
+      <div class="input-group-prepend calendar1">
+        <button
+          class="btn btn-outline-secondary calendar"
+          (click)="d.toggle()"
+          type="button"
+        >
+          <span class="input-group-text" id="calendar1"
+            ><i class="fas fa-calendar-day fa-lg"></i
+          ></span>
+        </button>
+      </div>
+      <input
+        class="form-control"
+        [(ngModel)]="fromModel"
+        [minDate]="minDate"
+        placeholder="From: yyyy-mm-dd"
+        name="d"
+        ngbDatepicker
+        #d="ngbDatepicker"
+      />
+    </div>
+  </div>
+  <div class="col-md-2 fourthbox flightsearch" *ngIf="!disableToCalendar">
+    <div class="errContainer" *ngIf="returnCalendarErrorMsg">
+      <span class="errText" [innerHTML]="returnCalendarErrorMsg"></span>
+    </div>
+    <div class="input-group mb-3">
+      <div class="input-group-prepend calendar1">
+        <button
+          class="btn btn-outline-secondary calendar"
+          (click)="d1.toggle()"
+          type="button"
+        >
+          <span class="input-group-text" id="calendar1"
+            ><i class="fas fa-calendar-alt fa-lg"></i
+          ></span>
+        </button>
+      </div>
+      <input
+        class="form-control"
+        [(ngModel)]="toModel"
+        [minDate]="minDate"
+        placeholder="{{ placeHolder }}"
+        name="d2"
+        [disabled]="disableToCalendar"
+        ngbDatepicker
+        #d1="ngbDatepicker"
+      />
+    </div>
+  </div>
+  <div class="col-md-auto fifthbox flightsearch">
+    <button class="btn searchbutton" (click)="search()">
+      <i class="fas fa-search fa-lg"></i>
+    </button>
+  </div>
+</div>

@@ -1,0 +1,71 @@
+.sidings {
+  margin-left: 0px;
+}
+
+.firstrow {
+  margin-top: 16px;
+  margin-bottom: 8px;
+}
+
+.secondMainRowFirstRow {
+  margin-top: 48px;
+  margin-bottom: 12px;
+}
+
+.headertext {
+  font-family: "Futura";
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.textGradient {
+  font-size: larger;
+  font-family: "Futura";
+  font-weight: bold;
+  background: linear-gradient(52deg, #1508af, #8e2ae3);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.mapHolder {
+  /* background-image: url("src/app/home/MapOFFlights.png");
+    background-size: cover;
+    background-position: center; */
+  height: 300px;
+  width: calc(100vw - 215px);
+  border-radius: 5px;
+}
+
+.carousel-inner {
+  width: calc(100vw - 215px);
+  border-radius: 5px;
+}
+
+.maprow {
+  margin-right: 24px;
+}
+
+.carousel-caption h5,
+.carousel-inner p {
+  font-family: "Lato", sans-serif;
+  font-weight: bolder;
+}
+
+@media screen and (max-width: 1000px) {
+  .mapHolder,
+  .carousel-inner {
+    width: 100%;
+  }
+}
+
+@media screen and (max-width: 800px) {
+  .sidings {
+    margin-left: 24px;
+  }
+
+  .mapHolder,
+  .carousel-inner {
+    width: 100%;
+  }
+}

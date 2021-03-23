@@ -1,0 +1,305 @@
+<app-mainheader [hideSignInButton]="true"></app-mainheader>
+<div class="container-fluid">
+  <app-alert
+    *ngIf="errorMsg"
+    [message]="errorMsg"
+    (closeEvent)="onCloseAlert()"
+  >
+  </app-alert>
+  <form [formGroup]="accountForm" (ngSubmit)="onSubmit()">
+    <div class="row movingGradient no-gutters">
+      <div class="col-md-6">
+        <span class="span-header">UTOPIA</span>
+      </div>
+      <div class="col-md-6 secondcell">
+        <span class="span-header">Your ticket to the skies</span>
+      </div>
+    </div>
+    <div *ngIf="isLoading" class="text-center">
+      <app-loading-spinner></app-loading-spinner>
+    </div>
+    <div *ngIf="!isLoading">
+      <div class="row no-gutters">
+        <div class="col-md-4">
+          <label for="email">
+            <b>Email</b>
+            <input
+              id="email"
+              class="tooltipInside"
+              [ngClass]="{ error: showErrorForField('email') }"
+              type="email"
+              formControlName="email"
+              placeholder="john_sample@utopia.com"
+              name="email"
+              autocomplete="email"
+              required
+            />
+          </label>
+          <span
+            id="emailErrorText"
+            [ngClass]="
+              showErrorForField('email') ? 'shownErrorText' : 'hiddenErrorText'
+            "
+            >{{ getErrorText("email") }}
+          </span>
+        </div>
+        <div class="col-md-4">
+          <label for="firstName">
+            <b>First Name</b>
+            <input
+              id="firstName"
+              class="tooltipInside"
+              [ngClass]="{ error: showErrorForField('firstName') }"
+              type="text"
+              formControlName="firstName"
+              placeholder="John"
+              name="firstName"
+              required
+            />
+          </label>
+          <span
+            id="firstNameErrorText"
+            [ngClass]="
+              showErrorForField('firstName')
+                ? 'shownErrorText'
+                : 'hiddenErrorText'
+            "
+            >{{ getErrorText("firstName") }}
+          </span>
+        </div>
+        <div class="col-md-4">
+          <label for="lastName">
+            <b>Last Name</b>
+            <input
+              id="lastName"
+              class="tooltipInside"
+              [ngClass]="{ error: showErrorForField('lastName') }"
+              type="text"
+              formControlName="lastName"
+              placeholder="Sample"
+              name="lastName"
+              required
+            />
+          </label>
+          <span
+            id="lastNameErrorText"
+            [ngClass]="
+              showErrorForField('lastName')
+                ? 'shownErrorText'
+                : 'hiddenErrorText'
+            "
+            >{{ getErrorText("lastName") }}
+          </span>
+        </div>
+      </div>
+      <div class="row no-gutters">
+        <div class="col-md-4">
+          <label for="addrLine1">
+            <b>Address</b>
+            <input
+              id="addrLine1"
+              class="tooltipInside"
+              [ngClass]="{ error: showErrorForField('addrLine1') }"
+              type="text"
+              formControlName="addrLine1"
+              placeholder="123 Main St."
+              name="addrLine1"
+              required
+            />
+          </label>
+          <span
+            id="addrLine1ErrorText"
+            [ngClass]="
+              showErrorForField('addrLine1')
+                ? 'shownErrorText'
+                : 'hiddenErrorText'
+            "
+            >{{ getErrorText("addrLine1") }}
+          </span>
+        </div>
+        <div class="col-md-4">
+          <label for="addrLine2">
+            <b>Apt/Suite</b>
+            <input
+              id="addrLine2"
+              class="tooltipInside"
+              type="text"
+              [ngClass]="{ error: showErrorForField('addrLine2') }"
+              formControlName="addrLine2"
+              placeholder="Apt #3 (not required)"
+              name="addrLine2"
+            />
+          </label>
+          <span
+            id="addrLine2ErrorText"
+            [ngClass]="
+              showErrorForField('addrLine2')
+                ? 'shownErrorText'
+                : 'hiddenErrorText'
+            "
+            >{{ getErrorText("addrLine2") }}
+          </span>
+        </div>
+        <div class="col-md-4">
+          <label for="phoneNumber">
+            <b>Phone Number</b>
+            <input
+              id="phoneNumber"
+              class="tooltipInside"
+              [ngClass]="{ error: showErrorForField('phoneNumber') }"
+              (focusout)="onPhoneNumberFocusOut()"
+              type="tel"
+              formControlName="phoneNumber"
+              placeholder="###-###-####"
+              required
+            />
+          </label>
+          <span
+            id="phoneNumberErrorText"
+            [ngClass]="
+              showErrorForField('phoneNumber')
+                ? 'shownErrorText'
+                : 'hiddenErrorText'
+            "
+            >{{ getErrorText("phoneNumber") }}
+          </span>
+        </div>
+      </div>
+      <div class="row no-gutters">
+        <div class="col-md-4">
+          <label for="city">
+            <b>City</b>
+            <input
+              id="city"
+              class="tooltipInside"
+              [ngClass]="{ error: showErrorForField('city') }"
+              type="text"
+              formControlName="city"
+              placeholder="Las Vegas"
+              name="city"
+              required
+            />
+          </label>
+          <span
+            id="cityErrorText"
+            [ngClass]="
+              showErrorForField('city') ? 'shownErrorText' : 'hiddenErrorText'
+            "
+            >{{ getErrorText("city") }}
+          </span>
+        </div>
+        <div class="col-md-4">
+          <label for="state">
+            <b>State</b>
+            <select id="state" class="tooltipInside" formControlName="state">
+              <option value="">Select a State</option>
+              <option *ngFor="let state of states" [ngValue]="state">
+                {{ state }}
+              </option>
+            </select>
+          </label>
+          <span
+            id="stateErrorText"
+            [ngClass]="
+              showErrorForField('state') ? 'shownErrorText' : 'hiddenErrorText'
+            "
+            >{{ getErrorText("state") }}
+          </span>
+        </div>
+        <div class="col-md-4">
+          <label for="zipcode">
+            <b>Postal Code</b>
+            <input
+              id="zipcode"
+              class="tooltipInside"
+              [ngClass]="{ error: showErrorForField('zipcode') }"
+              type="text"
+              formControlName="zipcode"
+              placeholder="#####-#### or #####"
+              name="postalCode"
+              required
+            />
+          </label>
+          <span
+            id="zipcodeErrorText"
+            [ngClass]="
+              showErrorForField('zipcode')
+                ? 'shownErrorText'
+                : 'hiddenErrorText'
+            "
+            >{{ getErrorText("zipcode") }}
+          </span>
+        </div>
+      </div>
+      <div class="row no-gutters">
+        <div class="col-md-4">
+          <label for="password">
+            <b>Password</b>
+            <input
+              id="password"
+              class="tooltipInside"
+              [ngClass]="{ error: showErrorForField('password') }"
+              type="password"
+              formControlName="password"
+              placeholder="Enter a password"
+              name="password"
+              autocomplete="new-password"
+              required
+            />
+          </label>
+          <span
+            id="passwordErrorText"
+            [ngClass]="
+              showErrorForField('password')
+                ? 'shownErrorText'
+                : 'hiddenErrorText'
+            "
+            >{{ getErrorText("password") }}
+          </span>
+        </div>
+        <div class="col-md-4 tooltipInside">
+          <label for="confirmPassword">
+            <b>Retype password</b>
+            <input
+              id="confirmPassword"
+              [ngClass]="{ error: invalidConfirmPassword }"
+              type="password"
+              formControlName="confirmPassword"
+              placeholder="Retype your password"
+              name="confirmPassword"
+              autocomplete="new-password"
+              required
+            />
+          </label>
+          <span
+            id="confirmPasswordErrorText"
+            [ngClass]="
+              showErrorForField('confirmPassword')
+                ? 'shownErrorText'
+                : 'hiddenErrorText'
+            "
+            >{{ getErrorText("confirmPassword") }}
+          </span>
+        </div>
+        <div class="col-md-4 submitColumn">
+          <button
+            id="submitButton"
+            class="submitButton"
+            [ngClass]="
+              accountForm.valid ? 'submitButtonEnabled' : 'submitButtonDisabled'
+            "
+            type="submit"
+            [disabled]="!accountForm.valid"
+          >
+            Submit
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class="row movingGradient no-gutters">
+      <div class="col-md-12">
+        <span class="span-header">Stop. Go. Utopia</span>
+      </div>
+    </div>
+  </form>
+</div>

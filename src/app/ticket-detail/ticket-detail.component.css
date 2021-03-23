@@ -1,0 +1,38 @@
+h2 {
+  font-family: "Futura";
+  font-weight: bold;
+}
+
+.flightDetailKey {
+  font-family: "Futura";
+  font-weight: bold;
+}
+
+.flightDetailValue {
+  font-family: "Lato", sans-serif;
+}
+
+button {
+  border: none;
+  border-radius: 0px;
+  margin: 3px;
+  font-family: Futura;
+  font-weight: bold;
+}
+
+#backButton:hover {
+  background: #444444;
+}
+
+#cancelButton {
+  background: #ee3030;
+  color: #fff;
+}
+
+#cancelButton:hover {
+  background: #9b0000;
+}
+
+.flightDetailBox {
+  border-color: #c2a6da !important;
+}

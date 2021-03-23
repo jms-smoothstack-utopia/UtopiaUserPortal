@@ -1,0 +1,99 @@
+.error {
+  border: red solid !important;
+}
+
+.hiddenErrorText {
+  display: none;
+}
+
+/* no special rule for shownErrorText */
+
+.updateButtonEnabled {
+  opacity: 1;
+}
+
+.updateButtonEnabled:hover {
+  opacity: 1;
+}
+
+.updateButtonDisabled {
+  opacity: 0.25;
+}
+
+.updateButtonDisabled:hover {
+  opacity: 0.25;
+}
+
+.headertext {
+  font-family: "Futura";
+  font-size: 24px;
+  font-weight: bold;
+}
+
+label {
+  font-family: "Futura";
+  font-size: 14px;
+  font-weight: bold;
+}
+
+input[type="text"] {
+  font-family: "Lato", sans-serif;
+  font-size: 14px;
+}
+
+/*.form-control::placeholder {
+  font-weight: bolder;
+  color: black;
+  font-family: "Lato", sans-serif;
+}*/
+
+.form-control {
+  height: 50px;
+  border-radius: 0px;
+  border: none;
+  background-color: #e5e8ea;
+  color: black;
+}
+
+input[type="checkbox"] {
+  height: 44px;
+}
+
+.selectContainer {
+  margin-left: 20px;
+}
+
+.checkboxContainer {
+  margin-left: 20px;
+  border: 1px #e5e8ea;
+}
+
+button {
+  border: none;
+  border-radius: 0px;
+  margin: 3px;
+  font-family: Futura;
+  font-weight: bold;
+}
+
+#updateButton:hover {
+  background: #444444;
+}
+
+#deleteButton {
+  background: #ee3030;
+  color: #fff;
+}
+
+#deleteButton:hover {
+  background: #9b0000;
+}
+
+h2 {
+  font-family: Futura;
+  font-weight: bold;
+}
+
+h6 {
+  font-family: Futura;
+}
