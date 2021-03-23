@@ -105,7 +105,7 @@ export class TicketDetailComponent implements OnInit {
   checkIsValidTicket(
     returnedValue: Ticket | HttpErrorResponse | undefined
   ): returnedValue is Ticket {
-    return (returnedValue as Ticket).status !== undefined;
+    return (returnedValue as Ticket).seatNumber !== undefined;
   }
 
   checkIsValidFlight(
@@ -115,7 +115,7 @@ export class TicketDetailComponent implements OnInit {
   }
 
   checkIsError(returnedValue: any): returnedValue is HttpErrorResponse {
-    return (returnedValue as HttpErrorResponse).status !== undefined;
+    return (returnedValue as HttpErrorResponse).message !== undefined;
   }
 
   back(): void {
