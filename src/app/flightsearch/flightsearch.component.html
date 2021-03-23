@@ -361,19 +361,21 @@
       </div>
     </div>
   </div>
-</div>
-
-<div class="row no-gutters d-flex justify-content-center align-items-center">
-  <ngb-pagination
-    [collectionSize]="viewData.length"
-    [(page)]="page"
-    [pageSize]="paginationCount"
-    [rotate]="true"
-  >
-  </ngb-pagination>
+  <div class="row no-gutters d-flex justify-content-center align-items-center">
+    <ngb-pagination
+      [collectionSize]="viewData.length"
+      [(page)]="page"
+      [pageSize]="paginationCount"
+      [rotate]="true"
+    >
+    </ngb-pagination>
+  </div>
 </div>
 
 <ng-template #elseBlock>
+  <div *ngIf="isLoading" class="row no-gutters d-flex justify-content-center">
+    <app-loading-spinner></app-loading-spinner>
+  </div>
   <div class="col-md-11 noResults d-flex justify-content-center">
     <h1
       class="textGradient largerErrorMessage"
