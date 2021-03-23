@@ -31,7 +31,7 @@ export class UserService {
   }
 
   // GET a user by ID
-  getUser(id: String): Observable<User | HttpErrorResponse> {
+  getUser(id: string): Observable<User | HttpErrorResponse> {
     const url = `${this.usersUrl}/${id}`;
     return this.http.get<User>(url).pipe(
       tap((_) => this.log.debug('successfully got user ' + _.id)),
