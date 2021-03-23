@@ -27,6 +27,7 @@ describe('TicketDetailComponent', () => {
   let component: TicketDetailComponent;
   let fixture: ComponentFixture<TicketDetailComponent>;
   let flightRecordsServiceSpy: FlightRecordsService;
+  let routerSpy: ActivatedRoute;
 
   const mockTicket: Ticket = {
     id: 1,
@@ -125,10 +126,23 @@ describe('TicketDetailComponent', () => {
     flightRecordsServiceSpy = fixture.debugElement.injector.get(
       FlightRecordsService
     );
+    routerSpy = fixture.debugElement.injector.get(ActivatedRoute);
   });
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+  
+  it('getTicket should get the ticket', () => {
+    spyOn(routerSpy.snapshot.paramMap, 'get').and.returnValue('1');
+    const mockGetTicket = spyOn(
+      flightRecordsServiceSpy,
+      'getTicketById'
+    ).and.returnValue(of(mockTicket));
+
+    component.getTicket();
+    expect(component.ticket).toEqual(mockTicket);
+    expect(mockGetTicket).toHaveBeenCalledWith(1);
   });
 
   it('setTicket should set ticket', () => {
@@ -165,6 +179,12 @@ describe('TicketDetailComponent', () => {
     component.getFlight();
 
     expect(component.flight).toEqual(undefined);
+  });
+
+  it('setFlight should set an error if it gets an error', () => {
+    component.setFlight(mockError);
+
+    expect(component.error).toEqual(mockError);
   });
 
   it('doPrettyPrinting should do it for ticket and flight', () => {
