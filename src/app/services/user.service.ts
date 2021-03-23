@@ -15,7 +15,7 @@ import { environment } from '../../environments/environment';
   providedIn: 'root',
 })
 export class UserService {
-  private usersUrl = environment.hostUrl + '/customers';
+  readonly USERS_URL = environment.hostUrl + '/customers';
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
   };
@@ -24,7 +24,7 @@ export class UserService {
 
   // GET all users
   getUsers(): Observable<User[]> {
-    return this.http.get<User[]>(this.usersUrl).pipe(
+    return this.http.get<User[]>(this.USERS_URL).pipe(
       tap((_) => this.log.debug('successfully got all users')),
       catchError(this.handleError<User[]>('getUsers', []))
     );
@@ -32,7 +32,7 @@ export class UserService {
 
   // GET a user by ID
   getUser(id: string): Observable<User | HttpErrorResponse> {
-    const url = `${this.usersUrl}/${id}`;
+    const url = `${this.USERS_URL}/${id}`;
     return this.http.get<User>(url).pipe(
       tap((_) => this.log.debug('successfully got user ' + _.id)),
       catchError(this.handleError<HttpErrorResponse>('getUser'))
@@ -41,7 +41,7 @@ export class UserService {
 
   //PUT update a user
   updateUser(updatedUser: User) {
-    const url = `${this.usersUrl}/${updatedUser.id}`;
+    const url = `${this.USERS_URL}/${updatedUser.id}`;
     return this.http.put<User>(url, updatedUser, this.httpOptions);
   }
 
