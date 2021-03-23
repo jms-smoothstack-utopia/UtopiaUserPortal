@@ -85,6 +85,9 @@ export class FlightsearchComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+
+    this.noResultsErrorMsg = "";
+
     this.activatedRoute.queryParams.subscribe((params) => {
       let tempFromAirport = params['origin'];
       let tempToAirport = params['destinations'];
@@ -160,8 +163,8 @@ export class FlightsearchComponent implements OnInit {
           baseSearchURL += '&multihop=' + true;
         }
 
-        this.viewData = [];
         this.isLoading = true;
+        this.viewData = [];
         this.flightSearch.getFlights(baseSearchURL).subscribe(
           (res) => {
             this.rawData = res;
@@ -194,7 +197,7 @@ export class FlightsearchComponent implements OnInit {
   parseCalendarString(dateString: string) {
     let tempVal: string[] = dateString.split('-');
     if (tempVal.length != 3) {
-      this.noValidData(this.inputError, undefined);
+      this.noValidData(this.problemExists, undefined);
       return;
     } else {
       return {

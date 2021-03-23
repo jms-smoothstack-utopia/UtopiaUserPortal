@@ -371,12 +371,11 @@
     </ngb-pagination>
   </div>
 </div>
-
+<div *ngIf="isLoading" class="row no-gutters d-flex justify-content-center">
+  <app-loading-spinner></app-loading-spinner>
+</div>
 <ng-template #elseBlock>
-  <div *ngIf="isLoading" class="row no-gutters d-flex justify-content-center">
-    <app-loading-spinner></app-loading-spinner>
-  </div>
-  <div class="col-md-11 noResults d-flex justify-content-center">
+  <div class="col-md-11 noResults d-flex justify-content-center" *ngIf="!isLoading">
     <h1
       class="textGradient largerErrorMessage"
       [innerHTML]="noResultsErrorMsg"
