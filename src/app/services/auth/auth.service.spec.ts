@@ -125,4 +125,38 @@ describe('AuthService', () => {
     const result = service.isLoggedIn();
     expect(result).toBeFalse();
   });
+
+  it('send a DELETE request with the correct headers on #deleteAccoutn', () => {
+    const email = 'some@email.com';
+    const password = 'somepassword';
+
+    service.deleteAccount(email, password).subscribe((res: any) => {
+      expect(res).toBeTruthy();
+    });
+
+    const req = httpTestingController.expectOne(
+      `${environment.hostUrl}/customers`
+    );
+
+    req.flush('response');
+
+    expect(req.request.method).toBe('DELETE');
+  });
+
+  it('should call #logout on #confirmDeletion', () => {
+    const token = 'some-UUID';
+    const url = `${service.DELETE_ACCOUNT_URL}/confirm/${token}`;
+    const logout = spyOn(service, 'logout');
+
+    service.confirmDeletion(token).subscribe((res: any) => {
+      expect(res).toBeTruthy();
+    });
+
+    const req = httpTestingController.expectOne(url);
+    req.flush('response');
+
+    expect(logout).toHaveBeenCalled();
+
+    expect(req.request.method).toBe('DELETE');
+  });
 });

@@ -15,7 +15,7 @@ import {
   NGXMapperServiceMock,
 } from 'ngx-logger/testing';
 import { DatePipe } from '@angular/common';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from '../../services/auth/auth.service';
 import { of } from 'rxjs';
 
@@ -24,6 +24,7 @@ describe('PerformDeletionComponent', () => {
   let fixture: ComponentFixture<PerformDeletionComponent>;
   let authServiceSpy: AuthService;
   let activatedRouteSpy: ActivatedRoute;
+  let routerSpy: Router;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -56,6 +57,7 @@ describe('PerformDeletionComponent', () => {
 
     authServiceSpy = fixture.debugElement.injector.get(AuthService);
     activatedRouteSpy = fixture.debugElement.injector.get(ActivatedRoute);
+    routerSpy = fixture.debugElement.injector.get(Router);
   });
 
   it('should create', () => {
@@ -66,5 +68,13 @@ describe('PerformDeletionComponent', () => {
     const fn = spyOn(authServiceSpy, 'confirmDeletion').and.returnValue(of({}));
     component.ngOnInit();
     expect(fn).toHaveBeenCalledWith('some-token');
+  });
+
+  it('should have an error if no token', () => {
+    spyOn(activatedRouteSpy.snapshot.paramMap, 'get').and.returnValue(null);
+    const navigate = spyOn(routerSpy, 'navigate');
+    component.ngOnInit();
+    expect(spyOn(authServiceSpy, 'confirmDeletion')).not.toHaveBeenCalled();
+    expect(navigate).toHaveBeenCalled();
   });
 });

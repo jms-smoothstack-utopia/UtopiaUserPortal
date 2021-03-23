@@ -65,4 +65,14 @@ describe('ReturnalertComponent', () => {
 
     expect(component.onClose).toHaveBeenCalled();
   });
+
+  it('should clear message #onClose', () => {
+    component.onClose();
+    expect(component.message).toBeUndefined();
+  });
+
+  it('should navigate #goBackToHomePage', () => {
+    component.goBackToHomePage();
+    expect(routerSpy.navigateByUrl).toHaveBeenCalled();
+  });
 });

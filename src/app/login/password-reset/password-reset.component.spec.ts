@@ -21,6 +21,11 @@ import { DatePipe } from '@angular/common';
 import { PasswordResetComponent } from './password-reset.component';
 import { environment } from 'src/environments/environment';
 import { BlankComponent } from 'src/app/blank/blank.component';
+import {
+  HttpErrorResponse,
+  HttpEventType,
+  HttpHeaders,
+} from '@angular/common/http';
 
 describe('PasswordResetComponent', () => {
   let component: PasswordResetComponent;
@@ -134,5 +139,29 @@ describe('PasswordResetComponent', () => {
     expect(req.request.method).toBe('POST');
     expect(component.errorMsg).toBe(undefined);
     expect(component.isLoading).toBe(false);
+  });
+
+  it('should remove message #onCloseAlert', () => {
+    component.onCloseAlert();
+    expect(component.errorMsg).toBeUndefined();
+  });
+
+  it('should have an error message if not 404', () => {
+    let err: HttpErrorResponse = {
+      error: undefined,
+      type: HttpEventType.Response,
+      headers: new HttpHeaders(),
+      ok: false,
+      statusText: '',
+      name: 'HttpErrorResponse',
+      message: 'Something bad happened.',
+      status: 403,
+      url: null,
+    };
+
+    component.errorPasswordReset(err);
+    expect(component.errorMsg).toBe(
+      'An error occurred while processing your request. Please try again.'
+    );
   });
 });

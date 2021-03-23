@@ -126,7 +126,7 @@ export class ResetformComponent implements OnInit {
         ' and at least one special character from the following: !@#$%^&*-_=+,.?';
     } else {
       this.errorMsg =
-        'An error occured while trying to process your request. Please try again.';
+        'An error occurred while trying to process your request. Please try again.';
     }
   }
 }
