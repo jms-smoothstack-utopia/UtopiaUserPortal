@@ -277,7 +277,7 @@ export class FlightsearchComponent implements OnInit {
         (x: any) => x.seatClass == 'ECONOMY' && x.seatStatus == 'AVAILABLE'
       ).length;
       newFlight.fromDateTime = element[0].approximateDateTimeStart;
-      newFlight.multihop = element.length == 1 ? false : true;
+      newFlight.multihop = element.length != 1;
       newFlight.numberOfHops = element.length;
       newFlight.origin = element[0].origin;
       newFlight.seats = element[0].seats;
@@ -357,7 +357,7 @@ export class FlightsearchComponent implements OnInit {
     if (this.nonStopRB == StopType.MULTIHOP) {
       return getCorrectFlights;
     } else {
-      return getCorrectFlights.filter((x) => x.multihop == false);
+      return getCorrectFlights.filter((x) => !x.multihop);
     }
   }
 
@@ -417,47 +417,47 @@ export class FlightsearchComponent implements OnInit {
     let data = this.viewData;
     switch (this.sort) {
       case SortMethod.EXPENSIVE:
-        data = data.sort(
+        data.sort(
           (a, b) =>
             b.basePrice.replace(/[$,]+/g, '') -
             a.basePrice.replace(/[$,]+/g, '')
         );
         break;
       case SortMethod.CHEAPEST:
-        data = data.sort(
+        data.sort(
           (a, b) =>
             a.basePrice.replace(/[$,]+/g, '') -
             b.basePrice.replace(/[$,]+/g, '')
         );
         break;
       case SortMethod.OLDEST:
-        data = data.sort(
+        data.sort(
           (a, b) => +new Date(a.creationTime) - +new Date(b.creationTime)
         );
         break;
       case SortMethod.MOST_RECENT:
-        data = data.sort(
+        data.sort(
           (a, b) => +new Date(b.creationTime) - +new Date(a.creationTime)
         );
         break;
       case SortMethod.LOW_HOPS:
-        data = data.sort((a, b) => a.numberOfHops - b.numberOfHops);
+        data.sort((a, b) => a.numberOfHops - b.numberOfHops);
         break;
       case SortMethod.HIGH_HOPS:
-        data = data.sort((a, b) => b.numberOfHops - a.numberOfHops);
+        data.sort((a, b) => b.numberOfHops - a.numberOfHops);
         break;
       case SortMethod.SHORTEST_DURATION:
-        data = data.sort(
+        data.sort(
           (a, b) => a.durationInMilliseconds - b.durationInMilliseconds
         );
         break;
       case SortMethod.LONGEST_DURATION:
-        data = data.sort(
+        data.sort(
           (a, b) => b.durationInMilliseconds - a.durationInMilliseconds
         );
         break;
       default:
-        data = data.sort(
+        data.sort(
           (a, b) =>
             b.basePrice.replace(/[$,]+/g, '') -
             a.basePrice.replace(/[$,]+/g, '')
@@ -512,7 +512,6 @@ export class FlightsearchComponent implements OnInit {
   }
 
   addFlightToCart(flight: any) {
-
     console.log(flight);
     this.selectedFlight = flight;
     this.showModal = true;

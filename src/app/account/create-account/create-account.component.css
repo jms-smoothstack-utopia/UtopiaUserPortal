@@ -168,19 +168,19 @@ input[type="password"]:focus {
 }
 
 .submitButtonEnabled {
-  opacity: 100%;
+  opacity: 1;
 }
 
 .submitButtonEnabled:hover {
-  opacity: 100%;
+  opacity: 1;
 }
 
 .submitButtonDisabled {
-  opacity: 25%;
+  opacity: 0.25;
 }
 
 .submitButtonDisabled:hover {
-  opacity: 25%;
+  opacity: 0.25;
 }
 
 .submitColumn {

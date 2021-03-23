@@ -109,7 +109,7 @@ export class FlightmodalComponent implements OnInit {
         alreadyThere = true;
       }
     }
-    if (alreadyThere == false) {
+    if (!alreadyThere) {
       this.userChoice.push(userChoosesFlight);
     }
 
@@ -130,10 +130,6 @@ export class FlightmodalComponent implements OnInit {
       this.cart.addToCart(x);
     });
     this.showTicketButtonAction = true;
-    if (this.areWeReturning == false) {
-      this.disabledButton = false;
-    } else {
-      this.disabledButton = true;
-    }
+    this.disabledButton = this.areWeReturning;
   }
 }
