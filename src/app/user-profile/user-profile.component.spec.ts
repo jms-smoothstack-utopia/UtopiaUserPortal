@@ -18,6 +18,7 @@ import { DatePipe } from '@angular/common';
 import { UserService } from '../services/user.service';
 import { User } from '../user';
 import { Address } from '../address';
+import { of, throwError } from 'rxjs';
 
 describe('UserProfileComponent', () => {
   let component: UserProfileComponent;
@@ -56,11 +57,11 @@ describe('UserProfileComponent', () => {
     addresses: mockAddrs,
     loyaltyPoints: 1,
     phoneNumber: '555-555-1234',
-    addrLine1: '',
-    addrLine2: '',
-    city: '',
-    state: '',
-    zipcode: '',
+    addrLine1: '123 Fake St',
+    addrLine2: '#1',
+    city: 'Anywhere',
+    state: 'VA',
+    zipcode: '12345',
     ticketEmails: true,
     flightEmails: true,
   };
@@ -83,6 +84,7 @@ describe('UserProfileComponent', () => {
     fixture = TestBed.createComponent(UserProfileComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
+
     userServiceSpy = fixture.debugElement.injector.get(UserService);
   });
 
@@ -145,5 +147,51 @@ describe('UserProfileComponent', () => {
     component.setUser(mockUser);
 
     expect(component.userProfileForm.invalid).toBeFalse();
+  });
+
+  it('#updatePhoneNumber should return empty if invalid', () => {
+    component.userProfileForm.controls['phoneNumber'].reset();
+
+    const result = component.updatePhoneNumberFormat();
+
+    expect(result).toBe('');
+  });
+
+  it('#updatePhoneNumber should return formatted number on valid', () => {
+    const control = component.userProfileForm.controls['phoneNumber'];
+    control.patchValue('(777) 777-7777');
+
+    const result = component.updatePhoneNumberFormat();
+
+    expect(result).toBe('777-777-7777');
+  });
+
+  it('should clear error message #onCloseAlert', () => {
+    component.onCloseAlert();
+    expect(component.modalMsg).toBeFalsy();
+  });
+
+  it('should call #updateUser on valid user', () => {
+    const fn = spyOn(userServiceSpy, 'updateUser').and.returnValue(
+      of(mockUser)
+    );
+    const fn2 = spyOn(component, 'checkIsValidUser').and.returnValue(true);
+    component.setUser(mockUser);
+    component.updateUser();
+    expect(fn).toHaveBeenCalled();
+    expect(fn2).toHaveBeenCalled();
+    expect(component.modalMsg).toBeTruthy();
+  });
+
+  it('should have a message if  update failed', () => {
+    const fn = spyOn(userServiceSpy, 'updateUser').and.returnValue(
+      throwError('SOME ERROR')
+    );
+    const fn2 = spyOn(component, 'checkIsValidUser').and.returnValue(true);
+    component.setUser(mockUser);
+    component.updateUser();
+    expect(fn).toHaveBeenCalled();
+    expect(fn2).toHaveBeenCalled();
+    expect(component.modalMsg).toBeTruthy();
   });
 });

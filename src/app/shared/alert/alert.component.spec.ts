@@ -37,4 +37,9 @@ describe('AlertComponent', () => {
       'some error'
     );
   });
+
+  it('should clear message #onClose', () => {
+    component.onClose();
+    expect(component.message).toBeUndefined();
+  });
 });

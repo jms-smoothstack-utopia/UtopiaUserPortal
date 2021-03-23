@@ -16,14 +16,15 @@ import {
 } from 'ngx-logger/testing';
 import { DatePipe } from '@angular/common';
 import { AuthService } from '../../services/auth/auth.service';
-import { of } from 'rxjs';
-import { ActivatedRoute } from '@angular/router';
+import { of, throwError } from 'rxjs';
+import { ActivatedRoute, Router } from '@angular/router';
 
 describe('ConfirmRegistrationComponent', () => {
   let component: ConfirmRegistrationComponent;
   let fixture: ComponentFixture<ConfirmRegistrationComponent>;
   let authServiceSpy: AuthService;
   let activatedRouteSpy: ActivatedRoute;
+  let routerSpy: Router;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -56,6 +57,7 @@ describe('ConfirmRegistrationComponent', () => {
 
     authServiceSpy = fixture.debugElement.injector.get(AuthService);
     activatedRouteSpy = fixture.debugElement.injector.get(ActivatedRoute);
+    routerSpy = fixture.debugElement.injector.get(Router);
   });
 
   it('should create', () => {
@@ -73,5 +75,33 @@ describe('ConfirmRegistrationComponent', () => {
     expect(confirmFn).toHaveBeenCalled();
 
     expect(component.alertMsg).toBeTruthy();
+  });
+
+  it('should have an alert message if no token', () => {
+    spyOn(activatedRouteSpy.snapshot.paramMap, 'get').and.returnValue(null);
+    component.ngOnInit();
+    expect(component.alertMsg).toBe(
+      'Please follow the link provided in your email to confirm your account.'
+    );
+  });
+
+  it('should have an alert message if an error occurs on confirmation', () => {
+    spyOn(authServiceSpy, 'confirmRegistration').and.returnValue(
+      throwError('SOME ERROR')
+    );
+
+    component.ngOnInit();
+
+    expect(component.alertMsg).toBe(
+      'There was a problem processing your request. The code monkeys have been notified!'
+    );
+  });
+
+  it('should clear alert message #onCloseAlert', () => {
+    component.alertMsg = 'CRISIS ALERT!!!';
+    const navigate = spyOn(routerSpy, 'navigate');
+    component.onCloseAlert();
+    expect(component.alertMsg).toBeUndefined();
+    expect(navigate).toHaveBeenCalledWith(['/']);
   });
 });

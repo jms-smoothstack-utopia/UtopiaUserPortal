@@ -23,6 +23,11 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { of } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { BlankComponent } from 'src/app/blank/blank.component';
+import {
+  HttpErrorResponse,
+  HttpEventType,
+  HttpHeaders,
+} from '@angular/common/http';
 
 describe('ResetformComponent', () => {
   let component: ResetformComponent;
@@ -180,5 +185,88 @@ describe('ResetformComponent', () => {
     expect(navigateSpy).toHaveBeenCalledWith(
       'login/password/confirmationchange'
     );
+  });
+
+  it('should remove message #onCloseAlert', () => {
+    component.onCloseAlert();
+    expect(component.errorMsg).toBeUndefined();
+  });
+
+  it('should reset from on #resetPageForm', () => {
+    const form = <NgForm>{
+      reset(value?: any) {},
+    };
+
+    const fn = spyOn(form, 'reset');
+    component.form = form;
+    component.resetPageForm();
+
+    expect(fn).toHaveBeenCalled();
+  });
+
+  it('should have error messages for all status codes', () => {
+    let err: HttpErrorResponse = {
+      error: undefined,
+      type: HttpEventType.Response,
+      headers: new HttpHeaders(),
+      ok: false,
+      statusText: '',
+      name: 'HttpErrorResponse',
+      message: 'Something bad happened.',
+      status: 404,
+      url: null,
+    };
+
+    component.passwordIsNotReset(err);
+
+    expect(component.errorMsg).toBe(
+      'The token you provided is expired or invalid. Please resetting your password again.'
+    );
+    err = {
+      error: undefined,
+      type: HttpEventType.Response,
+      headers: new HttpHeaders(),
+      ok: false,
+      statusText: '',
+      name: 'HttpErrorResponse',
+      message: 'Something bad happened.',
+      status: 400,
+      url: null,
+    };
+
+    component.passwordIsNotReset(err);
+
+    expect(component.errorMsg).toBe(
+      'Password must be between 10 and 128 characters,' +
+        ' contain at least one lowercase letter,' +
+        ' at least one uppercase letter,' +
+        ' at least one number,' +
+        ' and at least one special character from the following: !@#$%^&*-_=+,.?'
+    );
+
+    err = {
+      error: undefined,
+      type: HttpEventType.Response,
+      headers: new HttpHeaders(),
+      ok: false,
+      statusText: '',
+      name: 'HttpErrorResponse',
+      message: 'Something bad happened.',
+      status: 500,
+      url: null,
+    };
+
+    component.passwordIsNotReset(err);
+    expect(component.errorMsg).toBe(
+      'An error occurred while trying to process your request. Please try again.'
+    );
+  });
+
+  it('should not reset form if undefined', () => {
+    const previousValue = component.form;
+    component.form = undefined;
+    component.resetPageForm();
+    expect(component.form).toBeUndefined();
+    component.form = previousValue;
   });
 });

@@ -16,7 +16,7 @@ import {
 import { DatePipe } from '@angular/common';
 import { FormsModule, NgForm } from '@angular/forms';
 import { AuthService } from '../../services/auth/auth.service';
-import { of } from 'rxjs';
+import { of, throwError } from 'rxjs';
 
 describe('DeleteAccountComponent', () => {
   let component: DeleteAccountComponent;
@@ -77,5 +77,37 @@ describe('DeleteAccountComponent', () => {
     const emitter = spyOn(component.closeEvent, 'emit');
     component.onClose();
     expect(emitter).toHaveBeenCalled();
+  });
+
+  it('should have an error message on failure', () => {
+    const email = 'some@email.com';
+    const password = 'password';
+
+    const form = <NgForm>{
+      value: {
+        email,
+        password,
+      },
+      resetForm(value?: any) {},
+    };
+
+    const fn = spyOn(authServiceSpy, 'deleteAccount').and.returnValue(
+      throwError('SOME ERROR')
+    );
+    const reset = spyOn(form, 'resetForm');
+
+    component.onSubmitConfirmation(form);
+
+    expect(reset).toHaveBeenCalled();
+    expect(component.isLoading).toBeFalse();
+    expect(component.errorMessage).toBe(
+      'Your request could not be processed. Please verify you entered the correct credentials.'
+    );
+  });
+
+  it('should reset error message #onRetryFromError', () => {
+    component.errorMessage = 'Some error';
+    component.onRetryFromError();
+    expect(component.errorMessage).toBeUndefined();
   });
 });
