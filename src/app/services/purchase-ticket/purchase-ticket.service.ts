@@ -68,7 +68,7 @@ export class PurchaseTicketService {
           return seatNumber;
         }
         i++;
-    } while (seatNumber !== '') //then check to see if we found a valid seat
+    } while (seatNumber === '') //then check to see if we found a valid seat
 
     //TODO: fail somehow if we get through all seats and none available
     //currently assuming that a flight with no seats can't be put in the cart
