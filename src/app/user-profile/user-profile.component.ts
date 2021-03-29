@@ -15,8 +15,8 @@ import { AuthService } from '../services/auth/auth.service';
   styleUrls: ['./user-profile.component.css'],
 })
 export class UserProfileComponent implements OnInit {
-  @Input() user: User | undefined;
-  @Input() error: HttpErrorResponse | undefined;
+  user: User | undefined;
+  error: HttpErrorResponse | undefined;
   activeForNav: string = 'profile';
 
   phoneUtil: PhoneNumberUtil = PhoneNumberUtil.getInstance();
