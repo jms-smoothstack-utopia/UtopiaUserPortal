@@ -10,3 +10,8 @@ export interface Ticket {
   statusPrettyPrint: string;
   timePrettyPrint: string;
 }
+
+export enum TicketsList {
+  HISTORY,
+  UPCOMING
+}

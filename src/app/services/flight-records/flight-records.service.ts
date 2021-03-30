@@ -2,7 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { NGXLogger } from 'ngx-logger';
 import { Observable } from 'rxjs';
-import { Ticket } from 'src/app/ticket';
+import { Ticket, TicketsList } from 'src/app/ticket';
 import { Flight } from 'src/app/flight';
 import { environment } from 'src/environments/environment';
 
@@ -20,6 +20,15 @@ export class FlightRecordsService {
   };
 
   constructor(private http: HttpClient, private log: NGXLogger) {}
+
+  getTicketsByType(customerId: string, type: TicketsList): Observable<Ticket[]> {
+    switch (type) {
+      case TicketsList.HISTORY:
+        return this.getTicketsHistory(customerId);
+      case TicketsList.UPCOMING:
+        return this.getTicketsUpcoming(customerId);
+    }
+  }
 
   getTicketsHistory(customerId: string): Observable<Ticket[]> {
     const url = `${this.ticketHistoryUrl}/${customerId}`;
