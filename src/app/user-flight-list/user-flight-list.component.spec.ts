@@ -19,6 +19,8 @@ import { FlightRecordsService } from '../services/flight-records/flight-records.
 import { Ticket, TicketsList } from '../ticket';
 import { AuthService } from '../services/auth/auth.service';
 import { AppRoutingModule } from '../app-routing.module';
+import { HttpErrorResponse, HttpEventType, HttpHeaders } from '@angular/common/http';
+import { of } from 'rxjs';
 
 
 describe('UserFlightListComponent', () => {
@@ -71,6 +73,18 @@ describe('UserFlightListComponent', () => {
   };
 
   let mockTicketArr = [mockTicket1, mockTicket2, mockTicket3];
+
+  let mockError: HttpErrorResponse = {
+      error: true,
+      type: HttpEventType.Response,
+      headers: new HttpHeaders(),
+      ok: false,
+      statusText: '',
+      name: 'HttpErrorResponse',
+      message: 'Internal server error',
+      status: 500,
+      url: null,
+  }
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -130,5 +144,34 @@ describe('UserFlightListComponent', () => {
       expect(ticket.timePrettyPrint == mockTimeStr);
       expect(ticket.statusPrettyPrint == mockPrettyStatusStr);
     });
+  });
+
+  it('setTickets should set empty ticket array when passed in null', () => {
+    component.setTickets(null);
+
+    expect(component.tickets).toEqual([]);
+  });
+
+  it('setTickets should set error when passed in an error', () => {
+    component.setTickets(mockError);
+
+    expect(component.tickets).toBeUndefined();
+    expect((component.error as HttpErrorResponse).status).toEqual(mockError.status);
+  });
+
+  it('getTickets should get the tickets', () => {
+    authService.userId = mockTicket1.purchaserId;
+    const mockGetTicketsByType = spyOn(
+      flightRecordsServiceSpy,
+      'getTicketsByType'
+    ).and.returnValue(of([ mockTicket1 ]));
+    component.listType = TicketsList.HISTORY;
+
+    component.getTickets();
+    expect(component.tickets).toEqual([ mockTicket1 ]);
+    expect(mockGetTicketsByType).toHaveBeenCalledWith(
+      mockTicket1.purchaserId,
+      TicketsList.HISTORY
+      );
   });
 });

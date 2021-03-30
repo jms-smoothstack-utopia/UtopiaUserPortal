@@ -42,7 +42,7 @@ export class UserFlightListComponent implements OnInit {
     }
   }
 
-  setTickets(value: Ticket[]): void {
+  setTickets(value: Ticket[] | HttpErrorResponse | null): void {
     if (value === null) {
       //if there are no returned tickets
       this.tickets = [];
