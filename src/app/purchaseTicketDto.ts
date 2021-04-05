@@ -1,5 +1,6 @@
 export interface purchaseTicketDto {
     purchaserId: string,    //UUID
+    email: string,
     flightId: number,
     tickets: TicketItem[]
 }

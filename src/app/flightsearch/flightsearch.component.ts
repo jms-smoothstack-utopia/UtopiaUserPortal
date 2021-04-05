@@ -512,7 +512,6 @@ export class FlightsearchComponent implements OnInit {
   }
 
   addFlightToCart(flight: any) {
-    console.log(flight);
     this.selectedFlight = flight;
     this.showModal = true;
   }
