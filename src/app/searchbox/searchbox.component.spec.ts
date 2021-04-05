@@ -49,7 +49,7 @@ describe('SearchboxComponent', () => {
 
   it('click on TripRB button, then tripRBOverlay should display', () => {
     //const event
-    const event = new PointerEvent('click');
+    const event = new MouseEvent('click');
 
     //Spy on the function
     spyOn(component, 'toggleOverlay');
@@ -69,7 +69,7 @@ describe('SearchboxComponent', () => {
 
   it('click on nonStopRB button, then nonStopRBOverlay should display', () => {
     //const event
-    const event = new PointerEvent('click');
+    const event = new MouseEvent('click');
 
     //Spy on the function
     spyOn(component, 'toggleOverlay');
@@ -89,7 +89,7 @@ describe('SearchboxComponent', () => {
 
   it('click on numberOfPeople button, then numberOfPeople dropdown should display', () => {
     //const event
-    const event = new PointerEvent('click');
+    const event = new MouseEvent('click');
 
     //Spy on the function
     spyOn(component, 'toggleOverlay');
