@@ -42,4 +42,9 @@ pipeline {
       }
     }
   }
+  post {
+    always {
+      sh 'rm -rf ./node_modules'
+    }
+  }
 }
