@@ -37,8 +37,14 @@ pipeline {
       }
       steps {
         sh 'npx ng build --prod'
+        sh 'aws s3 rm s3://utopia-air.click --recursive'
         sh 'aws s3 cp ./dist/UtopiaUserPortal s3://utopia-air.click --recursive'
       }
+    }
+  }
+  post {
+    always {
+      sh 'rm -rf ./node_modules'
     }
   }
 }
