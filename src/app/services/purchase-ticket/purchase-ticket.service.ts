@@ -28,6 +28,7 @@ export class PurchaseTicketService {
   purchaseTickets(viewList: any, userName: string) {
     let ticketsToPurchase: purchaseTicketDto = {
       purchaserId: (this.authService.userId as string),
+      email: (this.authService.userEmail as string),
       flightId: viewList[0].flight.id,
       tickets: []
     };
