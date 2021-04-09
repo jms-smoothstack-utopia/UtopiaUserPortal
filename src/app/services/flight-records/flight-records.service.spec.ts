@@ -16,8 +16,9 @@ import {
 } from 'ngx-logger/testing';
 import { DatePipe } from '@angular/common';
 import { FlightRecordsService } from './flight-records.service';
-import { Ticket } from '../../ticket';
+import { Ticket, TicketsList } from '../../ticket';
 import { Flight } from '../../flight';
+import { environment } from 'src/environments/environment';
 
 describe('FlightRecordsService', () => {
   let service: FlightRecordsService;
@@ -130,23 +131,23 @@ describe('FlightRecordsService', () => {
   });
 
   it('history mock customer ID should return tickets', () => {
-    service.getTicketsHistory(mockId).subscribe((res) => {
+    service.getTicketsByType(mockId, TicketsList.HISTORY).subscribe((res) => {
       expect(res.length).toEqual(2);
     });
 
     const req = httpTestingController.expectOne(
-      'http://localhost:8080/tickets/history/' + mockId
+      environment.hostUrl + '/tickets/history/' + mockId
     );
     req.flush(mockTickets);
   });
 
   it('upcoming mock customer ID should return tickets', () => {
-    service.getTicketsUpcoming(mockId).subscribe((res) => {
+    service.getTicketsByType(mockId, TicketsList.UPCOMING).subscribe((res) => {
       expect(res.length).toEqual(2);
     });
 
     const req = httpTestingController.expectOne(
-      'http://localhost:8080/tickets/upcoming/' + mockId
+      environment.hostUrl + '/tickets/upcoming/' + mockId
     );
     req.flush(mockTickets);
   });
@@ -157,7 +158,7 @@ describe('FlightRecordsService', () => {
     });
 
     const req = httpTestingController.expectOne(
-      'http://localhost:8080/tickets/' + '1'
+      environment.hostUrl + '/tickets/' + '1'
     );
     req.flush(mockTicket1);
   });
@@ -168,7 +169,7 @@ describe('FlightRecordsService', () => {
     });
 
     const req = httpTestingController.expectOne(
-      'http://localhost:8080/tickets/cancel/' + '1'
+      environment.hostUrl + '/tickets/cancel/' + '1'
     );
     req.flush(true, { status: 204, statusText: 'No Content' });
   });
@@ -179,7 +180,7 @@ describe('FlightRecordsService', () => {
     });
 
     const req = httpTestingController.expectOne(
-      'http://localhost:8080/flights/' + '1'
+      environment.hostUrl + '/flights/' + '1'
     );
     req.flush(mockFlight);
   });

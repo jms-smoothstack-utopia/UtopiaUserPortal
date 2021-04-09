@@ -43,6 +43,7 @@ import { CancelTicketComponent } from './cancel-ticket/cancel-ticket.component';
 import { MapComponent } from './map/map.component';
 import { ShoppingcartComponent } from './shoppingcart/shoppingcart.component';
 import { FlightmodalComponent } from './shared/flightmodal/flightmodal.component';
+import { UserFlightListComponent } from './user-flight-list/user-flight-list.component';
 
 @NgModule({
   declarations: [
@@ -81,6 +82,7 @@ import { FlightmodalComponent } from './shared/flightmodal/flightmodal.component
     MapComponent,
     ShoppingcartComponent,
     FlightmodalComponent,
+    UserFlightListComponent,
   ],
   imports: [
     BrowserModule,
