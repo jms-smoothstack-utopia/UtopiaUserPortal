@@ -293,7 +293,9 @@ describe('FlightsearchComponent', () => {
     fixture.detectChanges();
 
     expect(component.viewData).toEqual([]);
-    expect(component.noResultsErrorMsg).toEqual('Input Error!');
+    expect(component.noResultsErrorMsg).toEqual(
+      'There was a problem. Please try again.'
+    );
   });
 
   it('Going through ternary operators for from calendar, included', () => {
@@ -334,7 +336,9 @@ describe('FlightsearchComponent', () => {
     fixture.detectChanges();
     //hello
     expect(component.viewData).toEqual([]);
-    expect(component.noResultsErrorMsg).toEqual('Input Error!');
+    expect(component.noResultsErrorMsg).toEqual(
+      'There was a problem. Please try again.'
+    );
   });
 
   it('Going through ternary operators for to calendar, included', () => {

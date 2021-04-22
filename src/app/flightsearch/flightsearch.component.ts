@@ -47,6 +47,7 @@ export class FlightsearchComponent implements OnInit {
   //The list we tie to the frontend
   viewData: flight[] = [];
   lookingAtReturnFlights: boolean = false;
+  isLoading: boolean = true;
 
   //Need to sort the data
   sort: string = SortMethod.EXPENSIVE;
@@ -84,6 +85,9 @@ export class FlightsearchComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+
+    this.noResultsErrorMsg = "";
+
     this.activatedRoute.queryParams.subscribe((params) => {
       let tempFromAirport = params['origin'];
       let tempToAirport = params['destinations'];
@@ -159,6 +163,8 @@ export class FlightsearchComponent implements OnInit {
           baseSearchURL += '&multihop=' + true;
         }
 
+        this.isLoading = true;
+        this.viewData = [];
         this.flightSearch.getFlights(baseSearchURL).subscribe(
           (res) => {
             this.rawData = res;
@@ -191,7 +197,7 @@ export class FlightsearchComponent implements OnInit {
   parseCalendarString(dateString: string) {
     let tempVal: string[] = dateString.split('-');
     if (tempVal.length != 3) {
-      this.noValidData(this.inputError, undefined);
+      this.noValidData(this.problemExists, undefined);
       return;
     } else {
       return {
@@ -206,6 +212,7 @@ export class FlightsearchComponent implements OnInit {
     errorMsg: string | undefined,
     returnTripErrorMsg: string | undefined
   ): void {
+    this.isLoading = false;
     if (errorMsg != undefined) {
       this.flightsData = [];
       this.viewData = [];
@@ -217,6 +224,7 @@ export class FlightsearchComponent implements OnInit {
   }
 
   processGetResults(res: any) {
+    this.isLoading = false;
     let originToDestination = res['Origin to destination'];
 
     if (originToDestination.length == 0) {
