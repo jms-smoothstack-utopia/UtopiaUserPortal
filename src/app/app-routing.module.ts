@@ -21,6 +21,9 @@ import { DeleteAccountComponent } from './account/delete-account/delete-account.
 import { PerformDeletionComponent } from './account/perform-deletion/perform-deletion.component';
 import { TicketDetailComponent } from './ticket-detail/ticket-detail.component';
 import { ShoppingcartComponent } from './shoppingcart/shoppingcart.component';
+import { UserPaymentmethodListComponent } from './user-paymentmethod-list/user-paymentmethod-list.component';
+import { UserPaymentmethodAddComponent } from './user-paymentmethod-add/user-paymentmethod-add.component';
+import { UserPaymentmethodDetailComponent } from './user-paymentmethod-detail/user-paymentmethod-detail.component';
 
 const routes: Routes = [
   {
@@ -105,6 +108,18 @@ const routes: Routes = [
       {
         path: PathConstants.TICKET_DETAIL,
         component: TicketDetailComponent,
+      },
+      {
+        path: PathConstants.PAYMENT_METHODS_LIST,
+        component: UserPaymentmethodListComponent,
+      },
+      {
+        path: PathConstants.PAYMENT_METHODS_CREATE,
+        component: UserPaymentmethodAddComponent,
+      },
+      {
+        path: PathConstants.PAYMENT_METHODS_DETAIL,
+        component: UserPaymentmethodDetailComponent,
       },
     ],
   },

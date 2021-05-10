@@ -1,0 +1,53 @@
+<app-user-navbar [parentComponent]="activeForNav"></app-user-navbar>
+<app-alert *ngIf="modalMsg" [message]="modalMsg" (closeEvent)="onCloseAlert()"></app-alert>
+<div *ngIf="paymentMethod">
+  <h2>
+    Payment method details:
+  </h2>
+  <div id="paymentMethodDetails">
+    <div class="row">
+      <div class="col border detailBox">
+        <span class="detailKey"> Brand: </span>
+        <span class="detailValue">
+          {{ paymentMethod.brand | titlecase}}
+        </span>
+      </div>
+      <div class="col border detailBox">
+        <span class="detailKey"> Last 4 digits: </span>
+        <span class="detailValue">
+          {{ paymentMethod.last4 }}
+        </span>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col border detailBox">
+        <span class="detailKey"> Expiration month: </span>
+        <span class="detailValue">
+          {{ paymentMethod.expMonth }}
+        </span>
+      </div>
+      <div class="col border detailBox">
+        <span class="detailKey"> Expiration year: </span>
+        <span class="detailValue">
+          {{ paymentMethod.expYear }}
+        </span>
+      </div>
+    </div>
+  </div>
+  <br>
+  <button (click)="showConfirmDelete = true" id="deleteButton">
+    Remove This Payment Method
+  </button>
+  <div *ngIf="showConfirmDelete">
+    <app-user-paymentmethod-remove
+      (closeEvent)="showConfirmDelete = false"
+      [paymentMethodId]="paymentMethod.id"
+    >
+    </app-user-paymentmethod-remove>
+  </div>
+</div>
+<div *ngIf="error">
+  <h2>{{ error.status }} Error</h2>
+  <p>{{ error.message }}</p>
+</div>
+<button id="backButton" (click)="back()">Go Back</button>

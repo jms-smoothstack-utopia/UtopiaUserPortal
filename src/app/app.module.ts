@@ -44,6 +44,10 @@ import { MapComponent } from './map/map.component';
 import { ShoppingcartComponent } from './shoppingcart/shoppingcart.component';
 import { FlightmodalComponent } from './shared/flightmodal/flightmodal.component';
 import { UserFlightListComponent } from './user-flight-list/user-flight-list.component';
+import { UserPaymentmethodListComponent } from './user-paymentmethod-list/user-paymentmethod-list.component';
+import { UserPaymentmethodDetailComponent } from './user-paymentmethod-detail/user-paymentmethod-detail.component';
+import { UserPaymentmethodAddComponent } from './user-paymentmethod-add/user-paymentmethod-add.component';
+import { UserPaymentmethodRemoveComponent } from './user-paymentmethod-remove/user-paymentmethod-remove.component';
 
 @NgModule({
   declarations: [
@@ -83,6 +87,10 @@ import { UserFlightListComponent } from './user-flight-list/user-flight-list.com
     ShoppingcartComponent,
     FlightmodalComponent,
     UserFlightListComponent,
+    UserPaymentmethodListComponent,
+    UserPaymentmethodDetailComponent,
+    UserPaymentmethodAddComponent,
+    UserPaymentmethodRemoveComponent,
   ],
   imports: [
     BrowserModule,

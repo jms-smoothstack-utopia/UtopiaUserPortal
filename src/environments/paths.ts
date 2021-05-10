@@ -9,6 +9,9 @@ const PathConstants = {
   FLIGHT_HISTORY: 'flights/history',
   FLIGHT_UPCOMING: 'flights/upcoming',
   TICKET_DETAIL: 'tickets/:id',
+  PAYMENT_METHODS_LIST: 'account/payment-methods',
+  PAYMENT_METHODS_CREATE: 'account/payment-methods/new',
+  PAYMENT_METHODS_DETAIL: 'account/payment-methods/:id',
 };
 
 export default PathConstants;

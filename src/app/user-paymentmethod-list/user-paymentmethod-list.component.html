@@ -1,0 +1,41 @@
+<app-user-navbar [parentComponent]="activeForNav"></app-user-navbar>
+<div *ngIf="paymentMethods">
+  <p *ngIf="paymentMethods.length == 0">
+    There are no payment methods to show. <a href="/account/payment-methods/new">Click here to add one!</a>
+  </p>
+  <div *ngIf="paymentMethods.length != 0" class="col-12">
+    <h3>Payment methods:</h3>
+    <table class="table table-responsive" id="paymentMethodsTable">
+      <thead>
+        <tr>
+          <th></th>
+          <!-- detail link -->
+          <th>ID</th>
+          <th>Card brand</th>
+          <th>Last 4 digits</th>
+          <th>Expiration month</th>
+          <th>Expiration year</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let method of paymentMethods">
+          <td><a href="/account/payment-methods/{{ method.id }}">Details</a></td>
+          <td>{{ method.id }}</td>
+          <td>{{ method.brand | titlecase }}</td>
+          <td>{{ method.last4 }}</td>
+          <td>{{ method.expMonth }}</td>
+          <td>{{ method.expYear }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <a href="/account/payment-methods/new">
+    <button id="createButton">
+      Add Payment Method
+    </button>
+  </a>
+</div>
+<div *ngIf="error">
+  <h2>{{ error.status }} Error</h2>
+  <p>{{ error.message }}</p>
+</div>

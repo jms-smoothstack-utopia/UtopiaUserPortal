@@ -13,6 +13,7 @@ export class UserNavbarComponent implements OnInit {
   profileActive: boolean = false;
   historyActive: boolean = false;
   upcomingActive: boolean = false;
+  paymentActive: boolean = false;
 
   constructor(
     private route: ActivatedRoute,
@@ -32,6 +33,10 @@ export class UserNavbarComponent implements OnInit {
     this.router.navigate([PathConstants.FLIGHT_UPCOMING]);
   }
 
+  goToPayment(): void {
+    this.router.navigate([PathConstants.PAYMENT_METHODS_LIST]);
+  }
+
   ngOnInit(): void {
     if (!this.authService.isLoggedIn()) {
       this.router.navigate([PathConstants.LOGIN]);
@@ -49,6 +54,9 @@ export class UserNavbarComponent implements OnInit {
         break;
       case 'upcoming':
         this.upcomingActive = true;
+        break;
+      case 'payment':
+        this.paymentActive = true;
         break;
       default:
       //do nothing

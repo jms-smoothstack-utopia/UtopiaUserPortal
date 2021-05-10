@@ -1,0 +1,23 @@
+<div class="backdrop" (click)="goBack()"></div>
+<div class="alert-box">
+  <div *ngIf="isLoading" style="text-align: center">
+    <app-loading-spinner></app-loading-spinner>
+  </div>
+  <div *ngIf="!isLoading  && !errorMessage && !removeConfirmed">
+    <h1>Confirm Removal</h1>
+    <h4>
+      Are you sure you wish to remove this payment method?
+    </h4>
+    <button (click)="confirmRemove()" id="confirm">Confirm Removal</button>
+    <button (click)="goBack()">Go Back</button>
+  </div>
+  <div *ngIf="!isLoading && removeConfirmed">
+    <p>This payment method has been removed.</p>
+    <button (click)="goBack()">OK</button>
+  </div>
+  <div *ngIf="errorMessage">
+    <p>{{ errorMessage }}</p>
+    <button type="reset" (click)="onRetryFromError()">Retry</button>
+    <button (click)="goBack()">Go Back</button>
+  </div>
+</div>

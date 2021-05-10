@@ -1,0 +1,120 @@
+<app-user-navbar [parentComponent]="activeForNav"></app-user-navbar>
+<app-alert *ngIf="modalMsg" [message]="modalMsg" (closeEvent)="onCloseAlert()"></app-alert>
+<form [formGroup]="paymentMethodAddForm">
+  <div class="row">
+    <div class="col-xs-3" class="selectContainer">
+      <label for="cardNumber">Card number:</label>
+      <input
+        type="text"
+        name="cardNumber"
+        id="cardNumber"
+        class="form-control"
+        formControlName="cardNumber"
+        required
+      />
+      <div
+        id="cardNumberErrorText"
+        class="alert alert-danger"
+        [ngClass]="
+          showErrorForField('cardNumber')
+            ? 'shownErrorText'
+            : 'hiddenErrorText'
+          "
+      >
+        Not a valid credit card number.
+      </div>
+    </div>
+    <div class="col-xs-3" class="selectContainer">
+      <label for="cvc">CVC:</label>
+      <input 
+        type="text" 
+        name="cvc"
+        id="cvc" 
+        class="form-control" 
+        formControlName="cvc" 
+        required 
+      />
+      <div 
+        id="cvcErrorText" 
+        class="alert alert-danger" 
+        [ngClass]="
+          showErrorForField('cvc')
+            ? 'shownErrorText'
+            : 'hiddenErrorText'
+          "
+      >
+        Not a valid CVC number.
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-3" class="selectContainer">
+      <label for="expMonth">Expiration month:</label>
+      <select
+        name="expMonth"
+        id="expMonth"
+        class="form-control"
+        formControlName="expMonth"
+        required
+      >
+        <option *ngFor="let value of months" [ngValue]="value">
+          {{ value }}
+        </option>
+      </select>
+      <div
+        id="expMonthErrorText"
+        class="alert alert-danger" 
+        [ngClass]="
+          showErrorForField('expMonth')
+            ? 'shownErrorText'
+            : 'hiddenErrorText'
+          "
+      >
+        Not a valid expiration month.
+      </div>
+      <div
+        id="pastExpirationErrorText"
+        class="alert alert-danger"
+        [ngClass]="
+          showExpirationError()
+            ? 'shownErrorText'
+            : 'hiddenErrorText'
+        "
+      >
+        Expiration month cannot be in the past.
+      </div>
+    </div>
+    <div class="col-xs-3" class="selectContainer">
+      <label for="expYear">Expiration year:</label>
+      <select 
+        name="expYear" 
+        id="expYear" 
+        class="form-control" 
+        formControlName="expYear" 
+        required
+      >
+        <option *ngFor="let value of years" [ngValue]="value">
+          {{ value }}
+        </option>
+      </select>
+      <div id="expYearErrorText" class="alert alert-danger" [ngClass]="
+                showErrorForField('expYear')
+                  ? 'shownErrorText'
+                  : 'hiddenErrorText'
+                ">
+        Not a valid expiration year.
+      </div>
+    </div>
+  </div>
+</form>
+<button
+  id="submitButton"
+  [ngClass]="
+    paymentMethodAddForm.valid ? 'submitButtonEnabled' : 'submitButtonDisabled'
+  "
+  type="submit"
+  [disabled]="!paymentMethodAddForm.valid"
+  (click)="submitForm()"
+>
+  Add Card
+</button>

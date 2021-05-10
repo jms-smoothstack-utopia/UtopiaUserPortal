@@ -1,0 +1,38 @@
+h2 {
+  font-family: "Futura";
+  font-weight: bold;
+}
+
+.detailKey {
+  font-family: "Futura";
+  font-weight: bold;
+}
+
+.detailValue {
+  font-family: "Lato", sans-serif;
+}
+
+button {
+  border: none;
+  border-radius: 0px;
+  margin: 3px;
+  font-family: Futura;
+  font-weight: bold;
+}
+
+#backButton:hover {
+  background: #444444;
+}
+
+#deleteButton {
+  background: #ee3030;
+  color: #fff;
+}
+
+#deleteButton:hover {
+  background: #9b0000;
+}
+
+.detailBox {
+  border-color: #c2a6da !important;
+}

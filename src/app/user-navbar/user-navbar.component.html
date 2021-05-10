@@ -22,6 +22,13 @@
         </li>
         <li
           class="nav-item nav-link"
+          [class.active]="paymentActive"
+          (click)="goToPayment()"
+        >
+          My Payment Methods
+        </li>
+        <li
+          class="nav-item nav-link"
           [class.active]="historyActive"
           (click)="goToHistory()"
         >
@@ -34,6 +41,7 @@
         >
           My Upcoming Flights
         </li>
+      
       </ul>
     </div>
   </div>

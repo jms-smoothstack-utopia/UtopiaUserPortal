@@ -1,0 +1,21 @@
+h3 {
+  font-family: Futura;
+  font-weight: bold;
+}
+
+table {
+  font-family: "Lato", sans-serif;
+}
+
+button {
+  border: none;
+  border-radius: 0px;
+  margin: 3px;
+  font-family: Futura;
+  font-weight: bold;
+}
+
+button:hover {
+  color: #fff;
+  background: #444444;
+}
